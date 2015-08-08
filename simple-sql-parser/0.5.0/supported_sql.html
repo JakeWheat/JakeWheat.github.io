@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>simple-sql-parser</title>
+<title>simple-sql-parser supported SQL</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -408,30 +408,467 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<style>
+.listingblock .pygments .hll { background-color: #ffffcc }
+.listingblock .pygments  { background: #f8f8f8; }
+.listingblock .pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+.listingblock .pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+.listingblock .pygments .tok-o { color: #666666 } /* Operator */
+.listingblock .pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.listingblock .pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+.listingblock .pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+.listingblock .pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
+.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+.listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+.listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
+.listingblock .pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+.listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+.listingblock .pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.listingblock .pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.listingblock .pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.listingblock .pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+.listingblock .pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.listingblock .pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+.listingblock .pygments .tok-m { color: #666666 } /* Literal.Number */
+.listingblock .pygments .tok-s { color: #BA2121 } /* Literal.String */
+.listingblock .pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+.listingblock .pygments .tok-nb { color: #008000 } /* Name.Builtin */
+.listingblock .pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.listingblock .pygments .tok-no { color: #880000 } /* Name.Constant */
+.listingblock .pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+.listingblock .pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.listingblock .pygments .tok-nf { color: #0000FF } /* Name.Function */
+.listingblock .pygments .tok-nl { color: #A0A000 } /* Name.Label */
+.listingblock .pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.listingblock .pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+.listingblock .pygments .tok-nv { color: #19177C } /* Name.Variable */
+.listingblock .pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+.listingblock .pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+.listingblock .pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+.listingblock .pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+.listingblock .pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+.listingblock .pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+.listingblock .pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+.listingblock .pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.listingblock .pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+.listingblock .pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.listingblock .pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+.listingblock .pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.listingblock .pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+.listingblock .pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+.listingblock .pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+.listingblock .pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+.listingblock .pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+.listingblock .pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+.listingblock .pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+.listingblock .pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+.listingblock .pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
 </head>
-<body class="article">
+<body class="article toc2 toc-right">
 <div id="header">
-<h1>simple-sql-parser</h1>
+<h1>simple-sql-parser supported SQL</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_overview">1. Overview</a></li>
+<li><a href="#_queries">2. Queries</a>
+<ul class="sectlevel2">
+<li><a href="#_select_lists">2.1. Select lists</a></li>
+<li><a href="#_set_quantifiers_on_select">2.2. Set quantifiers on select</a></li>
+<li><a href="#_from_clause">2.3. From clause</a></li>
+<li><a href="#_group_by_clause">2.4. Group by clause</a></li>
+<li><a href="#_order_by_clause">2.5. Order by clause</a></li>
+<li><a href="#_offset_and_fetch">2.6. Offset and fetch</a></li>
+<li><a href="#_set_operators">2.7. Set operators</a></li>
+<li><a href="#_table_value_constructor">2.8. Table value constructor</a></li>
+<li><a href="#_explicit_table">2.9. Explicit table</a></li>
+<li><a href="#_value_expressions">2.10. Value expressions</a></li>
+</ul>
+</li>
+<li><a href="#_ddl">3. DDL</a></li>
+<li><a href="#_non_query_dml">4. Non-query DML</a></li>
+<li><a href="#_access_control">5. Access Control</a></li>
+<li><a href="#_transaction_management">6. Transaction management</a></li>
+<li><a href="#_session_management">7. Session management</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_documentation_links">Documentation links</h2>
+<h2 id="_overview">1. Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="latest/">latest released version</a></p>
+<p><a href="index.html">simple-sql-parser home</a></p>
 </div>
 <div class="paragraph">
-<p><a href="0.5.0/">version 0.5.0, unreleased prealpha</a></p>
+<p>This page has more details on the supported SQL in simple-sql-parser.</p>
 </div>
 <div class="paragraph">
-<p><a href="0.4.0/">version 0.4.0</a></p>
+<p>See the <a href="test_cases.html">simple-sql-parser test cases</a> page for
+examples.</p>
+</div>
+<div class="paragraph">
+<p>The target dialect of SQL at this time is ISO/ANSI SQL:2011. The
+parser supports queries, DDL, non-query DML, access control, transaction
+management and session management syntax. The parser and syntax does
+not follow the standard grammar closely - they permit a lot of things
+which the grammar in the standard forbids. The intended usage is that
+an additional pass over the ast can be made if you want to carefully
+prohibit everything that the standard doesn&#8217;t allow.</p>
+</div>
+<div class="paragraph">
+<p>Apart from this permissiveness, some work has been put into trying to
+get the best parser error messages possible.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_queries">2. Queries</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_select_lists">2.1. Select lists</h3>
+<div class="paragraph">
+<p>Supports value expressions, aliases with optional 'as'.</p>
+</div>
+<div class="paragraph">
+<p>Doesn&#8217;t support 'select * as (a,b,c) from t' yet.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_set_quantifiers_on_select">2.2. Set quantifiers on select</h3>
+<div class="paragraph">
+<p>Supports 'select distinct' and explicit 'select all'.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_from_clause">2.3. From clause</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>aliases</p>
+</li>
+<li>
+<p>subqueries</p>
+</li>
+<li>
+<p>functions</p>
+</li>
+<li>
+<p>joins</p>
+<div class="ulist">
+<ul>
+<li>
+<p>natural</p>
+</li>
+<li>
+<p>inner</p>
+</li>
+<li>
+<p>left/right/full outer</p>
+</li>
+<li>
+<p>cross</p>
+</li>
+<li>
+<p>on expressions</p>
+</li>
+<li>
+<p>using lists</p>
+</li>
+<li>
+<p>lateral</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_group_by_clause">2.4. Group by clause</h3>
+<div class="paragraph">
+<p>Supports value expressions, group by (), cube, rollup, grouping
+parentheses and grouping sets with nested grouping expressions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_order_by_clause">2.5. Order by clause</h3>
+<div class="paragraph">
+<p>Supports value expressions, asc/desc and nulls first/last.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_offset_and_fetch">2.6. Offset and fetch</h3>
+<div class="paragraph">
+<p>Supports 'offset n rows' and 'fetch first n rows only'.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_set_operators">2.7. Set operators</h3>
+<div class="paragraph">
+<p>Union, except, intersect + all/distinct and corresponding.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_table_value_constructor">2.8. Table value constructor</h3>
+<div class="paragraph">
+<p>For example: values (1,2),(3,4).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_explicit_table">2.9. Explicit table</h3>
+<div class="paragraph">
+<p>For example: 'table t', which is shorthand for 'select * from t'.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_value_expressions">2.10. Value expressions</h3>
+<div class="paragraph">
+<p>The value expressions type and parser is used in many contexts,
+including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>select lists;</p>
+</li>
+<li>
+<p>where clause expressions;</p>
+</li>
+<li>
+<p>group by clause expressions;</p>
+</li>
+<li>
+<p>having clause expressions;</p>
+</li>
+<li>
+<p>order by clause expressions;</p>
+</li>
+<li>
+<p>offset and fetch clause expressions;</p>
+</li>
+<li>
+<p>table value constructors.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This doesn&#8217;t exactly follow the ANSI Standards, which have separate
+grammars for most of these.</p>
+</div>
+<div class="paragraph">
+<p>The supported value expressions include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>basic string literals in single quotes</p>
+</li>
+<li>
+<p>number literals: digits.digitse+-exp</p>
+</li>
+<li>
+<p>explicitly typed literal, e.g. int '3'</p>
+</li>
+<li>
+<p>binary operators</p>
+<div class="ulist">
+<ul>
+<li>
+<p>comparisons: = != &lt;&gt; &#8656; &gt;= &lt; &gt;</p>
+</li>
+<li>
+<p>arithmetic: + - / * % ^</p>
+</li>
+<li>
+<p>logic: and, or</p>
+</li>
+<li>
+<p>bitwise: &amp; | (and ^ as above)</p>
+</li>
+<li>
+<p>string: ||, like, not like</p>
+</li>
+<li>
+<p>other: overlaps, is similar to, is not similar too, is distinct
+from, is not distinct from</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>prefix unary operators</p>
+<div class="ulist">
+<ul>
+<li>
+<p>+, -</p>
+</li>
+<li>
+<p>not</p>
+</li>
+<li>
+<p>~</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>postfix unary</p>
+<div class="ulist">
+<ul>
+<li>
+<p>is null, is not null</p>
+</li>
+<li>
+<p>is true, is not true, is false, is not false, is unknown, is not unknown</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>other operators</p>
+<div class="ulist">
+<ul>
+<li>
+<p>extract (extract(day from dt))</p>
+</li>
+<li>
+<p>position (position string1 in string2)</p>
+</li>
+<li>
+<p>substring (substring(x from 2 for 4))</p>
+</li>
+<li>
+<p>convert (convert(string using conversion))</p>
+</li>
+<li>
+<p>translate (translate(string using translation))</p>
+</li>
+<li>
+<p>overlay (overlay (string placing embedded_string from start for
+length))</p>
+</li>
+<li>
+<p>trim (trim(leading '_' from s))</p>
+</li>
+<li>
+<p>between (a between 1 and 5)</p>
+</li>
+<li>
+<p>in list (a in (1,2,3,4))</p>
+</li>
+<li>
+<p>cast (cast(a as int))</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>subqueries</p>
+<div class="ulist">
+<ul>
+<li>
+<p>in subquery</p>
+</li>
+<li>
+<p>any/some/all</p>
+</li>
+<li>
+<p>exists</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>case expressions</p>
+</li>
+<li>
+<p>parentheses</p>
+</li>
+<li>
+<p>quoted and unquoted identifiers</p>
+</li>
+<li>
+<p>a.b qualified identifiers</p>
+</li>
+<li>
+<p>*, a.*</p>
+</li>
+<li>
+<p>functions: f(a,b)</p>
+</li>
+<li>
+<p>aggregates: agg(distinct a order by b)</p>
+</li>
+<li>
+<p>window functions: sum(x) over (partition by y order by z)
+plus some explicit frame support (same as in postgres 9.3)</p>
+</li>
+<li>
+<p>row constructors, e.g. where (a,b) = any (select a,b from t)</p>
+</li>
+<li>
+<p>? used in parameterized queries</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ddl">3. DDL</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>todo</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_non_query_dml">4. Non-query DML</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>todo</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_control">5. Access Control</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>todo</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transaction_management">6. Transaction management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>todo</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_session_management">7. Session management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>todo</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-08-08 22:31:28 IDT
+Last updated 2015-08-08 22:28:36 IDT
 </div>
 </div>
 </body>
