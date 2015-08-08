@@ -49,3 +49,7 @@ for SQL queries is built and extended. This parser was the basis for
 the simple-sql-parser project.
 
 link:intro_to_parsing/[]
+
+== Contact
+
++++jakewheatmail@gmail.com+++
