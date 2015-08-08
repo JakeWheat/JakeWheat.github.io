@@ -1,0 +1,51 @@
+
+:toc: right
+:toclevels: 8
+
+= Projects
+
+Here is a summary of my projects on Github. My Github repo home is here:
+link:https://github.com/JakeWheat/[].
+
+== SQL
+
+=== Libraries
+
+These are the libraries on hackage which you can use in Haskell
+projects right now.
+
+==== hssqlppp
+
+Older library to parse and do some typechecking of SQL. Supports
+mostly postgres dialect with good DML coverage, some DDL and some
+procedural SQL support.
+
+link:hssqlppp/latest/[].
+
+==== simple-sql-parser
+
+A parser for SQL currently focused on ANSI SQL2011. Parses most
+queries, with progress being made on schema/DDL, non-query DML, access
+control, psm, transaction control.
+
+Eventually plans to support other dialects of SQL also.
+
+link:simple-sql-parser/latest/[].
+
+=== Documentation/demo projects
+
+==== sql-overview
+
+This documentation currently has HTML renders of the draft SQL
+Standards.
+
+link:sql-overview/[]
+
+==== intro_to_parsing
+
+This project is an introduction to parsing in Haskell using
+Parsec. After introducing basic parsing techniques, a simple parser
+for SQL queries is built and extended. This parser was the basis for
+the simple-sql-parser project.
+
+link:intro_to_parsing/[]
