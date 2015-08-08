@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >index</title
+    ><link href="main.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><div class="header"
+    ><a href="index.html"
+      >HsSqlPpp-0.4.0</a
+      ></div
+    ><br
+     /><br
+     /><br
+     /><p
+    >A parser, pretty printer, and type checker for SQL written in Haskell. Supports PostgreSQL SQL and PL/pgSQL syntax. BSD licensed.</p
+    >
+<h1 id="purpose"
+    >Purpose</h1
+    >
+<p
+    >Possible uses of this library include:</p
+    >
+<ul
+    >
+<li
+      >type-checker can help with SQL development and catch bugs which aren't statically detected by Postgres</li
+      >
+<li
+      >generating SQL code programmatically/ generating SQL from some other source</li
+      >
+<li
+      >transforming SQL code, possibly using quasiquoting, e.g. writing PL/pgSQL with less boilerplate, or optimisation rewrites</li
+      >
+<li
+      >viewing the catalog produced by some SQL code</li
+      >
+</ul
+    >
+<p
+    >With some extra work:</p
+    >
+<ul
+    >
+<li
+      >generating documentation for SQL code</li
+      >
+<li
+      >support running one dialect of SQL on a different DBMS using automatic translation - portable SQL</li
+      >
+<li
+      >typesafe database access from Haskell</li
+      >
+<li
+      >lint or semantic analysis for SQL or PL/pgSQL</li
+      >
+</ul
+    >
+<h1 id="status"
+    >Status</h1
+    >
+<p
+    >Pre-alpha. Support for parsing SQL is patchy, but not too bad. Supports queries/DML and DDL. Here is an extract from the parsing tests which gives some examples of what can currently be parsed:</p
+    >
+<ul
+    >
+<li
+      ><a href="ParserTests.html"
+	>Parsing examples</a
+	></li
+      >
+</ul
+    >
+<p
+    >The type checker is currently still being fixed after some reworking of parsing and ast types. It should handle a lot of queries and dml fine though.</p
+    >
+<p
+    >Extract from the type checking tests:</p
+    >
+<ul
+    >
+<li
+      ><a href="TypeCheckTests.html"
+	>Type-checking examples</a
+	></li
+      >
+</ul
+    >
+<p
+    >Currently limited support for quasiquoting, here are the extracts from the tests:</p
+    >
+<ul
+    >
+<li
+      ><a href="QuasiQuoteTests.html"
+	>Quasiquotation examples</a
+	></li
+      >
+</ul
+    >
+<p
+    >The pretty printer should support everything the parser supports (i.e. it pretty prints code which both the parser and Postgres understand).</p
+    >
+<p
+    >Catalog information is limited, supports the type checking. Some information is collected on scalar types, domains, composite types, casts, tables, views and functions.</p
+    >
+<h1 id="installation"
+    >Installation</h1
+    >
+<p
+    >This project is currently developed on GHC 7.2.1. 7.0.x should be fine, 6.12.x might take a small amount of work.</p
+    >
+<p
+    >To install use</p
+    >
+<div class='sh'><pre class="sourceCode">cabal install hssqlppp</pre></div>
+<h1 id="documentation"
+    >Documentation</h1
+    >
+<p
+    ><a href="haddock/index.html"
+      >Haddock docs</a
+      ></p
+    >
+<p
+    ><a href="examples.txt.html"
+      >Examples</a
+      ></p
+    >
+<p
+    ><a href="devel.txt.html"
+      >Some notes on hacking on hssqlppp itself</a
+      ></p
+    >
+<h1 id="links"
+    >Links</h1
+    >
+<p
+    >Homepage: <a href="http://jakewheat.github.com/hssqlppp/"
+      ><code class="url"
+	>http://jakewheat.github.com/hssqlppp/</code
+	></a
+      ></p
+    >
+<p
+    >Hackage: <a href="http://hackage.haskell.org/package/hssqlppp"
+      ><code class="url"
+	>http://hackage.haskell.org/package/hssqlppp</code
+	></a
+      ></p
+    >
+<p
+    >Repository: <a href="https://github.com/JakeWheat/hssqlppp"
+      ><code class="url"
+	>https://github.com/JakeWheat/hssqlppp</code
+	></a
+      ></p
+    >
+<p
+    >Changes: <a href="https://github.com/JakeWheat/hssqlppp/blob/master/CHANGES"
+      ><code class="url"
+	>https://github.com/JakeWheat/hssqlppp/blob/master/CHANGES</code
+	></a
+      ></p
+    >
+<h1 id="reporting-issues-and-feature-requests"
+    >Reporting issues and feature requests</h1
+    >
+<p
+    >Use the github issue tracker. Please supply an example of SQL which doesn't parse/typecheck correctly where relevant.</p
+    >
+<p
+    ><a href="https://github.com/JakeWheat/hssqlppp/issues"
+      ><code class="url"
+	>https://github.com/JakeWheat/hssqlppp/issues</code
+	></a
+      ></p
+    >
+<h1 id="provisional-future-plans"
+    >Provisional future plans</h1
+    >
+<ul
+    >
+<li
+      >parameterized statements/typesafe haskell access</li
+      >
+<li
+      >some simple syntax extension support for SQL</li
+      >
+<li
+      >a 'compiler' command to help developing SQL</li
+      >
+<li
+      >parse most Postgres syntax, possibly other SQL dialects as well</li
+      >
+<li
+      >improve the typechecker - fix current regressions, get more sql type checking correctly</li
+      >
+<li
+      >improve the catalog - add more checking, more item types</li
+      >
+<li
+      >improve the quasi-quoting - is a bit ad hoc and limited at the moment</li
+      >
+<li
+      >documentation generator for SQL codebases</li
+      >
+</ul
+    >
+<h1 id="contact"
+    >Contact</h1
+    >
+<p
+    >Let me know if you're using/ interested in using the library, if you have any problems, bug reports, or suggestions, etc.. All contributions, comments and criticism welcome:</p
+    >
+<p
+    >jakewheatmail@gmail.com</p
+    ><br
+     /><br
+     /><br
+     /><div class="footer"
+    >generated on 10/30/11 15:52:45, hssqlppp-0.4.0</div
+    ></body
+  ></html
+>

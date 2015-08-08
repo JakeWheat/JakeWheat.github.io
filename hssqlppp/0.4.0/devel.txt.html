@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >devel</title
+    ><link href="main.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><div class="header"
+    ><a href="index.html"
+      >HsSqlPpp-0.4.0</a
+      ></div
+    ><br
+     /><br
+     /><br
+     /><p
+    >Here are some limited notes on working on the source of hssqlppp:</p
+    >
+<h1 id="get-the-source"
+    >Get the source</h1
+    >
+<p
+    >Please use the code from git to develop with, one way to get it is to run:</p
+    >
+<pre
+    ><code
+      >git clone https://github.com/JakeWheat/hssqlppp.git
+</code
+      ></pre
+    >
+<h1 id="build-the-library"
+    >Build the library</h1
+    >
+<p
+    >Once you have the source, you can build the library using cabal</p
+    >
+<pre
+    ><code
+      >cabal configure &amp;&amp; cabal build
+</code
+      ></pre
+    >
+<h1 id="rebuild-the-generated-files-for-the-syntax"
+    >Rebuild the generated files for the syntax</h1
+    >
+<p
+    >If you edit the ag files, you need to rebuild AstInternal.hs. First make sure you have uuagc installed:</p
+    >
+<pre
+    ><code
+      >cabal install uuagc
+</code
+      ></pre
+    >
+<p
+    >Then use the makefile:</p
+    >
+<pre
+    ><code
+      >make src/Database/HsSqlPpp/Internals/AstInternal.hs
+</code
+      ></pre
+    >
+<p
+    >The makefile hasn't been heavily tested yet. If you have any problems with unrecognised modules, the complete list of packages referenced is in the Makefile (it may be missing build tools, such as cpphs, this hasn't been checked yet).</p
+    >
+<p
+    >To just rebuild the library in the usual way after editing the ag files use:</p
+    >
+<pre
+    ><code
+      >make src/Database/HsSqlPpp/Internals/AstInternal.hs
+cabal build
+</code
+      ></pre
+    >
+<p
+    >There is one further generated file, DefaultTemplate1Catalog.lhs. You don't usually need to regenerate this, but this is how you do it:</p
+    >
+<pre
+    ><code
+      >make regenDefaultTemplate1Catalog
+</code
+      ></pre
+    >
+<h1 id="build-and-run-the-tests"
+    >Build and run the tests</h1
+    >
+<p
+    >You can build and run the tests using the makefile:</p
+    >
+<pre
+    ><code
+      >make tests
+</code
+      ></pre
+    >
+<p
+    >or to just build the tests, then run manually:</p
+    >
+<pre
+    ><code
+      >make src-extra/tests/Tests
+src-extra/tests/Tests
+</code
+      ></pre
+    >
+<p
+    >This also rebuilds from the ag files if needed. When working on the source, this is usually the only compile command you need.</p
+    >
+<h1 id="background-reading"
+    >Background reading</h1
+    >
+<p
+    >The main things used in hssqlppp are: parsec, uuagc, generics, quasiquoting, pretty printing.</p
+    >
+<p
+    >Parsec is used for parsing: Here is a tutorial for parsec which is outdated but isn't too bad for getting started: <a href="http://legacy.cs.uu.nl/daan/parsec.html"
+      ><code class="url"
+	>http://legacy.cs.uu.nl/daan/parsec.html</code
+	></a
+      ></p
+    >
+<p
+    >Chapter in Real World Haskell on parsec: <a href="http://book.realworldhaskell.org/read/using-parsec.html"
+      ><code class="url"
+	>http://book.realworldhaskell.org/read/using-parsec.html</code
+	></a
+      ></p
+    >
+<p
+    >UUAGC is used to assist the typechecking. It is also used to define the ast data types: <a href="http://www.cs.uu.nl/wiki/bin/view/HUT/AttributeGrammarSystem"
+      ><code class="url"
+	>http://www.cs.uu.nl/wiki/bin/view/HUT/AttributeGrammarSystem</code
+	></a
+      ></p
+    >
+<p
+    >A tutorial, not that easy to follow: <a href="http://www.cs.uu.nl/wiki/bin/view/HUT/AttributeGrammarManual"
+      ><code class="url"
+	>http://www.cs.uu.nl/wiki/bin/view/HUT/AttributeGrammarManual</code
+	></a
+      ></p
+    >
+<p
+    >Pretty printing: <a href="http://hackage.haskell.org/package/pretty"
+      ><code class="url"
+	>http://hackage.haskell.org/package/pretty</code
+	></a
+      ></p
+    >
+<p
+    >Generics: Just uses a bit of this at the moment, mostly uses uniplate: <a href="http://community.haskell.org/~ndm/uniplate/"
+      ><code class="url"
+	>http://community.haskell.org/~ndm/uniplate/</code
+	></a
+      ></p
+    >
+<p
+    >Quasiquotation: <a href="http://www.haskell.org/haskellwiki/Quasiquotation"
+      ><code class="url"
+	>http://www.haskell.org/haskellwiki/Quasiquotation</code
+	></a
+      ></p
+    >
+<p
+    >The automated tests use test-framework and HUnit.</p
+    >
+<h1 id="source-overview"
+    >Source overview</h1
+    >
+<p
+    >weird bits:</p
+    >
+<ul
+    >
+<li
+      >uuagc</li
+      >
+<li
+      >lexing/parsing split (uses parsec to lex, then parsec again to parse)</li
+      >
+<li
+      >typechecker: fixupidentifiers</li
+      >
+</ul
+    >
+<p
+    >TODO: make this less cryptic</p
+    >
+<p
+    >A short guide on <a href="adding_syntax.txt.html"
+      >adding Syntax</a
+      >.</p
+    ><br
+     /><br
+     /><br
+     /><div class="footer"
+    >generated on 10/30/11 15:52:45, hssqlppp-0.4.0</div
+    ></body
+  ></html
+>
