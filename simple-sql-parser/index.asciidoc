@@ -1,0 +1,8 @@
+
+= simple-sql-parser
+
+== Documentation links
+
+link:latest/[latest released version]
+
+link:0.4.0/[version 0.4.0]
