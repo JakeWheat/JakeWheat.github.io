@@ -50,6 +50,10 @@ the simple-sql-parser project.
 
 link:intro_to_parsing/[]
 
+== Unrealistic project plan
+
+image::projects_diagram.svg[]
+
 == Contact
 
 +++jakewheatmail@gmail.com+++
