@@ -79,16 +79,16 @@ digraph  {
           
     so[label="sql-overview",URL="http://jakewheat.github.io/sql-overview/"];
     itp[label="intro_to_parsing",URL="http://jakewheat.github.io/intro_to_parsing/"];
-    bdbms[label="building-a-dbms",color=gray90,fontcolor=gray90];
-    sec[label="security",color=gray90,fontcolor=gray90];
-    uq[label="understanding-queries",color=gray90,fontcolor=gray90];
-    sds[label="simple-durable-storage",color=gray90,fontcolor=gray90];
-    stt[label="single-threaded-transactions",color=gray90,fontcolor=gray90];
-    ct[label="concurrent-transactions",color=gray90,fontcolor=gray90];
-    dt[label="distributed-transactions",color=gray90,fontcolor=gray90];
-    cbo[label="cost-based-optimiser",color=gray90,fontcolor=gray90];
-    e[label="extensibility",color=gray90,fontcolor=gray90];
-    tr[label="transactions introduction and techniques review",color=gray90,fontcolor=gray90];
+    bdbms[label="building-a-dbms",color=gray60,fontcolor=gray60];
+    sec[label="security",color=gray60,fontcolor=gray60];
+    uq[label="understanding-queries",color=gray60,fontcolor=gray60];
+    sds[label="simple-durable-storage",color=gray60,fontcolor=gray60];
+    stt[label="single-threaded-transactions",color=gray60,fontcolor=gray60];
+    ct[label="concurrent-transactions",color=gray60,fontcolor=gray60];
+    dt[label="distributed-transactions",color=gray60,fontcolor=gray60];
+    cbo[label="cost-based-optimiser",color=gray60,fontcolor=gray60];
+    e[label="extensibility",color=gray60,fontcolor=gray60];
+    tr[label="transactions introduction and techniques review",color=gray60,fontcolor=gray60];
   }
 
   subgraph xcluster_libs {
@@ -96,15 +96,15 @@ digraph  {
           
     hssqlppp[label="hssqlppp",URL="http://jakewheat.github.io/hssqlppp/latest"];
     ssp[label="simple-sql-parser",URL="http://jakewheat.github.io/simple-sql-parser/latest/"];
-    ssf[label="simple-sql-frontend",color=gray90,fontcolor=gray90];
+    ssf[label="simple-sql-frontend",color=gray60,fontcolor=gray60];
   }
 
   subgraph xcluster_exes {
           label="executables";
           
-    ssdbms1[label="simple-sql-dbms-1",color=gray90,fontcolor=gray90];
-    ssdbms2[label="simple-sql-dbms-2",color=gray90,fontcolor=gray90];
-    tool[label="sql-dbms-tool",color=gray90,fontcolor=gray90];
+    ssdbms1[label="simple-sql-dbms-1",color=gray60,fontcolor=gray60];
+    ssdbms2[label="simple-sql-dbms-2",color=gray60,fontcolor=gray60];
+    tool[label="sql-dbms-tool",color=gray60,fontcolor=gray60];
   }
 
 
@@ -116,41 +116,41 @@ digraph  {
 
   hssqlppp -> ssp [style=dotted]
   ;
-  hssqlppp -> ssf [style=dotted,color=gray90];
+  hssqlppp -> ssf [style=dotted,color=gray60];
 
   itp -> ssp;
 
-  ssp -> ssf [color=gray90];
+  ssp -> ssf [color=gray60];
 
-  ssf -> uq [color=gray90];
+  ssf -> uq [color=gray60];
 
-  sds -> uq [color=gray90];
+  sds -> uq [color=gray60];
 
-  sds -> stt [color=gray90];
+  sds -> stt [color=gray60];
 
-  stt -> ct [color=gray90];
+  stt -> ct [color=gray60];
 
-  tr -> stt [color=gray90];
-  tr -> ct [color=gray90];
+  tr -> stt [color=gray60];
+  tr -> ct [color=gray60];
 
-  ct -> dt [color=gray90];
+  ct -> dt [color=gray60];
 
-  ct -> ssdbms1 [color=gray90];
+  ct -> ssdbms1 [color=gray60];
 
-  ssdbms1 -> ssdbms2 [color=gray90];
+  ssdbms1 -> ssdbms2 [color=gray60];
 
-  uq -> ssdbms1 [color=gray90];
+  uq -> ssdbms1 [color=gray60];
 
-  uq -> cbo [color=gray90];
+  uq -> cbo [color=gray60];
 
-  cbo -> ssdbms2 [color=gray90];
+  cbo -> ssdbms2 [color=gray60];
 
-  e -> ssdbms2 [color=gray90];
+  e -> ssdbms2 [color=gray60];
 
 
-  sec -> ssdbms2 [color=gray90];
+  sec -> ssdbms2 [color=gray60];
 
-  uq -> e [color=gray90];
+  uq -> e [color=gray60];
 
-  bdbms -> ssdbms1 [color=gray90];
+  bdbms -> ssdbms1 [color=gray60];
 }

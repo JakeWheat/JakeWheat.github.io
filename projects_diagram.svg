@@ -40,133 +40,133 @@
 </g>
 <!-- bdbms -->
 <g id="node3" class="node"><title>bdbms</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="531.545" cy="-162" rx="69.5877" ry="18"/>
-<text text-anchor="middle" x="531.545" y="-158.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">building&#45;a&#45;dbms</text>
+<ellipse fill="none" stroke="#999999" cx="531.545" cy="-162" rx="69.5877" ry="18"/>
+<text text-anchor="middle" x="531.545" y="-158.3" font-family="Times,serif" font-size="14.00" fill="#999999">building&#45;a&#45;dbms</text>
 </g>
 <!-- ssdbms1 -->
 <g id="node16" class="node"><title>ssdbms1</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="517.545" cy="-90" rx="77.1866" ry="18"/>
-<text text-anchor="middle" x="517.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">simple&#45;sql&#45;dbms&#45;1</text>
+<ellipse fill="none" stroke="#999999" cx="517.545" cy="-90" rx="77.1866" ry="18"/>
+<text text-anchor="middle" x="517.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#999999">simple&#45;sql&#45;dbms&#45;1</text>
 </g>
 <!-- bdbms&#45;&gt;ssdbms1 -->
 <g id="edge20" class="edge"><title>bdbms&#45;&gt;ssdbms1</title>
-<path fill="none" stroke="#e5e5e5" d="M528.084,-143.697C526.542,-135.983 524.687,-126.712 522.967,-118.112"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="526.359,-117.224 520.966,-108.104 519.495,-118.597 526.359,-117.224"/>
+<path fill="none" stroke="#999999" d="M528.084,-143.697C526.542,-135.983 524.687,-126.712 522.967,-118.112"/>
+<polygon fill="#999999" stroke="#999999" points="526.359,-117.224 520.966,-108.104 519.495,-118.597 526.359,-117.224"/>
 </g>
 <!-- sec -->
 <g id="node4" class="node"><title>sec</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="651.545" cy="-90" rx="38.1938" ry="18"/>
-<text text-anchor="middle" x="651.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">security</text>
+<ellipse fill="none" stroke="#999999" cx="651.545" cy="-90" rx="38.1938" ry="18"/>
+<text text-anchor="middle" x="651.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#999999">security</text>
 </g>
 <!-- ssdbms2 -->
 <g id="node17" class="node"><title>ssdbms2</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="442.545" cy="-18" rx="77.1866" ry="18"/>
-<text text-anchor="middle" x="442.545" y="-14.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">simple&#45;sql&#45;dbms&#45;2</text>
+<ellipse fill="none" stroke="#999999" cx="442.545" cy="-18" rx="77.1866" ry="18"/>
+<text text-anchor="middle" x="442.545" y="-14.3" font-family="Times,serif" font-size="14.00" fill="#999999">simple&#45;sql&#45;dbms&#45;2</text>
 </g>
 <!-- sec&#45;&gt;ssdbms2 -->
 <g id="edge18" class="edge"><title>sec&#45;&gt;ssdbms2</title>
-<path fill="none" stroke="#e5e5e5" d="M621.879,-78.3767C615.822,-76.2405 609.485,-74.0292 603.545,-72 567.739,-59.7674 527.284,-46.452 495.884,-36.2277"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="496.617,-32.7857 486.024,-33.022 494.452,-39.4427 496.617,-32.7857"/>
+<path fill="none" stroke="#999999" d="M621.879,-78.3767C615.822,-76.2405 609.485,-74.0292 603.545,-72 567.739,-59.7674 527.284,-46.452 495.884,-36.2277"/>
+<polygon fill="#999999" stroke="#999999" points="496.617,-32.7857 486.024,-33.022 494.452,-39.4427 496.617,-32.7857"/>
 </g>
 <!-- uq -->
 <g id="node5" class="node"><title>uq</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="354.545" cy="-162" rx="89.0842" ry="18"/>
-<text text-anchor="middle" x="354.545" y="-158.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">understanding&#45;queries</text>
+<ellipse fill="none" stroke="#999999" cx="354.545" cy="-162" rx="89.0842" ry="18"/>
+<text text-anchor="middle" x="354.545" y="-158.3" font-family="Times,serif" font-size="14.00" fill="#999999">understanding&#45;queries</text>
 </g>
 <!-- cbo -->
 <g id="node10" class="node"><title>cbo</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="212.545" cy="-90" rx="84.485" ry="18"/>
-<text text-anchor="middle" x="212.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">cost&#45;based&#45;optimiser</text>
+<ellipse fill="none" stroke="#999999" cx="212.545" cy="-90" rx="84.485" ry="18"/>
+<text text-anchor="middle" x="212.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#999999">cost&#45;based&#45;optimiser</text>
 </g>
 <!-- uq&#45;&gt;cbo -->
 <g id="edge15" class="edge"><title>uq&#45;&gt;cbo</title>
-<path fill="none" stroke="#e5e5e5" d="M322.323,-145.116C301.989,-135.092 275.533,-122.05 253.688,-111.282"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="255.156,-108.104 244.639,-106.821 252.061,-114.382 255.156,-108.104"/>
+<path fill="none" stroke="#999999" d="M322.323,-145.116C301.989,-135.092 275.533,-122.05 253.688,-111.282"/>
+<polygon fill="#999999" stroke="#999999" points="255.156,-108.104 244.639,-106.821 252.061,-114.382 255.156,-108.104"/>
 </g>
 <!-- e -->
 <g id="node11" class="node"><title>e</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="368.545" cy="-90" rx="53.8905" ry="18"/>
-<text text-anchor="middle" x="368.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">extensibility</text>
+<ellipse fill="none" stroke="#999999" cx="368.545" cy="-90" rx="53.8905" ry="18"/>
+<text text-anchor="middle" x="368.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#999999">extensibility</text>
 </g>
 <!-- uq&#45;&gt;e -->
 <g id="edge19" class="edge"><title>uq&#45;&gt;e</title>
-<path fill="none" stroke="#e5e5e5" d="M358.006,-143.697C359.548,-135.983 361.402,-126.712 363.122,-118.112"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="366.595,-118.597 365.124,-108.104 359.731,-117.224 366.595,-118.597"/>
+<path fill="none" stroke="#999999" d="M358.006,-143.697C359.548,-135.983 361.402,-126.712 363.122,-118.112"/>
+<polygon fill="#999999" stroke="#999999" points="366.595,-118.597 365.124,-108.104 359.731,-117.224 366.595,-118.597"/>
 </g>
 <!-- uq&#45;&gt;ssdbms1 -->
 <g id="edge14" class="edge"><title>uq&#45;&gt;ssdbms1</title>
-<path fill="none" stroke="#e5e5e5" d="M390.72,-145.465C415.028,-135.026 447.224,-121.199 473.093,-110.09"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="474.504,-113.293 482.311,-106.131 471.742,-106.861 474.504,-113.293"/>
+<path fill="none" stroke="#999999" d="M390.72,-145.465C415.028,-135.026 447.224,-121.199 473.093,-110.09"/>
+<polygon fill="#999999" stroke="#999999" points="474.504,-113.293 482.311,-106.131 471.742,-106.861 474.504,-113.293"/>
 </g>
 <!-- sds -->
 <g id="node6" class="node"><title>sds</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="448.545" cy="-306" rx="92.0841" ry="18"/>
-<text text-anchor="middle" x="448.545" y="-302.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">simple&#45;durable&#45;storage</text>
+<ellipse fill="none" stroke="#999999" cx="448.545" cy="-306" rx="92.0841" ry="18"/>
+<text text-anchor="middle" x="448.545" y="-302.3" font-family="Times,serif" font-size="14.00" fill="#999999">simple&#45;durable&#45;storage</text>
 </g>
 <!-- sds&#45;&gt;uq -->
 <g id="edge6" class="edge"><title>sds&#45;&gt;uq</title>
-<path fill="none" stroke="#e5e5e5" d="M445.713,-288.005C441.939,-269.107 433.876,-238.307 418.545,-216 410.601,-204.441 399.461,-194.018 388.698,-185.535"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="390.694,-182.657 380.599,-179.439 386.484,-188.25 390.694,-182.657"/>
+<path fill="none" stroke="#999999" d="M445.713,-288.005C441.939,-269.107 433.876,-238.307 418.545,-216 410.601,-204.441 399.461,-194.018 388.698,-185.535"/>
+<polygon fill="#999999" stroke="#999999" points="390.694,-182.657 380.599,-179.439 386.484,-188.25 390.694,-182.657"/>
 </g>
 <!-- stt -->
 <g id="node7" class="node"><title>stt</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="600.545" cy="-234" rx="109.681" ry="18"/>
-<text text-anchor="middle" x="600.545" y="-230.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">single&#45;threaded&#45;transactions</text>
+<ellipse fill="none" stroke="#999999" cx="600.545" cy="-234" rx="109.681" ry="18"/>
+<text text-anchor="middle" x="600.545" y="-230.3" font-family="Times,serif" font-size="14.00" fill="#999999">single&#45;threaded&#45;transactions</text>
 </g>
 <!-- sds&#45;&gt;stt -->
 <g id="edge7" class="edge"><title>sds&#45;&gt;stt</title>
-<path fill="none" stroke="#e5e5e5" d="M483.036,-289.116C504.669,-279.154 532.773,-266.211 556.073,-255.481"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="557.781,-258.547 565.4,-251.185 554.853,-252.189 557.781,-258.547"/>
+<path fill="none" stroke="#999999" d="M483.036,-289.116C504.669,-279.154 532.773,-266.211 556.073,-255.481"/>
+<polygon fill="#999999" stroke="#999999" points="557.781,-258.547 565.4,-251.185 554.853,-252.189 557.781,-258.547"/>
 </g>
 <!-- ct -->
 <g id="node8" class="node"><title>ct</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="724.545" cy="-162" rx="92.8835" ry="18"/>
-<text text-anchor="middle" x="724.545" y="-158.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">concurrent&#45;transactions</text>
+<ellipse fill="none" stroke="#999999" cx="724.545" cy="-162" rx="92.8835" ry="18"/>
+<text text-anchor="middle" x="724.545" y="-158.3" font-family="Times,serif" font-size="14.00" fill="#999999">concurrent&#45;transactions</text>
 </g>
 <!-- stt&#45;&gt;ct -->
 <g id="edge8" class="edge"><title>stt&#45;&gt;ct</title>
-<path fill="none" stroke="#e5e5e5" d="M629.617,-216.588C646.719,-206.934 668.53,-194.622 686.931,-184.234"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="688.667,-187.273 695.655,-179.309 685.226,-181.177 688.667,-187.273"/>
+<path fill="none" stroke="#999999" d="M629.617,-216.588C646.719,-206.934 668.53,-194.622 686.931,-184.234"/>
+<polygon fill="#999999" stroke="#999999" points="688.667,-187.273 695.655,-179.309 685.226,-181.177 688.667,-187.273"/>
 </g>
 <!-- dt -->
 <g id="node9" class="node"><title>dt</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="800.545" cy="-90" rx="92.8835" ry="18"/>
-<text text-anchor="middle" x="800.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">distributed&#45;transactions</text>
+<ellipse fill="none" stroke="#999999" cx="800.545" cy="-90" rx="92.8835" ry="18"/>
+<text text-anchor="middle" x="800.545" y="-86.3" font-family="Times,serif" font-size="14.00" fill="#999999">distributed&#45;transactions</text>
 </g>
 <!-- ct&#45;&gt;dt -->
 <g id="edge11" class="edge"><title>ct&#45;&gt;dt</title>
-<path fill="none" stroke="#e5e5e5" d="M742.942,-144.055C752.464,-135.285 764.248,-124.432 774.671,-114.831"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="777.333,-117.138 782.317,-107.789 772.59,-111.989 777.333,-117.138"/>
+<path fill="none" stroke="#999999" d="M742.942,-144.055C752.464,-135.285 764.248,-124.432 774.671,-114.831"/>
+<polygon fill="#999999" stroke="#999999" points="777.333,-117.138 782.317,-107.789 772.59,-111.989 777.333,-117.138"/>
 </g>
 <!-- ct&#45;&gt;ssdbms1 -->
 <g id="edge12" class="edge"><title>ct&#45;&gt;ssdbms1</title>
-<path fill="none" stroke="#e5e5e5" d="M680.392,-146.069C647.863,-135.069 603.521,-120.074 569.321,-108.509"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="570.105,-105.079 559.511,-105.191 567.863,-111.71 570.105,-105.079"/>
+<path fill="none" stroke="#999999" d="M680.392,-146.069C647.863,-135.069 603.521,-120.074 569.321,-108.509"/>
+<polygon fill="#999999" stroke="#999999" points="570.105,-105.079 559.511,-105.191 567.863,-111.71 570.105,-105.079"/>
 </g>
 <!-- cbo&#45;&gt;ssdbms2 -->
 <g id="edge16" class="edge"><title>cbo&#45;&gt;ssdbms2</title>
-<path fill="none" stroke="#e5e5e5" d="M258.812,-74.9187C296.059,-63.5827 348.5,-47.6224 387.828,-35.6531"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="388.979,-38.9613 397.527,-32.7013 386.941,-32.2646 388.979,-38.9613"/>
+<path fill="none" stroke="#999999" d="M258.812,-74.9187C296.059,-63.5827 348.5,-47.6224 387.828,-35.6531"/>
+<polygon fill="#999999" stroke="#999999" points="388.979,-38.9613 397.527,-32.7013 386.941,-32.2646 388.979,-38.9613"/>
 </g>
 <!-- e&#45;&gt;ssdbms2 -->
 <g id="edge17" class="edge"><title>e&#45;&gt;ssdbms2</title>
-<path fill="none" stroke="#e5e5e5" d="M385.708,-72.7646C395.191,-63.7947 407.141,-52.4902 417.634,-42.5643"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="420.102,-45.0481 424.961,-35.6334 415.291,-39.9628 420.102,-45.0481"/>
+<path fill="none" stroke="#999999" d="M385.708,-72.7646C395.191,-63.7947 407.141,-52.4902 417.634,-42.5643"/>
+<polygon fill="#999999" stroke="#999999" points="420.102,-45.0481 424.961,-35.6334 415.291,-39.9628 420.102,-45.0481"/>
 </g>
 <!-- tr -->
 <g id="node12" class="node"><title>tr</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="738.545" cy="-306" rx="179.268" ry="18"/>
-<text text-anchor="middle" x="738.545" y="-302.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">transactions introduction and techniques review</text>
+<ellipse fill="none" stroke="#999999" cx="738.545" cy="-306" rx="179.268" ry="18"/>
+<text text-anchor="middle" x="738.545" y="-302.3" font-family="Times,serif" font-size="14.00" fill="#999999">transactions introduction and techniques review</text>
 </g>
 <!-- tr&#45;&gt;stt -->
 <g id="edge9" class="edge"><title>tr&#45;&gt;stt</title>
-<path fill="none" stroke="#e5e5e5" d="M705.491,-288.233C686.406,-278.553 662.231,-266.29 641.895,-255.975"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="643.355,-252.791 632.854,-251.388 640.189,-259.034 643.355,-252.791"/>
+<path fill="none" stroke="#999999" d="M705.491,-288.233C686.406,-278.553 662.231,-266.29 641.895,-255.975"/>
+<polygon fill="#999999" stroke="#999999" points="643.355,-252.791 632.854,-251.388 640.189,-259.034 643.355,-252.791"/>
 </g>
 <!-- tr&#45;&gt;ct -->
 <g id="edge10" class="edge"><title>tr&#45;&gt;ct</title>
-<path fill="none" stroke="#e5e5e5" d="M736.856,-287.871C734.47,-263.67 730.087,-219.211 727.246,-190.393"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="730.704,-189.798 726.24,-180.189 723.738,-190.484 730.704,-189.798"/>
+<path fill="none" stroke="#999999" d="M736.856,-287.871C734.47,-263.67 730.087,-219.211 727.246,-190.393"/>
+<polygon fill="#999999" stroke="#999999" points="730.704,-189.798 726.24,-180.189 723.738,-190.484 730.704,-189.798"/>
 </g>
 <!-- hssqlppp -->
 <g id="node13" class="node"><title>hssqlppp</title>
@@ -183,33 +183,33 @@
 </g>
 <!-- ssf -->
 <g id="node15" class="node"><title>ssf</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="328.545" cy="-234" rx="80.6858" ry="18"/>
-<text text-anchor="middle" x="328.545" y="-230.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">simple&#45;sql&#45;frontend</text>
+<ellipse fill="none" stroke="#999999" cx="328.545" cy="-234" rx="80.6858" ry="18"/>
+<text text-anchor="middle" x="328.545" y="-230.3" font-family="Times,serif" font-size="14.00" fill="#999999">simple&#45;sql&#45;frontend</text>
 </g>
 <!-- hssqlppp&#45;&gt;ssf -->
 <g id="edge2" class="edge"><title>hssqlppp&#45;&gt;ssf</title>
-<path fill="none" stroke="#e5e5e5" stroke-dasharray="1,5" d="M328.545,-359.871C328.545,-335.67 328.545,-291.211 328.545,-262.393"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="332.045,-262.189 328.545,-252.189 325.045,-262.189 332.045,-262.189"/>
+<path fill="none" stroke="#999999" stroke-dasharray="1,5" d="M328.545,-359.871C328.545,-335.67 328.545,-291.211 328.545,-262.393"/>
+<polygon fill="#999999" stroke="#999999" points="332.045,-262.189 328.545,-252.189 325.045,-262.189 332.045,-262.189"/>
 </g>
 <!-- ssp&#45;&gt;ssf -->
 <g id="edge4" class="edge"><title>ssp&#45;&gt;ssf</title>
-<path fill="none" stroke="#e5e5e5" d="M251.738,-288.765C265.147,-279.379 282.206,-267.437 296.841,-257.193"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="298.946,-259.992 305.131,-251.39 294.932,-254.257 298.946,-259.992"/>
+<path fill="none" stroke="#999999" d="M251.738,-288.765C265.147,-279.379 282.206,-267.437 296.841,-257.193"/>
+<polygon fill="#999999" stroke="#999999" points="298.946,-259.992 305.131,-251.39 294.932,-254.257 298.946,-259.992"/>
 </g>
 <!-- ssf&#45;&gt;uq -->
 <g id="edge5" class="edge"><title>ssf&#45;&gt;uq</title>
-<path fill="none" stroke="#e5e5e5" d="M334.839,-216.055C337.765,-208.176 341.316,-198.617 344.593,-189.794"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="347.928,-190.868 348.128,-180.275 341.366,-188.431 347.928,-190.868"/>
+<path fill="none" stroke="#999999" d="M334.839,-216.055C337.765,-208.176 341.316,-198.617 344.593,-189.794"/>
+<polygon fill="#999999" stroke="#999999" points="347.928,-190.868 348.128,-180.275 341.366,-188.431 347.928,-190.868"/>
 </g>
 <!-- ssdbms1&#45;&gt;ssdbms2 -->
 <g id="edge13" class="edge"><title>ssdbms1&#45;&gt;ssdbms2</title>
-<path fill="none" stroke="#e5e5e5" d="M499.771,-72.411C490.22,-63.4969 478.283,-52.3554 467.786,-42.558"/>
-<polygon fill="#e5e5e5" stroke="#e5e5e5" points="470.15,-39.977 460.451,-35.7125 465.374,-45.0944 470.15,-39.977"/>
+<path fill="none" stroke="#999999" d="M499.771,-72.411C490.22,-63.4969 478.283,-52.3554 467.786,-42.558"/>
+<polygon fill="#999999" stroke="#999999" points="470.15,-39.977 460.451,-35.7125 465.374,-45.0944 470.15,-39.977"/>
 </g>
 <!-- tool -->
 <g id="node18" class="node"><title>tool</title>
-<ellipse fill="none" stroke="#e5e5e5" cx="448.545" cy="-378" rx="59.5901" ry="18"/>
-<text text-anchor="middle" x="448.545" y="-374.3" font-family="Times,serif" font-size="14.00" fill="#e5e5e5">sql&#45;dbms&#45;tool</text>
+<ellipse fill="none" stroke="#999999" cx="448.545" cy="-378" rx="59.5901" ry="18"/>
+<text text-anchor="middle" x="448.545" y="-374.3" font-family="Times,serif" font-size="14.00" fill="#999999">sql&#45;dbms&#45;tool</text>
 </g>
 </g>
 </svg>

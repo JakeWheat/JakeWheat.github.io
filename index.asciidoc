@@ -36,8 +36,9 @@ link:simple-sql-parser/latest/[].
 
 ==== sql-overview
 
-This documentation currently has HTML renders of the draft SQL
-Standards.
+This documentation intends to provide an overview of SQL concepts and
+jargon. Currently, it contains a nice SQL reading list and HTML
+renders of the draft SQL Standards' grammar.
 
 link:sql-overview/[]
 
@@ -53,7 +54,3 @@ link:intro_to_parsing/[]
 == Unrealistic project plan
 
 image::projects_diagram.svg[]
-
-== Contact
-
-+++jakewheatmail@gmail.com+++

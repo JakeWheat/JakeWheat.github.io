@@ -716,7 +716,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_22_1_get_diagnostics_statement">22.1 &lt;get diagnostics statement&gt;</a></li>
 </ul>
 </li>
+</ul><hr />
+<ul class="sectlevel1">
+<div id="toctitle">Links</div>
+<li><a href="index.html">Index</a></li>
+<li><a href='sql-92-grammar.html'>SQL-92</li>
+<li><a href='sql-1999-grammar.html'>SQL:1999</li>
+<li><a href='sql-2003-foundation-grammar.html'>SQL:2003</li>
+<li><a href='sql-2008-foundation-grammar.html'>SQL:2008</li>
+<li><a href='sql-2011-foundation-grammar.html'>SQL:2011</li>
+<li><a href='sql-2011-psm-grammar.html'>SQL:2011 SQL/PSM</li>
 </ul>
+<br />
+<ul class="sectlevel1">
+<li><a href="http://jakewheat.github.io/sql-overview" class="bare">Homepage</a></li>
+<li><a href="https://github.com/JakeWheat/sql-overview" class="bare">Repository</a></li>
+<li><a href="https://github.com/JakeWheat/sql-overview/issues" class="bare">Bug tracker</a></li>
+<li><a href="http://jakewheat.github.io/" class="bare">Parent project</a>
+</li><li>jakewheatmail@gmail.com</li>
+</ul>
+
 </div>
 </div>
 <div id="content">
@@ -729,10 +748,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Define the terminal symbols of the SQL language and the elements of strings.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="SQL-terminal-character" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;SQL terminal character&gt; ::= &lt;SQL language character&gt;</pre>
 </div>
@@ -969,10 +986,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify lexical units (tokens and separators) that participate in SQL language.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="token" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;token&gt; ::=
     <a href="#nondelimiter-token">&lt;nondelimiter token&gt;</a>
@@ -1391,10 +1406,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify a non-null value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="literal" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;literal&gt; ::=
     <a href="#signed-numeric-literal">&lt;signed numeric literal&gt;</a>
@@ -1710,10 +1723,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify names.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="identifier" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;identifier&gt; ::= &lt;actual identifier&gt;</pre>
 </div>
@@ -2015,10 +2026,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify a data type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="data-type" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;data type&gt; ::=
     <a href="#predefined-type">&lt;predefined type&gt;</a>
@@ -2246,10 +2255,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Define a field of a row type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="field-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;field definition&gt; ::= &lt;field name&gt; &lt;data type&gt;</pre>
 </div>
@@ -2261,10 +2268,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify a value that is syntactically self-delimited.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="value-expression-primary" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;value expression primary&gt; ::=
     <a href="#parenthesized-value-expression">&lt;parenthesized value expression&gt;</a>
@@ -2314,10 +2319,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify one or more values, host parameters, SQL parameters, dynamic parameters, or host variables.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="value-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;value specification&gt; ::=
     <a href="#literal">&lt;literal&gt;</a>
@@ -2431,10 +2434,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify a value whose data type is to be inferred from its context.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="contextually-typed-value-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;contextually typed value specification&gt; ::=
     <a href="#implicitly-typed-value-specification">&lt;implicitly typed value specification&gt;</a>
@@ -2472,10 +2473,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Disambiguate a &lt;period&gt;-separated chain of identifiers.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="identifier-chain" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;identifier chain&gt; ::= &lt;identifier&gt; [ { &lt;period&gt; &lt;identifier&gt; }... ]</pre>
 </div>
@@ -2492,10 +2491,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Reference a column.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="column-reference" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;column reference&gt; ::=
     <a href="#basic-identifier-chain">&lt;basic identifier chain&gt;</a>
@@ -2509,10 +2506,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Reference an SQL parameter.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="SQL-parameter-reference" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;SQL parameter reference&gt; ::= &lt;basic identifier chain&gt;</pre>
 </div>
@@ -2524,10 +2519,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify a value derived by the application of a function to an argument.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-function-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set function specification&gt; ::=
     <a href="#aggregate-function">&lt;aggregate function&gt;</a>
@@ -2548,10 +2541,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify a window function.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="window-function" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;window function&gt; ::= &lt;window function type&gt; OVER &lt;window name or specification&gt;</pre>
 </div>
@@ -2592,10 +2583,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify a conditional value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="case-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;case expression&gt; ::=
     <a href="#case-abbreviation">&lt;case abbreviation&gt;</a>
@@ -2695,10 +2684,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Specify a data conversion.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="cast-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;cast specification&gt; ::= CAST &lt;left paren&gt; &lt;cast operand&gt; AS &lt;cast target&gt; &lt;right paren&gt;</pre>
 </div>
@@ -2724,10 +2711,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Return the next value of a sequence generator.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="next-value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;next value expression&gt; ::= NEXT VALUE FOR &lt;sequence generator name&gt;</pre>
 </div>
@@ -2739,10 +2724,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Reference a field of a row value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="field-reference" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;field reference&gt; ::= &lt;value expression primary&gt; &lt;period&gt; &lt;field name&gt;</pre>
 </div>
@@ -2754,10 +2737,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Modify the declared type of an expression.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="subtype-treatment" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;subtype treatment&gt; ::=
     TREAT <a href="#left-paren">&lt;left paren&gt;</a> <a href="#subtype-operand">&lt;subtype operand&gt;</a> AS <a href="#target-subtype">&lt;target subtype&gt;</a> <a href="#right-paren">&lt;right paren&gt;</a></pre>
@@ -2782,10 +2763,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Reference an SQL-invoked method of a user-defined type value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="method-invocation" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;method invocation&gt; ::=
     <a href="#direct-invocation">&lt;direct invocation&gt;</a>
@@ -2822,10 +2801,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Invoke a static method.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="static-method-invocation" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;static method invocation&gt; ::=
     <a href="#path-resolved-user-defined-type-name">&lt;path-resolved user-defined type name&gt;</a> <a href="#double-colon">&lt;double colon&gt;</a> <a href="#method-name">&lt;method name&gt;</a>
@@ -2844,10 +2821,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Function</div>
 <p>Invoke a method on a newly-constructed value of a structured type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="new-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;new specification&gt; ::=
     NEW <a href="#path-resolved-user-defined-type-name">&lt;path-resolved user-defined type name&gt;</a> <a href="#SQL-argument-list">&lt;SQL argument list&gt;</a></pre>
@@ -2868,10 +2843,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Return a value acquired by accessing a column of the row identified by a value of a reference type or by
 invoking an SQL-invoked method.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="attribute-or-method-reference" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;attribute or method reference&gt; ::=
     <a href="#value-expression-primary">&lt;value expression primary&gt;</a> <a href="#dereference-operator">&lt;dereference operator&gt;</a> <a href="#qualified-identifier">&lt;qualified identifier&gt;</a>
@@ -2890,10 +2863,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Access a column of the row identified by a value of a reference type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="dereference-operation" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;dereference operation&gt; ::=
     <a href="#reference-value-expression">&lt;reference value expression&gt;</a> <a href="#dereference-operator">&lt;dereference operator&gt;</a> <a href="#attribute-name">&lt;attribute name&gt;</a></pre>
@@ -2906,10 +2877,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Return a value acquired from invoking an SQL-invoked routine that is a method.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="method-reference" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;method reference&gt; ::=
     <a href="#value-expression-primary">&lt;value expression primary&gt;</a> <a href="#dereference-operator">&lt;dereference operator&gt;</a> <a href="#method-name">&lt;method name&gt;</a> <a href="#SQL-argument-list">&lt;SQL argument list&gt;</a></pre>
@@ -2922,10 +2891,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Obtain the value referenced by a reference value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="reference-resolution" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;reference resolution&gt; ::=
     DEREF <a href="#left-paren">&lt;left paren&gt;</a> <a href="#reference-value-expression">&lt;reference value expression&gt;</a> <a href="#right-paren">&lt;right paren&gt;</a></pre>
@@ -2938,10 +2905,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Return an element of an array.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="array-element-reference" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;array element reference&gt; ::=
     <a href="#array-value-expression">&lt;array value expression&gt;</a>
@@ -2955,10 +2920,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Return the sole element of a multiset of one element.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="multiset-element-reference" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;multiset element reference&gt; ::=
     ELEMENT <a href="#left-paren">&lt;left paren&gt;</a> <a href="#multiset-value-expression">&lt;multiset value expression&gt;</a> <a href="#right-paren">&lt;right paren&gt;</a></pre>
@@ -2971,10 +2934,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;value expression&gt; ::=
     <a href="#common-value-expression">&lt;common value expression&gt;</a>
@@ -3018,10 +2979,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a numeric value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="numeric-value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;numeric value expression&gt; ::=
     <a href="#term">&lt;term&gt;</a>
@@ -3056,10 +3015,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a function yielding a value of type numeric.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="numeric-value-function" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;numeric value function&gt; ::=
     <a href="#position-expression">&lt;position expression&gt;</a>
@@ -3249,10 +3206,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a character string value or a binary string value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="string-value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;string value expression&gt; ::=
     <a href="#character-value-expression">&lt;character value expression&gt;</a>
@@ -3314,10 +3269,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a function yielding a value of type character string or binary string.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="string-value-function" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;string value function&gt; ::=
     <a href="#character-value-function">&lt;character value function&gt;</a>
@@ -3479,10 +3432,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a datetime value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="datetime-value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;datetime value expression&gt; ::=
     <a href="#datetime-term">&lt;datetime term&gt;</a>
@@ -3527,10 +3478,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a function yielding a value of type datetime.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="datetime-value-function" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;datetime value function&gt; ::=
     <a href="#current-date-value-function">&lt;current date value function&gt;</a>
@@ -3576,10 +3525,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify an interval value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="interval-value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;interval value expression&gt; ::=
     <a href="#interval-term">&lt;interval term&gt;</a>
@@ -3632,10 +3579,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a function yielding a value of type interval.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="interval-value-function" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;interval value function&gt; ::= &lt;interval absolute value function&gt;</pre>
 </div>
@@ -3653,10 +3598,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a boolean value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="boolean-value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;boolean value expression&gt; ::=
     <a href="#boolean-term">&lt;boolean term&gt;</a>
@@ -3715,10 +3658,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify an array value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="array-value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;array value expression&gt; ::=
     <a href="#array-concatenation">&lt;array concatenation&gt;</a>
@@ -3747,10 +3688,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify construction of an array.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="array-value-constructor" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;array value constructor&gt; ::=
     <a href="#array-value-constructor-by-enumeration">&lt;array value constructor by enumeration&gt;</a>
@@ -3787,10 +3726,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a multiset value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="multiset-value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;multiset value expression&gt; ::=
     <a href="#multiset-term">&lt;multiset term&gt;</a>
@@ -3819,10 +3756,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a function yielding a value of a multiset type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="multiset-value-function" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;multiset value function&gt; ::= &lt;multiset set function&gt;</pre>
 </div>
@@ -3840,10 +3775,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify construction of a multiset.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="multiset-value-constructor" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;multiset value constructor&gt; ::=
     <a href="#multiset-value-constructor-by-enumeration">&lt;multiset value constructor by enumeration&gt;</a>
@@ -3892,10 +3825,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a value or list of values to be constructed into a row.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="row-value-constructor" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;row value constructor&gt; ::=
     <a href="#common-value-expression">&lt;common value expression&gt;</a>
@@ -3964,10 +3895,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a row value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="row-value-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;row value expression&gt; ::=
     <a href="#row-value-special-case">&lt;row value special case&gt;</a>
@@ -4007,10 +3936,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a set of &lt;row value expression&gt;s to be constructed into a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="table-value-constructor" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;table value constructor&gt; ::= VALUES &lt;row value expression list&gt;</pre>
 </div>
@@ -4041,10 +3968,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a table or a grouped table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="table-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;table expression&gt; ::=
     <a href="#from-clause">&lt;from clause&gt;</a>
@@ -4061,10 +3986,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a table derived from one or more tables.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="from-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;from clause&gt; ::= FROM &lt;table reference list&gt;</pre>
 </div>
@@ -4082,10 +4005,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Reference a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="table-reference" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;table reference&gt; ::=
     <a href="#table-factor">&lt;table factor&gt;</a>
@@ -4197,10 +4118,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a table derived from a Cartesian product, inner join, or outer join.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="joined-table" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;joined table&gt; ::=
     <a href="#cross-join">&lt;cross join&gt;</a>
@@ -4270,10 +4189,8 @@ invoking an SQL-invoked method.</p>
 <div class="title">Function</div>
 <p>Specify a table derived by the application of a &lt;search condition&gt; to the result of the preceding &lt;from clause&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="where-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;where clause&gt; ::= WHERE &lt;search condition&gt;</pre>
 </div>
@@ -4286,10 +4203,8 @@ invoking an SQL-invoked method.</p>
 <p>Specify a grouped table derived by the application of the &lt;group by clause&gt; to the result of the previously
 specified clause.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="group-by-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;group by clause&gt; ::=
     GROUP BY [ <a href="#set-quantifier">&lt;set quantifier&gt;</a> ] <a href="#grouping-element-list">&lt;grouping element list&gt;</a></pre>
@@ -4382,10 +4297,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a grouped table derived by the elimination of groups that do not satisfy a &lt;search condition&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="having-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;having clause&gt; ::= HAVING &lt;search condition&gt;</pre>
 </div>
@@ -4397,10 +4310,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify one or more window definitions.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="window-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;window clause&gt; ::= WINDOW &lt;window definition list&gt;</pre>
 </div>
@@ -4548,10 +4459,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a table derived from the result of a &lt;table expression&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="query-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;query specification&gt; ::=
     SELECT [ <a href="#set-quantifier">&lt;set quantifier&gt;</a> ] <a href="#select-list">&lt;select list&gt;</a> <a href="#table-expression">&lt;table expression&gt;</a></pre>
@@ -4618,10 +4527,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="query-expression" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;query expression&gt; ::=
     [ <a href="#with-clause">&lt;with clause&gt;</a> ] <a href="#query-expression-body">&lt;query expression body&gt;</a></pre>
@@ -4707,10 +4614,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify the generation of ordering and cycle detection information in the result of recursive query expressions.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="search-or-cycle-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;search or cycle clause&gt; ::=
     <a href="#search-clause">&lt;search clause&gt;</a>
@@ -4781,10 +4686,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a scalar value, a row, or a table derived from a &lt;query expression&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="scalar-subquery" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;scalar subquery&gt; ::= &lt;subquery&gt;</pre>
 </div>
@@ -4816,10 +4719,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a condition that can be evaluated to give a boolean value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;predicate&gt; ::=
     <a href="#comparison-predicate">&lt;comparison predicate&gt;</a>
@@ -4848,10 +4749,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a comparison of two row values.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="comparison-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;comparison predicate&gt; ::= &lt;row value predicand&gt; &lt;comparison predicate part 2&gt;</pre>
 </div>
@@ -4879,10 +4778,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a range comparison.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="between-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;between predicate&gt; ::= &lt;row value predicand&gt; &lt;between predicate part 2&gt;</pre>
 </div>
@@ -4901,10 +4798,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a quantified comparison.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="in-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;in predicate&gt; ::= &lt;row value predicand&gt; &lt;in predicate part 2&gt;</pre>
 </div>
@@ -4933,10 +4828,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a pattern-match comparison.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="like-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;like predicate&gt; ::=
     <a href="#character-like-predicate">&lt;character like predicate&gt;</a>
@@ -4994,10 +4887,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a character string similarity by means of a regular expression.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="similar-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;similar predicate&gt; ::=
     <a href="#row-value-predicand">&lt;row value predicand&gt;</a> <a href="#similar-predicate-part-2">&lt;similar predicate part 2&gt;</a></pre>
@@ -5124,10 +5015,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a test for a null value.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="null-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;null predicate&gt; ::= &lt;row value predicand&gt; &lt;null predicate part 2&gt;</pre>
 </div>
@@ -5144,10 +5033,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a quantified comparison.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="quantified-comparison-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;quantified comparison predicate&gt; ::=
     <a href="#row-value-predicand">&lt;row value predicand&gt;</a> <a href="#quantified-comparison-predicate-part-2">&lt;quantified comparison predicate part 2&gt;</a></pre>
@@ -5185,10 +5072,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a test for a non-empty set.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="exists-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;exists predicate&gt; ::= EXISTS &lt;table subquery&gt;</pre>
 </div>
@@ -5200,10 +5085,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a test for the absence of duplicate rows.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="unique-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;unique predicate&gt; ::= UNIQUE &lt;table subquery&gt;</pre>
 </div>
@@ -5215,10 +5098,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Determine whether a character string value is normalized.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="normalized-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;normalized predicate&gt; ::= &lt;row value predicand&gt; &lt;normalized predicate part 2&gt;</pre>
 </div>
@@ -5235,10 +5116,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a test for matching rows.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="match-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;match predicate&gt; ::= &lt;row value predicand&gt; &lt;match predicate part 2&gt;</pre>
 </div>
@@ -5256,10 +5135,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a test for an overlap between two datetime periods.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="overlaps-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;overlaps predicate&gt; ::= &lt;overlaps predicate part 1&gt; &lt;overlaps predicate part 2&gt;</pre>
 </div>
@@ -5291,10 +5168,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a test of whether two row values are distinct</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="distinct-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;distinct predicate&gt; ::=
     <a href="#row-value-predicand-3">&lt;row value predicand 3&gt;</a> <a href="#distinct-predicate-part-2">&lt;distinct predicate part 2&gt;</a></pre>
@@ -5323,10 +5198,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a test of whether a value is a member of a multiset.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="member-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;member predicate&gt; ::=
     <a href="#row-value-predicand">&lt;row value predicand&gt;</a> <a href="#member-predicate-part-2">&lt;member predicate part 2&gt;</a></pre>
@@ -5345,10 +5218,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a test of whether a multiset is a submultiset of another multiset.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="submultiset-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;submultiset predicate&gt; ::=
     <a href="#row-value-predicand">&lt;row value predicand&gt;</a> <a href="#submultiset-predicate-part-2">&lt;submultiset predicate part 2&gt;</a></pre>
@@ -5367,10 +5238,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a test of whether a multiset is a set (that is, does not contain any duplicates).</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set predicate&gt; ::= &lt;row value predicand&gt; &lt;set predicate part 2&gt;</pre>
 </div>
@@ -5387,10 +5256,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a type test.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="type-predicate" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;type predicate&gt; ::=
     <a href="#row-value-predicand">&lt;row value predicand&gt;</a> <a href="#type-predicate-part-2">&lt;type predicate part 2&gt;</a></pre>
@@ -5435,10 +5302,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a condition that is True, False, or Unknown, depending on the value of a &lt;boolean value expression&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="search-condition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;search condition&gt; ::= &lt;boolean value expression&gt;</pre>
 </div>
@@ -5455,10 +5320,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify the precision of an interval data type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="interval-qualifier" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;interval qualifier&gt; ::=
     <a href="#start-field">&lt;start field&gt;</a> TO <a href="#end-field">&lt;end field&gt;</a>
@@ -5522,10 +5385,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a standard programming language.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="language-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;language clause&gt; ::= LANGUAGE &lt;language name&gt;</pre>
 </div>
@@ -5550,10 +5411,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify an order for searching for an SQL-invoked routine.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="path-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;path specification&gt; ::= PATH &lt;schema name list&gt;</pre>
 </div>
@@ -5570,10 +5429,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Invoke an SQL-invoked routine.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="routine-invocation" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;routine invocation&gt; ::= &lt;routine name&gt; &lt;SQL argument list&gt;</pre>
 </div>
@@ -5610,10 +5467,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Identify a character set.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="character-set-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;character set specification&gt; ::=
     <a href="#standard-character-set-name">&lt;standard character set name&gt;</a>
@@ -5643,10 +5498,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify an SQL-invoked routine.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="specific-routine-designator" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;specific routine designator&gt; ::=
     SPECIFIC <a href="#routine-type">&lt;routine type&gt;</a> <a href="#specific-name">&lt;specific name&gt;</a>
@@ -5687,10 +5540,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a default collation.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="collate-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;collate clause&gt; ::= COLLATE &lt;collation name&gt;</pre>
 </div>
@@ -5702,10 +5553,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify the name of a constraint and its characteristics.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="constraint-name-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;constraint name definition&gt; ::= CONSTRAINT &lt;constraint name&gt;</pre>
 </div>
@@ -5731,10 +5580,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a value computed from a collection of rows.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="aggregate-function" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;aggregate function&gt; ::=
     COUNT <a href="#left-paren">&lt;left paren&gt;</a> <a href="#asterisk">&lt;asterisk&gt;</a> <a href="#right-paren">&lt;right paren&gt;</a> [ <a href="#filter-clause">&lt;filter clause&gt;</a> ]
@@ -5876,10 +5723,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a sort order.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="sort-specification-list" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;sort specification list&gt; ::=
     <a href="#sort-specification">&lt;sort specification&gt;</a> [ { <a href="#comma">&lt;comma&gt;</a> <a href="#sort-specification">&lt;sort specification&gt;</a> }... ]</pre>
@@ -5922,10 +5767,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define a schema.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="schema-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;schema definition&gt; ::=
     CREATE SCHEMA <a href="#schema-name-clause">&lt;schema name clause&gt;</a>
@@ -5994,10 +5837,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a schema.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-schema-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop schema statement&gt; ::= DROP SCHEMA &lt;schema name&gt; &lt;drop behavior&gt;</pre>
 </div>
@@ -6016,10 +5857,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define a persistent base table, a created local temporary table, or a global temporary table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="table-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;table definition&gt; ::=
     CREATE [ <a href="#table-scope">&lt;table scope&gt;</a> ] TABLE <a href="#table-name">&lt;table name&gt;</a> <a href="#table-contents-source">&lt;table contents source&gt;</a>
@@ -6194,10 +6033,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define a column of a base table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="column-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;column definition&gt; ::=
     <a href="#column-name">&lt;column name&gt;</a> [ <a href="#data-type-or-domain-name">&lt;data type or domain name&gt;</a> ]
@@ -6257,10 +6094,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify the default for a column, domain, or attribute.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="default-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;default clause&gt; ::= DEFAULT &lt;default option&gt;</pre>
 </div>
@@ -6286,10 +6121,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify an integrity constraint.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="table-constraint-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;table constraint definition&gt; ::=
     [ <a href="#constraint-name-definition">&lt;constraint name definition&gt;</a> ] <a href="#table-constraint">&lt;table constraint&gt;</a>
@@ -6311,10 +6144,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a uniqueness constraint for a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="unique-constraint-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;unique constraint definition&gt; ::=
     <a href="#unique-specification">&lt;unique specification&gt;</a> <a href="#left-paren">&lt;left paren&gt;</a> <a href="#unique-column-list">&lt;unique column list&gt;</a> <a href="#right-paren">&lt;right paren&gt;</a>
@@ -6340,10 +6171,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a referential constraint.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="referential-constraint-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;referential constraint definition&gt; ::=
     FOREIGN KEY <a href="#left-paren">&lt;left paren&gt;</a> <a href="#referencing-columns">&lt;referencing columns&gt;</a> <a href="#right-paren">&lt;right paren&gt;</a>
@@ -6415,10 +6244,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify a condition for the SQL-data.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="check-constraint-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;check constraint definition&gt; ::= CHECK &lt;left paren&gt; &lt;search condition&gt; &lt;right paren&gt;</pre>
 </div>
@@ -6430,10 +6257,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Change the definition of a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="alter-table-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;alter table statement&gt; ::= ALTER TABLE &lt;table name&gt; &lt;alter table action&gt;</pre>
 </div>
@@ -6455,10 +6280,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Add a column to a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="add-column-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;add column definition&gt; ::= ADD [ COLUMN ] &lt;column definition&gt;</pre>
 </div>
@@ -6470,10 +6293,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Change a column and its definition.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="alter-column-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;alter column definition&gt; ::=
     ALTER [ COLUMN ] <a href="#column-name">&lt;column name&gt;</a> <a href="#alter-column-action">&lt;alter column action&gt;</a></pre>
@@ -6496,10 +6317,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Set the default clause for a column.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-column-default-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set column default clause&gt; ::= SET &lt;default clause&gt;</pre>
 </div>
@@ -6511,10 +6330,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Drop the default clause from a column.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-column-default-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop column default clause&gt; ::= DROP DEFAULT</pre>
 </div>
@@ -6526,10 +6343,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Add a non-empty scope for an existing column of data type REF in a base table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="add-column-scope-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;add column scope clause&gt; ::= ADD &lt;scope clause&gt;</pre>
 </div>
@@ -6541,10 +6356,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Drop the scope from an existing column of data type REF in a base table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-column-scope-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop column scope clause&gt; ::= DROP SCOPE &lt;drop behavior&gt;</pre>
 </div>
@@ -6556,10 +6369,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Change the options specified for an identity column.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="alter-identity-column-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;alter identity column specification&gt; ::= &lt;alter identity column option&gt;...</pre>
 </div>
@@ -6578,10 +6389,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a column of a base table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-column-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop column definition&gt; ::= DROP [ COLUMN ] &lt;column name&gt; &lt;drop behavior&gt;</pre>
 </div>
@@ -6593,10 +6402,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Add a constraint to a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="add-table-constraint-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;add table constraint definition&gt; ::= ADD &lt;table constraint definition&gt;</pre>
 </div>
@@ -6608,10 +6415,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a constraint on a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-table-constraint-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop table constraint definition&gt; ::= DROP CONSTRAINT &lt;constraint name&gt; &lt;drop behavior&gt;</pre>
 </div>
@@ -6623,10 +6428,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-table-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop table statement&gt; ::= DROP TABLE &lt;table name&gt; &lt;drop behavior&gt;</pre>
 </div>
@@ -6638,10 +6441,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define a viewed table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="view-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;view definition&gt; ::=
     CREATE [ RECURSIVE ] VIEW <a href="#table-name">&lt;table name&gt;</a> <a href="#view-specification">&lt;view specification&gt;</a>
@@ -6710,10 +6511,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a view.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-view-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop view statement&gt; ::= DROP VIEW &lt;table name&gt; &lt;drop behavior&gt;</pre>
 </div>
@@ -6725,10 +6524,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define a domain.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="domain-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;domain definition&gt; ::=
     CREATE DOMAIN <a href="#domain-name">&lt;domain name&gt;</a> [ AS ] <a href="#predefined-type">&lt;predefined type&gt;</a>
@@ -6751,10 +6548,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Change a domain and its definition.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="alter-domain-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;alter domain statement&gt; ::= ALTER DOMAIN &lt;domain name&gt; &lt;alter domain action&gt;</pre>
 </div>
@@ -6775,10 +6570,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Set the default value in a domain.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-domain-default-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set domain default clause&gt; ::= SET &lt;default clause&gt;</pre>
 </div>
@@ -6790,10 +6583,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Remove the default clause of a domain.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-domain-default-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop domain default clause&gt; ::= DROP DEFAULT</pre>
 </div>
@@ -6805,10 +6596,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Add a constraint to a domain.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="add-domain-constraint-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;add domain constraint definition&gt; ::= ADD &lt;domain constraint&gt;</pre>
 </div>
@@ -6820,10 +6609,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a constraint on a domain.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-domain-constraint-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop domain constraint definition&gt; ::= DROP CONSTRAINT &lt;constraint name&gt;</pre>
 </div>
@@ -6835,10 +6622,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a domain.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-domain-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop domain statement&gt; ::= DROP DOMAIN &lt;domain name&gt; &lt;drop behavior&gt;</pre>
 </div>
@@ -6850,10 +6635,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define a character set.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="character-set-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;character set definition&gt; ::=
     CREATE CHARACTER SET <a href="#character-set-name">&lt;character set name&gt;</a> [ AS ]
@@ -6872,10 +6655,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a character set.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-character-set-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop character set statement&gt; ::= DROP CHARACTER SET &lt;character set name&gt;</pre>
 </div>
@@ -6887,10 +6668,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define a collation.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="collation-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;collation definition&gt; ::=
     CREATE COLLATION <a href="#collation-name">&lt;collation name&gt;</a> FOR <a href="#character-set-specification">&lt;character set specification&gt;</a>
@@ -6916,10 +6695,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a collation.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-collation-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop collation statement&gt; ::= DROP COLLATION &lt;collation name&gt; &lt;drop behavior&gt;</pre>
 </div>
@@ -6931,10 +6708,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define a character transliteration.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="transliteration-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;transliteration definition&gt; ::=
     CREATE TRANSLATION <a href="#transliteration-name">&lt;transliteration name&gt;</a> FOR <a href="#source-character-set-specification">&lt;source character set specification&gt;</a>
@@ -6975,10 +6750,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a character transliteration.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-transliteration-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop transliteration statement&gt; ::= DROP TRANSLATION &lt;transliteration name&gt;</pre>
 </div>
@@ -6990,10 +6763,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Specify an integrity constraint.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="assertion-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;assertion definition&gt; ::=
     CREATE ASSERTION <a href="#constraint-name">&lt;constraint name&gt;</a>
@@ -7008,10 +6779,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy an assertion.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-assertion-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop assertion statement&gt; ::= DROP ASSERTION &lt;constraint name&gt; [ &lt;drop behavior&gt; ]</pre>
 </div>
@@ -7023,10 +6792,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define triggered SQL-statements.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="trigger-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;trigger definition&gt; ::=
     CREATE TRIGGER <a href="#trigger-name">&lt;trigger name&gt;</a> <a href="#trigger-action-time">&lt;trigger action time&gt;</a> <a href="#trigger-event">&lt;trigger event&gt;</a>
@@ -7115,10 +6882,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a trigger.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-trigger-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop trigger statement&gt; ::= DROP TRIGGER &lt;trigger name&gt;</pre>
 </div>
@@ -7130,10 +6895,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="user-defined-type-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;user-defined type definition&gt; ::= CREATE TYPE &lt;user-defined type body&gt;</pre>
 </div>
@@ -7343,10 +7106,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define an attribute of a structured type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="attribute-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;attribute definition&gt; ::=
     <a href="#attribute-name">&lt;attribute name&gt;</a> <a href="#data-type">&lt;data type&gt;</a>
@@ -7366,10 +7127,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Change the definition of a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="alter-type-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;alter type statement&gt; ::=
     ALTER TYPE <a href="#schema-resolved-user-defined-type-name">&lt;schema-resolved user-defined type name&gt;</a> <a href="#alter-type-action">&lt;alter type action&gt;</a></pre>
@@ -7392,10 +7151,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Add an attribute to a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="add-attribute-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;add attribute definition&gt; ::= ADD ATTRIBUTE &lt;attribute definition&gt;</pre>
 </div>
@@ -7407,10 +7164,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy an attribute of a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-attribute-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop attribute definition&gt; ::= DROP ATTRIBUTE &lt;attribute name&gt; RESTRICT</pre>
 </div>
@@ -7422,10 +7177,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Add an original method specification to a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="add-original-method-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;add original method specification&gt; ::= ADD &lt;original method specification&gt;</pre>
 </div>
@@ -7437,10 +7190,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Add an overriding method specification to a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="add-overriding-method-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;add overriding method specification&gt; ::=
     ADD <a href="#overriding-method-specification">&lt;overriding method specification&gt;</a></pre>
@@ -7453,10 +7204,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Remove a method specification from a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-method-specification" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop method specification&gt; ::=
     DROP <a href="#specific-method-specification-designator">&lt;specific method specification designator&gt;</a> RESTRICT</pre>
@@ -7476,10 +7225,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Destroy a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-data-type-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop data type statement&gt; ::=
     DROP TYPE <a href="#schema-resolved-user-defined-type-name">&lt;schema-resolved user-defined type name&gt;</a> <a href="#drop-behavior">&lt;drop behavior&gt;</a></pre>
@@ -7492,10 +7239,8 @@ specified clause.</p>
 <div class="title">Function</div>
 <p>Define an SQL-invoked routine.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="SQL-invoked-routine" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;SQL-invoked routine&gt; ::= &lt;schema routine&gt;</pre>
 </div>
@@ -7772,10 +7517,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Alter a characteristic of an SQL-invoked routine.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="alter-routine-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;alter routine statement&gt; ::=
     ALTER <a href="#specific-routine-designator">&lt;specific routine designator&gt;</a>
@@ -7810,10 +7553,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Destroy an SQL-invoked routine.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-routine-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop routine statement&gt; ::= DROP &lt;specific routine designator&gt; &lt;drop behavior&gt;</pre>
 </div>
@@ -7825,10 +7566,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define a user-defined cast.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="user-defined-cast-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;user-defined cast definition&gt; ::=
     CREATE CAST <a href="#left-paren">&lt;left paren&gt;</a> <a href="#source-data-type">&lt;source data type&gt;</a> AS <a href="#target-data-type">&lt;target data type&gt;</a> <a href="#right-paren">&lt;right paren&gt;</a>
@@ -7858,10 +7597,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Destroy a user-defined cast.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-user-defined-cast-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop user-defined cast statement&gt; ::=
     DROP CAST <a href="#left-paren">&lt;left paren&gt;</a> <a href="#source-data-type">&lt;source data type&gt;</a> AS <a href="#target-data-type">&lt;target data type&gt;</a> <a href="#right-paren">&lt;right paren&gt;</a>
@@ -7875,10 +7612,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define a user-defined ordering for a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="user-defined-ordering-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;user-defined ordering definition&gt; ::=
     CREATE ORDERING FOR <a href="#schema-resolved-user-defined-type-name">&lt;schema-resolved user-defined type name&gt;</a> <a href="#ordering-form">&lt;ordering form&gt;</a></pre>
@@ -7941,10 +7676,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Destroy a user-defined ordering method.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-user-defined-ordering-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop user-defined ordering statement&gt; ::=
     DROP ORDERING FOR <a href="#schema-resolved-user-defined-type-name">&lt;schema-resolved user-defined type name&gt;</a> <a href="#drop-behavior">&lt;drop behavior&gt;</a></pre>
@@ -7957,10 +7690,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define one or more transform functions for a user-defined type.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="transform-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;transform definition&gt; ::=
     CREATE { TRANSFORM | TRANSFORMS } FOR
@@ -8017,10 +7748,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Change the definition of one or more transform groups.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="alter-transform-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;alter transform statement&gt; ::=
     ALTER { TRANSFORM | TRANSFORMS }
@@ -8053,10 +7782,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Add a transform element (&lt;to sql&gt; and/or &lt;from sql&gt;) to an existing transform group.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="add-transform-element-list" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;add transform element list&gt; ::=
     ADD <a href="#left-paren">&lt;left paren&gt;</a> <a href="#transform-element-list">&lt;transform element list&gt;</a> <a href="#right-paren">&lt;right paren&gt;</a></pre>
@@ -8069,10 +7796,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Remove a transform element (&lt;to sql&gt; and/or &lt;from sql&gt;) from a transform group.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-transform-element-list" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop transform element list&gt; ::=
     DROP <a href="#left-paren">&lt;left paren&gt;</a> <a href="#transform-kind">&lt;transform kind&gt;</a>
@@ -8093,10 +7818,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Remove one or more transform functions associated with a transform.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-transform-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop transform statement&gt; ::=
     DROP { TRANSFORM | TRANSFORMS } <a href="#transforms-to-be-dropped">&lt;transforms to be dropped&gt;</a>
@@ -8122,10 +7845,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define an external sequence generator.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="sequence-generator-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;sequence generator definition&gt; ::=
     CREATE SEQUENCE <a href="#sequence-generator-name">&lt;sequence generator name&gt;</a> [ <a href="#sequence-generator-options">&lt;sequence generator options&gt;</a> ]</pre>
@@ -8227,10 +7948,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Change the definition of an external sequence generator.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="alter-sequence-generator-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;alter sequence generator statement&gt; ::=
     ALTER SEQUENCE <a href="#sequence-generator-name">&lt;sequence generator name&gt;</a> <a href="#alter-sequence-generator-options">&lt;alter sequence generator options&gt;</a></pre>
@@ -8266,10 +7985,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Destroy an external sequence generator.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-sequence-generator-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop sequence generator statement&gt; ::=
     DROP SEQUENCE <a href="#sequence-generator-name">&lt;sequence generator name&gt;</a> <a href="#drop-behavior">&lt;drop behavior&gt;</a></pre>
@@ -8287,10 +8004,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define privileges and role authorizations.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="grant-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;grant statement&gt; ::=
     <a href="#grant-privilege-statement">&lt;grant privilege statement&gt;</a>
@@ -8304,10 +8019,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define privileges.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="grant-privilege-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;grant privilege statement&gt; ::=
     GRANT <a href="#privileges">&lt;privileges&gt;</a> TO <a href="#grantee">&lt;grantee&gt;</a> [ { <a href="#comma">&lt;comma&gt;</a> <a href="#grantee">&lt;grantee&gt;</a> }... ]
@@ -8323,10 +8036,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Specify privileges.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="privileges" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;privileges&gt; ::= &lt;object privileges&gt; ON &lt;object name&gt;</pre>
 </div>
@@ -8399,10 +8110,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define a role.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="role-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;role definition&gt; ::= CREATE ROLE &lt;role name&gt; [ WITH ADMIN &lt;grantor&gt; ]</pre>
 </div>
@@ -8414,10 +8123,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define role authorizations.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="grant-role-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;grant role statement&gt; ::=
     GRANT <a href="#role-granted">&lt;role granted&gt;</a> [ { <a href="#comma">&lt;comma&gt;</a> <a href="#role-granted">&lt;role granted&gt;</a> }... ]
@@ -8438,10 +8145,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Destroy a role.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="drop-role-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;drop role statement&gt; ::= DROP ROLE &lt;role name&gt;</pre>
 </div>
@@ -8453,10 +8158,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Destroy privileges and role authorizations.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="revoke-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;revoke statement&gt; ::=
     <a href="#revoke-privilege-statement">&lt;revoke privilege statement&gt;</a>
@@ -8505,10 +8208,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define an SQL-client module.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="SQL-client-module-definition" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;SQL-client module definition&gt; ::=
     <a href="#module-name-clause">&lt;module name clause&gt;</a> <a href="#language-clause">&lt;language clause&gt;</a> <a href="#module-authorization-clause">&lt;module authorization clause&gt;</a>
@@ -8576,10 +8277,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Name an SQL-client module.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="module-name-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;module name clause&gt; ::=
     MODULE [ <a href="#SQL-client-module-name">&lt;SQL-client module name&gt;</a> ] [ <a href="#module-character-set-specification">&lt;module character set specification&gt;</a> ]</pre>
@@ -8597,10 +8296,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define an externally-invoked procedure.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="externally-invoked-procedure" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;externally-invoked procedure&gt; ::=
     PROCEDURE <a href="#procedure-name">&lt;procedure name&gt;</a> <a href="#host-parameter-declaration-list">&lt;host parameter declaration list&gt;</a> <a href="#semicolon">&lt;semicolon&gt;</a>
@@ -8638,10 +8335,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define all of the SQL-statements that are &lt;SQL procedure statement&gt;s.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="SQL-procedure-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;SQL procedure statement&gt; ::= &lt;SQL executable statement&gt;</pre>
 </div>
@@ -8830,10 +8525,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Define a cursor.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="declare-cursor" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;declare cursor&gt; ::=
     DECLARE <a href="#cursor-name">&lt;cursor name&gt;</a> [ <a href="#cursor-sensitivity">&lt;cursor sensitivity&gt;</a> ] [ <a href="#cursor-scrollability">&lt;cursor scrollability&gt;</a> ] CURSOR
@@ -8895,10 +8588,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Open a cursor.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="open-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;open statement&gt; ::= OPEN &lt;cursor name&gt;</pre>
 </div>
@@ -8910,10 +8601,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Position a cursor on a specified row of a table and retrieve values from that row.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="fetch-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;fetch statement&gt; ::=
     FETCH [ [ <a href="#fetch-orientation">&lt;fetch orientation&gt;</a> ] FROM ] <a href="#cursor-name">&lt;cursor name&gt;</a> INTO <a href="#fetch-target-list">&lt;fetch target list&gt;</a></pre>
@@ -8942,10 +8631,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Close a cursor.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="close-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;close statement&gt; ::= CLOSE &lt;cursor name&gt;</pre>
 </div>
@@ -8957,10 +8644,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Retrieve values from a specified row of a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="select-statement:-single-row" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;select statement: single row&gt; ::=
     SELECT [ <a href="#set-quantifier">&lt;set quantifier&gt;</a> ] <a href="#select-list">&lt;select list&gt;</a>
@@ -8981,10 +8666,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Delete a row of a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="delete-statement:-positioned" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;delete statement: positioned&gt; ::=
     DELETE FROM <a href="#target-table">&lt;target table&gt;</a> [ [ AS ] <a href="#correlation-name">&lt;correlation name&gt;</a> ]
@@ -9005,10 +8688,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Delete rows of a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="delete-statement:-searched" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;delete statement: searched&gt; ::=
     DELETE FROM <a href="#target-table">&lt;target table&gt;</a> [ [ AS ] <a href="#correlation-name">&lt;correlation name&gt;</a> ]
@@ -9022,10 +8703,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Create new rows in a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="insert-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;insert statement&gt; ::=
     INSERT INTO <a href="#insertion-target">&lt;insertion target&gt;</a> <a href="#insert-columns-and-source">&lt;insert columns and source&gt;</a></pre>
@@ -9084,10 +8763,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Conditionally update rows of a table, or insert new rows into a table, or both.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="merge-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;merge statement&gt; ::=
     MERGE INTO <a href="#target-table">&lt;target table&gt;</a> [ [ AS ] <a href="#merge-correlation-name">&lt;merge correlation name&gt;</a> ]
@@ -9159,10 +8836,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Update a row of a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="update-statement:-positioned" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;update statement: positioned&gt; ::=
     UPDATE <a href="#target-table">&lt;target table&gt;</a> [ [ AS ] <a href="#correlation-name">&lt;correlation name&gt;</a> ]
@@ -9177,10 +8852,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Update rows of a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="update-statement:-searched" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;update statement: searched&gt; ::=
     UPDATE <a href="#target-table">&lt;target table&gt;</a> [ [ AS ] <a href="#correlation-name">&lt;correlation name&gt;</a> ]
@@ -9195,10 +8868,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Specify a list of updates.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-clause-list" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set clause list&gt; ::= &lt;set clause&gt; [ { &lt;comma&gt; &lt;set clause&gt; }... ]</pre>
 </div>
@@ -9273,10 +8944,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Declare a declared local temporary table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="temporary-table-declaration" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;temporary table declaration&gt; ::=
     DECLARE LOCAL TEMPORARY TABLE <a href="#table-name">&lt;table name&gt;</a> <a href="#table-element-list">&lt;table element list&gt;</a>
@@ -9290,10 +8959,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Remove the association between a locator variable and the value that is represented by that locator.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="free-locator-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;free locator statement&gt; ::=
     FREE LOCATOR <a href="#locator-reference">&lt;locator reference&gt;</a> [ { <a href="#comma">&lt;comma&gt;</a> <a href="#locator-reference">&lt;locator reference&gt;</a> }... ]</pre>
@@ -9314,10 +8981,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Mark a locator variable as being holdable.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="hold-locator-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;hold locator statement&gt; ::=
     HOLD LOCATOR <a href="#locator-reference">&lt;locator reference&gt;</a> [ { <a href="#comma">&lt;comma&gt;</a> <a href="#locator-reference">&lt;locator reference&gt;</a> }... ]</pre>
@@ -9335,10 +9000,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Invoke an SQL-invoked routine.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="call-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;call statement&gt; ::= CALL &lt;routine invocation&gt;</pre>
 </div>
@@ -9350,10 +9013,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Return a value from an SQL function.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="return-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;return statement&gt; ::= RETURN &lt;return value&gt;</pre>
 </div>
@@ -9377,10 +9038,8 @@ list&gt;
 <div class="title">Function</div>
 <p>Start an SQL-transaction and set its characteristics.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="start-transaction-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;start transaction statement&gt; ::=
     START TRANSACTION
@@ -9434,10 +9093,8 @@ list&gt;
 <p>Set the characteristics of the next SQL-transaction for the SQL-agent.
 NOTE 411 — This statement has no effect on any SQL-transactions subsequent to the next SQL-transaction.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-transaction-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set transaction statement&gt; ::=
     SET [ LOCAL ] <a href="#transaction-characteristics">&lt;transaction characteristics&gt;</a></pre>
@@ -9459,10 +9116,8 @@ SQL-session. If no SQL-transaction is currently active, then set the constraint 
 in the current SQL-session for the SQL-agent.
 NOTE 413 — This statement has no effect on any SQL-transactions subsequent to this SQL-transaction.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-constraints-mode-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set constraints mode statement&gt; ::=
     SET CONSTRAINTS <a href="#constraint-name-list">&lt;constraint name list&gt;</a> { DEFERRED | IMMEDIATE }</pre>
@@ -9482,10 +9137,8 @@ NOTE 413 — This statement has no effect on any SQL-transactions subsequent to 
 <div class="title">Function</div>
 <p>Establish a savepoint.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="savepoint-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;savepoint statement&gt; ::= SAVEPOINT &lt;savepoint specifier&gt;</pre>
 </div>
@@ -9502,10 +9155,8 @@ NOTE 413 — This statement has no effect on any SQL-transactions subsequent to 
 <div class="title">Function</div>
 <p>Destroy a savepoint.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="release-savepoint-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;release savepoint statement&gt; ::= RELEASE SAVEPOINT &lt;savepoint specifier&gt;</pre>
 </div>
@@ -9517,10 +9168,8 @@ NOTE 413 — This statement has no effect on any SQL-transactions subsequent to 
 <div class="title">Function</div>
 <p>Terminate the current SQL-transaction with commit.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="commit-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;commit statement&gt; ::= COMMIT [ WORK ] [ AND [ NO ] CHAIN ]</pre>
 </div>
@@ -9533,10 +9182,8 @@ NOTE 413 — This statement has no effect on any SQL-transactions subsequent to 
 <p>Terminate the current SQL-transaction with rollback, or rollback all actions affecting SQL-data and/or schemas
 since the establishment of a savepoint.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="rollback-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;rollback statement&gt; ::= ROLLBACK [ WORK ] [ AND [ NO ] CHAIN ] [ &lt;savepoint clause&gt; ]</pre>
 </div>
@@ -9558,10 +9205,8 @@ since the establishment of a savepoint.</p>
 <div class="title">Function</div>
 <p>Establish an SQL-session.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="connect-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;connect statement&gt; ::= CONNECT TO &lt;connection target&gt;</pre>
 </div>
@@ -9580,10 +9225,8 @@ since the establishment of a savepoint.</p>
 <div class="title">Function</div>
 <p>Select an SQL-connection from the available SQL-connections.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-connection-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set connection statement&gt; ::= SET CONNECTION &lt;connection object&gt;</pre>
 </div>
@@ -9602,10 +9245,8 @@ since the establishment of a savepoint.</p>
 <div class="title">Function</div>
 <p>Terminate an SQL-connection.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="disconnect-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;disconnect statement&gt; ::= DISCONNECT &lt;disconnect object&gt;</pre>
 </div>
@@ -9630,10 +9271,8 @@ since the establishment of a savepoint.</p>
 <div class="title">Function</div>
 <p>Set one or more characteristics for the current SQL-session.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-session-characteristics-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set session characteristics statement&gt; ::=
     SET SESSION CHARACTERISTICS AS <a href="#session-characteristic-list">&lt;session characteristic list&gt;</a></pre>
@@ -9657,10 +9296,8 @@ since the establishment of a savepoint.</p>
 <div class="title">Function</div>
 <p>Set the SQL-session user identifier and the current user identifier of the current SQL-session context.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-session-user-identifier-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set session user identifier statement&gt; ::=
     SET SESSION AUTHORIZATION <a href="#value-specification">&lt;value specification&gt;</a></pre>
@@ -9673,10 +9310,8 @@ since the establishment of a savepoint.</p>
 <div class="title">Function</div>
 <p>Set the current role name for the current SQL-session context.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-role-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set role statement&gt; ::= SET ROLE &lt;role specification&gt;</pre>
 </div>
@@ -9695,10 +9330,8 @@ since the establishment of a savepoint.</p>
 <div class="title">Function</div>
 <p>Set the current default time zone displacement for the current SQL-session.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-local-time-zone-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set local time zone statement&gt; ::= SET TIME ZONE &lt;set time zone value&gt;</pre>
 </div>
@@ -9719,10 +9352,8 @@ since the establishment of a savepoint.</p>
 the current SQL-session by an &lt;execute immediate statement&gt; or a &lt;prepare statement&gt; and in &lt;direct SQL
 statement&gt;s that are invoked directly.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-catalog-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set catalog statement&gt; ::= SET &lt;catalog name characteristic&gt;</pre>
 </div>
@@ -9745,10 +9376,8 @@ prepared in the current SQL-session by an &lt;execute immediate statement&gt; or
 <pre>&lt;direct SQL statement&gt;s that are invoked directly.</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-schema-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set schema statement&gt; ::= SET &lt;schema name characteristic&gt;</pre>
 </div>
@@ -9767,10 +9396,8 @@ prepared in the current SQL-session by an &lt;execute immediate statement&gt; or
 in the current SQL-session by an &lt;execute immediate statement&gt; or a &lt;prepare statement&gt; and in &lt;direct SQL
 statement&gt;s that are invoked directly.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-names-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set names statement&gt; ::= SET &lt;character set name characteristic&gt;</pre>
 </div>
@@ -9790,10 +9417,8 @@ name&gt;s in &lt;preparable statement&gt;s that are prepared in the current SQL-
 statement&gt; or a &lt;prepare statement&gt; and in &lt;direct SQL statement&gt;s, respectively, that are invoked directly.
 The SQL-path remains the current SQL-path of the SQL-session until another SQL-path is successfully set.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-path-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set path statement&gt; ::= SET &lt;SQL-path characteristic&gt;</pre>
 </div>
@@ -9811,10 +9436,8 @@ The SQL-path remains the current SQL-path of the SQL-session until another SQL-p
 <p>Set the group name that identifies the group of transform functions for mapping values of user-defined types
 to predefined data types.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-transform-group-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set transform group statement&gt; ::= SET &lt;transform group characteristic&gt;</pre>
 </div>
@@ -9834,10 +9457,8 @@ to predefined data types.</p>
 <p>Set the SQL-session collation of the SQL-session for one or more character sets. An SQL-session collation
 remains effective until another SQL-session collation for the same character set is successfully set.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-session-collation-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set session collation statement&gt; ::=
     SET COLLATION <a href="#collation-specification">&lt;collation specification&gt;</a> [ FOR <a href="#character-set-specification-list">&lt;character set specification list&gt;</a> ]
@@ -9861,10 +9482,8 @@ remains effective until another SQL-session collation for the same character set
 <div class="title">Function</div>
 <p>Allocate an SQL descriptor area.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="allocate-descriptor-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;allocate descriptor statement&gt; ::=
     ALLOCATE [ SQL ] DESCRIPTOR <a href="#descriptor-name">&lt;descriptor name&gt;</a> [ WITH MAX <a href="#occurrences">&lt;occurrences&gt;</a> ]</pre>
@@ -9882,10 +9501,8 @@ remains effective until another SQL-session collation for the same character set
 <div class="title">Function</div>
 <p>Deallocate an SQL descriptor area.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="deallocate-descriptor-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;deallocate descriptor statement&gt; ::=
     DEALLOCATE [ SQL ] DESCRIPTOR <a href="#descriptor-name">&lt;descriptor name&gt;</a></pre>
@@ -9898,10 +9515,8 @@ remains effective until another SQL-session collation for the same character set
 <div class="title">Function</div>
 <p>Get information from an SQL descriptor area.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="get-descriptor-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;get descriptor statement&gt; ::=
     GET [ SQL ] DESCRIPTOR <a href="#descriptor-name">&lt;descriptor name&gt;</a> <a href="#get-descriptor-information">&lt;get descriptor information&gt;</a></pre>
@@ -10001,10 +9616,8 @@ remains effective until another SQL-session collation for the same character set
 <div class="title">Function</div>
 <p>Set information in an SQL descriptor area.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="set-descriptor-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;set descriptor statement&gt; ::=
     SET [ SQL ] DESCRIPTOR <a href="#descriptor-name">&lt;descriptor name&gt;</a> <a href="#set-descriptor-information">&lt;set descriptor information&gt;</a></pre>
@@ -10047,10 +9660,8 @@ remains effective until another SQL-session collation for the same character set
 <div class="title">Function</div>
 <p>Prepare a statement for execution.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="prepare-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;prepare statement&gt; ::=
     PREPARE <a href="#SQL-statement-name">&lt;SQL statement name&gt;</a> [ <a href="#attributes-specification">&lt;attributes specification&gt;</a> ]
@@ -10135,10 +9746,8 @@ remains effective until another SQL-session collation for the same character set
 <div class="title">Function</div>
 <p>Specify a list of cursor attributes.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="cursor-attributes" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;cursor attributes&gt; ::= &lt;cursor attribute&gt;...</pre>
 </div>
@@ -10159,10 +9768,8 @@ remains effective until another SQL-session collation for the same character set
 <div class="title">Function</div>
 <p>Deallocate SQL-statements that have been prepared with a &lt;prepare statement&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="deallocate-prepared-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;deallocate prepared statement&gt; ::= DEALLOCATE PREPARE &lt;SQL statement name&gt;</pre>
 </div>
@@ -10175,10 +9782,8 @@ remains effective until another SQL-session collation for the same character set
 <p>Obtain information about the &lt;select list&gt; columns or &lt;dynamic parameter specification&gt;s contained in a prepared
 statement or about the columns of the result set associated with a cursor.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="describe-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;describe statement&gt; ::=
     <a href="#describe-input-statement">&lt;describe input statement&gt;</a>
@@ -10223,10 +9828,8 @@ statement or about the columns of the result set associated with a cursor.</p>
 <div class="title">Function</div>
 <p>Supply input values for an &lt;SQL dynamic statement&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="input-using-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;input using clause&gt; ::=
     <a href="#using-arguments">&lt;using arguments&gt;</a>
@@ -10255,10 +9858,8 @@ statement or about the columns of the result set associated with a cursor.</p>
 <div class="title">Function</div>
 <p>Supply output variables for an &lt;SQL dynamic statement&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="output-using-clause" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;output using clause&gt; ::=
     <a href="#into-arguments">&lt;into arguments&gt;</a>
@@ -10287,10 +9888,8 @@ statement or about the columns of the result set associated with a cursor.</p>
 <div class="title">Function</div>
 <p>Associate input SQL parameters and output targets with a prepared statement and execute the statement.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="execute-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;execute statement&gt; ::=
     EXECUTE <a href="#SQL-statement-name">&lt;SQL statement name&gt;</a> [ <a href="#result-using-clause">&lt;result using clause&gt;</a> ] [ <a href="#parameter-using-clause">&lt;parameter using clause&gt;</a> ]</pre>
@@ -10313,10 +9912,8 @@ statement or about the columns of the result set associated with a cursor.</p>
 <div class="title">Function</div>
 <p>Dynamically prepare and execute a preparable statement.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="execute-immediate-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;execute immediate statement&gt; ::=
     EXECUTE IMMEDIATE <a href="#SQL-statement-variable">&lt;SQL statement variable&gt;</a></pre>
@@ -10330,10 +9927,8 @@ statement or about the columns of the result set associated with a cursor.</p>
 <p>Declare a cursor to be associated with a &lt;statement name&gt;, which may in turn be associated with a &lt;cursor
 specification&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="dynamic-declare-cursor" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic declare cursor&gt; ::=
     DECLARE <a href="#cursor-name">&lt;cursor name&gt;</a> [ <a href="#cursor-sensitivity">&lt;cursor sensitivity&gt;</a> ] [ <a href="#cursor-scrollability">&lt;cursor scrollability&gt;</a> ] CURSOR
@@ -10350,10 +9945,8 @@ specification&gt;.</p>
 <p>Define a cursor based on a prepared statement for a &lt;cursor specification&gt; or assign a cursor to the ordered set
 of result sets returned from an SQL-invoked procedure.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="allocate-cursor-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;allocate cursor statement&gt; ::=
     ALLOCATE <a href="#extended-cursor-name">&lt;extended cursor name&gt;</a> <a href="#cursor-intent">&lt;cursor intent&gt;</a></pre>
@@ -10387,10 +9980,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Associate input dynamic parameters with a &lt;cursor specification&gt; and open the cursor.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="dynamic-open-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic open statement&gt; ::= OPEN &lt;dynamic cursor name&gt; [ &lt;input using clause&gt; ]</pre>
 </div>
@@ -10402,10 +9993,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Fetch a row for a cursor declared with a &lt;dynamic declare cursor&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="dynamic-fetch-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic fetch statement&gt; ::=
     FETCH [ [ <a href="#fetch-orientation">&lt;fetch orientation&gt;</a> ] FROM ] <a href="#dynamic-cursor-name">&lt;dynamic cursor name&gt;</a> <a href="#output-using-clause">&lt;output using clause&gt;</a></pre>
@@ -10418,10 +10007,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Retrieve values from a dynamically-specified row of a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="dynamic-single-row-select-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic single row select statement&gt; ::= &lt;query specification&gt;</pre>
 </div>
@@ -10433,10 +10020,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Close a cursor.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="dynamic-close-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic close statement&gt; ::= CLOSE &lt;dynamic cursor name&gt;</pre>
 </div>
@@ -10448,10 +10033,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Delete a row of a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="dynamic-delete-statement:-positioned" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic delete statement: positioned&gt; ::=
     DELETE FROM <a href="#target-table">&lt;target table&gt;</a> WHERE CURRENT OF <a href="#dynamic-cursor-name">&lt;dynamic cursor name&gt;</a></pre>
@@ -10464,10 +10047,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Update a row of a table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="dynamic-update-statement:-positioned" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic update statement: positioned&gt; ::=
     UPDATE <a href="#target-table">&lt;target table&gt;</a> SET <a href="#set-clause-list">&lt;set clause list&gt;</a>
@@ -10481,10 +10062,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Delete a row of a table through a dynamic cursor.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="preparable-dynamic-delete-statement:-positioned" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;preparable dynamic delete statement: positioned&gt; ::=
     DELETE [ FROM <a href="#target-table">&lt;target table&gt;</a> ]
@@ -10498,10 +10077,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Update a row of a table through a dynamic cursor.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="preparable-dynamic-update-statement:-positioned" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;preparable dynamic update statement: positioned&gt; ::=
     UPDATE [ <a href="#target-table">&lt;target table&gt;</a> ] SET <a href="#set-clause-list">&lt;set clause list&gt;</a>
@@ -10520,10 +10097,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify an &lt;embedded SQL host program&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="embedded-SQL-------host-program" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;embedded SQL       host program&gt; ::=
     <a href="#embedded-------SQL-Ada-program">&lt;embedded       SQL Ada program&gt;</a>
@@ -10682,10 +10257,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify the action to be taken when an SQL-statement causes a specific class of condition to be raised.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="embedded-exception-declaration" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;embedded exception declaration&gt; ::= WHENEVER &lt;condition&gt; &lt;condition action&gt;</pre>
 </div>
@@ -10770,10 +10343,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify an &lt;embedded SQL Ada program&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="embedded-SQL-Ada-program" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;embedded SQL Ada program&gt; ::= !! See the Syntax Rules.</pre>
 </div>
@@ -10910,10 +10481,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify an &lt;embedded SQL C program&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="embedded-SQL-C-program" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;embedded SQL C program&gt; ::= !! See the Syntax Rules.</pre>
 </div>
@@ -11129,10 +10698,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify an &lt;embedded SQL COBOL program&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="embedded-SQL-COBOL-program" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;embedded SQL COBOL program&gt; ::= !! See the Syntax Rules.</pre>
 </div>
@@ -11289,10 +10856,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify an &lt;embedded SQL Fortran program&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="embedded-SQL-Fortran-program" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;embedded SQL Fortran program&gt; ::= !! See the Syntax Rules.</pre>
 </div>
@@ -11399,10 +10964,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify an &lt;embedded SQL MUMPS program&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="embedded-SQL-MUMPS-program" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;embedded SQL MUMPS program&gt; ::= !! See the Syntax Rules.</pre>
 </div>
@@ -11523,10 +11086,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify an &lt;embedded SQL Pascal program&gt;.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="embedded-SQL-Pascal-program" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;embedded SQL Pascal program&gt; ::= !! See the Syntax Rules.</pre>
 </div>
@@ -11632,8 +11193,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <p>Specify an &lt;embedded SQL PL/I program&gt;.</p>
 </div>
 <div class="paragraph">
-<p>Format
-[[embedded-SQL-PL/I-program]]</p>
+<div class="title">Format</div>
+<p>[[embedded-SQL-PL/I-program]]</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11815,10 +11376,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify direct execution of SQL.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="direct-SQL-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;direct SQL statement&gt; ::= &lt;directly executable statement&gt; &lt;semicolon&gt;</pre>
 </div>
@@ -11857,10 +11416,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Specify a statement to retrieve multiple rows from a specified table.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="direct-select-statement:-multiple-rows" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;direct select statement: multiple rows&gt; ::= &lt;cursor specification&gt;</pre>
 </div>
@@ -11877,10 +11434,8 @@ of result sets returned from an SQL-invoked procedure.</p>
 <div class="title">Function</div>
 <p>Get exception or completion condition information from a diagnostics area.</p>
 </div>
-<div class="paragraph">
-<p>Format</p>
-</div>
 <div id="get-diagnostics-statement" class="listingblock">
+<div class="title">Format</div>
 <div class="content">
 <pre>&lt;get diagnostics statement&gt; ::=
     GET DIAGNOSTICS <a href="#SQL-diagnostics-information">&lt;SQL diagnostics information&gt;</a></pre>
@@ -11976,7 +11531,7 @@ of result sets returned from an SQL-invoked procedure.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-08-07 21:31:23 IDT
+Last updated 2015-08-15 17:35:06 IDT
 </div>
 </div>
 </body>

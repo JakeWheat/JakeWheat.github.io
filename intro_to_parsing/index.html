@@ -728,7 +728,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_updated_parsing_code_with_improved_error_message_behaviour">16.7. updated parsing code with improved error message behaviour</a></li>
 </ul>
 </li>
+</ul><hr />
+<ul class="sectlevel1">
+<li><a href="http://jakewheat.github.io/intro_to_parsing" class="bare">Homepage</a></li>
+<li><a href="https://github.com/JakeWheat/intro_to_parsing" class="bare">Repository</a></li>
+<li><a href="https://github.com/JakeWheat/intro_to_parsing/issues" class="bare">Bug tracker</a></li>
+<li><a href="http://jakewheat.github.io/" class="bare">Parent project</a>
+</li><li>jakewheatmail@gmail.com</li>
 </ul>
+
 </div>
 </div>
 <div id="content">
@@ -864,7 +872,7 @@ restructuring parser code can lead to better or worse error messages.</p>
 <div class="paragraph">
 <p>If you are interesting in SQL parsing, check out the project to build
 a complete SQL parser here:
-<a href="http://jakewheat.github.io/simple-sql-parser/" class="bare">http://jakewheat.github.io/simple-sql-parser/</a>. The parsing code in the
+<a href="http://jakewheat.github.io/simple-sql-parser/latest" class="bare">http://jakewheat.github.io/simple-sql-parser/latest</a>. The parsing code in the
 simple-sql-parser project is based on this tutorial code.</p>
 </div>
 </div>
@@ -908,12 +916,15 @@ a file passed as an argument</p>
 <p>This is an introduction to parsing with Haskell and Parsec.</p>
 </div>
 <div class="paragraph">
-<p>Prerequisites: you should know some basic Haskell and have the Haskell
-Platform installed (or GHC and Parsec installed in some other way).</p>
+<p>Prerequisites: you should know some basic Haskell and have GHC and
+cabal-install installed (installing the Haskell Platform will give you
+this).</p>
 </div>
 <div class="paragraph">
-<p>This tutorial was written using GHC 7.6.3 and Parsec 3.1.3, which are
-the versions which come with the Haskell Platform 2013.2.0.0.</p>
+<p>This tutorial was originally written using GHC 7.6.3 and Parsec 3.1.3,
+which are the versions which come with the Haskell Platform
+2013.2.0.0. It should also work fine with GHC 7.8.4 and GHC 7.10.2 and
+through to at least the latest release of Parsec 3.1.x.</p>
 </div>
 <div class="paragraph">
 <p>This tutorial was written using Literate Haskell files available here:
@@ -921,7 +932,8 @@ the versions which come with the Haskell Platform 2013.2.0.0.</p>
 </div>
 <div class="paragraph">
 <p>I recommend you download them all, and follow along in your favourite
-editor, and use ghci to experiment. To download, use:</p>
+editor, and use GHCi to experiment. To download the intro_to_parsing
+files, use:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -964,31 +976,75 @@ the module <code>Text.Parsec.String</code>. We will cover this in more detail
 later.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s use this parser. Change to the directory where you saved this
-.lhs file, and run ghci. Then type in ':l GettingStarted.lhs'. You
-can run the parser using a wrapper, enter the following at the ghci
-prompt: <code>regularParse anyChar "a"</code>.</p>
+<p>Let&#8217;s use this parser. I will assume you have GHC and cabal-install
+installed (which provides the 'cabal' executable) and both are in your
+PATH. The Haskell Platform is one way that provides this.</p>
+</div>
+<div class="paragraph">
+<p>Change to the directory where you downloaded the intro_to_parsing
+source files (which will contain the GettingStarted.lhs file). Then
+you can set up a cabal sandbox and be ready to work with the code by
+running the following commands in that directory:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>regularParse :: Parser a -&gt; String -&gt; Either ParseError a</code></pre>
+<pre class="pygments highlight"><code>cabal update
+cabal sandbox init
+cabal install parsec
+cabal repl</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Here is a transcript:</p>
+<p>Now you will get the ghci prompt. Type in ':l GettingStarted.lhs'. You
+can run the parser using a wrapper, enter the following at the ghci
+prompt: <code>regularParse anyChar "a"</code>.</p>
+</div>
+<div class="paragraph">
+<p>Here is a transcript of running ghci via 'cabal repl':</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code>$ ghci
+<pre class="pygments highlight"><code>$ cabal repl
 GHCi, version 7.6.3: http://www.haskell.org/ghc/  :? for help
 Loading package ghc-prim ... linking ... done.
 Loading package integer-gmp ... linking ... done.
 Loading package base ... linking ... done.
 Prelude&gt; :l GettingStarted.lhs
-[1 of 1] Compiling Main             ( GettingStarted.lhs, interpreted )
-Ok, modules loaded: Main.
+[1 of 5] Compiling Text.Parsec.String.Parsec ( Text/Parsec/String/Parsec.hs, interpreted )
+[2 of 5] Compiling Text.Parsec.String.Combinator ( Text/Parsec/String/Combinator.hs, interpreted )
+[3 of 5] Compiling Text.Parsec.String.Char ( Text/Parsec/String/Char.hs, interpreted )
+[4 of 5] Compiling FunctionsAndTypesForParsing ( FunctionsAndTypesForParsing.lhs, interpreted )
+[5 of 5] Compiling Main             ( GettingStarted.lhs, interpreted )
+Ok, modules loaded: FunctionsAndTypesForParsing, Text.Parsec.String.Char, Text.Parsec.String.Combinator, Main, Text.Parsec.String.Parsec.
 *Main&gt; regularParse anyChar "a"
-Right 'a'</code></pre>
+Loading package array-0.4.0.1 ... linking ... done.
+Loading package deepseq-1.3.0.1 ... linking ... done.
+Loading package bytestring-0.10.0.2 ... linking ... done.
+Loading package containers-0.5.0.0 ... linking ... done.
+Loading package binary-0.5.1.1 ... linking ... done.
+Loading package transformers-0.4.3.0 ... linking ... done.
+Loading package mtl-2.2.1 ... linking ... done.
+Loading package text-1.2.1.3 ... linking ... done.
+Loading package parsec-3.1.9 ... linking ... done.
+Right 'a'
+*Main&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can exit ghci by entering ':quit' or using Ctrl-d. From now on, to
+start ghci again, you can just change to the directory with
+GettingStarted.lhs and run 'cabal repl'. ghci should have readline
+support so you can browse through your command history using up and
+down arrow, etc.</p>
+</div>
+<div class="paragraph">
+<p>This is the type of <code>regularParse</code>. It is wrapper which takes a parser
+function such as anyChar, and wraps it so you can parse a string to
+either a parse error, or the return value from your parser function:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code>regularParse :: Parser a -&gt; String -&gt; Either ParseError a</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1281,7 +1337,7 @@ noneOf :: [Char] -&gt; Parser Char</code></pre>
 <p>These are just simple wrappers of satisfy using <code>elem</code>.</p>
 </div>
 <div class="paragraph">
-<p>You should try all these parsers out in GHCI, e.g.:</p>
+<p>You should try all these parsers out in ghci, e.g.:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1369,9 +1425,6 @@ write this boilerplate until later.</p>
 <p>Now you can easily experiment using ghci, or with a string on the
 command line, or by putting the text to parse into a file and parsing
 that.</p>
-</div>
-<div class="paragraph">
-<p>TODO: transcript of using these exes.</p>
 </div>
 </div>
 </div>
@@ -2683,15 +2736,8 @@ like this using <code>fmap</code> with IO in other Haskell code.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Why does this work? It it equivalent to this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="haskell"><span class="tok-nf">numA2&#39;</span> <span class="tok-ow">::</span> <span class="tok-kt">Parser</span> <span class="tok-kt">SimpleExpr</span>
-<span class="tok-nf">numA2&#39;</span> <span class="tok-ow">=</span> <span class="tok-kr">do</span>
-    <span class="tok-n">n</span> <span class="tok-ow">&lt;-</span> <span class="tok-p">(</span><span class="tok-kt">Num</span> <span class="tok-o">.</span> <span class="tok-n">read</span><span class="tok-p">)</span> <span class="tok-o">&lt;$&gt;</span> <span class="tok-n">lexemeA</span> <span class="tok-p">(</span><span class="tok-n">many1</span> <span class="tok-n">digit</span><span class="tok-p">))</span>
-    <span class="tok-n">return</span> <span class="tok-n">n</span></code></pre>
-</div>
+<p>Why does this work? It it equivalent to the previous version partly
+because of the applicative laws.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s break it down:</p>
@@ -3705,9 +3751,7 @@ parse a keyword and return a no argument constructor:</p>
 </div>
 <div class="paragraph">
 <p>TODO: double check using these from Parsec instead of
-Control.Applicative: possible performance implictions? Look at the
-implementations, maybe they are all the same now, and the performance
-issues were in the past only.</p>
+Control.Applicative: possible performance implictions?</p>
 </div>
 </div>
 <div class="sect2">
@@ -3971,8 +4015,9 @@ easily. Fixity is the (not completely standard) term for precendence
 and associativity together.</p>
 </div>
 <div class="paragraph">
-<p><code>Text.Parsec.Expr</code> can be great to quickly get a parser up and
-running.</p>
+<p><code>Text.Parsec.Expr</code> can be great to quickly get a parser for simple
+expressions or a simple programming language with simple expressions
+up and running.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8801,7 +8846,7 @@ boundaries</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-08-08 21:10:06 IDT
+Last updated 2015-08-15 17:35:20 IDT
 </div>
 </div>
 </body>
