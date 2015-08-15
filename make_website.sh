@@ -24,19 +24,21 @@ all_docs () {
     echo Build subproject docs
 
     echo sql-overview
-    #(cd ../../sql-overview/master && ./make_website.sh && cp -R build/* ../../jakewheat.github.io/master/sql-overview/ && cd -)
+    (cd ../../sql-overview/master && ./make_website.sh && cp -R build/* ../../jakewheat.github.io/master/sql-overview/ && cd -)
 
     echo intro_to_parsing
-    #(cd ../../intro_to_parsing/master && ./make_website.sh && cp -R build/index.html ../../jakewheat.github.io/master/intro_to_parsing/ && cd -)
+    (cd ../../intro_to_parsing/master && ./make_website.sh && cp -R build/index.html ../../jakewheat.github.io/master/intro_to_parsing/ && cd -)
 
-    #echo hssqlppp
+    echo hssqlppp
     (cd ../../hssqlppp/master && make website website-haddock && cp -R build/website/* ../../jakewheat.github.io/master/hssqlppp/0.5.18/ && cd -)
 
     echo simple-sql-parser
-    #(cd ../../simple-sql-parser/master && make website && cp -R build/* ../../jakewheat.github.io/master/simple-sql-parser/0.5.0 && cd -)
+    (cd ../../simple-sql-parser/master && make website && cp -R build/* ../../jakewheat.github.io/master/simple-sql-parser/0.5.0 && cd -)
 
     local_docs
 }
+
+# TODO: add targets for each of the subprojects separately
 
 usage () {
     echo please use either
