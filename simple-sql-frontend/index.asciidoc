@@ -1,0 +1,89 @@
+= simple sql frontend
+
+== stuff
+
+milestones:
+----
+value expressions
+queries step by step
+start with value expressions
+then do queries step by step
+focus on incorrect sql as well as correct
+stick to annotating types and errors all over the tree like in
+  hssqlppp
+dml
+ddl
+other sql statements?
+routines
+procedural sql
+extensibility
+----
+
+== components to the system
+
+=== from simple-sql-parser
+
+syntax, lexer, parser, pretty printer from simple-sql-parser
+
+have to convert the syntax module into uuagc syntax
+
+maybe add the fields postprocessor hack from hssqlppp
+
+=== annotations
+
+----
+want to create ids for identifiers and link references to identifiers
+  to the ids: this is to help with being a front end
+what could go in the annotations type after typechecking:
+identifier definition reference
+type of the node
+catalog updates for ddl
+implicit cast applied to node
+source position from parser
+any errors associated with the node
+possible internals:
+  environment at the node??
+  log of how the type resolution worked out
+----
+
+== typechecking uuagc code
+
+this is the attr and sem for uuagc stuff
+
+== typechecking support non-uuagc
+
+this is the misc hs code to support the type checking
+
+== types
+
+this is the representation of sql types in the system. A bit tricky to
+work out...
+
+== typeconversion module
+
+this is the module which handles the three postgresql style
+typeconversion tasks:
+
+* choosing a function, operator or whatever in the presence of
+  function overloading and implicit casting
+
+* assignment implicit cast resolution - this is for insert and for
+  assignment (e.g. in procedural sql)
+
+* expression set type resolution - this is to resolve the result type
+  for a union column, case then expression, join keys, etc.
+
+== catalog handling
+
+catalog type should store more or less what is in a dbms catalog. It
+also provides lookup for stuff, and updates to the catalog will do
+error checking such as duplicate names or dropped object doesn't exist
+
+== environment handling
+
+environment handles the available identifiers in each part of the
+tree. The main tricky bit is inside join trees in trefs, and select
+lists connected to trees, but there are a few places. It handles
+whether an identifier is ambiguous or missing, and can also supply the
+identifier source id, and what the correlation/qualification name
+should be if it were written explicitly.

@@ -1,0 +1,9 @@
+
+= distributed queries
+
+== stuff
+
+extend the transactions demo to do distributed storage: we want
+reliable transactions, none of that availability bullshit. Something
+like paxos or raft.
+

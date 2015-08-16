@@ -1,0 +1,28 @@
+
+= cost based optimiser
+
+== stuff
+
+cost based optimiser. Start by setting up some benchmarks
+
+talk about different implementations like stream/hash agg,
+ninlj,inlj,hj,smj, etc.
+
+show some speed difference by manually changing trees and choosing the
+right implementation
+
+do some demos of a cost based optimiser:
+
+* simple stats/histograms
+* row count estimates
+* tree cost estimates
+* tree enumerator
+
+try to get a good optimised tree without worrying about optimising the
+optimiser first
+
+then try to optimise the optimiser so we break even or better
+
+can also put in other optimisation ideas here: lots of simple tree
+rewrites, constant expression evaluation, cse?, cte->temp table or
+rewind, etc.

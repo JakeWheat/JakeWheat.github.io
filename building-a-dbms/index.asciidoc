@@ -1,0 +1,29 @@
+
+
+
+= Building a DBMS
+
+== notes
+
+We have a concurrent transactions storage layer, and a queries
+implementation which will plug into the storage layer. What else do we
+need to build a minimal sql dbms?
+
+* network code
+* sessions/connections
+* client driver + command line client for testing
+
+This is in addition to the existing:
+
+* sql compiler
+* sql statement engine
+* sql transactional storage engine
+* tests from the transaction and queries projects
+
+What about SQL things that haven't been implemented yet?
+
+a proper catalog, views, triggers, functions, procedures, psm,
+domains, cursors, merge, schemas and databases, structured types,
+assertion, sequence (encodings, collations: probably already done in
+uq, dynamic sql, connection management?, session management?,
+diagnostics?

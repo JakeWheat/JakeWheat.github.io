@@ -1,0 +1,41 @@
+
+= sql dbms tool
+
+== stuff
+
+one of those page editing things where you can also run sql, edit
+stuff, see graphs from data
+
+what will be new?
+
+nicely rendered tables which are also just text, can select all text
+easily
+
+large documents, bigger than memory easily handle
+
+uses transliterature, permanent history, espcially the edl,
+permascroll and transclusions
+
+nice history browsers: using history tree
+
+no save and load, automatically persisted
+
+uses humane style cursors, selections and stuff
+
+incremental search
+
+zui for many workspaces
+
+really fast
+
+works with different databases
+
+add some dba functionality: browse catalog, query construction helper?
+
+nicely integrates with history of document and data
+
+can use it as a dba tool
+
+or a data scientist exploration tool
+
+or a document editing tool

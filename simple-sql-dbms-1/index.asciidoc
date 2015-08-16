@@ -1,0 +1,8 @@
+
+= simple sql dbms 1
+
+== stuff
+
+Take the understanding queries and the concurrent transactions and
+build a dbms around it. Focus is on correctness and simple features.
+

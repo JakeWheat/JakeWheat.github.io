@@ -1,0 +1,19 @@
+
+
+= Security
+
+== stuff
+
+What kind of security can we add to a DBMS?
+
+== Authentication
+
+== Authorization
+
+SQL Standard style permissions + more
+
+== Data encryption
+
+== TLS
+
+== Advanced security

@@ -1,0 +1,19 @@
+= extensibility in a sql dbms
+
+== stuff
+
+what is extensibility:
+
+basics: types, functions (including ops, casts, anything scalar)
+
+aggregates and windows
+
+foreign data
+
+triggers and psm
+
+table valued functions
+
+types, functions, etc. written in non-sql languages
+
+more internally stuff: indexes, joins, new table operators

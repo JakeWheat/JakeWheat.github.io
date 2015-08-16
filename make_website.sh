@@ -6,6 +6,10 @@ set -x
 
 local_docs () {
     echo Build local docs
+    for i in `find . -iname '*.asciidoc' | grep -v "^./index.asciidoc|^./simple-sql-parser/index.asciidoc|^./hssqlppp/index.asciidoc"`; do
+        echo $i
+        asciidoctor $i
+    done
     dot -Tsvg projects_diagram.dot -o projects_diagram.svg
     echo index
     asciidoctor index.asciidoc -o - | runhaskell AddLinks.lhs > index.html
@@ -72,3 +76,4 @@ case $key in
         exit;;
 esac
 done
+

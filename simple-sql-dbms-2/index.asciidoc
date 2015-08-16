@@ -1,0 +1,12 @@
+
+
+= simple sql dbms 2
+
+== stuff
+
+Build on simple sql dbms 1
+
+add some extensibility, security and some optimisation. This should be
+a decent enough sqlite kind of thing in haskell, but also with an
+option to do concurrency and a network server
+

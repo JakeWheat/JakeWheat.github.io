@@ -1,0 +1,42 @@
+
+= simple durable storage
+
+== stuff
+
+Implement a simple storage which saves to disk after every update.
+
+No recovery or transactions.
+
+Start with Ints only, and:
+
+insert, update, delete, create table, drop table
+maybe select * only query?
+
+single threaded only
+
+no nulls
+
+milestones:
+
+more types + nullable (maybe start with Dynamic?)
+
+catalog
+
+see if there is a simple way to do type extensibility
+
+alter table?
+
+memory only operation
+
+add constraints?
+
+add sequences, default?
+
+optimise to not save the whole database on every update
+
+change the saving layer to avoid leaving the database corrupt
+
+This will provide the basis for the single threaded transactions
+implementation
+
+

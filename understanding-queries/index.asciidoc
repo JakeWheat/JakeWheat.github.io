@@ -1,0 +1,111 @@
+= understanding queries
+
+== intro
+
+Implement most SQL queries in a way that explains what the queries
+mean/ explain what various queries mean by way of a simple
+implementation.
+
+== basics
+
+----
+introduce the simple durable storage and how it works
+
+write a simple demo to do selects
+
+each one of these: write a couple of sql statements
+then write the physical operators
+
+simple scalar expressions
+
+row->row select lists, aliases
+from:
+  tref
+  joins
+  subqueries
+where
+having
+aggregates
+groupby aggregates
+distinct
+orderby
+limit offset (fetch syntax)
+
+set operators
+
+write a little test framewoek
+----
+
+== compiling
+
+----
+physical operators overview
+
+use actual sql parser and compiler so can run sql statements
+  add statements for the storage also
+
+query flow
+
+can discuss about compilation strategy
+  combining different features in a query
+  structuring compiler + compiler report to debug
+
+compilation ideas (desugar, optimise, etc.)
+
+explain
+----
+
+== more stuff
+
+---
+nulls
+
+complete joins
+
+tableref aliases
+
+complete simple scalar expressions
+
+impure functions
+
+complete aggregates
+
+complete order by
+
+complete set operators
+
+unnest
+
+window functions
+
+combined scalar expressions with aggs, window, etc.
+
+values
+
+grouping sets
+
+cte
+
+recursive cte
+
+table refs
+  functions
+  lateral
+  tablesample
+  temporal?
+  some other stuff in tableref
+
+temporal in other places?
+
+
+subqueries overview
+  scalar
+  join style
+  correlated
+
+select list revisit: flow
+
+syntactic scalar expressions review + contexts
+
+
+----

@@ -1,0 +1,34 @@
+
+= single threaded transactions
+
+== stuff
+
+build on the simple durable storage
+
+the goal is full multistatement transactions with commit, rollback and
+recovery.
+
+real durability - after return the database is safely updated
+
+single statement rollback
+
+recovery on partial update then crash
+
+multistatement transactions
+
+savepoints, nested transactions?
+
+constraints??
+
+not doing:
+
+syntax layer
+
+concurrent transactions
+
+views, triggers, domains (maybe after constraints?), text:encodings,
+collations, type extensibility except by modifying the haskell source,
+cursors, users/permissions, functions, routines, modules, merge, other
+more complete dml variations
+
+multiple databases, schemas

@@ -77,34 +77,34 @@ digraph  {
   subgraph xcluster_docs {
           label="documentation and demos";
           
-    so[label="sql-overview",URL="http://jakewheat.github.io/sql-overview/"];
-    itp[label="intro_to_parsing",URL="http://jakewheat.github.io/intro_to_parsing/"];
-    bdbms[label="building-a-dbms",color=gray60,fontcolor=gray60];
-    sec[label="security",color=gray60,fontcolor=gray60];
-    uq[label="understanding-queries",color=gray60,fontcolor=gray60];
-    sds[label="simple-durable-storage",color=gray60,fontcolor=gray60];
-    stt[label="single-threaded-transactions",color=gray60,fontcolor=gray60];
-    ct[label="concurrent-transactions",color=gray60,fontcolor=gray60];
-    dt[label="distributed-transactions",color=gray60,fontcolor=gray60];
-    cbo[label="cost-based-optimiser",color=gray60,fontcolor=gray60];
-    e[label="extensibility",color=gray60,fontcolor=gray60];
-    tr[label="transactions introduction and techniques review",color=gray60,fontcolor=gray60];
+    so[label="sql-overview",URL="sql-overview/"];
+    itp[label="intro_to_parsing",URL="intro_to_parsing/"];
+    bdbms[label="building-a-dbms",color=gray60,fontcolor=gray60,URL="building-a-dbms/"];
+    sec[label="security",color=gray60,fontcolor=gray60,URL="security/"];
+    uq[label="understanding-queries",color=gray60,fontcolor=gray60,URL="understanding-queries/"];
+    sds[label="simple-durable-storage",color=gray60,fontcolor=gray60,URL="simple-durable-storage/"];
+    stt[label="single-threaded-transactions",color=gray60,fontcolor=gray60,URL="single-threaded-transactions/"];
+    ct[label="concurrent-transactions",color=gray60,fontcolor=gray60,URL="concurrent-transactions/"];
+    dt[label="distributed-transactions",color=gray60,fontcolor=gray60,URL="distributed-transactions/"];
+    cbo[label="cost-based-optimiser",color=gray60,fontcolor=gray60,URL="cost-based-optimiser/"];
+    e[label="extensibility",color=gray60,fontcolor=gray60,URL="extensibility/"];
+    tr[label="intro-to-transactions",color=gray60,fontcolor=gray60,URL="intro-to-transactions/"];
   }
 
   subgraph xcluster_libs {
           label="libraries";
           
-    hssqlppp[label="hssqlppp",URL="http://jakewheat.github.io/hssqlppp/latest"];
-    ssp[label="simple-sql-parser",URL="http://jakewheat.github.io/simple-sql-parser/latest/"];
-    ssf[label="simple-sql-frontend",color=gray60,fontcolor=gray60];
+    hssqlppp[label="hssqlppp",URL="hssqlppp/latest"];
+    ssp[label="simple-sql-parser",URL="simple-sql-parser/latest/"];
+    ssf[label="simple-sql-frontend",color=gray60,fontcolor=gray60,URL="simple-sql-frontend/"];
   }
 
   subgraph xcluster_exes {
           label="executables";
           
-    ssdbms1[label="simple-sql-dbms-1",color=gray60,fontcolor=gray60];
-    ssdbms2[label="simple-sql-dbms-2",color=gray60,fontcolor=gray60];
-    tool[label="sql-dbms-tool",color=gray60,fontcolor=gray60];
+    ssdbms1[label="simple-sql-dbms-1",color=gray60,fontcolor=gray60,URL="simple-sql-dbms-1/"];
+    ssdbms2[label="simple-sql-dbms-2",color=gray60,fontcolor=gray60,URL="simple-sql-dbms-2/"];
+    tool[label="sql-dbms-tool",color=gray60,fontcolor=gray60,URL="sql-dbms-tool/"];
   }
 
 

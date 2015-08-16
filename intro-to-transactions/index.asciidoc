@@ -1,0 +1,12 @@
+
+= intro to transactions
+
+== intro
+
+explain what transactions are quickly
+
+do a survey of transaction implementations: have serializable isolated
+and nearly serializable isolated in sql dbms, serializable isolated in
+other dbmss, and all the other kinds of weak shit that other non-sql
+database systems and sql database systems call transactions.
+

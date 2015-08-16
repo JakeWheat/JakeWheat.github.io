@@ -1,0 +1,21 @@
+
+= concurrent transactions
+
+== stuff
+
+The only reason to implement concurrent transactions is
+performance. Set up a fake concurrent transaction system using an
+exclusive lock, and add benchmark tests for concurrent access
+scenarios.
+
+First step is to allow multiple updates at the same time so they all
+save OK when there is no conflicts. Then add conflict detection.
+
+Implementation possibilities: main two are: mvcc, update in place with
+rollback log.
+
+have to continue to maintain multistatement transactions, rollback and
+recovery.
+
+Then can consider adding ddl to transactions.
+
