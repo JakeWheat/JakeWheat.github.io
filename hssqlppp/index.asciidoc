@@ -9,6 +9,8 @@
 
 link:latest/[latest released version (0.4.0)]
 
+link:0.6.0/[version 0.6.0]
+
 link:0.5.18/[version 0.5.18]
 
 link:0.4.0/[version 0.4.0]

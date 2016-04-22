@@ -1,0 +1,7676 @@
+
+:toc:
+:toc-placement: macro
+:sectnums:
+:toclevels: 10
+:sectnumlevels: 10
+:source-highlighter: pygments
+
+= Parser tests
+
+toc::[]
+
+
+
+== Overview
+
+The parser examples have the sql source on the left, and the ast that the parser produces
+the right, the annotations have been replaced with a placeholder 'A' to make the output a bit more readable.
+
+The source this file is generated from is here:
+[ParserTests.lhs](https://github.com/JakeWheat/hssqlppp/blob/master/src-extra/tests/Database/HsSqlPpp/Tests/ParserTests.lhs)
+
+  
+
+== lexing
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+'string'
+----
+
+a|
+[source,haskell]
+----
+[SqlString "'" "'" "string"]
+----
+
+a|
+[source,sql]
+----
+E'string\n'
+----
+
+a|
+[source,haskell]
+----
+[SqlString "E'" "'" "string\\n"]
+----
+
+a|
+[source,sql]
+----
+E'bsquoteend\''
+----
+
+a|
+[source,haskell]
+----
+[SqlString "E'" "'" "bsquoteend\\'"]
+----
+
+a|
+[source,sql]
+----
+E'bsquote\'xx'
+----
+
+a|
+[source,haskell]
+----
+[SqlString "E'" "'" "bsquote\\'xx"]
+----
+
+a|
+[source,sql]
+----
+E'quoteend'''
+----
+
+a|
+[source,haskell]
+----
+[SqlString "E'" "'" "quoteend''"]
+----
+
+a|
+[source,sql]
+----
+E'quote''x'
+----
+
+a|
+[source,haskell]
+----
+[SqlString "E'" "'" "quote''x"]
+----
+
+a|
+[source,sql]
+----
+'normal '' quote'
+----
+
+a|
+[source,haskell]
+----
+[SqlString "'" "'" "normal '' quote"]
+----
+
+a|
+[source,sql]
+----
+'normalendquote '''
+----
+
+a|
+[source,haskell]
+----
+[SqlString "'" "'" "normalendquote ''"]
+----
+
+a|
+[source,sql]
+----
+$$dollar quoting$$
+----
+
+a|
+[source,haskell]
+----
+[SqlString "$$" "$$" "dollar quoting"]
+----
+
+a|
+[source,sql]
+----
+$x$dollar $$ quoting$x$
+----
+
+a|
+[source,haskell]
+----
+[SqlString "$x$" "$x$" "dollar $$ quoting"]
+----
+
+a|
+[source,sql]
+----
+test
+----
+
+a|
+[source,haskell]
+----
+[Identifier Nothing "test"]
+----
+
+a|
+[source,sql]
+----
+_test
+----
+
+a|
+[source,haskell]
+----
+[Identifier Nothing "_test"]
+----
+
+a|
+[source,sql]
+----
+"test test"
+----
+
+a|
+[source,haskell]
+----
+[Identifier (Just ("\"", "\"")) "test test"]
+----
+
+a|
+[source,sql]
+----
+test123
+----
+
+a|
+[source,haskell]
+----
+[Identifier Nothing "test123"]
+----
+
+a|
+[source,sql]
+----
+[test "]
+----
+
+a|
+[source,haskell]
+----
+[Identifier (Just ("[", "]")) "test \""]
+----
+
+a|
+[source,sql]
+----
+@test
+----
+
+a|
+[source,haskell]
+----
+[PrefixedVariable '@' "test"]
+----
+
+a|
+[source,sql]
+----
+#test
+----
+
+a|
+[source,haskell]
+----
+[PrefixedVariable '#' "test"]
+----
+
+a|
+[source,sql]
+----
+:test
+----
+
+a|
+[source,haskell]
+----
+[PrefixedVariable ':' "test"]
+----
+
+a|
+[source,sql]
+----
++
+----
+
+a|
+[source,haskell]
+----
+[Symbol "+"]
+----
+
+a|
+[source,sql]
+----
+*
+----
+
+a|
+[source,haskell]
+----
+[Symbol "*"]
+----
+
+a|
+[source,sql]
+----
+10
+----
+
+a|
+[source,haskell]
+----
+[SqlNumber "10"]
+----
+
+a|
+[source,sql]
+----
+.1
+----
+
+a|
+[source,haskell]
+----
+[SqlNumber ".1"]
+----
+
+a|
+[source,sql]
+----
+5e3
+----
+
+a|
+[source,haskell]
+----
+[SqlNumber "5e3"]
+----
+
+a|
+[source,sql]
+----
+5e+3
+----
+
+a|
+[source,haskell]
+----
+[SqlNumber "5e+3"]
+----
+
+a|
+[source,sql]
+----
+5e-3
+----
+
+a|
+[source,haskell]
+----
+[SqlNumber "5e-3"]
+----
+
+a|
+[source,sql]
+----
+10.2
+----
+
+a|
+[source,haskell]
+----
+[SqlNumber "10.2"]
+----
+
+a|
+[source,sql]
+----
+10.2e7
+----
+
+a|
+[source,haskell]
+----
+[SqlNumber "10.2e7"]
+----
+
+a|
+[source,sql]
+----
+ 
+----
+
+a|
+[source,haskell]
+----
+[Whitespace " "]
+----
+
+a|
+[source,sql]
+----
+  
+----
+
+a|
+[source,haskell]
+----
+[Whitespace "  "]
+----
+
+a|
+[source,sql]
+----
+
+
+----
+
+a|
+[source,haskell]
+----
+[Whitespace "\n"]
+----
+
+a|
+[source,sql]
+----
+	
+----
+
+a|
+[source,haskell]
+----
+[Whitespace "\t"]
+----
+
+a|
+[source,sql]
+----
+a.b
+----
+
+a|
+[source,haskell]
+----
+[Identifier Nothing "a", Symbol ".", Identifier Nothing "b"]
+----
+
+a|
+[source,sql]
+----
+$1
+----
+
+a|
+[source,haskell]
+----
+[PositionalArg 1]
+----
+
+a|
+[source,sql]
+----
+-- this is a comment
+
+----
+
+a|
+[source,haskell]
+----
+[LineComment "-- this is a comment\n"]
+----
+
+a|
+[source,sql]
+----
+-- this is a comment
+----
+
+a|
+[source,haskell]
+----
+[LineComment "-- this is a comment"]
+----
+
+a|
+[source,sql]
+----
+/* block
+comment */
+----
+
+a|
+[source,haskell]
+----
+[BlockComment "/* block\ncomment */"]
+----
+
+a|
+[source,sql]
+----
+/* nested /*block*/ comment */
+----
+
+a|
+[source,haskell]
+----
+[BlockComment "/* nested /*block*/ comment */"]
+----
+
+a|
+[source,sql]
+----
+$c(splice)
+----
+
+a|
+[source,haskell]
+----
+[Splice 'c' "splice"]
+----
+
+a|
+[source,sql]
+----
+1 .. 2
+----
+
+a|
+[source,haskell]
+----
+[SqlNumber "1", Whitespace " ", Symbol "..", Whitespace " ",
+ SqlNumber "2"]
+----
+
+a|
+[source,sql]
+----
+1..2
+----
+
+a|
+[source,haskell]
+----
+[SqlNumber "1", Symbol "..", SqlNumber "2"]
+----
+
+|===
+
+== parse expressions
+
+=== numbers
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+42
+----
+
+a|
+[source,haskell]
+----
+NumberLit (A) "42"
+----
+
+a|
+[source,sql]
+----
+3.5
+----
+
+a|
+[source,haskell]
+----
+NumberLit (A) "3.5"
+----
+
+a|
+[source,sql]
+----
+4.
+----
+
+a|
+[source,haskell]
+----
+NumberLit (A) "4."
+----
+
+a|
+[source,sql]
+----
+.001
+----
+
+a|
+[source,haskell]
+----
+NumberLit (A) ".001"
+----
+
+a|
+[source,sql]
+----
+5e2
+----
+
+a|
+[source,haskell]
+----
+NumberLit (A) "5e2"
+----
+
+a|
+[source,sql]
+----
+1.925e-3
+----
+
+a|
+[source,haskell]
+----
+NumberLit (A) "1.925e-3"
+----
+
+|===
+
+=== basic expressions
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+1
+----
+
+a|
+[source,haskell]
+----
+NumberLit (A) "1"
+----
+
+a|
+[source,sql]
+----
+-1
+----
+
+a|
+[source,haskell]
+----
+PrefixOp (A) (Name (A) [Nmc "-"]) (NumberLit (A) "1")
+----
+
+a|
+[source,sql]
+----
+1.1
+----
+
+a|
+[source,haskell]
+----
+NumberLit (A) "1.1"
+----
+
+a|
+[source,sql]
+----
+-1.1
+----
+
+a|
+[source,haskell]
+----
+PrefixOp (A) (Name (A) [Nmc "-"]) (NumberLit (A) "1.1")
+----
+
+a|
+[source,sql]
+----
+ 1 + 1 
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "+"]) (NumberLit (A) "1")
+  (NumberLit (A) "1")
+----
+
+a|
+[source,sql]
+----
+1+1+1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "+"])
+  (BinaryOp (A) (Name (A) [Nmc "+"]) (NumberLit (A) "1")
+     (NumberLit (A) "1"))
+  (NumberLit (A) "1")
+----
+
+|===
+
+=== parens
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+(1)
+----
+
+a|
+[source,haskell]
+----
+Parens (A) (NumberLit (A) "1")
+----
+
+a|
+[source,sql]
+----
+row ()
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "rowctor"]) []
+----
+
+a|
+[source,sql]
+----
+row (1)
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "rowctor"]) [NumberLit (A) "1"]
+----
+
+a|
+[source,sql]
+----
+row (1,2)
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "rowctor"])
+  [NumberLit (A) "1", NumberLit (A) "2"]
+----
+
+a|
+[source,sql]
+----
+(1,2)
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "rowctor"])
+  [NumberLit (A) "1", NumberLit (A) "2"]
+----
+
+|===
+
+=== more basic expressions
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+'test'
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "test"
+----
+
+a|
+[source,sql]
+----
+''
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) ""
+----
+
+a|
+[source,sql]
+----
+hello
+----
+
+a|
+[source,haskell]
+----
+Identifier (A) (Name (A) [Nmc "hello"])
+----
+
+a|
+[source,sql]
+----
+helloTest
+----
+
+a|
+[source,haskell]
+----
+Identifier (A) (Name (A) [Nmc "helloTest"])
+----
+
+a|
+[source,sql]
+----
+hello_test
+----
+
+a|
+[source,haskell]
+----
+Identifier (A) (Name (A) [Nmc "hello_test"])
+----
+
+a|
+[source,sql]
+----
+"this is an identifier"
+----
+
+a|
+[source,haskell]
+----
+Identifier (A) (Name (A) [QNmc "this is an identifier"])
+----
+
+a|
+[source,sql]
+----
+hello1234
+----
+
+a|
+[source,haskell]
+----
+Identifier (A) (Name (A) [Nmc "hello1234"])
+----
+
+a|
+[source,sql]
+----
+true
+----
+
+a|
+[source,haskell]
+----
+BooleanLit (A) True
+----
+
+a|
+[source,sql]
+----
+false
+----
+
+a|
+[source,haskell]
+----
+BooleanLit (A) False
+----
+
+a|
+[source,sql]
+----
+null
+----
+
+a|
+[source,haskell]
+----
+NullLit (A)
+----
+
+|===
+
+=== array ctor and selector
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+array[1,2]
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "arrayctor"])
+  [NumberLit (A) "1", NumberLit (A) "2"]
+----
+
+a|
+[source,sql]
+----
+a[1]
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "arraysub"])
+  [Identifier (A) (Name (A) [Nmc "a"]), NumberLit (A) "1"]
+----
+
+|===
+
+=== simple operators
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+1 + tst1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "+"]) (NumberLit (A) "1")
+  (Identifier (A) (Name (A) [Nmc "tst1"]))
+----
+
+a|
+[source,sql]
+----
+tst1 + 1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "+"])
+  (Identifier (A) (Name (A) [Nmc "tst1"]))
+  (NumberLit (A) "1")
+----
+
+a|
+[source,sql]
+----
+tst + tst1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "+"])
+  (Identifier (A) (Name (A) [Nmc "tst"]))
+  (Identifier (A) (Name (A) [Nmc "tst1"]))
+----
+
+a|
+[source,sql]
+----
+'a' \|\| 'b'
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "\|\|"]) (StringLit (A) "a")
+  (StringLit (A) "b")
+----
+
+a|
+[source,sql]
+----
+tst \| tst1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "\|"])
+  (Identifier (A) (Name (A) [Nmc "tst"]))
+  (Identifier (A) (Name (A) [Nmc "tst1"]))
+----
+
+a|
+[source,sql]
+----
+tst & tst1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "&"])
+  (Identifier (A) (Name (A) [Nmc "tst"]))
+  (Identifier (A) (Name (A) [Nmc "tst1"]))
+----
+
+a|
+[source,sql]
+----
+tst # tst1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "#"])
+  (Identifier (A) (Name (A) [Nmc "tst"]))
+  (Identifier (A) (Name (A) [Nmc "tst1"]))
+----
+
+a|
+[source,sql]
+----
+tst << tst1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "<<"])
+  (Identifier (A) (Name (A) [Nmc "tst"]))
+  (Identifier (A) (Name (A) [Nmc "tst1"]))
+----
+
+a|
+[source,sql]
+----
+tst >> tst1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc ">>"])
+  (Identifier (A) (Name (A) [Nmc "tst"]))
+  (Identifier (A) (Name (A) [Nmc "tst1"]))
+----
+
+a|
+[source,sql]
+----
+~tst
+----
+
+a|
+[source,haskell]
+----
+PrefixOp (A) (Name (A) [Nmc "~"])
+  (Identifier (A) (Name (A) [Nmc "tst"]))
+----
+
+a|
+[source,sql]
+----
+~tst + tst1
+----
+
+a|
+[source,haskell]
+----
+PrefixOp (A) (Name (A) [Nmc "~"])
+  (BinaryOp (A) (Name (A) [Nmc "+"])
+     (Identifier (A) (Name (A) [Nmc "tst"]))
+     (Identifier (A) (Name (A) [Nmc "tst1"])))
+----
+
+a|
+[source,sql]
+----
+2 + 1 << 3
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "<<"])
+  (BinaryOp (A) (Name (A) [Nmc "+"]) (NumberLit (A) "2")
+     (NumberLit (A) "1"))
+  (NumberLit (A) "3")
+----
+
+a|
+[source,sql]
+----
+'stuff'::text
+----
+
+a|
+[source,haskell]
+----
+Cast (A) (StringLit (A) "stuff")
+  (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+----
+
+a|
+[source,sql]
+----
+245::float(24)
+----
+
+a|
+[source,haskell]
+----
+Cast (A) (NumberLit (A) "245")
+  (PrecTypeName (A) (Name (A) [Nmc "float"]) 24)
+----
+
+a|
+[source,sql]
+----
+245.1::numeric(5,3)
+----
+
+a|
+[source,haskell]
+----
+Cast (A) (NumberLit (A) "245.1")
+  (Prec2TypeName (A) (Name (A) [Nmc "numeric"]) 5 3)
+----
+
+a|
+[source,sql]
+----
+245::double precision
+----
+
+a|
+[source,haskell]
+----
+Cast (A) (NumberLit (A) "245")
+  (SimpleTypeName (A) (Name (A) [Nmc "double precision"]))
+----
+
+a|
+[source,sql]
+----
+'test'::character varying(6)
+----
+
+a|
+[source,haskell]
+----
+Cast (A) (StringLit (A) "test")
+  (PrecTypeName (A) (Name (A) [Nmc "character varying"]) 6)
+----
+
+a|
+[source,sql]
+----
+date '1998-12-01'
+----
+
+a|
+[source,haskell]
+----
+TypedStringLit (A) (SimpleTypeName (A) (Name (A) [Nmc "date"]))
+  "1998-12-01"
+----
+
+a|
+[source,sql]
+----
+interval '63' day
+----
+
+a|
+[source,haskell]
+----
+Interval (A) "63" IntervalDay Nothing
+----
+
+a|
+[source,sql]
+----
+interval '63' day (3)
+----
+
+a|
+[source,haskell]
+----
+Interval (A) "63" IntervalDay (Just 3)
+----
+
+a|
+[source,sql]
+----
+interval '63' minute
+----
+
+a|
+[source,haskell]
+----
+Interval (A) "63" IntervalMinute Nothing
+----
+
+a|
+[source,sql]
+----
+EXTRACT(year from a)
+----
+
+a|
+[source,haskell]
+----
+Extract (A) ExtractYear (Identifier (A) (Name (A) [Nmc "a"]))
+----
+
+a|
+[source,sql]
+----
+a between 1 and 3
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "between"])
+  [Identifier (A) (Name (A) [Nmc "a"]), NumberLit (A) "1",
+   NumberLit (A) "3"]
+----
+
+a|
+[source,sql]
+----
+a between 7 - 1 and 7 + 1
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "between"])
+  [Identifier (A) (Name (A) [Nmc "a"]),
+   BinaryOp (A) (Name (A) [Nmc "-"]) (NumberLit (A) "7")
+     (NumberLit (A) "1"),
+   BinaryOp (A) (Name (A) [Nmc "+"]) (NumberLit (A) "7")
+     (NumberLit (A) "1")]
+----
+
+a|
+[source,sql]
+----
+cast(a as text)
+----
+
+a|
+[source,haskell]
+----
+Cast (A) (Identifier (A) (Name (A) [Nmc "a"]))
+  (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+----
+
+a|
+[source,sql]
+----
+@ a
+----
+
+a|
+[source,haskell]
+----
+PrefixOp (A) (Name (A) [Nmc "@"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+----
+
+a|
+[source,sql]
+----
+substring(a from 0 for 3)
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "substring"])
+  [Identifier (A) (Name (A) [Nmc "a"]), NumberLit (A) "0",
+   NumberLit (A) "3"]
+----
+
+a|
+[source,sql]
+----
+substring(a from 0 for (5 - 3))
+----
+
+a|
+[source,haskell]
+----
+SpecialOp (A) (Name (A) [Nmc "substring"])
+  [Identifier (A) (Name (A) [Nmc "a"]), NumberLit (A) "0",
+   Parens (A)
+     (BinaryOp (A) (Name (A) [Nmc "-"]) (NumberLit (A) "5")
+        (NumberLit (A) "3"))]
+----
+
+a|
+[source,sql]
+----
+substring(a,b,c)
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "substring"])
+  [Identifier (A) (Name (A) [Nmc "a"]),
+   Identifier (A) (Name (A) [Nmc "b"]),
+   Identifier (A) (Name (A) [Nmc "c"])]
+----
+
+a|
+[source,sql]
+----
+a like b
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "like"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+  (Identifier (A) (Name (A) [Nmc "b"]))
+----
+
+a|
+[source,sql]
+----
+a rlike b
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "rlike"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+  (Identifier (A) (Name (A) [Nmc "b"]))
+----
+
+a|
+[source,sql]
+----
+a not like b
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "notlike"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+  (Identifier (A) (Name (A) [Nmc "b"]))
+----
+
+a|
+[source,sql]
+----
+a and b and c and d
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "and"])
+  (BinaryOp (A) (Name (A) [Nmc "and"])
+     (BinaryOp (A) (Name (A) [Nmc "and"])
+        (Identifier (A) (Name (A) [Nmc "a"]))
+        (Identifier (A) (Name (A) [Nmc "b"])))
+     (Identifier (A) (Name (A) [Nmc "c"])))
+  (Identifier (A) (Name (A) [Nmc "d"]))
+----
+
+|===
+
+=== function calls
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+fn()
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "fn"]) []
+----
+
+a|
+[source,sql]
+----
+fn(1)
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "fn"]) [NumberLit (A) "1"]
+----
+
+a|
+[source,sql]
+----
+fn('test')
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "fn"]) [StringLit (A) "test"]
+----
+
+a|
+[source,sql]
+----
+fn(1,'test')
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "fn"])
+  [NumberLit (A) "1", StringLit (A) "test"]
+----
+
+a|
+[source,sql]
+----
+fn('test')
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "fn"]) [StringLit (A) "test"]
+----
+
+a|
+[source,sql]
+----
+g.f()
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "g", Nmc "f"]) []
+----
+
+a|
+[source,sql]
+----
+h.g.f()
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "h", Nmc "g", Nmc "f"]) []
+----
+
+|===
+
+=== simple whitespace sanity checks
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+fn (1)
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "fn"]) [NumberLit (A) "1"]
+----
+
+a|
+[source,sql]
+----
+fn( 1)
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "fn"]) [NumberLit (A) "1"]
+----
+
+a|
+[source,sql]
+----
+fn(1 )
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "fn"]) [NumberLit (A) "1"]
+----
+
+a|
+[source,sql]
+----
+fn(1) 
+----
+
+a|
+[source,haskell]
+----
+App (A) (Name (A) [Nmc "fn"]) [NumberLit (A) "1"]
+----
+
+|===
+
+=== null stuff
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+not null
+----
+
+a|
+[source,haskell]
+----
+PrefixOp (A) (Name (A) [Nmc "not"]) (NullLit (A))
+----
+
+a|
+[source,sql]
+----
+a is null
+----
+
+a|
+[source,haskell]
+----
+PostfixOp (A) (Name (A) [Nmc "isnull"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+----
+
+a|
+[source,sql]
+----
+a is not null
+----
+
+a|
+[source,haskell]
+----
+PostfixOp (A) (Name (A) [Nmc "isnotnull"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+----
+
+a|
+[source,sql]
+----
+not not true
+----
+
+a|
+[source,haskell]
+----
+PrefixOp (A) (Name (A) [Nmc "not"])
+  (PrefixOp (A) (Name (A) [Nmc "not"]) (BooleanLit (A) True))
+----
+
+|===
+
+=== case expressions
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+
+           case when a,b then 3
+                when c then 4
+                else 5
+           end
+           
+----
+
+a|
+[source,haskell]
+----
+Case (A)
+  [([Identifier (A) (Name (A) [Nmc "a"]),
+     Identifier (A) (Name (A) [Nmc "b"])],
+    NumberLit (A) "3"),
+   ([Identifier (A) (Name (A) [Nmc "c"])], NumberLit (A) "4")]
+  (Just (NumberLit (A) "5"))
+----
+
+a|
+[source,sql]
+----
+case 1 when 2 then 3 else 4 end
+----
+
+a|
+[source,haskell]
+----
+CaseSimple (A) (NumberLit (A) "1")
+  [([NumberLit (A) "2"], NumberLit (A) "3")]
+  (Just (NumberLit (A) "4"))
+----
+
+|===
+
+=== positional args
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+$1
+----
+
+a|
+[source,haskell]
+----
+PositionalArg (A) 1
+----
+
+a|
+[source,sql]
+----
+?
+----
+
+a|
+[source,haskell]
+----
+Placeholder (A)
+----
+
+a|
+[source,sql]
+----
+a = ?
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "="])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+  (Placeholder (A))
+----
+
+|===
+
+=== exists
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+exists (select 1 from a)
+----
+
+a|
+[source,haskell]
+----
+Exists (A)
+  (Select{ann = A, selDistinct = All,
+          selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+          selTref = [Tref (A) (Name (A) [Nmc "a"])], selWhere = Nothing,
+          selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+          selLimit = Nothing, selOffset = Nothing, selOption = []})
+----
+
+|===
+
+=== in variants
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+t in (1,2)
+----
+
+a|
+[source,haskell]
+----
+InPredicate (A) (Identifier (A) (Name (A) [Nmc "t"])) True
+  (InList (A) [NumberLit (A) "1", NumberLit (A) "2"])
+----
+
+a|
+[source,sql]
+----
+t not in (1,2)
+----
+
+a|
+[source,haskell]
+----
+InPredicate (A) (Identifier (A) (Name (A) [Nmc "t"])) False
+  (InList (A) [NumberLit (A) "1", NumberLit (A) "2"])
+----
+
+a|
+[source,sql]
+----
+(t,u) in (1,2)
+----
+
+a|
+[source,haskell]
+----
+InPredicate (A)
+  (SpecialOp (A) (Name (A) [Nmc "rowctor"])
+     [Identifier (A) (Name (A) [Nmc "t"]),
+      Identifier (A) (Name (A) [Nmc "u"])])
+  True
+  (InList (A) [NumberLit (A) "1", NumberLit (A) "2"])
+----
+
+a|
+[source,sql]
+----
+3 = any (array[1,2])
+----
+
+a|
+[source,haskell]
+----
+LiftApp (A) (Name (A) [Nmc "="]) LiftAny
+  [NumberLit (A) "3",
+   SpecialOp (A) (Name (A) [Nmc "arrayctor"])
+     [NumberLit (A) "1", NumberLit (A) "2"]]
+----
+
+a|
+[source,sql]
+----
+3 = all (array[1,2,4])
+----
+
+a|
+[source,haskell]
+----
+LiftApp (A) (Name (A) [Nmc "="]) LiftAll
+  [NumberLit (A) "3",
+   SpecialOp (A) (Name (A) [Nmc "arrayctor"])
+     [NumberLit (A) "1", NumberLit (A) "2", NumberLit (A) "4"]]
+----
+
+|===
+
+=== comparison operators
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+a < b
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "<"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+  (Identifier (A) (Name (A) [Nmc "b"]))
+----
+
+a|
+[source,sql]
+----
+a <> b
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "<>"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+  (Identifier (A) (Name (A) [Nmc "b"]))
+----
+
+a|
+[source,sql]
+----
+a != b
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "<>"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+  (Identifier (A) (Name (A) [Nmc "b"]))
+----
+
+|===
+
+=== string parsing
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+''
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) ""
+----
+
+a|
+[source,sql]
+----
+''''
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "'"
+----
+
+a|
+[source,sql]
+----
+'test'''
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "test'"
+----
+
+a|
+[source,sql]
+----
+'''test'
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "'test"
+----
+
+a|
+[source,sql]
+----
+'te''st'
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "te'st"
+----
+
+a|
+[source,sql]
+----
+$$test$$
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "test"
+----
+
+a|
+[source,sql]
+----
+$$te'st$$
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "te'st"
+----
+
+a|
+[source,sql]
+----
+$st$test$st$
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "test"
+----
+
+a|
+[source,sql]
+----
+$outer$te$$yup$$st$outer$
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "te$$yup$$st"
+----
+
+a|
+[source,sql]
+----
+'spl$$it'
+----
+
+a|
+[source,haskell]
+----
+StringLit (A) "spl$$it"
+----
+
+|===
+
+=== bracketed things
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+(p).x
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "."])
+  (Parens (A) (Identifier (A) (Name (A) [Nmc "p"])))
+  (Identifier (A) (Name (A) [Nmc "x"]))
+----
+
+a|
+[source,sql]
+----
+(select f(((a).x, y)::z))
+----
+
+a|
+[source,haskell]
+----
+ScalarSubQuery (A)
+  (Select{ann = A, selDistinct = All,
+          selSelectList =
+            SelectList (A)
+              [SelExp (A)
+                 (App (A) (Name (A) [Nmc "f"])
+                    [Cast (A)
+                       (SpecialOp (A) (Name (A) [Nmc "rowctor"])
+                          [BinaryOp (A) (Name (A) [Nmc "."])
+                             (Parens (A) (Identifier (A) (Name (A) [Nmc "a"])))
+                             (Identifier (A) (Name (A) [Nmc "x"])),
+                           Identifier (A) (Name (A) [Nmc "y"])])
+                       (SimpleTypeName (A) (Name (A) [Nmc "z"]))])],
+          selTref = [], selWhere = Nothing, selGroupBy = [],
+          selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+          selOffset = Nothing, selOption = []})
+----
+
+|===
+
+=== tricky operator parsing
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+2 <>-1
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "<>"]) (NumberLit (A) "2")
+  (PrefixOp (A) (Name (A) [Nmc "-"]) (NumberLit (A) "1"))
+----
+
+a|
+[source,sql]
+----
+a <-> b
+----
+
+a|
+[source,haskell]
+----
+BinaryOp (A) (Name (A) [Nmc "<->"])
+  (Identifier (A) (Name (A) [Nmc "a"]))
+  (Identifier (A) (Name (A) [Nmc "b"]))
+----
+
+|===
+
+== misc select statements
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select 1;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+       selTref = [], selWhere = Nothing, selGroupBy = [],
+       selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+       selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select distinct a from t;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = Distinct,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t where b=2;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])],
+       selWhere =
+         Just
+           (BinaryOp (A) (Name (A) [Nmc "="])
+              (Identifier (A) (Name (A) [Nmc "b"]))
+              (NumberLit (A) "2")),
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t where b=2 and c=3;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])],
+       selWhere =
+         Just
+           (BinaryOp (A) (Name (A) [Nmc "and"])
+              (BinaryOp (A) (Name (A) [Nmc "="])
+                 (Identifier (A) (Name (A) [Nmc "b"]))
+                 (NumberLit (A) "2"))
+              (BinaryOp (A) (Name (A) [Nmc "="])
+                 (Identifier (A) (Name (A) [Nmc "c"]))
+                 (NumberLit (A) "3"))),
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+SELECT T.A::INT FROM TBL AS T;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A)
+              (Cast (A) (Identifier (A) (Name (A) [Nmc "T", Nmc "A"]))
+                 (SimpleTypeName (A) (Name (A) [Nmc "INT"])))],
+       selTref =
+         [TableAlias (A) (Nmc "T") (Tref (A) (Name (A) [Nmc "TBL"]))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsDefault)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a asc;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsDefault)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a desc;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Desc, NullsDefault)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a,b;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsDefault),
+          (Identifier (A) (Name (A) [Nmc "b"]), Asc, NullsDefault)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a asc,b;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsDefault),
+          (Identifier (A) (Name (A) [Nmc "b"]), Asc, NullsDefault)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a desc,b;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Desc, NullsDefault),
+          (Identifier (A) (Name (A) [Nmc "b"]), Asc, NullsDefault)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a desc,b desc;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Desc, NullsDefault),
+          (Identifier (A) (Name (A) [Nmc "b"]), Desc, NullsDefault)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a nulls first;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsFirst)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a nulls last;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsLast)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a asc nulls first;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsFirst)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a asc nulls last;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsLast)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a desc nulls first;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Desc, NullsFirst)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a desc nulls last;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Desc, NullsLast)],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t limit 1;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Just (NumberLit (A) "1"), selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t offset 1;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Just (NumberLit (A) "1"),
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t order by a limit 1 offset 1;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing,
+       selOrderBy =
+         [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsDefault)],
+       selLimit = Just (NumberLit (A) "1"),
+       selOffset = Just (NumberLit (A) "1"), selOption = []}
+----
+
+a|
+[source,sql]
+----
+select (p).x, (p).y from pos;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A)
+              (BinaryOp (A) (Name (A) [Nmc "."])
+                 (Parens (A) (Identifier (A) (Name (A) [Nmc "p"])))
+                 (Identifier (A) (Name (A) [Nmc "x"]))),
+            SelExp (A)
+              (BinaryOp (A) (Name (A) [Nmc "."])
+                 (Parens (A) (Identifier (A) (Name (A) [Nmc "p"])))
+                 (Identifier (A) (Name (A) [Nmc "y"])))],
+       selTref = [Tref (A) (Name (A) [Nmc "pos"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select ($1).x, ($1).y from pos;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A)
+              (BinaryOp (A) (Name (A) [Nmc "."])
+                 (Parens (A) (PositionalArg (A) 1))
+                 (Identifier (A) (Name (A) [Nmc "x"]))),
+            SelExp (A)
+              (BinaryOp (A) (Name (A) [Nmc "."])
+                 (Parens (A) (PositionalArg (A) 1))
+                 (Identifier (A) (Name (A) [Nmc "y"])))],
+       selTref = [Tref (A) (Name (A) [Nmc "pos"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select right ('test string',5) from t;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A)
+              (App (A) (Name (A) [Nmc "right"])
+                 [StringLit (A) "test string", NumberLit (A) "5"])],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+|===
+
+== combineSelects
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a from tbl
+except
+select a from tbl1;
+----
+
+a|
+[source,haskell]
+----
+CombineQueryExpr{ann = A, cqType = Except,
+                 cqQe0 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList =
+                            SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                          selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+                          selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                          selLimit = Nothing, selOffset = Nothing, selOption = []},
+                 cqQe1 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList =
+                            SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                          selTref = [Tref (A) (Name (A) [Nmc "tbl1"])], selWhere = Nothing,
+                          selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                          selLimit = Nothing, selOffset = Nothing, selOption = []}}
+----
+
+a|
+[source,sql]
+----
+select a from tbl where true
+except
+select a from tbl1 where true;
+----
+
+a|
+[source,haskell]
+----
+CombineQueryExpr{ann = A, cqType = Except,
+                 cqQe0 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList =
+                            SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                          selTref = [Tref (A) (Name (A) [Nmc "tbl"])],
+                          selWhere = Just (BooleanLit (A) True), selGroupBy = [],
+                          selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+                          selOffset = Nothing, selOption = []},
+                 cqQe1 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList =
+                            SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                          selTref = [Tref (A) (Name (A) [Nmc "tbl1"])],
+                          selWhere = Just (BooleanLit (A) True), selGroupBy = [],
+                          selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+                          selOffset = Nothing, selOption = []}}
+----
+
+a|
+[source,sql]
+----
+select a from tbl
+union
+select a from tbl1;
+----
+
+a|
+[source,haskell]
+----
+CombineQueryExpr{ann = A, cqType = Union,
+                 cqQe0 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList =
+                            SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                          selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+                          selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                          selLimit = Nothing, selOffset = Nothing, selOption = []},
+                 cqQe1 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList =
+                            SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                          selTref = [Tref (A) (Name (A) [Nmc "tbl1"])], selWhere = Nothing,
+                          selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                          selLimit = Nothing, selOffset = Nothing, selOption = []}}
+----
+
+a|
+[source,sql]
+----
+select a from tbl
+union all
+select a from tbl1;
+----
+
+a|
+[source,haskell]
+----
+CombineQueryExpr{ann = A, cqType = UnionAll,
+                 cqQe0 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList =
+                            SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                          selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+                          selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                          selLimit = Nothing, selOffset = Nothing, selOption = []},
+                 cqQe1 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList =
+                            SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                          selTref = [Tref (A) (Name (A) [Nmc "tbl1"])], selWhere = Nothing,
+                          selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                          selLimit = Nothing, selOffset = Nothing, selOption = []}}
+----
+
+a|
+[source,sql]
+----
+(select 1 union select 2) union select 3;
+----
+
+a|
+[source,haskell]
+----
+CombineQueryExpr{ann = A, cqType = Union,
+                 cqQe0 =
+                   CombineQueryExpr{ann = A, cqType = Union,
+                                    cqQe0 =
+                                      Select{ann = A, selDistinct = All,
+                                             selSelectList =
+                                               SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+                                             selTref = [], selWhere = Nothing, selGroupBy = [],
+                                             selHaving = Nothing, selOrderBy = [],
+                                             selLimit = Nothing, selOffset = Nothing,
+                                             selOption = []},
+                                    cqQe1 =
+                                      Select{ann = A, selDistinct = All,
+                                             selSelectList =
+                                               SelectList (A) [SelExp (A) (NumberLit (A) "2")],
+                                             selTref = [], selWhere = Nothing, selGroupBy = [],
+                                             selHaving = Nothing, selOrderBy = [],
+                                             selLimit = Nothing, selOffset = Nothing,
+                                             selOption = []}},
+                 cqQe1 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "3")],
+                          selTref = [], selWhere = Nothing, selGroupBy = [],
+                          selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+                          selOffset = Nothing, selOption = []}}
+----
+
+a|
+[source,sql]
+----
+select 1 union (select 2 union select 3);
+----
+
+a|
+[source,haskell]
+----
+CombineQueryExpr{ann = A, cqType = Union,
+                 cqQe0 =
+                   Select{ann = A, selDistinct = All,
+                          selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+                          selTref = [], selWhere = Nothing, selGroupBy = [],
+                          selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+                          selOffset = Nothing, selOption = []},
+                 cqQe1 =
+                   CombineQueryExpr{ann = A, cqType = Union,
+                                    cqQe0 =
+                                      Select{ann = A, selDistinct = All,
+                                             selSelectList =
+                                               SelectList (A) [SelExp (A) (NumberLit (A) "2")],
+                                             selTref = [], selWhere = Nothing, selGroupBy = [],
+                                             selHaving = Nothing, selOrderBy = [],
+                                             selLimit = Nothing, selOffset = Nothing,
+                                             selOption = []},
+                                    cqQe1 =
+                                      Select{ann = A, selDistinct = All,
+                                             selSelectList =
+                                               SelectList (A) [SelExp (A) (NumberLit (A) "3")],
+                                             selTref = [], selWhere = Nothing, selGroupBy = [],
+                                             selHaving = Nothing, selOrderBy = [],
+                                             selLimit = Nothing, selOffset = Nothing,
+                                             selOption = []}}}
+----
+
+a|
+[source,sql]
+----
+
+           with a as (select a from tbl),
+                b as (select a from tbl1)
+                select 1; 
+----
+
+a|
+[source,haskell]
+----
+WithQueryExpr{ann = A,
+              withs =
+                [WithQuery (A) (Nmc "a") Nothing
+                   (Select{ann = A, selDistinct = All,
+                           selSelectList =
+                             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                           selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+                           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                           selLimit = Nothing, selOffset = Nothing, selOption = []}),
+                 WithQuery (A) (Nmc "b") Nothing
+                   (Select{ann = A, selDistinct = All,
+                           selSelectList =
+                             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                           selTref = [Tref (A) (Name (A) [Nmc "tbl1"])], selWhere = Nothing,
+                           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                           selLimit = Nothing, selOffset = Nothing, selOption = []})],
+              withQe =
+                Select{ann = A, selDistinct = All,
+                       selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+                       selTref = [], selWhere = Nothing, selGroupBy = [],
+                       selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+                       selOffset = Nothing, selOption = []}}
+----
+
+a|
+[source,sql]
+----
+
+           with a as (select a from tbl),
+                b as (select a from tbl1)
+                select 1
+                union select 2; 
+----
+
+a|
+[source,haskell]
+----
+WithQueryExpr{ann = A,
+              withs =
+                [WithQuery (A) (Nmc "a") Nothing
+                   (Select{ann = A, selDistinct = All,
+                           selSelectList =
+                             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                           selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+                           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                           selLimit = Nothing, selOffset = Nothing, selOption = []}),
+                 WithQuery (A) (Nmc "b") Nothing
+                   (Select{ann = A, selDistinct = All,
+                           selSelectList =
+                             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                           selTref = [Tref (A) (Name (A) [Nmc "tbl1"])], selWhere = Nothing,
+                           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                           selLimit = Nothing, selOffset = Nothing, selOption = []})],
+              withQe =
+                CombineQueryExpr{ann = A, cqType = Union,
+                                 cqQe0 =
+                                   Select{ann = A, selDistinct = All,
+                                          selSelectList =
+                                            SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+                                          selTref = [], selWhere = Nothing, selGroupBy = [],
+                                          selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+                                          selOffset = Nothing, selOption = []},
+                                 cqQe1 =
+                                   Select{ann = A, selDistinct = All,
+                                          selSelectList =
+                                            SelectList (A) [SelExp (A) (NumberLit (A) "2")],
+                                          selTref = [], selWhere = Nothing, selGroupBy = [],
+                                          selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+                                          selOffset = Nothing, selOption = []}}}
+----
+
+|===
+
+== selectLists
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a from tbl
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a,b from tbl
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"])),
+            SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a as b from tbl
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A) (Identifier (A) (Name (A) [Nmc "a"])) (Nmc "b")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select * from tbl
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select tbl.* from tbl
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (QStar (A) (Nmc "tbl"))],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a + b as b from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A)
+              (BinaryOp (A) (Name (A) [Nmc "+"])
+                 (Identifier (A) (Name (A) [Nmc "a"]))
+                 (Identifier (A) (Name (A) [Nmc "b"])))
+              (Nmc "b")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select row_number() over(order by a) as place from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A)
+              (WindowApp (A) (App (A) (Name (A) [Nmc "row_number"]) []) []
+                 [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsDefault)]
+                 Nothing)
+              (Nmc "place")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select row_number() over(order by a asc) as place from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A)
+              (WindowApp (A) (App (A) (Name (A) [Nmc "row_number"]) []) []
+                 [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsDefault)]
+                 Nothing)
+              (Nmc "place")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select row_number() over(order by a desc) as place from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A)
+              (WindowApp (A) (App (A) (Name (A) [Nmc "row_number"]) []) []
+                 [(Identifier (A) (Name (A) [Nmc "a"]), Desc, NullsDefault)]
+                 Nothing)
+              (Nmc "place")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select row_number()
+over(partition by a,b order by c) as place
+from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A)
+              (WindowApp (A) (App (A) (Name (A) [Nmc "row_number"]) [])
+                 [Identifier (A) (Name (A) [Nmc "a"]),
+                  Identifier (A) (Name (A) [Nmc "b"])]
+                 [(Identifier (A) (Name (A) [Nmc "c"]), Asc, NullsDefault)]
+                 Nothing)
+              (Nmc "place")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select row_number() over(), x from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A)
+              (WindowApp (A) (App (A) (Name (A) [Nmc "row_number"]) []) [] []
+                 Nothing),
+            SelExp (A) (Identifier (A) (Name (A) [Nmc "x"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select count(distinct b) from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A)
+              (AggregateApp (A) Distinct
+                 (App (A) (Name (A) [Nmc "count"])
+                    [Identifier (A) (Name (A) [Nmc "b"])])
+                 [])],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select count(all b) from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A)
+              (AggregateApp (A) All
+                 (App (A) (Name (A) [Nmc "count"])
+                    [Identifier (A) (Name (A) [Nmc "b"])])
+                 [])],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select string_agg(distinct relname,',' order by relname1) from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A)
+              (AggregateApp (A) Distinct
+                 (App (A) (Name (A) [Nmc "string_agg"])
+                    [Identifier (A) (Name (A) [Nmc "relname"]), StringLit (A) ","])
+                 [(Identifier (A) (Name (A) [Nmc "relname1"]), Asc,
+                   NullsDefault)])],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a, count(b) from tbl group by a;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"])),
+            SelExp (A)
+              (App (A) (Name (A) [Nmc "count"])
+                 [Identifier (A) (Name (A) [Nmc "b"])])],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [Identifier (A) (Name (A) [Nmc "a"])],
+       selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+       selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a, count(b) as cnt from tbl group by a having cnt > 4;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"])),
+            SelectItem (A)
+              (App (A) (Name (A) [Nmc "count"])
+                 [Identifier (A) (Name (A) [Nmc "b"])])
+              (Nmc "cnt")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [Identifier (A) (Name (A) [Nmc "a"])],
+       selHaving =
+         Just
+           (BinaryOp (A) (Name (A) [Nmc ">"])
+              (Identifier (A) (Name (A) [Nmc "cnt"]))
+              (NumberLit (A) "4")),
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from tbl option (partition group);
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing,
+       selOption = [QueryHintPartitionGroup]}
+----
+
+a|
+[source,sql]
+----
+select a from tbl option (partition group,columnar host group);
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing,
+       selOption = [QueryHintPartitionGroup, QueryHintColumnarHostGroup]}
+----
+
+a|
+[source,sql]
+----
+select a b from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A) (Identifier (A) (Name (A) [Nmc "a"])) (Nmc "b")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a b, b c, c d from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A) (Identifier (A) (Name (A) [Nmc "a"])) (Nmc "b"),
+            SelectItem (A) (Identifier (A) (Name (A) [Nmc "b"])) (Nmc "c"),
+            SelectItem (A) (Identifier (A) (Name (A) [Nmc "c"])) (Nmc "d")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a + b b from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A)
+              (BinaryOp (A) (Name (A) [Nmc "+"])
+                 (Identifier (A) (Name (A) [Nmc "a"]))
+                 (Identifier (A) (Name (A) [Nmc "b"])))
+              (Nmc "b")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select row_number() over(order by a) place from tbl;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelectItem (A)
+              (WindowApp (A) (App (A) (Name (A) [Nmc "row_number"]) []) []
+                 [(Identifier (A) (Name (A) [Nmc "a"]), Asc, NullsDefault)]
+                 Nothing)
+              (Nmc "place")],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+|===
+
+== tableRefs
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a from tbl
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from sc.tbl
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "sc", Nmc "tbl"])],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from tbl a
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [TableAlias (A) (Nmc "a") (Tref (A) (Name (A) [Nmc "tbl"]))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from tbl as a
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [TableAlias (A) (Nmc "a") (Tref (A) (Name (A) [Nmc "tbl"]))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from tbl as a(b,c)
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [FullAlias (A) (Nmc "a") [Nmc "b", Nmc "c"]
+            (Tref (A) (Name (A) [Nmc "tbl"]))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from gen();
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [FunTref (A) (App (A) (Name (A) [Nmc "gen"]) [])],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from gen() t;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [TableAlias (A) (Nmc "t")
+            (FunTref (A) (App (A) (Name (A) [Nmc "gen"]) []))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from gen() as t;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [TableAlias (A) (Nmc "t")
+            (FunTref (A) (App (A) (Name (A) [Nmc "gen"]) []))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from (select a from tbl) as t;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [TableAlias (A) (Nmc "t")
+            (SubTref (A)
+               (Select{ann = A, selDistinct = All,
+                       selSelectList =
+                         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+                       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                       selLimit = Nothing, selOffset = Nothing, selOption = []}))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from (select a from tbl) t;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [TableAlias (A) (Nmc "t")
+            (SubTref (A)
+               (Select{ann = A, selDistinct = All,
+                       selSelectList =
+                         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                       selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+                       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                       selLimit = Nothing, selOffset = Nothing, selOption = []}))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+|===
+
+== joins
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a from t1,t2
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [Tref (A) (Name (A) [Nmc "t1"]), Tref (A) (Name (A) [Nmc "t2"])],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t1 natural inner join t2
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A) (Tref (A) (Name (A) [Nmc "t1"])) Natural Inner
+            Nothing
+            (Tref (A) (Name (A) [Nmc "t2"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t1 inner join t2 using (a)
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A) (Tref (A) (Name (A) [Nmc "t1"])) Unnatural Inner
+            Nothing
+            (Tref (A) (Name (A) [Nmc "t2"]))
+            (Just (JoinUsing (A) [Nmc "a"]))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t1 left outer join t2
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A) (Tref (A) (Name (A) [Nmc "t1"])) Unnatural LeftOuter
+            Nothing
+            (Tref (A) (Name (A) [Nmc "t2"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t1 right outer join t2
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A) (Tref (A) (Name (A) [Nmc "t1"])) Unnatural RightOuter
+            Nothing
+            (Tref (A) (Name (A) [Nmc "t2"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t1 full outer join t2
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A) (Tref (A) (Name (A) [Nmc "t1"])) Unnatural FullOuter
+            Nothing
+            (Tref (A) (Name (A) [Nmc "t2"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t1 cross join t2
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A) (Tref (A) (Name (A) [Nmc "t1"])) Unnatural Cross
+            Nothing
+            (Tref (A) (Name (A) [Nmc "t2"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from t1 join t2
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A) (Tref (A) (Name (A) [Nmc "t1"])) Unnatural Inner
+            Nothing
+            (Tref (A) (Name (A) [Nmc "t2"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from (b natural join c);
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [TableRefParens (A)
+            (JoinTref (A) (Tref (A) (Name (A) [Nmc "b"])) Natural Inner Nothing
+               (Tref (A) (Name (A) [Nmc "c"]))
+               Nothing)],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from a cross join b cross join c;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A)
+            (JoinTref (A) (Tref (A) (Name (A) [Nmc "a"])) Unnatural Cross
+               Nothing
+               (Tref (A) (Name (A) [Nmc "b"]))
+               Nothing)
+            Unnatural
+            Cross
+            Nothing
+            (Tref (A) (Name (A) [Nmc "c"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from (a cross join b) cross join c;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A)
+            (TableRefParens (A)
+               (JoinTref (A) (Tref (A) (Name (A) [Nmc "a"])) Unnatural Cross
+                  Nothing
+                  (Tref (A) (Name (A) [Nmc "b"]))
+                  Nothing))
+            Unnatural
+            Cross
+            Nothing
+            (Tref (A) (Name (A) [Nmc "c"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from ((a cross join b) cross join c);
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [TableRefParens (A)
+            (JoinTref (A)
+               (TableRefParens (A)
+                  (JoinTref (A) (Tref (A) (Name (A) [Nmc "a"])) Unnatural Cross
+                     Nothing
+                     (Tref (A) (Name (A) [Nmc "b"]))
+                     Nothing))
+               Unnatural
+               Cross
+               Nothing
+               (Tref (A) (Name (A) [Nmc "c"]))
+               Nothing)],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from a cross join (b cross join c);
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A) (Tref (A) (Name (A) [Nmc "a"])) Unnatural Cross
+            Nothing
+            (TableRefParens (A)
+               (JoinTref (A) (Tref (A) (Name (A) [Nmc "b"])) Unnatural Cross
+                  Nothing
+                  (Tref (A) (Name (A) [Nmc "c"]))
+                  Nothing))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from (a cross join (b cross join c));
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [TableRefParens (A)
+            (JoinTref (A) (Tref (A) (Name (A) [Nmc "a"])) Unnatural Cross
+               Nothing
+               (TableRefParens (A)
+                  (JoinTref (A) (Tref (A) (Name (A) [Nmc "b"])) Unnatural Cross
+                     Nothing
+                     (Tref (A) (Name (A) [Nmc "c"]))
+                     Nothing))
+               Nothing)],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from ((a cross join b) cross join c) cross join d;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A)
+            (TableRefParens (A)
+               (JoinTref (A)
+                  (TableRefParens (A)
+                     (JoinTref (A) (Tref (A) (Name (A) [Nmc "a"])) Unnatural Cross
+                        Nothing
+                        (Tref (A) (Name (A) [Nmc "b"]))
+                        Nothing))
+                  Unnatural
+                  Cross
+                  Nothing
+                  (Tref (A) (Name (A) [Nmc "c"]))
+                  Nothing))
+            Unnatural
+            Cross
+            Nothing
+            (Tref (A) (Name (A) [Nmc "d"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from a cross join b cross join c cross join d;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A)
+            (JoinTref (A)
+               (JoinTref (A) (Tref (A) (Name (A) [Nmc "a"])) Unnatural Cross
+                  Nothing
+                  (Tref (A) (Name (A) [Nmc "b"]))
+                  Nothing)
+               Unnatural
+               Cross
+               Nothing
+               (Tref (A) (Name (A) [Nmc "c"]))
+               Nothing)
+            Unnatural
+            Cross
+            Nothing
+            (Tref (A) (Name (A) [Nmc "d"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from b
+    inner join c
+      on true
+    inner join d
+      on 1=1;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A)
+            (JoinTref (A) (Tref (A) (Name (A) [Nmc "b"])) Unnatural Inner
+               Nothing
+               (Tref (A) (Name (A) [Nmc "c"]))
+               (Just (JoinOn (A) (BooleanLit (A) True))))
+            Unnatural
+            Inner
+            Nothing
+            (Tref (A) (Name (A) [Nmc "d"]))
+            (Just
+               (JoinOn (A)
+                  (BinaryOp (A) (Name (A) [Nmc "="]) (NumberLit (A) "1")
+                     (NumberLit (A) "1"))))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+|===
+
+== dml
+
+=== insert
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+insert into testtable
+(columna,columnb)
+values (1,2);
+
+----
+
+a|
+[source,haskell]
+----
+[Insert (A) (Name (A) [Nmc "testtable"])
+   [Nmc "columna", Nmc "columnb"]
+   (Values{ann = A,
+           qeValues = [[NumberLit (A) "1", NumberLit (A) "2"]]})
+   Nothing]
+----
+
+a|
+[source,sql]
+----
+values (1,2), (3,4);
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Values{ann = A,
+           qeValues =
+             [[NumberLit (A) "1", NumberLit (A) "2"],
+              [NumberLit (A) "3", NumberLit (A) "4"]]})]
+----
+
+a|
+[source,sql]
+----
+insert into testtable
+(columna,columnb)
+values (1,2), (3,4);
+
+----
+
+a|
+[source,haskell]
+----
+[Insert (A) (Name (A) [Nmc "testtable"])
+   [Nmc "columna", Nmc "columnb"]
+   (Values{ann = A,
+           qeValues =
+             [[NumberLit (A) "1", NumberLit (A) "2"],
+              [NumberLit (A) "3", NumberLit (A) "4"]]})
+   Nothing]
+----
+
+a|
+[source,sql]
+----
+insert into a
+    select b from c;
+----
+
+a|
+[source,haskell]
+----
+[Insert (A) (Name (A) [Nmc "a"]) []
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "c"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})
+   Nothing]
+----
+
+a|
+[source,sql]
+----
+insert into testtable
+(columna,columnb)
+values (1,2) returning id;
+
+----
+
+a|
+[source,haskell]
+----
+[Insert (A) (Name (A) [Nmc "testtable"])
+   [Nmc "columna", Nmc "columnb"]
+   (Values{ann = A,
+           qeValues = [[NumberLit (A) "1", NumberLit (A) "2"]]})
+   (Just
+      (SelectList (A)
+         [SelExp (A) (Identifier (A) (Name (A) [Nmc "id"]))]))]
+----
+
+|===
+
+=== update
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+update tb
+  set x = 1, y = 2;
+----
+
+a|
+[source,haskell]
+----
+[Update (A) (Name (A) [Nmc "tb"])
+   [SetClause (A) (Nmc "x") (NumberLit (A) "1"),
+    SetClause (A) (Nmc "y") (NumberLit (A) "2")]
+   []
+   Nothing
+   Nothing]
+----
+
+a|
+[source,sql]
+----
+update tb
+  set x = 1, y = 2 where z = true;
+----
+
+a|
+[source,haskell]
+----
+[Update (A) (Name (A) [Nmc "tb"])
+   [SetClause (A) (Nmc "x") (NumberLit (A) "1"),
+    SetClause (A) (Nmc "y") (NumberLit (A) "2")]
+   []
+   (Just
+      (BinaryOp (A) (Name (A) [Nmc "="])
+         (Identifier (A) (Name (A) [Nmc "z"]))
+         (BooleanLit (A) True)))
+   Nothing]
+----
+
+a|
+[source,sql]
+----
+update tb
+  set x = 1, y = 2 returning id;
+----
+
+a|
+[source,haskell]
+----
+[Update (A) (Name (A) [Nmc "tb"])
+   [SetClause (A) (Nmc "x") (NumberLit (A) "1"),
+    SetClause (A) (Nmc "y") (NumberLit (A) "2")]
+   []
+   Nothing
+   (Just
+      (SelectList (A)
+         [SelExp (A) (Identifier (A) (Name (A) [Nmc "id"]))]))]
+----
+
+a|
+[source,sql]
+----
+update tb
+  set (x,y) = (1,2);
+----
+
+a|
+[source,haskell]
+----
+[Update (A) (Name (A) [Nmc "tb"])
+   [MultiSetClause (A) [Nmc "x", Nmc "y"]
+      (SpecialOp (A) (Name (A) [Nmc "rowctor"])
+         [NumberLit (A) "1", NumberLit (A) "2"])]
+   []
+   Nothing
+   Nothing]
+----
+
+|===
+
+=== delete
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+delete from tbl1 where x = true;
+----
+
+a|
+[source,haskell]
+----
+[Delete (A) (Name (A) [Nmc "tbl1"]) []
+   (Just
+      (BinaryOp (A) (Name (A) [Nmc "="])
+         (Identifier (A) (Name (A) [Nmc "x"]))
+         (BooleanLit (A) True)))
+   Nothing]
+----
+
+a|
+[source,sql]
+----
+delete from tbl1 where x = true returning id;
+----
+
+a|
+[source,haskell]
+----
+[Delete (A) (Name (A) [Nmc "tbl1"]) []
+   (Just
+      (BinaryOp (A) (Name (A) [Nmc "="])
+         (Identifier (A) (Name (A) [Nmc "x"]))
+         (BooleanLit (A) True)))
+   (Just
+      (SelectList (A)
+         [SelExp (A) (Identifier (A) (Name (A) [Nmc "id"]))]))]
+----
+
+|===
+
+=== truncate
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+truncate test;
+----
+
+a|
+[source,haskell]
+----
+[Truncate (A) [Name (A) [Nmc "test"]] ContinueIdentity Restrict]
+----
+
+a|
+[source,sql]
+----
+truncate table test, test2 restart identity cascade;
+----
+
+a|
+[source,haskell]
+----
+[Truncate (A) [Name (A) [Nmc "test"], Name (A) [Nmc "test2"]]
+   RestartIdentity
+   Cascade]
+----
+
+|===
+
+=== copy
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+copy tbl(a,b) from stdin;
+bat	t
+bear	f
+\.
+
+----
+
+a|
+[source,haskell]
+----
+[CopyFrom (A) (Name (A) [Nmc "tbl"]) [Nmc "a", Nmc "b"] Stdin [],
+ CopyData (A) "bat\tt\nbear\tf\n"]
+----
+
+a|
+[source,sql]
+----
+copy tbl (a,b) from 'filename' with delimiter '\|';
+----
+
+a|
+[source,haskell]
+----
+[CopyFrom (A) (Name (A) [Nmc "tbl"]) [Nmc "a", Nmc "b"]
+   (CopyFilename "filename")
+   [CopyFromDelimiter "\|"]]
+----
+
+a|
+[source,sql]
+----
+copy tbl (a,b) from 'filename' with delimiter '\|' parsers 'b=oracle';
+----
+
+a|
+[source,haskell]
+----
+[CopyFrom (A) (Name (A) [Nmc "tbl"]) [Nmc "a", Nmc "b"]
+   (CopyFilename "filename")
+   [CopyFromDelimiter "\|", CopyFromParsers "b=oracle"]]
+----
+
+a|
+[source,sql]
+----
+copy tbl (a,b) from 'filename' with delimiter '\|' error_log 'errors.log';
+----
+
+a|
+[source,haskell]
+----
+[CopyFrom (A) (Name (A) [Nmc "tbl"]) [Nmc "a", Nmc "b"]
+   (CopyFilename "filename")
+   [CopyFromDelimiter "\|", CopyFromErrorLog "errors.log"]]
+----
+
+a|
+[source,sql]
+----
+copy tbl (a,b) from 'filename' with delimiter '\|' error_log 'errors.log' error_verbosity 1;
+----
+
+a|
+[source,haskell]
+----
+[CopyFrom (A) (Name (A) [Nmc "tbl"]) [Nmc "a", Nmc "b"]
+   (CopyFilename "filename")
+   [CopyFromDelimiter "\|", CopyFromErrorLog "errors.log",
+    CopyFromErrorVerbosity 1]]
+----
+
+a|
+[source,sql]
+----
+copy tbl (a,b) from 'filename' with delimiter '\|' error_log 'errors.log' error_verbosity 1 parsers 'b=oracle';
+----
+
+a|
+[source,haskell]
+----
+[CopyFrom (A) (Name (A) [Nmc "tbl"]) [Nmc "a", Nmc "b"]
+   (CopyFilename "filename")
+   [CopyFromDelimiter "\|", CopyFromErrorLog "errors.log",
+    CopyFromErrorVerbosity 1, CopyFromParsers "b=oracle"]]
+----
+
+a|
+[source,sql]
+----
+copy tbl to 'file';
+----
+
+a|
+[source,haskell]
+----
+[CopyTo (A) (CopyTable (Name (A) [Nmc "tbl"]) []) "file" []]
+----
+
+a|
+[source,sql]
+----
+copy tbl(a,b) to 'file';
+----
+
+a|
+[source,haskell]
+----
+[CopyTo (A) (CopyTable (Name (A) [Nmc "tbl"]) [Nmc "a", Nmc "b"])
+   "file"
+   []]
+----
+
+a|
+[source,sql]
+----
+copy (select * from tbl) to 'file' with format binary;
+----
+
+a|
+[source,haskell]
+----
+[CopyTo (A)
+   (CopyQuery
+      (Select{ann = A, selDistinct = All,
+              selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+              selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+              selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+              selLimit = Nothing, selOffset = Nothing, selOption = []}))
+   "file"
+   [CopyToFormat "binary"]]
+----
+
+|===
+
+== ddl
+
+=== create table
+
+==== simple tables
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create table test (
+  fielda text,
+  fieldb int
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "test"])
+   [AttributeDef (A) (Nmc "fielda")
+      (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "fieldb")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table tbl (
+  fld boolean default false);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "tbl"])
+   [AttributeDef (A) (Nmc "fld")
+      (SimpleTypeName (A) (Name (A) [Nmc "boolean"]))
+      (Just (BooleanLit (A) False))
+      []]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table tbl as select 1;
+----
+
+a|
+[source,haskell]
+----
+[CreateTableAs (A) (Name (A) [Nmc "tbl"]) NoReplace
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+           selTref = [], selWhere = Nothing, selGroupBy = [],
+           selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+           selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+create table tbl  (
+  fld int not null identity(1,1));
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "tbl"])
+   [AttributeDef (A) (Nmc "fld")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [NotNullConstraint (A) "",
+       IdentityConstraint (A) "" (Just (1, 1))]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table tbl  (
+  fld int not null identity(-1,-1));
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "tbl"])
+   [AttributeDef (A) (Nmc "fld")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [NotNullConstraint (A) "",
+       IdentityConstraint (A) "" (Just (-1, -1))]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table tbl  (
+  fld int not null identity);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "tbl"])
+   [AttributeDef (A) (Nmc "fld")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [NotNullConstraint (A) "", IdentityConstraint (A) "" Nothing]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+alter table a rename to b;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (RenameTable (A) (Name (A) [Nmc "b"]))]
+----
+
+a|
+[source,sql]
+----
+alter table a rename column b to c;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (RenameColumn (A) (Nmc "b") (Nmc "c"))]
+----
+
+a|
+[source,sql]
+----
+alter table a add column b int;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A)
+      [AddColumn (A)
+         (AttributeDef (A) (Nmc "b")
+            (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+            Nothing
+            [])])]
+----
+
+a|
+[source,sql]
+----
+alter table a drop column b;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A) [DropColumn (A) (Nmc "b")])]
+----
+
+a|
+[source,sql]
+----
+alter table a alter column b set data type int;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A)
+      [AlterColumn (A) (Nmc "b")
+         (SetDataType (A) (SimpleTypeName (A) (Name (A) [Nmc "int"])))])]
+----
+
+a|
+[source,sql]
+----
+alter table a alter column b set data type int;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A)
+      [AlterColumn (A) (Nmc "b")
+         (SetDataType (A) (SimpleTypeName (A) (Name (A) [Nmc "int"])))])]
+----
+
+a|
+[source,sql]
+----
+alter table a alter column b set default 1;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A)
+      [AlterColumn (A) (Nmc "b") (SetDefault (A) (NumberLit (A) "1"))])]
+----
+
+a|
+[source,sql]
+----
+alter table a alter column b drop default;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A)
+      [AlterColumn (A) (Nmc "b") (DropDefault (A))])]
+----
+
+a|
+[source,sql]
+----
+alter table a alter column b set not null;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A)
+      [AlterColumn (A) (Nmc "b") (SetNotNull (A))])]
+----
+
+a|
+[source,sql]
+----
+alter table a alter column b drop not null;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A)
+      [AlterColumn (A) (Nmc "b") (DropNotNull (A))])]
+----
+
+a|
+[source,sql]
+----
+alter table a add column b int,drop column c;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A)
+      [AddColumn (A)
+         (AttributeDef (A) (Nmc "b")
+            (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+            Nothing
+            []),
+       DropColumn (A) (Nmc "c")])]
+----
+
+a|
+[source,sql]
+----
+alter table a drop column b;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A) [DropColumn (A) (Nmc "b")])]
+----
+
+a|
+[source,sql]
+----
+alter table a add constraint unique(b);
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "a"])
+   (AlterTableActions (A)
+      [AddConstraint (A) (UniqueConstraint (A) "" [Nmc "b"])])]
+----
+
+|===
+
+==== constraints
+
+===== nulls
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create table t1 (
+ a text null
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "a")
+      (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+      Nothing
+      [NullConstraint (A) ""]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ a text not null
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "a")
+      (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+      Nothing
+      [NotNullConstraint (A) ""]]
+   []
+   Nothing
+   NoReplace]
+----
+
+|===
+
+===== unique
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create table t1 (
+ x int,
+ y int,
+ unique (x,y)
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "y")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   [UniqueConstraint (A) "" [Nmc "x", Nmc "y"]]
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int,
+ unique (x),
+ y int
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "y")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   [UniqueConstraint (A) "" [Nmc "x"]]
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1(
+ x int,
+ ts datetime
+ )
+ partition by range(ts)
+  (
+   every 5 months
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "ts")
+      (SimpleTypeName (A) (Name (A) [Nmc "datetime"]))
+      Nothing
+      []]
+   []
+   (Just (TablePartitionDef (A) (Nmc "ts") 5 Month))
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int unique
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [RowUniqueConstraint (A) ""]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int unique not null
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [RowUniqueConstraint (A) "", NotNullConstraint (A) ""]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int not null unique
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [NotNullConstraint (A) "", RowUniqueConstraint (A) ""]]
+   []
+   Nothing
+   NoReplace]
+----
+
+|===
+
+===== primary key
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create table t1 (
+ x int primary key
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [RowPrimaryKeyConstraint (A) ""]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int,
+ y int,
+ primary key (x,y)
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "y")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   [PrimaryKeyConstraint (A) "" [Nmc "x", Nmc "y"]]
+   Nothing
+   NoReplace]
+----
+
+|===
+
+===== check
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create table t (
+f text check (f in('a', 'b'))
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t"])
+   [AttributeDef (A) (Nmc "f")
+      (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+      Nothing
+      [RowCheckConstraint (A) ""
+         (InPredicate (A) (Identifier (A) (Name (A) [Nmc "f"])) True
+            (InList (A) [StringLit (A) "a", StringLit (A) "b"]))]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int,
+ y int,
+ check (x>y)
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "y")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   [CheckConstraint (A) ""
+      (BinaryOp (A) (Name (A) [Nmc ">"])
+         (Identifier (A) (Name (A) [Nmc "x"]))
+         (Identifier (A) (Name (A) [Nmc "y"])))]
+   Nothing
+   NoReplace]
+----
+
+|===
+
+===== misc
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create table t (
+f text not null unique check (f in('a', 'b'))
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t"])
+   [AttributeDef (A) (Nmc "f")
+      (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+      Nothing
+      [NotNullConstraint (A) "", RowUniqueConstraint (A) "",
+       RowCheckConstraint (A) ""
+         (InPredicate (A) (Identifier (A) (Name (A) [Nmc "f"])) True
+            (InList (A) [StringLit (A) "a", StringLit (A) "b"]))]]
+   []
+   Nothing
+   NoReplace]
+----
+
+|===
+
+===== references
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create table t1 (
+ x int references t2
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [RowReferenceConstraint (A) "" (Name (A) [Nmc "t2"]) Nothing
+         Restrict
+         Restrict]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int references t2(y)
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [RowReferenceConstraint (A) "" (Name (A) [Nmc "t2"])
+         (Just (Nmc "y"))
+         Restrict
+         Restrict]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int,
+ y int,
+ foreign key (x,y) references t2
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "y")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   [ReferenceConstraint (A) "" [Nmc "x", Nmc "y"]
+      (Name (A) [Nmc "t2"])
+      []
+      Restrict
+      Restrict]
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int,
+ y int,
+ foreign key (x,y) references t2(z,w)
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "y")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   [ReferenceConstraint (A) "" [Nmc "x", Nmc "y"]
+      (Name (A) [Nmc "t2"])
+      [Nmc "z", Nmc "w"]
+      Restrict
+      Restrict]
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int references t2 on delete cascade
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [RowReferenceConstraint (A) "" (Name (A) [Nmc "t2"]) Nothing
+         Cascade
+         Restrict]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int references t2 on update cascade
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [RowReferenceConstraint (A) "" (Name (A) [Nmc "t2"]) Nothing
+         Restrict
+         Cascade]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int references t2 on delete cascade on update cascade
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [RowReferenceConstraint (A) "" (Name (A) [Nmc "t2"]) Nothing
+         Cascade
+         Cascade]]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create table t1 (
+ x int,
+ y int,
+ foreign key (x,y) references t2 on update cascade on delete cascade
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "y")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   [ReferenceConstraint (A) "" [Nmc "x", Nmc "y"]
+      (Name (A) [Nmc "t2"])
+      []
+      Cascade
+      Cascade]
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+create or replace table test (
+  fielda text,
+  fieldb int
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "test"])
+   [AttributeDef (A) (Nmc "fielda")
+      (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "fieldb")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   []
+   Nothing
+   Replace]
+----
+
+a|
+[source,sql]
+----
+create or replace table tbl as select 1;
+----
+
+a|
+[source,haskell]
+----
+[CreateTableAs (A) (Name (A) [Nmc "tbl"]) Replace
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+           selTref = [], selWhere = Nothing, selGroupBy = [],
+           selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+           selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+create or replace table t1 (
+ x int,
+ y int,
+ foreign key (x,y) references t2(z,w)
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "t1"])
+   [AttributeDef (A) (Nmc "x")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "y")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   [ReferenceConstraint (A) "" [Nmc "x", Nmc "y"]
+      (Name (A) [Nmc "t2"])
+      [Nmc "z", Nmc "w"]
+      Restrict
+      Restrict]
+   Nothing
+   Replace]
+----
+
+|===
+
+=== misc ddl
+
+==== misc create/alter
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create database dbname;
+----
+
+a|
+[source,haskell]
+----
+[CreateDatabase (A) (Name (A) [Nmc "dbname"])]
+----
+
+a|
+[source,sql]
+----
+alter database dbname rename to otherdb;
+----
+
+a|
+[source,haskell]
+----
+[AlterDatabase (A) (Name (A) [Nmc "dbname"])
+   (RenameDatabase (A) (Name (A) [Nmc "otherdb"]))]
+----
+
+a|
+[source,sql]
+----
+create view v1 as
+select a,b from t;
+----
+
+a|
+[source,haskell]
+----
+[CreateView (A) (Name (A) [Nmc "v1"]) Nothing
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"])),
+                SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+alter view v1 as
+select a,b from t;
+----
+
+a|
+[source,haskell]
+----
+[AlterView (A) (Name (A) [Nmc "v1"]) Nothing
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"])),
+                SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+create view v1(c,d) as
+select a,b from t;
+----
+
+a|
+[source,haskell]
+----
+[CreateView (A) (Name (A) [Nmc "v1"]) (Just [Nmc "c", Nmc "d"])
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"])),
+                SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+alter view v1(c,d) as
+select a,b from t;
+----
+
+a|
+[source,haskell]
+----
+[AlterView (A) (Name (A) [Nmc "v1"]) (Just [Nmc "c", Nmc "d"])
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"])),
+                SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+create domain td as text check (value in ('t1', 't2'));
+----
+
+a|
+[source,haskell]
+----
+[CreateDomain (A) (Name (A) [Nmc "td"])
+   (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+   ""
+   (Just
+      (InPredicate (A) (Identifier (A) (Name (A) [Nmc "value"])) True
+         (InList (A) [StringLit (A) "t1", StringLit (A) "t2"])))]
+----
+
+a|
+[source,sql]
+----
+create type tp1 as (
+  f1 text,
+  f2 text
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateType (A) (Name (A) [Nmc "tp1"])
+   [TypeAttDef (A) (Nmc "f1")
+      (SimpleTypeName (A) (Name (A) [Nmc "text"])),
+    TypeAttDef (A) (Nmc "f2")
+      (SimpleTypeName (A) (Name (A) [Nmc "text"]))]]
+----
+
+a|
+[source,sql]
+----
+create sequence s start with 5 increment by 4 no maxvalue no minvalue cache 1;
+----
+
+a|
+[source,haskell]
+----
+[CreateSequence (A) (Name (A) [Nmc "s"]) 4 Nothing Nothing 5 1]
+----
+
+a|
+[source,sql]
+----
+alter sequence s owned by a.b;
+----
+
+a|
+[source,haskell]
+----
+[AlterSequence (A) (Name (A) [Nmc "s"])
+   (AlterSequenceOwned (A) (Name (A) [Nmc "a", Nmc "b"]))]
+----
+
+a|
+[source,sql]
+----
+alter sequence s rename to s2;
+----
+
+a|
+[source,haskell]
+----
+[AlterSequence (A) (Name (A) [Nmc "s"])
+   (AlterSequenceRename (A) (Name (A) [Nmc "s2"]))]
+----
+
+a|
+[source,sql]
+----
+alter sequence s increment by 2 start with 3;
+----
+
+a|
+[source,haskell]
+----
+[AlterSequence (A) (Name (A) [Nmc "s"])
+   (AlterSequenceActions (A)
+      [AlterSequenceIncrement (A) 2, AlterSequenceStart (A) 3])]
+----
+
+a|
+[source,sql]
+----
+alter sequence s no maxvalue minvalue 1;
+----
+
+a|
+[source,haskell]
+----
+[AlterSequence (A) (Name (A) [Nmc "s"])
+   (AlterSequenceActions (A)
+      [AlterSequenceMax (A) Nothing, AlterSequenceMin (A) (Just 1)])]
+----
+
+a|
+[source,sql]
+----
+alter sequence s cache 2;
+----
+
+a|
+[source,haskell]
+----
+[AlterSequence (A) (Name (A) [Nmc "s"])
+   (AlterSequenceActions (A) [AlterSequenceCache (A) 2])]
+----
+
+a|
+[source,sql]
+----
+alter sequence s restart;
+----
+
+a|
+[source,haskell]
+----
+[AlterSequence (A) (Name (A) [Nmc "s"])
+   (AlterSequenceActions (A) [AlterSequenceRestart (A) Nothing])]
+----
+
+a|
+[source,sql]
+----
+alter sequence s restart with 1;
+----
+
+a|
+[source,haskell]
+----
+[AlterSequence (A) (Name (A) [Nmc "s"])
+   (AlterSequenceActions (A) [AlterSequenceRestart (A) (Just 1)])]
+----
+
+a|
+[source,sql]
+----
+create trigger tr
+after insert or delete on tb
+for each statement
+execute procedure fb();
+----
+
+a|
+[source,haskell]
+----
+[CreateTrigger (A) (Nmc "tr") TriggerAfter [TInsert, TDelete]
+   (Name (A) [Nmc "tb"])
+   EachStatement
+   (Name (A) [Nmc "fb"])
+   []]
+----
+
+a|
+[source,sql]
+----
+drop trigger
+if exists tr
+on tb cascade;
+----
+
+a|
+[source,haskell]
+----
+[DropTrigger (A) IfExists (Nmc "tr") (Name (A) [Nmc "tb"]) Cascade]
+----
+
+a|
+[source,sql]
+----
+drop trigger tr
+on tb restrict;
+----
+
+a|
+[source,haskell]
+----
+[DropTrigger (A) Require (Nmc "tr") (Name (A) [Nmc "tb"]) Restrict]
+----
+
+|===
+
+==== drops
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+drop domain t;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Domain Require [Name (A) [Nmc "t"]] Restrict]
+----
+
+a|
+[source,sql]
+----
+drop domain if exists t,u cascade;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Domain IfExists
+   [Name (A) [Nmc "t"], Name (A) [Nmc "u"]]
+   Cascade]
+----
+
+a|
+[source,sql]
+----
+drop domain t restrict;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Domain Require [Name (A) [Nmc "t"]] Restrict]
+----
+
+a|
+[source,sql]
+----
+drop type t;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Type Require [Name (A) [Nmc "t"]] Restrict]
+----
+
+a|
+[source,sql]
+----
+drop table t;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Table Require [Name (A) [Nmc "t"]] Restrict]
+----
+
+a|
+[source,sql]
+----
+drop view t;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) View Require [Name (A) [Nmc "t"]] Restrict]
+----
+
+a|
+[source,sql]
+----
+drop database dbname;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Database Require [Name (A) [Nmc "dbname"]]
+   Restrict]
+----
+
+|===
+
+=== functionsddl
+
+==== basics
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create function t1(text) returns text as $$
+select a from t1 where b = $1;
+$$ language sql stable;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "t1"])
+   [ParamDefTp (A) (SimpleTypeName (A) (Name (A) [Nmc "text"]))]
+   (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+   NoReplace
+   Sql
+   (SqlFnBody (A)
+      [QueryStatement (A)
+         (Select{ann = A, selDistinct = All,
+                 selSelectList =
+                   SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+                 selTref = [Tref (A) (Name (A) [Nmc "t1"])],
+                 selWhere =
+                   Just
+                     (BinaryOp (A) (Name (A) [Nmc "="])
+                        (Identifier (A) (Name (A) [Nmc "b"]))
+                        (PositionalArg (A) 1)),
+                 selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+                 selLimit = Nothing, selOffset = Nothing, selOption = []})])
+   Stable]
+----
+
+a|
+[source,sql]
+----
+create function fn() returns void as $$
+declare
+  a int;
+  b text;
+begin
+  null;
+end;
+$$ language plpgsql volatile;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "fn"]) []
+   (SimpleTypeName (A) (Name (A) [Nmc "void"]))
+   NoReplace
+   Plpgsql
+   (PlpgsqlFnBody (A)
+      (Block (A) Nothing
+         [VarDef (A) (Nmc "a") (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+            Nothing,
+          VarDef (A) (Nmc "b") (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+            Nothing]
+         [NullStatement (A)]))
+   Volatile]
+----
+
+a|
+[source,sql]
+----
+create function fn() returns void as $$
+declare
+  a int;
+  b text;
+begin
+  null;
+end;
+$$ language plpgsql volatile;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "fn"]) []
+   (SimpleTypeName (A) (Name (A) [Nmc "void"]))
+   NoReplace
+   Plpgsql
+   (PlpgsqlFnBody (A)
+      (Block (A) Nothing
+         [VarDef (A) (Nmc "a") (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+            Nothing,
+          VarDef (A) (Nmc "b") (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+            Nothing]
+         [NullStatement (A)]))
+   Volatile]
+----
+
+a|
+[source,sql]
+----
+create function fn(a text[]) returns int[] as $$
+declare
+  b xtype[] := '{}';
+begin
+  null;
+end;
+$$ language plpgsql immutable;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "fn"])
+   [ParamDef (A) (Nmc "a")
+      (ArrayTypeName (A) (SimpleTypeName (A) (Name (A) [Nmc "text"])))]
+   (ArrayTypeName (A) (SimpleTypeName (A) (Name (A) [Nmc "int"])))
+   NoReplace
+   Plpgsql
+   (PlpgsqlFnBody (A)
+      (Block (A) Nothing
+         [VarDef (A) (Nmc "b")
+            (ArrayTypeName (A) (SimpleTypeName (A) (Name (A) [Nmc "xtype"])))
+            (Just (StringLit (A) "{}"))]
+         [NullStatement (A)]))
+   Immutable]
+----
+
+a|
+[source,sql]
+----
+create function fn() returns void as '
+declare
+  a int := 3;
+begin
+  null;
+end;
+' language plpgsql stable;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "fn"]) []
+   (SimpleTypeName (A) (Name (A) [Nmc "void"]))
+   NoReplace
+   Plpgsql
+   (PlpgsqlFnBody (A)
+      (Block (A) Nothing
+         [VarDef (A) (Nmc "a") (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+            (Just (NumberLit (A) "3"))]
+         [NullStatement (A)]))
+   Stable]
+----
+
+a|
+[source,sql]
+----
+create function fn(int) returns void as '
+declare
+  a alias for $1;
+begin
+  null;
+end;
+' language plpgsql stable;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "fn"])
+   [ParamDefTp (A) (SimpleTypeName (A) (Name (A) [Nmc "int"]))]
+   (SimpleTypeName (A) (Name (A) [Nmc "void"]))
+   NoReplace
+   Plpgsql
+   (PlpgsqlFnBody (A)
+      (Block (A) Nothing [ParamAlias (A) (Nmc "a") 1]
+         [NullStatement (A)]))
+   Stable]
+----
+
+a|
+[source,sql]
+----
+create function fn(b int) returns void as '
+declare
+  a alias for b;
+begin
+  null;
+end;
+' language plpgsql stable;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "fn"])
+   [ParamDef (A) (Nmc "b")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))]
+   (SimpleTypeName (A) (Name (A) [Nmc "void"]))
+   NoReplace
+   Plpgsql
+   (PlpgsqlFnBody (A)
+      (Block (A) Nothing [VarAlias (A) (Nmc "a") (Name (A) [Nmc "b"])]
+         [NullStatement (A)]))
+   Stable]
+----
+
+a|
+[source,sql]
+----
+create function fn() returns setof int as $$
+begin
+  null;
+end;
+$$ language plpgsql stable;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "fn"]) []
+   (SetOfTypeName (A) (SimpleTypeName (A) (Name (A) [Nmc "int"])))
+   NoReplace
+   Plpgsql
+   (PlpgsqlFnBody (A) (Block (A) Nothing [] [NullStatement (A)]))
+   Stable]
+----
+
+a|
+[source,sql]
+----
+create function fn() returns void as $$
+begin
+  null;
+end
+$$ language plpgsql stable;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "fn"]) []
+   (SimpleTypeName (A) (Name (A) [Nmc "void"]))
+   NoReplace
+   Plpgsql
+   (PlpgsqlFnBody (A) (Block (A) Nothing [] [NullStatement (A)]))
+   Stable]
+----
+
+a|
+[source,sql]
+----
+create or replace function fn() returns void as $$
+begin
+  null;
+end
+$$ language plpgsql stable;
+----
+
+a|
+[source,haskell]
+----
+[CreateFunction (A) (Name (A) [Nmc "fn"]) []
+   (SimpleTypeName (A) (Name (A) [Nmc "void"]))
+   Replace
+   Plpgsql
+   (PlpgsqlFnBody (A) (Block (A) Nothing [] [NullStatement (A)]))
+   Stable]
+----
+
+a|
+[source,sql]
+----
+drop function test(text);
+----
+
+a|
+[source,haskell]
+----
+[DropFunction (A) Require
+   [(Name (A) [Nmc "test"],
+     [SimpleTypeName (A) (Name (A) [Nmc "text"])])]
+   Restrict]
+----
+
+a|
+[source,sql]
+----
+drop function test(int,int);
+----
+
+a|
+[source,haskell]
+----
+[DropFunction (A) Require
+   [(Name (A) [Nmc "test"],
+     [SimpleTypeName (A) (Name (A) [Nmc "int"]),
+      SimpleTypeName (A) (Name (A) [Nmc "int"])])]
+   Restrict]
+----
+
+a|
+[source,sql]
+----
+drop function if exists a(),test(text) cascade;
+----
+
+a|
+[source,haskell]
+----
+[DropFunction (A) IfExists
+   [(Name (A) [Nmc "a"], []),
+    (Name (A) [Nmc "test"],
+     [SimpleTypeName (A) (Name (A) [Nmc "text"])])]
+   Cascade]
+----
+
+|===
+
+== schema
+
+=== ddl - schemas
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create schema test;
+----
+
+a|
+[source,haskell]
+----
+[CreateSchema (A) (Nmc "test") Nothing]
+----
+
+a|
+[source,sql]
+----
+create schema test authorization owner;
+----
+
+a|
+[source,haskell]
+----
+[CreateSchema (A) (Nmc "test") (Just (Name (A) [Nmc "owner"]))]
+----
+
+|===
+
+==== drop schema
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+drop schema test;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Schema Require [Name (A) [Nmc "test"]] Restrict]
+----
+
+a|
+[source,sql]
+----
+drop schema if exists test restrict;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Schema IfExists [Name (A) [Nmc "test"]]
+   Restrict]
+----
+
+a|
+[source,sql]
+----
+drop schema test cascade;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Schema Require [Name (A) [Nmc "test"]] Cascade]
+----
+
+|===
+
+==== alter schema
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+alter schema test rename to test2;
+----
+
+a|
+[source,haskell]
+----
+[AlterSchema (A) (Nmc "test") (AlterSchemaName (A) (Nmc "test2"))]
+----
+
+a|
+[source,sql]
+----
+alter schema test owner to new_owner;
+----
+
+a|
+[source,haskell]
+----
+[AlterSchema (A) (Nmc "test")
+   (AlterSchemaOwner (A) (Name (A) [Nmc "new_owner"]))]
+----
+
+|===
+
+=== ddl - schema-explicit tables
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create table s.test (
+  fielda text,
+  fieldb int
+);
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [Nmc "s", Nmc "test"])
+   [AttributeDef (A) (Nmc "fielda")
+      (SimpleTypeName (A) (Name (A) [Nmc "text"]))
+      Nothing
+      [],
+    AttributeDef (A) (Nmc "fieldb")
+      (SimpleTypeName (A) (Name (A) [Nmc "int"]))
+      Nothing
+      []]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+alter table s.a rename to b;
+----
+
+a|
+[source,haskell]
+----
+[AlterTable (A) (Name (A) [Nmc "s", Nmc "a"])
+   (RenameTable (A) (Name (A) [Nmc "b"]))]
+----
+
+a|
+[source,sql]
+----
+drop table s.t;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) Table Require [Name (A) [Nmc "s", Nmc "t"]]
+   Restrict]
+----
+
+|===
+
+=== ddl - schema-explicit views
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+create view s1.v1 as
+select a,b from s2.t;
+----
+
+a|
+[source,haskell]
+----
+[CreateView (A) (Name (A) [Nmc "s1", Nmc "v1"]) Nothing
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"])),
+                SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "s2", Nmc "t"])],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+alter view s1.v1 as
+select a,b from s2.t;
+----
+
+a|
+[source,haskell]
+----
+[AlterView (A) (Name (A) [Nmc "s1", Nmc "v1"]) Nothing
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"])),
+                SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "s2", Nmc "t"])],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+drop view s.v;
+----
+
+a|
+[source,haskell]
+----
+[DropSomething (A) View Require [Name (A) [Nmc "s", Nmc "v"]]
+   Restrict]
+----
+
+|===
+
+=== dml - schemas
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a from s.t
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref = [Tref (A) (Name (A) [Nmc "s", Nmc "t"])],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+a|
+[source,sql]
+----
+select a from s1.t1 natural inner join t2
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+       selTref =
+         [JoinTref (A) (Tref (A) (Name (A) [Nmc "s1", Nmc "t1"])) Natural
+            Inner
+            Nothing
+            (Tref (A) (Name (A) [Nmc "t2"]))
+            Nothing],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+|===
+
+== plpgsql
+
+=== simple plpgsql statements
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+success := true;
+----
+
+a|
+[source,haskell]
+----
+[Assignment (A) (Name (A) [Nmc "success"]) (BooleanLit (A) True)]
+----
+
+a|
+[source,sql]
+----
+success = true;
+----
+
+a|
+[source,haskell]
+----
+[Assignment (A) (Name (A) [Nmc "success"]) (BooleanLit (A) True)]
+----
+
+a|
+[source,sql]
+----
+return true;
+----
+
+a|
+[source,haskell]
+----
+[Return (A) (Just (BooleanLit (A) True))]
+----
+
+a|
+[source,sql]
+----
+return;
+----
+
+a|
+[source,haskell]
+----
+[Return (A) Nothing]
+----
+
+a|
+[source,sql]
+----
+return next 1;
+----
+
+a|
+[source,haskell]
+----
+[ReturnNext (A) (NumberLit (A) "1")]
+----
+
+a|
+[source,sql]
+----
+return query select a from b;
+----
+
+a|
+[source,haskell]
+----
+[ReturnQuery (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "b"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+raise notice 'stuff %', 1;
+----
+
+a|
+[source,haskell]
+----
+[Raise (A) RNotice "stuff %" [NumberLit (A) "1"]]
+----
+
+a|
+[source,sql]
+----
+perform test();
+----
+
+a|
+[source,haskell]
+----
+[Perform (A) (App (A) (Name (A) [Nmc "test"]) [])]
+----
+
+a|
+[source,sql]
+----
+perform test(a,b);
+----
+
+a|
+[source,haskell]
+----
+[Perform (A)
+   (App (A) (Name (A) [Nmc "test"])
+      [Identifier (A) (Name (A) [Nmc "a"]),
+       Identifier (A) (Name (A) [Nmc "b"])])]
+----
+
+a|
+[source,sql]
+----
+perform test(r.relvar_name \|\| '_and_stuff');
+----
+
+a|
+[source,haskell]
+----
+[Perform (A)
+   (App (A) (Name (A) [Nmc "test"])
+      [BinaryOp (A) (Name (A) [Nmc "\|\|"])
+         (Identifier (A) (Name (A) [Nmc "r", Nmc "relvar_name"]))
+         (StringLit (A) "_and_stuff")])]
+----
+
+a|
+[source,sql]
+----
+select into a,b c,d from e;
+----
+
+a|
+[source,haskell]
+----
+[Into (A) False [Name (A) [Nmc "a"], Name (A) [Nmc "b"]]
+   (QueryStatement (A)
+      (Select{ann = A, selDistinct = All,
+              selSelectList =
+                SelectList (A)
+                  [SelExp (A) (Identifier (A) (Name (A) [Nmc "c"])),
+                   SelExp (A) (Identifier (A) (Name (A) [Nmc "d"]))],
+              selTref = [Tref (A) (Name (A) [Nmc "e"])], selWhere = Nothing,
+              selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+              selLimit = Nothing, selOffset = Nothing, selOption = []}))]
+----
+
+a|
+[source,sql]
+----
+select c,d into a,b from e;
+----
+
+a|
+[source,haskell]
+----
+[Into (A) False [Name (A) [Nmc "a"], Name (A) [Nmc "b"]]
+   (QueryStatement (A)
+      (Select{ann = A, selDistinct = All,
+              selSelectList =
+                SelectList (A)
+                  [SelExp (A) (Identifier (A) (Name (A) [Nmc "c"])),
+                   SelExp (A) (Identifier (A) (Name (A) [Nmc "d"]))],
+              selTref = [Tref (A) (Name (A) [Nmc "e"])], selWhere = Nothing,
+              selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+              selLimit = Nothing, selOffset = Nothing, selOption = []}))]
+----
+
+a|
+[source,sql]
+----
+delete from pieces where x = 1 and y = 1 returning tag into r.tag;
+----
+
+a|
+[source,haskell]
+----
+[Into (A) False [Name (A) [Nmc "r", Nmc "tag"]]
+   (Delete (A) (Name (A) [Nmc "pieces"]) []
+      (Just
+         (BinaryOp (A) (Name (A) [Nmc "and"])
+            (BinaryOp (A) (Name (A) [Nmc "="])
+               (Identifier (A) (Name (A) [Nmc "x"]))
+               (NumberLit (A) "1"))
+            (BinaryOp (A) (Name (A) [Nmc "="])
+               (Identifier (A) (Name (A) [Nmc "y"]))
+               (NumberLit (A) "1"))))
+      (Just
+         (SelectList (A)
+            [SelExp (A) (Identifier (A) (Name (A) [Nmc "tag"]))])))]
+----
+
+a|
+[source,sql]
+----
+update pieces
+set a=b returning tag into r.tag;
+----
+
+a|
+[source,haskell]
+----
+[Into (A) False [Name (A) [Nmc "r", Nmc "tag"]]
+   (Update (A) (Name (A) [Nmc "pieces"])
+      [SetClause (A) (Nmc "a") (Identifier (A) (Name (A) [Nmc "b"]))]
+      []
+      Nothing
+      (Just
+         (SelectList (A)
+            [SelExp (A) (Identifier (A) (Name (A) [Nmc "tag"]))])))]
+----
+
+a|
+[source,sql]
+----
+insert into t(a) values (1) returning id into x;
+----
+
+a|
+[source,haskell]
+----
+[Into (A) False [Name (A) [Nmc "x"]]
+   (Insert (A) (Name (A) [Nmc "t"]) [Nmc "a"]
+      (Values{ann = A, qeValues = [[NumberLit (A) "1"]]})
+      (Just
+         (SelectList (A)
+            [SelExp (A) (Identifier (A) (Name (A) [Nmc "id"]))])))]
+----
+
+a|
+[source,sql]
+----
+update t
+  set x = 1 returning id into z;
+----
+
+a|
+[source,haskell]
+----
+[Into (A) False [Name (A) [Nmc "z"]]
+   (Update (A) (Name (A) [Nmc "t"])
+      [SetClause (A) (Nmc "x") (NumberLit (A) "1")]
+      []
+      Nothing
+      (Just
+         (SelectList (A)
+            [SelExp (A) (Identifier (A) (Name (A) [Nmc "id"]))])))]
+----
+
+a|
+[source,sql]
+----
+execute s;
+----
+
+a|
+[source,haskell]
+----
+[Execute (A) (Identifier (A) (Name (A) [Nmc "s"]))]
+----
+
+a|
+[source,sql]
+----
+execute s into r;
+----
+
+a|
+[source,haskell]
+----
+[Into (A) False [Name (A) [Nmc "r"]]
+   (Execute (A) (Identifier (A) (Name (A) [Nmc "s"])))]
+----
+
+a|
+[source,sql]
+----
+continue;
+----
+
+a|
+[source,haskell]
+----
+[ContinueStatement (A) Nothing]
+----
+
+|===
+
+=== other plpgsql statements
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+for r in select a from tbl loop
+null;
+end loop;
+----
+
+a|
+[source,haskell]
+----
+[ForQueryStatement (A) Nothing (Nmc "r")
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})
+   [NullStatement (A)]]
+----
+
+a|
+[source,sql]
+----
+for r in select a from tbl where true loop
+null;
+end loop;
+----
+
+a|
+[source,haskell]
+----
+[ForQueryStatement (A) Nothing (Nmc "r")
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "tbl"])],
+           selWhere = Just (BooleanLit (A) True), selGroupBy = [],
+           selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+           selOffset = Nothing, selOption = []})
+   [NullStatement (A)]]
+----
+
+a|
+[source,sql]
+----
+for r in 1 .. 10 loop
+null;
+end loop;
+----
+
+a|
+[source,haskell]
+----
+[ForIntegerStatement (A) Nothing (Nmc "r") (NumberLit (A) "1")
+   (NumberLit (A) "10")
+   [NullStatement (A)]]
+----
+
+a|
+[source,sql]
+----
+for r in 1..10 loop
+null;
+end loop;
+----
+
+a|
+[source,haskell]
+----
+[ForIntegerStatement (A) Nothing (Nmc "r") (NumberLit (A) "1")
+   (NumberLit (A) "10")
+   [NullStatement (A)]]
+----
+
+a|
+[source,sql]
+----
+if a=b then
+  update c set d = e;
+end if;
+----
+
+a|
+[source,haskell]
+----
+[If (A)
+   [(BinaryOp (A) (Name (A) [Nmc "="])
+       (Identifier (A) (Name (A) [Nmc "a"]))
+       (Identifier (A) (Name (A) [Nmc "b"])),
+     [Update (A) (Name (A) [Nmc "c"])
+        [SetClause (A) (Nmc "d") (Identifier (A) (Name (A) [Nmc "e"]))]
+        []
+        Nothing
+        Nothing])]
+   []]
+----
+
+a|
+[source,sql]
+----
+if true then
+  null;
+else
+  null;
+end if;
+----
+
+a|
+[source,haskell]
+----
+[If (A) [(BooleanLit (A) True, [NullStatement (A)])]
+   [NullStatement (A)]]
+----
+
+a|
+[source,sql]
+----
+if true then
+  null;
+elseif false then
+  return;
+end if;
+----
+
+a|
+[source,haskell]
+----
+[If (A)
+   [(BooleanLit (A) True, [NullStatement (A)]),
+    (BooleanLit (A) False, [Return (A) Nothing])]
+   []]
+----
+
+a|
+[source,sql]
+----
+if true then
+  null;
+elseif false then
+  return;
+elsif false then
+  return;
+else
+  return;
+end if;
+----
+
+a|
+[source,haskell]
+----
+[If (A)
+   [(BooleanLit (A) True, [NullStatement (A)]),
+    (BooleanLit (A) False, [Return (A) Nothing]),
+    (BooleanLit (A) False, [Return (A) Nothing])]
+   [Return (A) Nothing]]
+----
+
+a|
+[source,sql]
+----
+case a
+  when b then null;
+  when c,d then null;
+  else null;
+end case;
+----
+
+a|
+[source,haskell]
+----
+[CaseStatementSimple (A) (Identifier (A) (Name (A) [Nmc "a"]))
+   [([Identifier (A) (Name (A) [Nmc "b"])], [NullStatement (A)]),
+    ([Identifier (A) (Name (A) [Nmc "c"]),
+      Identifier (A) (Name (A) [Nmc "d"])],
+     [NullStatement (A)])]
+   [NullStatement (A)]]
+----
+
+|===
+
+== miscParserTests
+
+=== multiple statements
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select 1;
+select 2;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+           selTref = [], selWhere = Nothing, selGroupBy = [],
+           selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+           selOffset = Nothing, selOption = []}),
+ QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "2")],
+           selTref = [], selWhere = Nothing, selGroupBy = [],
+           selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+           selOffset = Nothing, selOption = []})]
+----
+
+|===
+
+=== comments
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+
+----
+
+a|
+[source,haskell]
+----
+[]
+----
+
+a|
+[source,sql]
+----
+-- this is a test
+----
+
+a|
+[source,haskell]
+----
+[]
+----
+
+a|
+[source,sql]
+----
+/* this is
+a test*/
+----
+
+a|
+[source,haskell]
+----
+[]
+----
+
+a|
+[source,sql]
+----
+select 1;
+-- this is a test
+select -- this is a test
+2;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+           selTref = [], selWhere = Nothing, selGroupBy = [],
+           selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+           selOffset = Nothing, selOption = []}),
+ QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "2")],
+           selTref = [], selWhere = Nothing, selGroupBy = [],
+           selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+           selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select 1;
+/* this is
+a test*/
+select /* this is a test*/2;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "1")],
+           selTref = [], selWhere = Nothing, selGroupBy = [],
+           selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+           selOffset = Nothing, selOption = []}),
+ QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (NumberLit (A) "2")],
+           selTref = [], selWhere = Nothing, selGroupBy = [],
+           selHaving = Nothing, selOrderBy = [], selLimit = Nothing,
+           selOffset = Nothing, selOption = []})]
+----
+
+|===
+
+=== misc
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+SET search_path TO my_schema, public;
+----
+
+a|
+[source,haskell]
+----
+[Set (A) "search_path" [SetId (A) "my_schema", SetId (A) "public"]]
+----
+
+a|
+[source,sql]
+----
+SET t1 = 3;
+----
+
+a|
+[source,haskell]
+----
+[Set (A) "t1" [SetNum (A) 3.0]]
+----
+
+a|
+[source,sql]
+----
+SET t1 = 'stuff';
+----
+
+a|
+[source,haskell]
+----
+[Set (A) "t1" [SetStr (A) "stuff"]]
+----
+
+a|
+[source,sql]
+----
+create language plpgsql;
+----
+
+a|
+[source,haskell]
+----
+[CreateLanguage (A) "plpgsql"]
+----
+
+|===
+
+== parse sql server
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select top 3 * from a order by c;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref = [Tref (A) (Name (A) [Nmc "a"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing,
+           selOrderBy =
+             [(Identifier (A) (Name (A) [Nmc "c"]), Asc, NullsDefault)],
+           selLimit = Just (NumberLit (A) "3"), selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select top(3) * from a order by c;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref = [Tref (A) (Name (A) [Nmc "a"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing,
+           selOrderBy =
+             [(Identifier (A) (Name (A) [Nmc "c"]), Asc, NullsDefault)],
+           selLimit = Just (NumberLit (A) "3"), selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select r.dn as 'rg' from tbl;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelectItem (A) (Identifier (A) (Name (A) [Nmc "r", Nmc "dn"]))
+                  (QNmc "rg")],
+           selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select r.dn as 'check the pretty printing' from tbl;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelectItem (A) (Identifier (A) (Name (A) [Nmc "r", Nmc "dn"]))
+                  (QNmc "check the pretty printing")],
+           selTref = [Tref (A) (Name (A) [Nmc "tbl"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select a..b() from t;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A) (App (A) (Name (A) [Nmc "a", Nmc "", Nmc "b"]) [])],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select a...b() from t;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A)
+                  (App (A) (Name (A) [Nmc "a", Nmc "", Nmc "", Nmc "b"]) [])],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select * from a join x..b;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref =
+             [JoinTref (A) (Tref (A) (Name (A) [Nmc "a"])) Unnatural Inner
+                Nothing
+                (Tref (A) (Name (A) [Nmc "x", Nmc "", Nmc "b"]))
+                Nothing],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select * from a join x...b;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref =
+             [JoinTref (A) (Tref (A) (Name (A) [Nmc "a"])) Unnatural Inner
+                Nothing
+                (Tref (A) (Name (A) [Nmc "x", Nmc "", Nmc "", Nmc "b"]))
+                Nothing],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select a from t with(nolock);
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select a from #tbl;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "#tbl"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+CREATE TABLE [schema].[table_name](
+             [fieldname] [typename])
+----
+
+a|
+[source,haskell]
+----
+[CreateTable (A) (Name (A) [QNmc "schema", QNmc "table_name"])
+   [AttributeDef (A) (QNmc "fieldname")
+      (SimpleTypeName (A) (Name (A) [QNmc "typename"]))
+      Nothing
+      []]
+   []
+   Nothing
+   NoReplace]
+----
+
+a|
+[source,sql]
+----
+select a from t  -- no semi colon
+select b from t
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []}),
+ QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+if 1=1
+   drop table #temp
+select b from t
+----
+
+a|
+[source,haskell]
+----
+[If (A)
+   [(BinaryOp (A) (Name (A) [Nmc "="]) (NumberLit (A) "1")
+       (NumberLit (A) "1"),
+     [DropSomething (A) Table Require [Name (A) [Nmc "#temp"]]
+        Restrict])]
+   [],
+ QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "b"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+declare @nm int
+----
+
+a|
+[source,haskell]
+----
+[DeclareStatement (A)
+   [("@nm", SimpleTypeName (A) (Name (A) [Nmc "int"]), Nothing)]]
+----
+
+a|
+[source,sql]
+----
+declare @nm int = 3, @nm2 datetime = '1/1/2000'
+----
+
+a|
+[source,haskell]
+----
+[DeclareStatement (A)
+   [("@nm", SimpleTypeName (A) (Name (A) [Nmc "int"]),
+     Just (NumberLit (A) "3")),
+    ("@nm2", SimpleTypeName (A) (Name (A) [Nmc "datetime"]),
+     Just (StringLit (A) "1/1/2000"))]]
+----
+
+a|
+[source,sql]
+----
+select convert (INT,5) from t
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A)
+                  (App (A) (Name (A) [Nmc "convert"])
+                     [Identifier (A) (Name (A) [Nmc "INT"]), NumberLit (A) "5"])],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select convert (time,something,108) from t
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A)
+                  (Cast (A) (Identifier (A) (Name (A) [Nmc "something"]))
+                     (SimpleTypeName (A) (Name (A) [Nmc "time"])))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+CREATE NONCLUSTERED INDEX idx ON tbl (col) INCLUDE (Gap)
+----
+
+a|
+[source,haskell]
+----
+[CreateIndexTSQL (A) (Nmc "idx") (Name (A) [Nmc "tbl"])
+   [Nmc "col"]]
+----
+
+a|
+[source,sql]
+----
+CREATE NONCLUSTERED INDEX idx ON [dbo].[#tmp] (col) INCLUDE (Gap)
+----
+
+a|
+[source,haskell]
+----
+[CreateIndexTSQL (A) (Nmc "idx")
+   (Name (A) [QNmc "dbo", QNmc "#tmp"])
+   [Nmc "col"]]
+----
+
+a|
+[source,sql]
+----
+select y -@test from t
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A)
+                  (BinaryOp (A) (Name (A) [Nmc "-"])
+                     (Identifier (A) (Name (A) [Nmc "y"]))
+                     (Identifier (A) (Name (A) [Nmc "@test"])))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select * from t natural inner hash join u
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref =
+             [JoinTref (A) (Tref (A) (Name (A) [Nmc "t"])) Natural Inner
+                (Just Hash)
+                (Tref (A) (Name (A) [Nmc "u"]))
+                Nothing],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select * from t natural inner loop join u
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref =
+             [JoinTref (A) (Tref (A) (Name (A) [Nmc "t"])) Natural Inner
+                (Just Loop)
+                (Tref (A) (Name (A) [Nmc "u"]))
+                Nothing],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select * from t natural inner merge join u
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref =
+             [JoinTref (A) (Tref (A) (Name (A) [Nmc "t"])) Natural Inner
+                (Just Merge)
+                (Tref (A) (Name (A) [Nmc "u"]))
+                Nothing],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select * from t loop join u
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref =
+             [JoinTref (A) (Tref (A) (Name (A) [Nmc "t"])) Unnatural Inner
+                (Just Loop)
+                (Tref (A) (Name (A) [Nmc "u"]))
+                Nothing],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select * from t merge join u
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref =
+             [JoinTref (A) (Tref (A) (Name (A) [Nmc "t"])) Unnatural Inner
+                (Just Merge)
+                (Tref (A) (Name (A) [Nmc "u"]))
+                Nothing],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select * from t hash join u
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref =
+             [JoinTref (A) (Tref (A) (Name (A) [Nmc "t"])) Unnatural Inner
+                (Just Hash)
+                (Tref (A) (Name (A) [Nmc "u"]))
+                Nothing],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+|===
+
+== parse oracle
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select unique a from t;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = Distinct,
+           selSelectList =
+             SelectList (A) [SelExp (A) (Identifier (A) (Name (A) [Nmc "a"]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+a|
+[source,sql]
+----
+select count(unique a) from t;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A)
+                  (AggregateApp (A) Distinct
+                     (App (A) (Name (A) [Nmc "count"])
+                        [Identifier (A) (Name (A) [Nmc "a"])])
+                     [])],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+|===
+
+== odbcParsing
+
+=== datetime
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+{d '2000-01-01'}
+----
+
+a|
+[source,haskell]
+----
+OdbcLiteral (A) OLDate "2000-01-01"
+----
+
+a|
+[source,sql]
+----
+{t '12:00:01.1'}
+----
+
+a|
+[source,haskell]
+----
+OdbcLiteral (A) OLTime "12:00:01.1"
+----
+
+a|
+[source,sql]
+----
+{ts '2000-01-01 12:00:01.1'}
+----
+
+a|
+[source,haskell]
+----
+OdbcLiteral (A) OLTimestamp "2000-01-01 12:00:01.1"
+----
+
+|===
+
+=== functions
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+{fn CHARACTER_LENGTH(string_exp)}
+----
+
+a|
+[source,haskell]
+----
+OdbcFunc (A)
+  (App (A) (Name (A) [Nmc "CHARACTER_LENGTH"])
+     [Identifier (A) (Name (A) [Nmc "string_exp"])])
+----
+
+a|
+[source,sql]
+----
+{fn EXTRACT(year from my_date)}
+----
+
+a|
+[source,haskell]
+----
+OdbcFunc (A)
+  (Extract (A) ExtractYear
+     (Identifier (A) (Name (A) [Nmc "my_date"])))
+----
+
+a|
+[source,sql]
+----
+{fn now()}
+----
+
+a|
+[source,haskell]
+----
+OdbcFunc (A) (App (A) (Name (A) [Nmc "now"]) [])
+----
+
+a|
+[source,sql]
+----
+{fn CONVERT('2000-01-01', SQL_DATE)}
+----
+
+a|
+[source,haskell]
+----
+OdbcFunc (A)
+  (App (A) (Name (A) [Nmc "CONVERT"])
+     [StringLit (A) "2000-01-01",
+      Identifier (A) (Name (A) [Nmc "SQL_DATE"])])
+----
+
+a|
+[source,sql]
+----
+{fn CONVERT({fn CURDATE()}, SQL_DATE)}
+----
+
+a|
+[source,haskell]
+----
+OdbcFunc (A)
+  (App (A) (Name (A) [Nmc "CONVERT"])
+     [OdbcFunc (A) (App (A) (Name (A) [Nmc "CURDATE"]) []),
+      Identifier (A) (Name (A) [Nmc "SQL_DATE"])])
+----
+
+|===
+
+=== outer join
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select * from {oj t1 left outer join t2 on true}
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+       selTref =
+         [OdbcTableRef (A)
+            (JoinTref (A) (Tref (A) (Name (A) [Nmc "t1"])) Unnatural LeftOuter
+               Nothing
+               (Tref (A) (Name (A) [Nmc "t2"]))
+               (Just (JoinOn (A) (BooleanLit (A) True))))],
+       selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+       selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+       selOption = []}
+----
+
+|===
+
+=== check parsing bugs
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select {fn CONVERT(cint,SQL_BIGINT)} from t;
+----
+
+a|
+[source,haskell]
+----
+Select{ann = A, selDistinct = All,
+       selSelectList =
+         SelectList (A)
+           [SelExp (A)
+              (OdbcFunc (A)
+                 (App (A) (Name (A) [Nmc "CONVERT"])
+                    [Identifier (A) (Name (A) [Nmc "cint"]),
+                     Identifier (A) (Name (A) [Nmc "SQL_BIGINT"])]))],
+       selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+       selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+       selLimit = Nothing, selOffset = Nothing, selOption = []}
+----
+
+|===
+
+=== outer join
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select * from {oj t1 left outer join t2 on true}
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList = SelectList (A) [SelExp (A) (Star (A))],
+           selTref =
+             [OdbcTableRef (A)
+                (JoinTref (A) (Tref (A) (Name (A) [Nmc "t1"])) Unnatural LeftOuter
+                   Nothing
+                   (Tref (A) (Name (A) [Nmc "t2"]))
+                   (Just (JoinOn (A) (BooleanLit (A) True))))],
+           selWhere = Nothing, selGroupBy = [], selHaving = Nothing,
+           selOrderBy = [], selLimit = Nothing, selOffset = Nothing,
+           selOption = []})]
+----
+
+|===
+
+=== check parsing bugs
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select {fn CONVERT(cint,SQL_BIGINT)} from t;
+----
+
+a|
+[source,haskell]
+----
+[QueryStatement (A)
+   (Select{ann = A, selDistinct = All,
+           selSelectList =
+             SelectList (A)
+               [SelExp (A)
+                  (OdbcFunc (A)
+                     (App (A) (Name (A) [Nmc "convert"])
+                        [Identifier (A) (Name (A) [Nmc "cint"]),
+                         Identifier (A) (Name (A) [Nmc "SQL_BIGINT"])]))],
+           selTref = [Tref (A) (Name (A) [Nmc "t"])], selWhere = Nothing,
+           selGroupBy = [], selHaving = Nothing, selOrderBy = [],
+           selLimit = Nothing, selOffset = Nothing, selOption = []})]
+----
+
+|===

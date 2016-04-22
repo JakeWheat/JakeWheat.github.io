@@ -1,0 +1,172 @@
+
+:toc:
+:toc-placement: macro
+:sectnums:
+:toclevels: 10
+:sectnumlevels: 10
+:source-highlighter: pygments
+
+= Quasiquote tests
+
+toc::[]
+
+ 
+  Pretty rough presentation, each example is a lets, with a pair of sql
+  quasiquotes: one with antiquotes, and one with the resultant sql without antiquotes.
+ 
+  The source this file is generated from is here:
+  [QuasiQuoteTests.lhs](https://github.com/JakeWheat/hssqlppp/blob/master/src-extra/tests/Database/HsSqlPpp/Tests/QuasiQuoteTests.lhs)
+  
+[cols="1"]
+|===
+a|
+[source,haskell]
+----
+let tableName = [sqlName\| my_table \|]
+    varname = [sqlNameComponent\| my_field \|]
+    typename = [sqlName\| text \|]
+  in
+  Stmt
+    [sqlStmt\|
+ 
+       create table $n(tableName) (
+         $m(varname) $n(typename)
+       );
+ 
+       \|]
+    [sqlStmt\|
+       create table my_table (
+         my_field text
+       );
+       \|]
+----
+
+a|
+[source,haskell]
+----
+let fnname = [sqlName\| my_function \|]
+    tablename = [sqlName\| my_table \|]
+    typename = [sqlName\| int \|]
+  in
+  Stmt
+    [sqlStmt\|
+ 
+    create function $n(fnname)() returns $n(typename) as $a$
+      select * from $n(tablename);
+    $a$ language sql stable;
+ 
+       \|]
+    [sqlStmt\|
+    create function my_function() returns int as $a$
+      select * from my_table;
+    $a$ language sql stable;
+       \|]
+----
+
+a|
+[source,haskell]
+----
+let fnname = [sqlName\|my_function\|] in
+  Stmt [sqlStmt\| drop function $n(fnname)();\|]
+    [sqlStmt\| drop function my_function();\|]
+----
+
+a|
+[source,haskell]
+----
+let expr = StringLit ea "testing" in
+  PgSqlStmt [pgsqlStmt\| return $e(expr); \|]
+    [pgsqlStmt\| return 'testing'; \|]
+----
+
+a|
+[source,haskell]
+----
+let expr = [sqlExpr\| 3 + 4 \|] in
+  PgSqlStmt [pgsqlStmt\| return $e(expr); \|]
+    [pgsqlStmt\| return 3 + 4; \|]
+----
+
+a|
+[source,haskell]
+----
+let triggername = [sqlNameComponent\|my_trigger\|]
+    tablename = [sqlName\|my_table\|]
+    opname = [sqlName\|my_function\|]
+  in
+  Stmt
+    [sqlStmt\|
+    create trigger $m(triggername)
+      after insert or update or delete on $n(tablename)
+      for each statement
+      execute procedure $n(opname)();
+              \|]
+    [sqlStmt\|
+    create trigger my_trigger
+      after insert or update or delete on my_table
+      for each statement
+      execute procedure my_function();
+              \|]
+----
+
+a|
+[source,haskell]
+----
+let tablename = [sqlName\|lotsastuff\|] in
+  Expr [sqlExpr\|(select count(*) from $n(tablename))\|]
+    [sqlExpr\|(select count(*) from lotsastuff)\|]
+----
+
+a|
+[source,haskell]
+----
+let trigname = [sqlNameComponent\|tbl_trig1\|]
+    tablename = [sqlName\|tbl\|]
+    tevent = TUpdate
+    fn = [sqlName\|checkit\|]
+  in
+  Stmt
+    [sqlStmt\|
+       create trigger $m(trigname)
+          after $t(tevent) on $n(tablename)
+          for each row
+          execute procedure $n(fn)();
+              \|]
+    [sqlStmt\|
+       create trigger tbl_trig1
+          after update on tbl
+          for each row
+          execute procedure checkit();
+              \|]
+----
+
+a|
+[source,haskell]
+----
+let x = [sqlName\| fnname \|] in
+  Expr [sqlExpr\| $n(x)('a') \|] [sqlExpr\| fnname('a') \|]
+----
+
+a|
+[source,haskell]
+----
+let x = StringLit ea "splicedstring" in
+  Expr [sqlExpr\| $e(x) \|] [sqlExpr\| 'splicedstring' \|]
+----
+
+a|
+[source,haskell]
+----
+let x = [sqlName\|splicedIdentifier\|] in
+  Expr [sqlExpr\| $n(x) \|] [sqlExpr\| splicedIdentifier \|]
+----
+
+a|
+[source,haskell]
+----
+let errMsg = "string splice" in
+  PgSqlStmt [pgsqlStmt\| raise exception $s(errMsg); \|]
+    [pgsqlStmt\| raise exception 'string splice'; \|]
+----
+
+|===

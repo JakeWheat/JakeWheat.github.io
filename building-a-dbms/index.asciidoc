@@ -15,9 +15,10 @@ need to build a minimal sql dbms?
 
 This is in addition to the existing:
 
-* sql compiler
+* partial? sql compiler
 * sql statement engine
 * sql transactional storage engine
+* catalog
 * tests from the transaction and queries projects
 
 What about SQL things that haven't been implemented yet?
@@ -27,3 +28,22 @@ domains, cursors, merge, schemas and databases, structured types,
 assertion, sequence (encodings, collations: probably already done in
 uq, dynamic sql, connection management?, session management?,
 diagnostics?
+
+Here is a nice document about how to implement a dbms:
+
+http://coding-geek.com/how-databases-work/
+
+== something
+
+1. build an sql dbms with a lot of features (queries, transactions,
+   concurrency, etc) written in a reference/model implementation style
+
+2. demostrate a medium size haskell codebase: have a nice pure
+   compiler, and then lots of io to do storage and networking, and
+   multi user stuff too
+
+3. show some of the development infrastructure in this sized project:
+   comments, documentation, testing, build system
+
+the sql-dbms-2 might be able to demonstrate heavy optimisation,
+profiling, benchmarking, etc.

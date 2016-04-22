@@ -1,0 +1,4872 @@
+
+:toc:
+:toc-placement: macro
+:sectnums:
+:toclevels: 10
+:sectnumlevels: 10
+:source-highlighter: pygments
+
+= Typecheck tests
+
+toc::[]
+
+ 
+  The type checking examples have the sql on the left and the result of type checking
+  on the right. Different sections are using different tests:
+ 
+  * parse and type check expression, return either type error or type
+  * parse and type check a list of statements, return either type error or the top level statement type annotation
+  * update the catalog, then check a list of statements
+  * parse and type check some ddl statements, return the list of catalog updates they generate
+ 
+  The source this file is generated from is here:
+  [TypeCheckTests.lhs](https://github.com/JakeWheat/hssqlppp/blob/master/src-extra/tests/Database/HsSqlPpp/Tests/TypeCheckTests.lhs)
+  
+
+== scalarExprs
+
+=== simple literals
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+true
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "bool")
+----
+
+a|
+[source,sql]
+----
+false
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "bool")
+----
+
+a|
+[source,sql]
+----
+41
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+2147483648
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int8")
+----
+
+a|
+[source,sql]
+----
+9223372036854775808
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "numeric")
+----
+
+a|
+[source,sql]
+----
+1.6
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "numeric")
+----
+
+a|
+[source,sql]
+----
+'test'
+----
+
+a|
+[source,haskell]
+----
+Right UnknownType
+----
+
+a|
+[source,sql]
+----
+null
+----
+
+a|
+[source,haskell]
+----
+Right UnknownType
+----
+
+|===
+
+=== other simple scalexprs
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+'1'::int
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+date '2000-01-01'
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "date")
+----
+
+a|
+[source,sql]
+----
+interval '90' day
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "interval")
+----
+
+a|
+[source,sql]
+----
+?
+----
+
+a|
+[source,haskell]
+----
+Right UnknownType
+----
+
+|===
+
+=== function application
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+length('test')
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+-5
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+|===
+
+=== function application like
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+extract(year from date '2000-01-01')
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+extract(year from 3)
+----
+
+a|
+[source,haskell]
+----
+Left [NoMatchingOperator "extract" [ScalarType "int4"]]
+----
+
+|===
+
+== simpleQueryExpr
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a,b from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a as c,b as d from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t.a,t.b from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select u.* from t u
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from t u(c,d)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select u.a,u.b from t u
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select count(*) from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("count",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select * from t union select * from u
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from t union select * from u
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a,b from t union select a from u
+----
+
+a|
+[source,haskell]
+----
+Left
+  [IncompatibleUnionTypes
+     (CompositeType
+        [("a",
+          TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                    teScale = Nothing, teNullable = True}),
+         ("b",
+          TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                    teScale = Nothing, teNullable = True})])
+     (CompositeType
+        [("a",
+          TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                    teScale = Nothing, teNullable = True})])]
+----
+
+a|
+[source,sql]
+----
+select a,count(*) over () as r from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("r",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+values (1)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("values%0",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+values (1),(2)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("values%0",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+values (1,1.5),(2,2.5)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("values%0",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("values%1",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+values (1.5),(1)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("values%0",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+|===
+
+== joins
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select * from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select b from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select c from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select d from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a,b,c,d from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from (select 1 as a, 2 as b) a
+  cross join (select true as c, 4.5 as d) b;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("b",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("c",
+       TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("d",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select * from (select 1 as a, 2 as b) a
+  inner join (select true as c, 4.5 as d) b on true;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("b",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("c",
+       TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("d",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select * from (select 1 as a, 2 as b) a
+  inner join (select 1 as a, 4.5 as d) b using(a);
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("b",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("d",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select * from (select 1 as a, 2 as b) a
+  natural inner join (select 1 as a, 4.5 as d) b;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("b",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("d",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select * from (select 2 as b, 1 as a) a
+ natural inner join (select 4.5 as d, 1 as a) b;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("b",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("d",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select * from (select 1 as a1, 2 as b) a
+ natural inner join (select true as a1, 4.5 as d) b;
+----
+
+a|
+[source,haskell]
+----
+Left [IncompatibleTypeSet [ScalarType "int4", ScalarType "bool"]]
+----
+
+a|
+[source,sql]
+----
+select * from (select 1 as a1, 2 as b) a
+ natural inner join (select true as a1, 4.5 as d) b;
+----
+
+a|
+[source,haskell]
+----
+Left [IncompatibleTypeSet [ScalarType "int4", ScalarType "bool"]]
+----
+
+a|
+[source,sql]
+----
+select * from (select 1 as a1) a, (select 2 as a2) b;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a1",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("a2",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select * from (select 1 as a1) a, (select 2 as a1) b;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a1",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("a1",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select a1 from (select 1 as a1) a,  (select 2 as a1) b;
+----
+
+a|
+[source,haskell]
+----
+Left [AmbiguousIdentifier "a1"]
+----
+
+a|
+[source,sql]
+----
+select a from t0 inner join t1 on t0.a = t1.c;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select x.a from (select * from t0) x 
+ inner join t1 Y on X.a = Y.C
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+|===
+
+== trefIdentifiers
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select * from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t0.* from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t1.* from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select *, t0.*, t1.* from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t0.* from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t1.* from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select *, t0.*, t1.* from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t0.a from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t1.a from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a from t0 cross join t1
+----
+
+a|
+[source,haskell]
+----
+Left [AmbiguousIdentifier "a"]
+----
+
+a|
+[source,sql]
+----
+select * from t0 natural inner join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t0.* from t0 natural inner join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t1.* from t0 natural inner join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select *, t0.*, t1.* from t0 natural inner join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t0.a from t0 natural inner join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select t1.a from t0 natural inner join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a from t0 natural inner join t1
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+|===
+
+== rewrites
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a,b from t
+----
+
+a|
+[source,haskell]
+----
+"select a as a,b as b from t"
+----
+
+a|
+[source,sql]
+----
+select * from t
+----
+
+a|
+[source,haskell]
+----
+"select t.a,t.b from t"
+----
+
+a|
+[source,sql]
+----
+select b,count(a) from t group by b
+----
+
+a|
+[source,haskell]
+----
+"select t.b,count(t.a) from t group by t.b"
+----
+
+a|
+[source,sql]
+----
+select * from t where a > 3
+----
+
+a|
+[source,haskell]
+----
+"select * from t where t.a > 3"
+----
+
+a|
+[source,sql]
+----
+select * from t u where a > 3
+----
+
+a|
+[source,haskell]
+----
+"select * from t u where u.a > 3"
+----
+
+a|
+[source,sql]
+----
+select * from t order by a
+----
+
+a|
+[source,haskell]
+----
+"select * from t order by t.a"
+----
+
+a|
+[source,sql]
+----
+select * from t
+----
+
+a|
+[source,haskell]
+----
+"select * from t as t(a,b)"
+----
+
+a|
+[source,sql]
+----
+select * from (select a,b from t) u
+----
+
+a|
+[source,haskell]
+----
+"select * from (select a,b from t t(a,b)) u(a,b)"
+----
+
+a|
+[source,sql]
+----
+select * from t cross join u
+----
+
+a|
+[source,haskell]
+----
+"select * from t t(a,b) cross join u u(c,d)"
+----
+
+a|
+[source,sql]
+----
+select * from t cross join u t
+----
+
+a|
+[source,haskell]
+----
+"select * from (t t(a,b) cross join u t(c,d)) t(a,b,c,d)"
+----
+
+a|
+[source,sql]
+----
+select a,b from t
+----
+
+a|
+[source,haskell]
+----
+"select t.a,t.b from t"
+----
+
+a|
+[source,sql]
+----
+/*thisit*/select * from t
+----
+
+a|
+[source,haskell]
+----
+"select t.a as a,t.b as b from t as t(a,b)"
+----
+
+|===
+
+== case expressions
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+case
+ when true then 1
+end
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+case
+ when 1=2 then 'stuff'
+ when 2=3 then 'blah'
+ else 'test'
+end
+----
+
+a|
+[source,haskell]
+----
+Right UnknownType
+----
+
+a|
+[source,sql]
+----
+case
+ when 1=2 then 'stuff'
+ when 2=3 then 'blah'
+ else 'test'::text
+end
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "text")
+----
+
+a|
+[source,sql]
+----
+case
+ when 1=2 then 'stuff'
+ when true=3 then 'blah'
+ else 'test'
+end
+----
+
+a|
+[source,haskell]
+----
+Left
+  [NoMatchingOperator "=" [ScalarType "bool", ScalarType "int4"]]
+----
+
+a|
+[source,sql]
+----
+case
+ when 1=2 then true
+ when 2=3 then false
+ else 1
+end
+----
+
+a|
+[source,haskell]
+----
+Left
+  [IncompatibleTypeSet
+     [ScalarType "bool", ScalarType "bool", ScalarType "int4"]]
+----
+
+a|
+[source,sql]
+----
+case
+ when 1=2 then false
+ when 2=3 then 1
+ else true
+end
+----
+
+a|
+[source,haskell]
+----
+Left
+  [IncompatibleTypeSet
+     [ScalarType "bool", ScalarType "int4", ScalarType "bool"]]
+----
+
+a|
+[source,sql]
+----
+case 1 when 2 then 3 else 4 end
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+case 1 when true then 3 else 4 end
+----
+
+a|
+[source,haskell]
+----
+Left [IncompatibleTypeSet [ScalarType "int4", ScalarType "bool"]]
+----
+
+a|
+[source,sql]
+----
+case 1 when 2 then true else false end
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "bool")
+----
+
+a|
+[source,sql]
+----
+case 1 when 2 then 3 else false end
+----
+
+a|
+[source,haskell]
+----
+Left [IncompatibleTypeSet [ScalarType "int4", ScalarType "bool"]]
+----
+
+|===
+
+== tpch
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+
+
+select
+        l_returnflag,
+        l_linestatus,
+        sum(l_quantity) as sum_qty,
+        sum(l_extendedprice) as sum_base_price,
+        sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+        sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+        avg(l_quantity) as avg_qty,
+        avg(l_extendedprice) as avg_price,
+        avg(l_discount) as avg_disc,
+        count(*) as count_order
+from
+        lineitem
+where
+        l_shipdate <= date '1998-12-01' - interval '63' day (3)
+group by
+        l_returnflag,
+        l_linestatus
+order by
+        l_returnflag,
+        l_linestatus;
+--set rowcount -1
+--go
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("l_returnflag",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("l_linestatus",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("sum_qty",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("sum_base_price",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("sum_disc_price",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("sum_charge",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("avg_qty",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("avg_price",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("avg_disc",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("count_order",
+       TypeExtra{teType = ScalarType "bigint", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+select
+        s_acctbal,
+        s_name,
+        n_name,
+        p_partkey,
+        p_mfgr,
+        s_address,
+        s_phone,
+        s_comment
+from
+        part,
+        supplier,
+        partsupp,
+        nation,
+        region
+where
+        p_partkey = ps_partkey
+        and s_suppkey = ps_suppkey
+        and p_size = 15
+        and p_type like '%BRASS'
+        and s_nationkey = n_nationkey
+        and n_regionkey = r_regionkey
+        and r_name = 'EUROPE'
+        and ps_supplycost = (
+                select
+                        min(ps_supplycost)
+                from
+                        partsupp,
+                        supplier,
+                        nation,
+                        region
+                where
+                        p_partkey = ps_partkey
+                        and s_suppkey = ps_suppkey
+                        and s_nationkey = n_nationkey
+                        and n_regionkey = r_regionkey
+                        and r_name = 'EUROPE'
+        )
+order by
+        s_acctbal desc,
+        n_name,
+        s_name,
+        p_partkey;
+--set rowcount 100
+--go
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("s_acctbal",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("s_name",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("n_name",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("p_partkey",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("p_mfgr",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("s_address",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("s_phone",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("s_comment",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+select
+        l_orderkey,
+        sum(l_extendedprice * (1 - l_discount)) as revenue,
+        o_orderdate,
+        o_shippriority
+from
+        customer,
+        orders,
+        lineitem
+where
+        c_mktsegment = 'MACHINERY'
+        and c_custkey = o_custkey
+        and l_orderkey = o_orderkey
+        and o_orderdate < date '1995-03-21'
+        and l_shipdate > date '1995-03-21'
+group by
+        l_orderkey,
+        o_orderdate,
+        o_shippriority
+order by
+        revenue desc,
+        o_orderdate;
+--set rowcount 10
+--go
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("l_orderkey",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("revenue",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("o_orderdate",
+       TypeExtra{teType = ScalarType "date", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("o_shippriority",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+select
+        o_orderpriority,
+        count(*) as order_count
+from
+        orders
+where
+        o_orderdate >= date '1996-03-01'
+        and o_orderdate < date '1996-03-01' + interval '3' month
+        and exists (
+                select
+                        *
+                from
+                        lineitem
+                where
+                        l_orderkey = o_orderkey
+                        and l_commitdate < l_receiptdate
+        )
+group by
+        o_orderpriority
+order by
+        o_orderpriority;
+--set rowcount -1
+--go
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("o_orderpriority",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("order_count",
+       TypeExtra{teType = ScalarType "bigint", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+
+
+select
+        n_name,
+        sum(l_extendedprice * (1 - l_discount)) as revenue
+from
+        customer,
+        orders,
+        lineitem,
+        supplier,
+        nation,
+        region
+where
+        c_custkey = o_custkey
+        and l_orderkey = o_orderkey
+        and l_suppkey = s_suppkey
+        and c_nationkey = s_nationkey
+        and s_nationkey = n_nationkey
+        and n_regionkey = r_regionkey
+        and r_name = 'EUROPE'
+        and o_orderdate >= date '1997-01-01'
+        and o_orderdate < date '1997-01-01' + interval '1' year
+group by
+        n_name
+order by
+        revenue desc;
+--set rowcount -1
+--go
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("n_name",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("revenue",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+select
+        sum(l_extendedprice * l_discount) as revenue
+from
+        lineitem
+where
+        l_shipdate >= date '1997-01-01'
+        and l_shipdate < date '1997-01-01' + interval '1' year
+        and l_discount between 0.07 - 0.01 and 0.07 + 0.01
+        and l_quantity < 24;
+--set rowcount -1
+--go
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("revenue",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+select
+        supp_nation,
+        cust_nation,
+        l_year,
+        sum(volume) as revenue
+from
+        (
+                select
+                        n1.n_name as supp_nation,
+                        n2.n_name as cust_nation,
+                        extract(year from l_shipdate) as l_year,
+                        l_extendedprice * (1 - l_discount) as volume
+                from
+                        supplier,
+                        lineitem,
+                        orders,
+                        customer,
+                        nation n1,
+                        nation n2
+                where
+                        s_suppkey = l_suppkey
+                        and o_orderkey = l_orderkey
+                        and c_custkey = o_custkey
+                        and s_nationkey = n1.n_nationkey
+                        and c_nationkey = n2.n_nationkey
+                        and (
+                                (n1.n_name = 'PERU' and n2.n_name = 'IRAQ')
+                                or (n1.n_name = 'IRAQ' and n2.n_name = 'PERU')
+                        )
+                        and l_shipdate between date '1995-01-01' and date '1996-12-31'
+        ) as shipping
+group by
+        supp_nation,
+        cust_nation,
+        l_year
+order by
+        supp_nation,
+        cust_nation,
+        l_year;
+--set rowcount -1
+--go
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("supp_nation",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("cust_nation",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("l_year",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("revenue",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+select
+        o_year,
+        sum(case
+                when nation = 'IRAQ' then volume
+                else 0
+        end) / sum(volume) as mkt_share
+from
+        (
+                select
+                        extract(year from o_orderdate) as o_year,
+                        l_extendedprice * (1 - l_discount) as volume,
+                        n2.n_name as nation
+                from
+                        part,
+                        supplier,
+                        lineitem,
+                        orders,
+                        customer,
+                        nation n1,
+                        nation n2,
+                        region
+                where
+                        p_partkey = l_partkey
+                        and s_suppkey = l_suppkey
+                        and l_orderkey = o_orderkey
+                        and o_custkey = c_custkey
+                        and c_nationkey = n1.n_nationkey
+                        and n1.n_regionkey = r_regionkey
+                        and r_name = 'MIDDLE EAST'
+                        and s_nationkey = n2.n_nationkey
+                        and o_orderdate between date '1995-01-01' and date '1996-12-31'
+                        and p_type = 'STANDARD ANODIZED BRASS'
+        ) as all_nations
+group by
+        o_year
+order by
+        o_year;
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("o_year",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("mkt_share",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        nation,
+        o_year,
+        sum(amount) as sum_profit
+from
+        (
+                select
+                        n_name as nation,
+                        extract(year from o_orderdate) as o_year,
+                        l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+                from
+                        part,
+                        supplier,
+                        lineitem,
+                        partsupp,
+                        orders,
+                        nation
+                where
+                        s_suppkey = l_suppkey
+                        and ps_suppkey = l_suppkey
+                        and ps_partkey = l_partkey
+                        and p_partkey = l_partkey
+                        and o_orderkey = l_orderkey
+                        and s_nationkey = n_nationkey
+                        and p_name like '%antique%'
+        ) as profit
+group by
+        nation,
+        o_year
+order by
+        nation,
+        o_year desc;
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("nation",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("o_year",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("sum_profit",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        c_custkey,
+        c_name,
+        sum(l_extendedprice * (1 - l_discount)) as revenue,
+        c_acctbal,
+        n_name,
+        c_address,
+        c_phone,
+        c_comment
+from
+        customer,
+        orders,
+        lineitem,
+        nation
+where
+        c_custkey = o_custkey
+        and l_orderkey = o_orderkey
+        and o_orderdate >= date '1993-12-01'
+        and o_orderdate < date '1993-12-01' + interval '3' month
+        and l_returnflag = 'R'
+        and c_nationkey = n_nationkey
+group by
+        c_custkey,
+        c_name,
+        c_acctbal,
+        c_phone,
+        n_name,
+        c_address,
+        c_comment
+order by
+        revenue desc;
+--set rowcount 20
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("c_custkey",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c_name",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("revenue",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c_acctbal",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("n_name",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c_address",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c_phone",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c_comment",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        ps_partkey,
+        sum(ps_supplycost * ps_availqty) as value
+from
+        partsupp,
+        supplier,
+        nation
+where
+        ps_suppkey = s_suppkey
+        and s_nationkey = n_nationkey
+        and n_name = 'CHINA'
+group by
+        ps_partkey having
+                sum(ps_supplycost * ps_availqty) > (
+                        select
+                                sum(ps_supplycost * ps_availqty) * 0.0001000000
+                        from
+                                partsupp,
+                                supplier,
+                                nation
+                        where
+                                ps_suppkey = s_suppkey
+                                and s_nationkey = n_nationkey
+                                and n_name = 'CHINA'
+                )
+order by
+        value desc;
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("ps_partkey",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("value",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        l_shipmode,
+        sum(case
+                when o_orderpriority = '1-URGENT'
+                        or o_orderpriority = '2-HIGH'
+                        then 1
+                else 0
+        end) as high_line_count,
+        sum(case
+                when o_orderpriority <> '1-URGENT'
+                        and o_orderpriority <> '2-HIGH'
+                        then 1
+                else 0
+        end) as low_line_count
+from
+        orders,
+        lineitem
+where
+        o_orderkey = l_orderkey
+        and l_shipmode in ('AIR', 'RAIL')
+        and l_commitdate < l_receiptdate
+        and l_shipdate < l_commitdate
+        and l_receiptdate >= date '1994-01-01'
+        and l_receiptdate < date '1994-01-01' + interval '1' year
+group by
+        l_shipmode
+order by
+        l_shipmode;
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("l_shipmode",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("high_line_count",
+       TypeExtra{teType = ScalarType "bigint", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("low_line_count",
+       TypeExtra{teType = ScalarType "bigint", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        c_count,
+        count(*) as custdist
+from
+        (
+                select
+                        c_custkey,
+                        count(o_orderkey)
+                from
+                        customer left outer join orders on
+                                c_custkey = o_custkey
+                                and o_comment not like '%pending%requests%'
+                group by
+                        c_custkey
+        ) as c_orders (c_custkey, c_count)
+group by
+        c_count
+order by
+        custdist desc,
+        c_count desc;
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("c_count",
+       TypeExtra{teType = ScalarType "bigint", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("custdist",
+       TypeExtra{teType = ScalarType "bigint", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+select
+        100.00 * sum(case
+                when p_type like 'PROMO%'
+                        then l_extendedprice * (1 - l_discount)
+                else 0
+        end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue
+from
+        lineitem,
+        part
+where
+        l_partkey = p_partkey
+        and l_shipdate >= date '1994-12-01'
+        and l_shipdate < date '1994-12-01' + interval '1' month;
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("promo_revenue",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        p_brand,
+        p_type,
+        p_size,
+        count(distinct ps_suppkey) as supplier_cnt
+from
+        partsupp,
+        part
+where
+        p_partkey = ps_partkey
+        and p_brand <> 'Brand#15'
+        and p_type not like 'MEDIUM BURNISHED%'
+        and p_size in (39, 26, 18, 45, 19, 1, 3, 9)
+        and ps_suppkey not in (
+                select
+                        s_suppkey
+                from
+                        supplier
+                where
+                        s_comment like '%Customer%Complaints%'
+        )
+group by
+        p_brand,
+        p_type,
+        p_size
+order by
+        supplier_cnt desc,
+        p_brand,
+        p_type,
+        p_size;
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("p_brand",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("p_type",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("p_size",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("supplier_cnt",
+       TypeExtra{teType = ScalarType "bigint", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        sum(l_extendedprice) / 7.0 as avg_yearly
+from
+        lineitem,
+        part
+where
+        p_partkey = l_partkey
+        and p_brand = 'Brand#52'
+        and p_container = 'JUMBO CAN'
+        and l_quantity < (
+                select
+                        0.2 * avg(l_quantity)
+                from
+                        lineitem
+                where
+                        l_partkey = p_partkey
+        );
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("avg_yearly",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        c_name,
+        c_custkey,
+        o_orderkey,
+        o_orderdate,
+        o_totalprice,
+        sum(l_quantity)
+from
+        customer,
+        orders,
+        lineitem
+where
+        o_orderkey in (
+                select
+                        l_orderkey
+                from
+                        lineitem
+                group by
+                        l_orderkey having
+                                sum(l_quantity) > 313
+        )
+        and c_custkey = o_custkey
+        and o_orderkey = l_orderkey
+group by
+        c_name,
+        c_custkey,
+        o_orderkey,
+        o_orderdate,
+        o_totalprice
+order by
+        o_totalprice desc,
+        o_orderdate;
+--set rowcount 100
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("c_name",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c_custkey",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("o_orderkey",
+       TypeExtra{teType = ScalarType "int", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("o_orderdate",
+       TypeExtra{teType = ScalarType "date", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("o_totalprice",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("sum",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        sum(l_extendedprice* (1 - l_discount)) as revenue
+from
+        lineitem,
+        part
+where
+        (
+                p_partkey = l_partkey
+                and p_brand = 'Brand#43'
+                and p_container in ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+                and l_quantity >= 3 and l_quantity <= 3 + 10
+                and p_size between 1 and 5
+                and l_shipmode in ('AIR', 'AIR REG')
+                and l_shipinstruct = 'DELIVER IN PERSON'
+        )
+        or
+        (
+                p_partkey = l_partkey
+                and p_brand = 'Brand#25'
+                and p_container in ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+                and l_quantity >= 10 and l_quantity <= 10 + 10
+                and p_size between 1 and 10
+                and l_shipmode in ('AIR', 'AIR REG')
+                and l_shipinstruct = 'DELIVER IN PERSON'
+        )
+        or
+        (
+                p_partkey = l_partkey
+                and p_brand = 'Brand#24'
+                and p_container in ('LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+                and l_quantity >= 22 and l_quantity <= 22 + 10
+                and p_size between 1 and 15
+                and l_shipmode in ('AIR', 'AIR REG')
+                and l_shipinstruct = 'DELIVER IN PERSON'
+        );
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("revenue",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        s_name,
+        s_address
+from
+        supplier,
+        nation
+where
+        s_suppkey in (
+                select
+                        ps_suppkey
+                from
+                        partsupp
+                where
+                        ps_partkey in (
+                                select
+                                        p_partkey
+                                from
+                                        part
+                                where
+                                        p_name like 'lime%'
+                        )
+                        and ps_availqty > (
+                                select
+                                        0.5 * sum(l_quantity)
+                                from
+                                        lineitem
+                                where
+                                        l_partkey = ps_partkey
+                                        and l_suppkey = ps_suppkey
+                                        and l_shipdate >= date '1994-01-01'
+                                        and l_shipdate < date '1994-01-01' + interval '1' year
+                        )
+        )
+        and s_nationkey = n_nationkey
+        and n_name = 'VIETNAM'
+order by
+        s_name;
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("s_name",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("s_address",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        s_name,
+        count(*) as numwait
+from
+        supplier,
+        lineitem l1,
+        orders,
+        nation
+where
+        s_suppkey = l1.l_suppkey
+        and o_orderkey = l1.l_orderkey
+        and o_orderstatus = 'F'
+        and l1.l_receiptdate > l1.l_commitdate
+        and exists (
+                select
+                        *
+                from
+                        lineitem l2
+                where
+                        l2.l_orderkey = l1.l_orderkey
+                        and l2.l_suppkey <> l1.l_suppkey
+        )
+        and not exists (
+                select
+                        *
+                from
+                        lineitem l3
+                where
+                        l3.l_orderkey = l1.l_orderkey
+                        and l3.l_suppkey <> l1.l_suppkey
+                        and l3.l_receiptdate > l3.l_commitdate
+        )
+        and s_nationkey = n_nationkey
+        and n_name = 'INDIA'
+group by
+        s_name
+order by
+        numwait desc,
+        s_name;
+--set rowcount 100
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("s_name",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("numwait",
+       TypeExtra{teType = ScalarType "bigint", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+
+
+
+
+select
+        cntrycode,
+        count(*) as numcust,
+        sum(c_acctbal) as totacctbal
+from
+        (
+                select
+                        substring(c_phone from 1 for 2) as cntrycode,
+                        c_acctbal
+                from
+                        customer
+                where
+                        substring(c_phone from 1 for 2) in
+                                ('41', '28', '39', '21', '24', '29', '44')
+                        and c_acctbal > (
+                                select
+                                        avg(c_acctbal)
+                                from
+                                        customer
+                                where
+                                        c_acctbal > 0.00
+                                        and substring(c_phone from 1 for 2) in
+                                                ('41', '28', '39', '21', '24', '29', '44')
+                        )
+                        and not exists (
+                                select
+                                        *
+                                from
+                                        orders
+                                where
+                                        o_custkey = c_custkey
+                        )
+        ) as custsale
+group by
+        cntrycode
+order by
+        cntrycode;
+--set rowcount -1
+--go
+
+
+                                      
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("cntrycode",
+       TypeExtra{teType = ScalarType "char", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("numcust",
+       TypeExtra{teType = ScalarType "bigint", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("totacctbal",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+|===
+
+== impCasts
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+'1' + 2
+----
+
+a|
+[source,haskell]
+----
+"'1' :: int4 + 2"
+----
+
+a|
+[source,sql]
+----
+1.5 :: numeric between 1.1 and 2
+----
+
+a|
+[source,haskell]
+----
+"1.5 :: numeric between 1.1 and 2 :: numeric"
+----
+
+a|
+[source,sql]
+----
+'aa'::text = 'bb'
+----
+
+a|
+[source,haskell]
+----
+"'aa'::text = 'bb'::text"
+----
+
+a|
+[source,sql]
+----
+cast(1 as int4) + cast('2' as varchar)
+----
+
+a|
+[source,haskell]
+----
+"cast(1 as int4) + cast(cast('2' as varchar) as int4)"
+----
+
+|===
+
+== tsql
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select datediff(hour,a,b) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a+b as a from t /* junk it */
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int2", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select datepart(day,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select datepart(month,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select datepart(year,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select datepart(hour,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select datepart(day,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select datepart(month,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select datepart(year,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select datepart(hour,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select dateadd(day,5,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "date", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select dateadd(month,5,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "date", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select dateadd(year,5,a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "date", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select dateadd(day,5,'1992-001-01') as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "timestamp", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select dateadd(month,5,'1992-001-01') as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "timestamp", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select dateadd(year,5,'1992-001-01') as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "timestamp", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select sum(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select sum(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select sum(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select sum(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select sum(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "float8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select sum(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "float8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select avg(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select avg(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select avg(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select avg(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select avg(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "float8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select avg(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "float8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select count(*) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select count_big(*) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select trunc(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "timestamp", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select trunc(a) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "timestamp", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a from t where  trunc(a) between '2001-01-01 00:00:00' and '2001-04-01 00:00:00'
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "date", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select decode(a,0,0,1,5,2,6,3,7,10) as a from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+|===
+
+== issues
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select t.a as "Quoted" from t as t(a,b);
+----
+
+a|
+[source,haskell]
+----
+"select t.a as \"Quoted\" from t as t(a,b);"
+----
+
+a|
+[source,sql]
+----
+select a from t as t(a,b);
+----
+
+a|
+[source,haskell]
+----
+"select t.a as a from t as t(a,b);"
+----
+
+a|
+[source,sql]
+----
+select A from t as t(a,b);
+----
+
+a|
+[source,haskell]
+----
+"select t.A as A from t as t(a,b);"
+----
+
+a|
+[source,sql]
+----
+select T.A from t as t(a,b);
+----
+
+a|
+[source,haskell]
+----
+"select T.A as A from t as t(a,b);"
+----
+
+a|
+[source,sql]
+----
+select tbl.a as a from t as tbl(a,b);
+----
+
+a|
+[source,haskell]
+----
+"select tbl.a as a from t as tbl(a,b);"
+----
+
+|===
+
+== aggregates
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a,b,count(c) as c from t group by a,b
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select a,b,count(c) as c from t group by cube(a,b)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+|===
+
+== PrecisionAndNullable
+
+=== ScalarExprs
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+an
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+             teScale = Nothing, teNullable = True})
+----
+
+a|
+[source,sql]
+----
+a
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+cn
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "char", tePrecision = Just 4,
+             teScale = Nothing, teNullable = True})
+----
+
+a|
+[source,sql]
+----
+c
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "char", tePrecision = Just 3,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+vn
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "varchar", tePrecision = Just 7,
+             teScale = Nothing, teNullable = True})
+----
+
+a|
+[source,sql]
+----
+v
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "varchar", tePrecision = Just 6,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+dn
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "numeric", tePrecision = Just 10,
+             teScale = Just 2, teNullable = True})
+----
+
+a|
+[source,sql]
+----
+d
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "numeric", tePrecision = Just 9,
+             teScale = Just 3, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+v\|\|vn
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "text", tePrecision = Just 13,
+             teScale = Nothing, teNullable = True})
+----
+
+a|
+[source,sql]
+----
+v\|\|'test12'
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "text", tePrecision = Just 12,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+v=vn
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+             teScale = Nothing, teNullable = True})
+----
+
+a|
+[source,sql]
+----
+isnull(an,a)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+isnull(an,an)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+             teScale = Nothing, teNullable = True})
+----
+
+a|
+[source,sql]
+----
+a is null
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+a is not null
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+an is null
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+an is not null
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+coalesce(an,dn,a)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "numeric", tePrecision = Just 10,
+             teScale = Just 2, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+case vn when v then a when c then an end
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+             teScale = Nothing, teNullable = True})
+----
+
+a|
+[source,sql]
+----
+case when an is null then a when v is null then an else dn end
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "numeric", tePrecision = Just 10,
+             teScale = Just 2, teNullable = True})
+----
+
+a|
+[source,sql]
+----
+dateadd(year,1,'1997/01/01')
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "timestamp", tePrecision = Nothing,
+             teScale = Nothing, teNullable = False})
+----
+
+a|
+[source,sql]
+----
+len(v)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+             teScale = Nothing, teNullable = False})
+----
+
+|===
+
+=== PrecisionAndNullabletcQueryExpr
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a,b from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Just 7,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select nullif(a,b) as ni from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("ni",
+       TypeExtra{teType = ScalarType "numeric", tePrecision = Just 6,
+                 teScale = Just 2, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "float8", tePrecision = Just 10,
+                 teScale = Just 2, teNullable = False}),
+      ("b",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Just 12,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from t1 union all select * from t2
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "float8", tePrecision = Just 10,
+                 teScale = Just 2, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Just 6,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select case when a is null then b else c end as cs from t u
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("cs",
+       TypeExtra{teType = ScalarType "varchar", tePrecision = Just 15,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from t u(c,d)
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select u.a,u.b from t u
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select count(*) from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("count",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select * from t union select * from u
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from t union select * from u
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a,count(*) over () as r from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("r",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select d from t where d > dateadd(year,1,'1997-01-01')
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("d",
+       TypeExtra{teType = ScalarType "date", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select t.a from t inner join tt on t.a=tt.v
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select tv from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("tv",
+       TypeExtra{teType = ScalarType "nvarchar", tePrecision = Just 15,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select * from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("tv",
+       TypeExtra{teType = ScalarType "nvarchar", tePrecision = Just 15,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select substring(tv,0,2) from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("substring",
+       TypeExtra{teType = ScalarType "nvarchar", tePrecision = Just 15,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+select len(tv) from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("len",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+SELECT tv LIKE '%foo' FROM t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("?column?",
+       TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+SELECT tv=tv1 FROM t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("?column?",
+       TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+SELECT tv='foo' FROM t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("?column?",
+       TypeExtra{teType = ScalarType "bool", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+|===
+
+== insertQueryExpr
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+insert into t2(b) select a from t1;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+insert into t2(b) select a from t1;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+insert into t2(b) select a from t1;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+insert into t2 select a from t1;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+insert into t2 select a from t1 where a>0;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+a|
+[source,sql]
+----
+insert into t2(b) values (1);
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("values%0",
+       TypeExtra{teType = ScalarType "int8", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+insert into t2(b) values (1);
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("values%0",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+insert into tt select datepart(day,d) from t;
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("datepart",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False})])
+----
+
+|===
+
+== odbcTypechecking
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+{d '2000-01-01'}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "date")
+----
+
+a|
+[source,sql]
+----
+{t '12:00:01.1'}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "time")
+----
+
+a|
+[source,sql]
+----
+{ts '2000-01-01 12:00:01.1'}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "timestamp")
+----
+
+a|
+[source,sql]
+----
+{fn ascii('test')}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+{fn extract(hour from date 'dt')}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+(extract(hour from date 'dt'))
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+{fn CONVERT(3, SQL_BIGINT)}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int8")
+----
+
+a|
+[source,sql]
+----
+{fn CONVERT(3, SQL_FLOAT)}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "float8")
+----
+
+a|
+[source,sql]
+----
+{fn timestampadd(SQL_TSI_SECOND,3, {t '12:00:00'})}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "time")
+----
+
+a|
+[source,sql]
+----
+{fn timestampadd(SQL_TSI_MINUTE,3, {ts '2001-01-01 12:00:00'})}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "timestamp")
+----
+
+a|
+[source,sql]
+----
+{fn timestampadd(SQL_TSI_YEAR,3, {d '2001-01-01'})}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "date")
+----
+
+a|
+[source,sql]
+----
+{fn timestampdiff(SQL_TSI_YEAR,{d '2001-01-01'}, {d '2001-01-01'})}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "int4")
+----
+
+a|
+[source,sql]
+----
+{fn left('test',3)}
+----
+
+a|
+[source,haskell]
+----
+Right (ScalarType "text")
+----
+
+a|
+[source,sql]
+----
+select {fn ascii('test')} as a, a as b, {d '2000-01-01'} as c,
+       {fn CONVERT('text', SQL_VARCHAR)} \|\| {t '12:00:01.1'} as d from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = False}),
+      ("b",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "date", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select * from {oj t0 left outer join t1 on t0.a=t1.c}
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+|===
+
+== trefSchemas
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+select a,b from public.t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a,b from t
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+a|
+[source,sql]
+----
+select a,b from something.t
+----
+
+a|
+[source,haskell]
+----
+Left [UnrecognisedRelation ("something", "t")]
+----
+
+a|
+[source,sql]
+----
+select a,b from public.u
+----
+
+a|
+[source,haskell]
+----
+Left [UnrecognisedRelation ("public", "u")]
+----
+
+a|
+[source,sql]
+----
+select a,b from u
+----
+
+a|
+[source,haskell]
+----
+Left [UnrecognisedRelation ("public", "u")]
+----
+
+a|
+[source,sql]
+----
+select a,b from something.u
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("a",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("b",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+|===
+
+== queryExprs
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+with tbl1(c,d) as (select a,b from tbl), tbl2(e,f) as (select c,d from tbl1) select c,d,e,f from tbl1 join tbl2
+----
+
+a|
+[source,haskell]
+----
+Right
+  (CompositeType
+     [("c",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("d",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("e",
+       TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True}),
+      ("f",
+       TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                 teScale = Nothing, teNullable = True})])
+----
+
+|===
+
+== updates
+
+=== tcinsert
+[cols="2"]
+|===
+a|
+[source,sql]
+----
+insert into t values (1,'2');
+----
+
+a|
+[source,haskell]
+----
+Nothing
+----
+
+a|
+[source,sql]
+----
+insert into t values (1,'2',3);
+----
+
+a|
+[source,haskell]
+----
+Just [TooManyColumnsInInsert]
+----
+
+a|
+[source,sql]
+----
+insert into t values (1);
+----
+
+a|
+[source,haskell]
+----
+Nothing
+----
+
+a|
+[source,sql]
+----
+insert into t values (1,'2'), ('1'::text,2);
+----
+
+a|
+[source,haskell]
+----
+Just
+  [IncompatibleUnionTypes
+     (CompositeType
+        [("",
+          TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                    teScale = Nothing, teNullable = False}),
+         ("",
+          TypeExtra{teType = UnknownType, tePrecision = Just 1,
+                    teScale = Nothing, teNullable = False})])
+     (CompositeType
+        [("values%0",
+          TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                    teScale = Nothing, teNullable = False}),
+         ("values%1",
+          TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                    teScale = Nothing, teNullable = False})])]
+----
+
+a|
+[source,sql]
+----
+insert into t values ('1'::text,2), (1,'2');
+----
+
+a|
+[source,haskell]
+----
+Just
+  [IncompatibleUnionTypes
+     (CompositeType
+        [("",
+          TypeExtra{teType = ScalarType "text", tePrecision = Nothing,
+                    teScale = Nothing, teNullable = False}),
+         ("",
+          TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                    teScale = Nothing, teNullable = False})])
+     (CompositeType
+        [("values%0",
+          TypeExtra{teType = ScalarType "int4", tePrecision = Nothing,
+                    teScale = Nothing, teNullable = False}),
+         ("values%1",
+          TypeExtra{teType = UnknownType, tePrecision = Just 1,
+                    teScale = Nothing, teNullable = False})])]
+----
+
+a|
+[source,sql]
+----
+insert into zt values (1,'2');
+----
+
+a|
+[source,haskell]
+----
+Just [UnrecognisedRelation ("public", "zt")]
+----
+
+a|
+[source,sql]
+----
+insert into public.t values (1,'2');
+----
+
+a|
+[source,haskell]
+----
+Nothing
+----
+
+a|
+[source,sql]
+----
+insert into something.t values (1,'2');
+----
+
+a|
+[source,haskell]
+----
+Just [UnrecognisedRelation ("something", "t")]
+----
+
+a|
+[source,sql]
+----
+insert into t(a,b) values (1,'2');
+----
+
+a|
+[source,haskell]
+----
+Nothing
+----
+
+a|
+[source,sql]
+----
+insert into t(b,a) values ('2'::text,1);
+----
+
+a|
+[source,haskell]
+----
+Nothing
+----
+
+a|
+[source,sql]
+----
+insert into t(a) values (1,'2');
+----
+
+a|
+[source,haskell]
+----
+Just [TooManyColumnsInInsert]
+----
+
+a|
+[source,sql]
+----
+insert into t(a,b) values (1,'2',3);
+----
+
+a|
+[source,haskell]
+----
+Just [TooManyColumnsInInsert]
+----
+
+a|
+[source,sql]
+----
+insert into t(a) values (1);
+----
+
+a|
+[source,haskell]
+----
+Nothing
+----
+
+a|
+[source,sql]
+----
+insert into t(a,c) values (1,'2');
+----
+
+a|
+[source,haskell]
+----
+Just [UnrecognisedIdentifier "c"]
+----
+
+a|
+[source,sql]
+----
+insert into t(a,b,a) values (1,'2',1);
+----
+
+a|
+[source,haskell]
+----
+Just [DuplicateColumnName "a"]
+----
+
+|===

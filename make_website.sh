@@ -17,7 +17,7 @@ local_docs () {
     # todo: fix svg tag in html
     cabal sandbox init
     cabal install split
-    runhaskell -package-db=.cabal-sandbox/x86_64-linux-ghc-7.10.2-packages.conf.d/ FixStuff.lhs
+    runhaskell -package-db=.cabal-sandbox/x86_64-linux-ghc-7.10.3-packages.conf.d/ FixStuff.lhs
     echo hssqlppp/index
     asciidoctor hssqlppp/index.asciidoc -o - | runhaskell AddLinks.lhs ".." > hssqlppp/index.html
     echo simple-sql-parser/index
@@ -34,7 +34,7 @@ all_docs () {
     (cd ../../intro_to_parsing/master && ./make_website.sh && cp -R build/index.html ../../jakewheat.github.io/master/intro_to_parsing/ && cd -)
 
     echo hssqlppp
-    (cd ../../hssqlppp/master && make website website-haddock && cp -R build/website/* ../../jakewheat.github.io/master/hssqlppp/0.5.18/ && cd -)
+    (cd ../../hssqlppp/master && make website website-haddock && cp -R build/website/* ../../jakewheat.github.io/master/hssqlppp/0.6.0/ && cd -)
 
     echo simple-sql-parser
     (cd ../../simple-sql-parser/master && make website && cp -R build/* ../../jakewheat.github.io/master/simple-sql-parser/0.5.0 && cd -)

@@ -4,6 +4,13 @@
 == stuff
 
 extend the transactions demo to do distributed storage: we want
-reliable transactions, none of that availability bullshit. Something
-like paxos or raft.
+reliable transactions, none of that partition-availability
+bullshit. Something like paxos or raft.
 
+== some resources
+
+https://aphyr.com/
+
+http://the-paper-trail.org/
+
+https://raftconsensus.github.io/
