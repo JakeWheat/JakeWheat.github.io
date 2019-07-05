@@ -477,22 +477,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_6_23_reference_resolution">6.23 &lt;reference resolution&gt;</a></li>
 <li><a href="#_6_24_array_element_reference">6.24 &lt;array element reference&gt;</a></li>
 <li><a href="#_6_25_multiset_element_reference">6.25 &lt;multiset element reference&gt;</a></li>
-<li><a href="#_6_26_value_expression">6.26 &lt;value expression&gt;</a></li>
-<li><a href="#_6_27_numeric_value_expression">6.27 &lt;numeric value expression&gt;</a></li>
-<li><a href="#_6_28_numeric_value_function">6.28 &lt;numeric value function&gt;</a></li>
-<li><a href="#_6_29_string_value_expression">6.29 &lt;string value expression&gt;</a></li>
-<li><a href="#_6_30_string_value_function">6.30 &lt;string value function&gt;</a></li>
-<li><a href="#_6_31_datetime_value_expression">6.31 &lt;datetime value expression&gt;</a></li>
-<li><a href="#_6_32_datetime_value_function">6.32 &lt;datetime value function&gt;</a></li>
-<li><a href="#_6_33_interval_value_expression">6.33 &lt;interval value expression&gt;</a></li>
-<li><a href="#_6_34_interval_value_function">6.34 &lt;interval value function&gt;</a></li>
-<li><a href="#_6_35_boolean_value_expression">6.35 &lt;boolean value expression&gt;</a></li>
-<li><a href="#_6_36_array_value_expression">6.36 &lt;array value expression&gt;</a></li>
-<li><a href="#_6_37_array_value_function">6.37 &lt;array value function&gt;</a></li>
-<li><a href="#_6_38_array_value_constructor">6.38 &lt;array value constructor&gt;</a></li>
-<li><a href="#_6_39_multiset_value_expression">6.39 &lt;multiset value expression&gt;</a></li>
-<li><a href="#_6_40_multiset_value_function">6.40 &lt;multiset value function&gt;</a></li>
-<li><a href="#_6_41_multiset_value_constructor">6.41 &lt;multiset value constructor&gt;</a></li>
+<li><a href="#_6_26_row_pattern_navigation_operation">6.26 &lt;row pattern navigation operation&gt;</a></li>
+<li><a href="#_6_27_json_value_function">6.27 &lt;JSON value function&gt;</a></li>
+<li><a href="#_6_28_value_expression">6.28 &lt;value expression&gt;</a></li>
+<li><a href="#_6_29_numeric_value_expression">6.29 &lt;numeric value expression&gt;</a></li>
+<li><a href="#_6_30_numeric_value_function">6.30 &lt;numeric value function&gt;</a></li>
+<li><a href="#_6_31_string_value_expression">6.31 &lt;string value expression&gt;</a></li>
+<li><a href="#_6_32_string_value_function">6.32 &lt;string value function&gt;</a></li>
+<li><a href="#_6_33_json_value_constructor">6.33 &lt;JSON value constructor&gt;</a></li>
+<li><a href="#_6_34_json_query">6.34 &lt;JSON query&gt;</a></li>
+<li><a href="#_6_35_datetime_value_expression">6.35 &lt;datetime value expression&gt;</a></li>
+<li><a href="#_6_36_datetime_value_function">6.36 &lt;datetime value function&gt;</a></li>
+<li><a href="#_6_37_interval_value_expression">6.37 &lt;interval value expression&gt;</a></li>
+<li><a href="#_6_38_interval_value_function">6.38 &lt;interval value function&gt;</a></li>
+<li><a href="#_6_39_boolean_value_expression">6.39 &lt;boolean value expression&gt;</a></li>
+<li><a href="#_6_40_array_value_expression">6.40 &lt;array value expression&gt;</a></li>
+<li><a href="#_6_41_array_value_function">6.41 &lt;array value function&gt;</a></li>
+<li><a href="#_6_42_array_value_constructor">6.42 &lt;array value constructor&gt;</a></li>
+<li><a href="#_6_43_multiset_value_expression">6.43 &lt;multiset value expression&gt;</a></li>
+<li><a href="#_6_44_multiset_value_function">6.44 &lt;multiset value function&gt;</a></li>
+<li><a href="#_6_45_multiset_value_constructor">6.45 &lt;multiset value constructor&gt;</a></li>
 </ul>
 </li>
 <li><a href="#_7_query_expressions">7 Query expressions</a>
@@ -503,15 +507,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_7_4_table_expression">7.4      &lt;table expression&gt;</a></li>
 <li><a href="#_7_5_from_clause">7.5        &lt;from clause&gt;</a></li>
 <li><a href="#_7_6_table_reference">7.6     &lt;table reference&gt;</a></li>
-<li><a href="#_7_7_joined_table">7.7     &lt;joined table&gt;</a></li>
-<li><a href="#_7_8_where_clause">7.8      &lt;where clause&gt;</a></li>
-<li><a href="#_7_9_group_by_clause">7.9     &lt;group by clause&gt;</a></li>
-<li><a href="#_7_10_having_clause">7.10 &lt;having clause&gt;</a></li>
-<li><a href="#_7_11_window_clause">7.11 &lt;window clause&gt;</a></li>
-<li><a href="#_7_12_query_specification">7.12 &lt;query specification&gt;</a></li>
-<li><a href="#_7_13_query_expression">7.13 &lt;query expression&gt;</a></li>
-<li><a href="#_7_14_search_or_cycle_clause">7.14 &lt;search or cycle clause&gt;</a></li>
-<li><a href="#_7_15_subquery">7.15 &lt;subquery&gt;</a></li>
+<li><a href="#_7_7_row_pattern_recognition_clause">7.7        &lt;row pattern recognition clause&gt;</a></li>
+<li><a href="#_7_8_row_pattern_measures">7.8        &lt;row pattern measures&gt;</a></li>
+<li><a href="#_7_9_row_pattern_common_syntax">7.9    &lt;row pattern common syntax&gt;</a></li>
+<li><a href="#_7_10_joined_table">7.10 &lt;joined table&gt;</a></li>
+<li><a href="#_7_11_json_table">7.11 &lt;JSON table&gt;</a></li>
+<li><a href="#_7_12_where_clause">7.12 &lt;where clause&gt;</a></li>
+<li><a href="#_7_13_group_by_clause">7.13 &lt;group by clause&gt;</a></li>
+<li><a href="#_7_14_having_clause">7.14 &lt;having clause&gt;</a></li>
+<li><a href="#_7_15_window_clause">7.15 &lt;window clause&gt;</a></li>
+<li><a href="#_7_16_query_specification">7.16 &lt;query specification&gt;</a></li>
+<li><a href="#_7_17_query_expression">7.17 &lt;query expression&gt;</a></li>
+</ul>
+</li>
+<li><a href="#_14_with_clause">14 &lt;with clause&gt; ::=</a>
+<ul class="sectlevel2">
+<li><a href="#_7_18_search_or_cycle_clause">7.18 &lt;search or cycle clause&gt;</a></li>
+<li><a href="#_7_19_subquery">7.19 &lt;subquery&gt;</a></li>
 </ul>
 </li>
 <li><a href="#_8_predicates">8 Predicates</a>
@@ -537,6 +549,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_8_19_type_predicate">8.19 &lt;type predicate&gt;</a></li>
 <li><a href="#_8_20_period_predicate">8.20 &lt;period predicate&gt;</a></li>
 <li><a href="#_8_21_search_condition">8.21 &lt;search condition&gt;</a></li>
+<li><a href="#_8_22_json_predicate">8.22 &lt;JSON predicate&gt;</a></li>
+<li><a href="#_8_23_json_exists_predicate">8.23 &lt;JSON exists predicate&gt;</a></li>
+</ul>
+</li>
+<li><a href="#_9_additional_common_rules">9 Additional common rules</a>
+<ul class="sectlevel2">
+<li><a href="#_9_38_sqljson_path_language_lexical_elements">9.38 SQL/JSON path language: lexical elements</a></li>
+<li><a href="#_9_39_sqljson_path_language_syntax_and_semantics">9.39 SQL/JSON path language: syntax and semantics</a></li>
+<li><a href="#_9_44_datetime_templates">9.44 Datetime templates</a></li>
 </ul>
 </li>
 <li><a href="#_10_additional_common_elements">10 Additional common elements</a>
@@ -551,6 +572,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_10_8_constraint_name_definition_and_constraint_characteristics">10.8 &lt;constraint name definition&gt; and &lt;constraint characteristics&gt;</a></li>
 <li><a href="#_10_9_aggregate_function">10.9 &lt;aggregate function&gt;</a></li>
 <li><a href="#_10_10_sort_specification_list">10.10 &lt;sort specification list&gt;</a></li>
+<li><a href="#_10_11_json_aggregate_function">10.11 &lt;JSON aggregate function&gt;</a></li>
+<li><a href="#_10_12_json_value_expression">10.12 &lt;JSON value expression&gt;</a></li>
+<li><a href="#_10_13_json_output_clause">10.13 &lt;JSON output clause&gt;</a></li>
+<li><a href="#_10_14_json_api_common_syntax">10.14 &lt;JSON API common syntax&gt;</a></li>
 </ul>
 </li>
 <li><a href="#_11_schema_definition_and_manipulation">11 Schema definition and manipulation</a>
@@ -615,6 +640,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_11_58_drop_method_specification">11.58 &lt;drop method specification&gt;</a></li>
 <li><a href="#_11_59_drop_data_type_statement">11.59 &lt;drop data type statement&gt;</a></li>
 <li><a href="#_11_60_sql_invoked_routine">11.60 &lt;SQL-invoked routine&gt;</a></li>
+</ul>
+</li>
+<li><a href="#_14_sql_parameter_declaration">14 &lt;SQL parameter declaration&gt; ::=</a>
+<ul class="sectlevel2">
 <li><a href="#_11_61_alter_routine_statement">11.61 &lt;alter routine statement&gt;</a></li>
 <li><a href="#_11_62_drop_routine_statement">11.62 &lt;drop routine statement&gt;</a></li>
 <li><a href="#_11_63_user_defined_cast_definition">11.63 &lt;user-defined cast definition&gt;</a></li>
@@ -717,26 +746,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_20_3_deallocate_descriptor_statement">20.3 &lt;deallocate descriptor statement&gt;</a></li>
 <li><a href="#_20_4_get_descriptor_statement">20.4 &lt;get descriptor statement&gt;</a></li>
 <li><a href="#_20_5_set_descriptor_statement">20.5 &lt;set descriptor statement&gt;</a></li>
-<li><a href="#_20_6_prepare_statement">20.6 &lt;prepare statement&gt;</a></li>
-<li><a href="#_20_7_cursor_attributes">20.7 &lt;cursor attributes&gt;</a></li>
-<li><a href="#_20_8_deallocate_prepared_statement">20.8 &lt;deallocate prepared statement&gt;</a></li>
-<li><a href="#_20_9_describe_statement">20.9 &lt;describe statement&gt;</a></li>
-<li><a href="#_20_10_input_using_clause">20.10 &lt;input using clause&gt;</a></li>
-<li><a href="#_20_11_output_using_clause">20.11 &lt;output using clause&gt;</a></li>
-<li><a href="#_20_12_execute_statement">20.12 &lt;execute statement&gt;</a></li>
-<li><a href="#_20_13_execute_immediate_statement">20.13 &lt;execute immediate statement&gt;</a></li>
-<li><a href="#_20_14_dynamic_declare_cursor">20.14 &lt;dynamic declare cursor&gt;</a></li>
-<li><a href="#_20_15_allocate_extended_dynamic_cursor_statement">20.15 &lt;allocate extended dynamic cursor statement&gt;</a></li>
-<li><a href="#_20_16_allocate_received_cursor_statement">20.16 &lt;allocate received cursor statement&gt;</a></li>
-<li><a href="#_20_17_dynamic_open_statement">20.17 &lt;dynamic open statement&gt;</a></li>
-<li><a href="#_20_18_dynamic_fetch_statement">20.18 &lt;dynamic fetch statement&gt;</a></li>
-<li><a href="#_20_19_dynamic_single_row_select_statement">20.19 &lt;dynamic single row select statement&gt;</a></li>
-<li><a href="#_20_20_dynamic_close_statement">20.20 &lt;dynamic close statement&gt;</a></li>
-<li><a href="#_20_21_dynamic_delete_statement_positioned">20.21 &lt;dynamic delete statement: positioned&gt;</a></li>
-<li><a href="#_20_22_dynamic_update_statement_positioned">20.22 &lt;dynamic update statement: positioned&gt;</a></li>
-<li><a href="#_20_23_preparable_dynamic_delete_statement_positioned">20.23 &lt;preparable dynamic delete statement: positioned&gt;</a></li>
-<li><a href="#_20_24_preparable_dynamic_cursor_name">20.24 &lt;preparable dynamic cursor name&gt;</a></li>
-<li><a href="#_20_25_preparable_dynamic_update_statement_positioned">20.25 &lt;preparable dynamic update statement: positioned&gt;</a></li>
+<li><a href="#_20_6_copy_descriptor_statement">20.6 &lt;copy descriptor statement&gt;</a></li>
+<li><a href="#_20_7_prepare_statement">20.7 &lt;prepare statement&gt;</a></li>
+<li><a href="#_20_8_cursor_attributes">20.8 &lt;cursor attributes&gt;</a></li>
+<li><a href="#_20_9_deallocate_prepared_statement">20.9 &lt;deallocate prepared statement&gt;</a></li>
+<li><a href="#_20_10_describe_statement">20.10 &lt;describe statement&gt;</a></li>
+<li><a href="#_20_11_input_using_clause">20.11 &lt;input using clause&gt;</a></li>
+<li><a href="#_20_12_output_using_clause">20.12 &lt;output using clause&gt;</a></li>
+<li><a href="#_20_13_execute_statement">20.13 &lt;execute statement&gt;</a></li>
+<li><a href="#_20_14_execute_immediate_statement">20.14 &lt;execute immediate statement&gt;</a></li>
+<li><a href="#_20_15_dynamic_declare_cursor">20.15 &lt;dynamic declare cursor&gt;</a></li>
+<li><a href="#_20_16_descriptor_value_constructor">20.16 &lt;descriptor value constructor&gt;</a></li>
+<li><a href="#_20_17_allocate_extended_dynamic_cursor_statement">20.17 &lt;allocate extended dynamic cursor statement&gt;</a></li>
+<li><a href="#_20_18_allocate_received_cursor_statement">20.18 &lt;allocate received cursor statement&gt;</a></li>
+<li><a href="#_20_19_dynamic_open_statement">20.19 &lt;dynamic open statement&gt;</a></li>
+<li><a href="#_20_20_dynamic_fetch_statement">20.20 &lt;dynamic fetch statement&gt;</a></li>
+<li><a href="#_20_21_dynamic_single_row_select_statement">20.21 &lt;dynamic single row select statement&gt;</a></li>
+<li><a href="#_20_22_dynamic_close_statement">20.22 &lt;dynamic close statement&gt;</a></li>
+<li><a href="#_20_23_dynamic_delete_statement_positioned">20.23 &lt;dynamic delete statement: positioned&gt;</a></li>
+<li><a href="#_20_24_dynamic_update_statement_positioned">20.24 &lt;dynamic update statement: positioned&gt;</a></li>
+<li><a href="#_20_25_preparable_dynamic_delete_statement_positioned">20.25 &lt;preparable dynamic delete statement: positioned&gt;</a></li>
+<li><a href="#_20_26_preparable_dynamic_cursor_name">20.26 &lt;preparable dynamic cursor name&gt;</a></li>
+<li><a href="#_20_27_preparable_dynamic_update_statement_positioned">20.27 &lt;preparable dynamic update statement: positioned&gt;</a></li>
+<li><a href="#_20_28_pipe_row_statement">20.28 &lt;pipe row statement&gt;</a></li>
 </ul>
 </li>
 <li><a href="#_21_embedded_sql">21 Embedded SQL</a>
@@ -866,7 +898,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   |   <a href="#underscore">&lt;underscore&gt; </a>
   |   <a href="#vertical-bar">&lt;vertical bar&gt; </a>
   |   <a href="#left-brace">&lt;left brace&gt; </a>
-  |   <a href="#right-brace">&lt;right brace&gt; </a></pre>
+  |   <a href="#right-brace">&lt;right brace&gt; </a>
+  |   <a href="#dollar-sign">&lt;dollar sign&gt; </a>
+  |   <a href="#apostrophe">&lt;apostrophe&gt; </a></pre>
 </div>
 </div>
 <div id="space" class="listingblock">
@@ -1057,6 +1091,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   }</pre>
 </div>
 </div>
+<div id="dollar-sign" class="listingblock">
+<div class="content">
+<pre>&lt;dollar sign&gt; ::=
+  $</pre>
+</div>
+</div>
+<div id="apostrophe" class="listingblock">
+<div class="content">
+<pre>&lt;apostrophe&gt; ::=
+  '</pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_5_2_token_and_separator">5.2     &lt;token&gt; and &lt;separator&gt;</h3>
@@ -1242,7 +1288,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   | <a href="#right-bracket-trigraph">&lt;right bracket trigraph&gt; </a>
   | <a href="#double-colon">&lt;double colon&gt; </a>
   | <a href="#double-period">&lt;double period&gt; </a>
-  | <a href="#named-argument-assignment-token">&lt;named argument assignment token&gt; </a></pre>
+  | <a href="#named-argument-assignment-token">&lt;named argument assignment token&gt; </a>
+  | <a href="#left-brace-minus">&lt;left brace minus&gt; </a>
+  | <a href="#right-minus-brace">&lt;right minus brace&gt; </a></pre>
 </div>
 </div>
 <div id="not-equals-operator" class="listingblock">
@@ -1291,6 +1339,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre>&lt;named argument assignment token&gt; ::=
   =&gt;</pre>
+</div>
+</div>
+<div id="left-brace-minus" class="listingblock">
+<div class="content">
+<pre>&lt;left brace minus&gt; ::=
+  {-</pre>
+</div>
+</div>
+<div id="right-minus-brace" class="listingblock">
+<div class="content">
+<pre>&lt;right minus brace&gt; ::=
+  -}</pre>
 </div>
 </div>
 <div id="separator" class="listingblock">
@@ -1378,64 +1438,83 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
   | BEFORE | BERNOULLI | BREADTH
 
-  | C | CASCADE | CATALOG | CATALOG_NAME | CHAIN | CHARACTER_SET_CATALOG
+  | C | CASCADE | CATALOG | CATALOG_NAME | CHAIN | CHAINING | CHARACTER_SET_CATALOG
   | CHARACTER_SET_NAME | CHARACTER_SET_SCHEMA | CHARACTERISTICS | CHARACTERS
   | CLASS_ORIGIN | COBOL | COLLATION | COLLATION_CATALOG | COLLATION_NAME | COLLATION_SCHEMA
-  | COLUMN_NAME | COMMAND_FUNCTION | COMMAND_FUNCTION_CODE | COMMITTED
-  | CONDITION_NUMBER | CONNECTION | CONNECTION_NAME | CONSTRAINT_CATALOG | CONSTRAINT_NAME
-  | CONSTRAINT_SCHEMA | CONSTRAINTS | CONSTRUCTOR | CONTINUE | CURSOR_NAME
+  | COLUMNS | COLUMN_NAME | COMMAND_FUNCTION | COMMAND_FUNCTION_CODE | COMMITTED
+  | CONDITIONAL | CONDITION_NUMBER | CONNECTION | CONNECTION_NAME | CONSTRAINT_CATALOG
+  | CONSTRAINT_NAME | CONSTRAINT_SCHEMA | CONSTRAINTS | CONSTRUCTOR
+  | CONTINUE | CURSOR_NAME
 
   | DATA | DATETIME_INTERVAL_CODE | DATETIME_INTERVAL_PRECISION | DEFAULTS | DEFERRABLE
-  | DEFERRED | DEFINED | DEFINER | DEGREE | DEPTH | DERIVED | DESC | DESCRIPTOR
+  | DEFERRED | DEFINED | DEFINER | DEGREE | DEPTH | DERIVED | DESC | DESCRIBE_CATALOG
+  | DESCRIBE_NAME | DESCRIBE_PROCEDURE_SPECIFIC_CATALOG
+  | DESCRIBE_PROCEDURE_SPECIFIC_NAME | DESCRIBE_PROCEDURE_SPECIFIC_SCHEMA
+  | DESCRIBE_SCHEMA | DESCRIPTOR
   | DIAGNOSTICS | DISPATCH | DOMAIN | DYNAMIC_FUNCTION | DYNAMIC_FUNCTION_CODE
 
-  | ENFORCED | EXCLUDE | EXCLUDING | EXPRESSION
+  | ENCODING | ENFORCED | ERROR | EXCLUDE | EXCLUDING | EXPRESSION
 
-  | FINAL | FIRST | FLAG | FOLLOWING | FORTRAN | FOUND
+  | FINAL | FINISH | FINISH_CATALOG | FINISH_NAME | FINISH_PROCEDURE_SPECIFIC_CATALOG
+  | FINISH_PROCEDURE_SPECIFIC_NAME | FINISH_PROCEDURE_SPECIFIC_SCHEMA
+  | FINISH_SCHEMA | FIRST | FLAG | FOLLOWING | FORMAT | FORTRAN | FOUND | FULFILL
+  | FULFILL_CATALOG | FULFILL_NAME | FULFILL_PROCEDURE_SPECIFIC_CATALOG
+  | FULFILL_PROCEDURE_SPECIFIC_NAME | FULFILL_PROCEDURE_SPECIFIC_SCHEMA | FULFILL_SCHEMA
 
   | G | GENERAL | GENERATED | GO | GOTO | GRANTED
 
-  | HIERARCHY
+  | HAS_PASS_THROUGH_COLUMNS | HAS_PASS_THRU_COLS | HIERARCHY
 
   | IGNORE | IMMEDIATE | IMMEDIATELY | IMPLEMENTATION | INCLUDING | INCREMENT | INITIALLY
-  | INPUT | INSTANCE | INSTANTIABLE | INSTEAD | INVOKER | ISOLATION
+  | INPUT | INSTANCE | INSTANTIABLE | INSTEAD | INVOKER | ISOLATION | IS_PRUNABLE
 
-  | K | KEY | KEY_MEMBER | KEY_TYPE
+  | JSON
+
+  | K | KEEP | KEY | KEYS | KEY_MEMBER | KEY_TYPE
 
   | LAST | LENGTH | LEVEL | LOCATOR
 
   | M | MAP | MATCHED | MAXVALUE | MESSAGE_LENGTH | MESSAGE_OCTET_LENGTH
   | MESSAGE_TEXT | MINVALUE | MORE | MUMPS
 
-  | NAME | NAMES | NESTING | NEXT | NFC | NFD | NFKC | NFKD
+  | NAME | NAMES | NESTED | NESTING | NEXT | NFC | NFD | NFKC | NFKD
   | NORMALIZED | NULLABLE | NULLS | NUMBER
 
   | OBJECT | OCTETS | OPTION | OPTIONS | ORDERING | ORDINALITY | OTHERS
-  | OUTPUT | OVERRIDING
+  | OUTPUT | OVERFLOW | OVERRIDING
 
   | P | PAD | PARAMETER_MODE | PARAMETER_NAME | PARAMETER_ORDINAL_POSITION
   | PARAMETER_SPECIFIC_CATALOG | PARAMETER_SPECIFIC_NAME | PARAMETER_SPECIFIC_SCHEMA
-  | PARTIAL | PASCAL | PATH | PLACING | PLI | PRECEDING | PRESERVE | PRIOR
-  | PRIVILEGES | PUBLIC
+  | PARTIAL | PASCAL | PASS | PASSING | PAST | PATH | PLACING | PLAN | PLI
+  | PRECEDING | PRESERVE | PRIOR | PRIVATE | PRIVATE_PARAMETERS | PRIVATE_PARAMS_S
+  | PRIVILEGES | PRUNE | PUBLIC
+
+  | QUOTES
 
   | READ | RELATIVE | REPEATABLE | RESPECT | RESTART | RESTRICT | RETURNED_CARDINALITY
-  | RETURNED_LENGTH | RETURNED_OCTET_LENGTH | RETURNED_SQLSTATE | ROLE
-  | ROUTINE | ROUTINE_CATALOG | ROUTINE_NAME | ROUTINE_SCHEMA | ROW_COUNT
-  | SCALE | SCHEMA | SCHEMA_NAME | SCOPE_CATALOG | SCOPE_NAME | SCOPE_SCHEMA
-  | SECTION | SECURITY | SELF | SEQUENCE | SERIALIZABLE | SERVER_NAME | SESSION
-  | SETS | SIMPLE | SIZE | SOURCE | SPACE | SPECIFIC_NAME | STATE | STATEMENT
-  | STRUCTURE | STYLE | SUBCLASS_ORIGIN
+  | RETURNED_LENGTH | RETURNED_OCTET_LENGTH | RETURNED_SQLSTATE | RETURNING
+  | RETURNS_ONLY_PASS_THROUGH | RET_ONLY_PASS_THRU | ROLE | ROUTINE
+  | ROUTINE_CATALOG | ROUTINE_NAME | ROUTINE_SCHEMA | ROW_COUNT
 
-  | T | TABLE_NAME | TEMPORARY | TIES | TOP_LEVEL_COUNT | TRANSACTION
-  | TRANSACTION_ACTIVE | TRANSACTIONS_COMMITTED | TRANSACTIONS_ROLLED_BACK
-  | TRANSFORM | TRANSFORMS | TRIGGER_CATALOG | TRIGGER_NAME | TRIGGER_SCHEMA | TYPE
+  | SCALAR | SCALE | SCHEMA | SCHEMA_NAME | SCOPE_CATALOG | SCOPE_NAME
+  | SCOPE_SCHEMA | SECTION | SECURITY | SELF | SEQUENCE | SERIALIZABLE | SERVER_NAME
+  | SESSION | SETS | SIMPLE | SIZE | SOURCE | SPACE | SPECIFIC_NAME | START_CATALOG
+  | START_NAME | START_PROCEDURE_SPECIFIC_CATALOG | START_PROCEDURE_SPECIFIC_NAME
+  | START_PROCEDURE_SPECIFIC_SCHEMA | START_SCHEMA | STATE | STATEMENT
+  | STRING | STRUCTURE | STYLE | SUBCLASS_ORIGIN
 
-  | UNBOUNDED | UNCOMMITTED | UNDER | UNNAMED | USAGE | USER_DEFINED_TYPE_CATALOG
-  | USER_DEFINED_TYPE_CODE | USER_DEFINED_TYPE_NAME | USER_DEFINED_TYPE_SCHEMA
+  | T | TABLE_NAME | TABLE_SEMANTICS | TEMPORARY | THROUGH | TIES | TOP_LEVEL_COUNT
+  | TRANSACTION | TRANSACTION_ACTIVE | TRANSACTIONS_COMMITTED
+  | TRANSACTIONS_ROLLED_BACK | TRANSFORM | TRANSFORMS | TRIGGER_CATALOG | TRIGGER_NAME
+  | TRIGGER_SCHEMA | TYPE
+
+  | UNBOUNDED | UNCOMMITTED | UNCONDITIONAL | UNDER | UNNAMED | USAGE
+  | USER_DEFINED_TYPE_CATALOG | USER_DEFINED_TYPE_CODE | USER_DEFINED_TYPE_NAME
+  | USER_DEFINED_TYPE_SCHEMA | UTF16 | UTF32 | UTF8
 
   | VIEW
 
-  | WORK | WRITE
+  | WORK | WRAPPER | WRITE
 
   | ZONE</pre>
 </div>
@@ -1443,27 +1522,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="reserved-word" class="listingblock">
 <div class="content">
 <pre>&lt;reserved word&gt; ::=
-    ABS | ALL | ALLOCATE | ALTER | AND | ANY | ARE | ARRAY | ARRAY_AGG
-  | ARRAY_MAX_CARDINALITY | AS | ASENSITIVE | ASYMMETRIC | AT | ATOMIC | AUTHORIZATION
-  | AVG
+    ABS | ACOS | ALL | ALLOCATE | ALTER | AND | ANY | ARE | ARRAY | ARRAY_AGG
+  | ARRAY_MAX_CARDINALITY | AS | ASENSITIVE | ASIN | ASYMMETRIC | AT | ATAN
+  | ATOMIC | AUTHORIZATION | AVG
 
   | BEGIN | BEGIN_FRAME | BEGIN_PARTITION | BETWEEN | BIGINT | BINARY
   | BLOB | BOOLEAN | BOTH | BY
 
   | CALL | CALLED | CARDINALITY | CASCADED | CASE | CAST | CEIL | CEILING
-  | CHAR | CHAR_LENGTH | CHARACTER | CHARACTER_LENGTH | CHECK | CLOB | CLOSE
-  | COALESCE | COLLATE | COLLECT | COLUMN | COMMIT | CONDITION | CONNECT
-  | CONSTRAINT | CONTAINS | CONVERT | CORR | CORRESPONDING | COUNT | COVAR_POP
-  | COVAR_SAMP | CREATE | CROSS | CUBE | CUME_DIST | CURRENT | CURRENT_CATALOG
-  | CURRENT_DATE | CURRENT_DEFAULT_TRANSFORM_GROUP | CURRENT_PATH | CURRENT_ROLE
-  | CURRENT_ROW | CURRENT_SCHEMA | CURRENT_TIME | CURRENT_TIMESTAMP
-  | CURRENT_TRANSFORM_GROUP_FOR_TYPE | CURRENT_USER | CURSOR | CYCLE
+  | CHAR | CHAR_LENGTH | CHARACTER | CHARACTER_LENGTH | CHECK | CLASSIFIER | CLOB
+  | CLOSE | COALESCE | COLLATE | COLLECT | COLUMN | COMMIT | CONDITION | CONNECT
+  | CONSTRAINT | CONTAINS | CONVERT | COPY | CORR | CORRESPONDING | COS | COSH
+  | COUNT | COVAR_POP | COVAR_SAMP | CREATE | CROSS | CUBE | CUME_DIST | CURRENT
+  | CURRENT_CATALOG | CURRENT_DATE | CURRENT_DEFAULT_TRANSFORM_GROUP
+  | CURRENT_PATH | CURRENT_ROLE | CURRENT_ROW | CURRENT_SCHEMA | CURRENT_TIME
+  | CURRENT_TIMESTAMP | CURRENT_PATH | CURRENT_ROLE | CURRENT_TRANSFORM_GROUP_FOR_TYPE
+  | CURRENT_USER | CURSOR | CYCLE
 
-  | DATE | DAY | DEALLOCATE | DEC | DECIMAL | DECLARE | DEFAULT | DELETE
-  | DENSE_RANK | DEREF | DESCRIBE | DETERMINISTIC | DISCONNECT | DISTINCT
+  | DATE | DAY | DEALLOCATE | DEC | DECIMAL | DECFLOAT | DECLARE | DEFAULT | DEFINE
+  | DELETE | DENSE_RANK | DEREF | DESCRIBE | DETERMINISTIC | DISCONNECT | DISTINCT
   | DOUBLE | DROP | DYNAMIC
 
-  | EACH | ELEMENT | ELSE | END | END_FRAME | END_PARTITION | END-EXEC
+  | EACH | ELEMENT | ELSE | EMPTY | END | END_FRAME | END_PARTITION | END-EXEC
   | EQUALS | ESCAPE | EVERY | EXCEPT | EXEC | EXECUTE | EXISTS | EXP
   | EXTERNAL | EXTRACT
 
@@ -1474,43 +1554,45 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
   | HAVING | HOLD | HOUR
 
-  | IDENTITY | IN | INDICATOR | INNER | INOUT | INSENSITIVE | INSERT
+  | IDENTITY | IN | INDICATOR | INITIAL | INNER | INOUT | INSENSITIVE | INSERT
   | INT | INTEGER | INTERSECT | INTERSECTION | INTERVAL | INTO | IS
 
-  | JOIN
+  | JOIN | JSON_ARRAY | JSON_ARRAYAGG | JSON_EXISTS | JSON_OBJECT
+  | JSON_OBJECTAGG | JSON_QUERY | JSON_TABLE | JSON_TABLE_PRIMITIVE | JSON_VALUE
 
-  | LAG | LANGUAGE | LARGE | LAST_VALUE | LATERAL | LEAD | LEADING | LEFT
-  | LIKE | LIKE_REGEX | LN | LOCAL | LOCALTIME | LOCALTIMESTAMP | LOWER
+  | LAG | LANGUAGE | LARGE | LAST_VALUE | LATERAL | LEAD | LEADING | LEFT | LIKE
+  | LIKE_REGEX | LISTAGG | LN | LOCAL | LOCALTIME | LOCALTIMESTAMP | LOG | LOG10 | LOWER
 
-  | MATCH | MAX | MEMBER | MERGE | METHOD | MIN | MINUTE
-  | MOD | MODIFIES | MODULE | MONTH | MULTISET
+  | MATCH | MATCH_NUMBER | MATCH_RECOGNIZE | MATCHES | MAX | MEMBER
+  | MERGE | METHOD | MIN | MINUTE | MOD | MODIFIES | MODULE | MONTH | MULTISET
 
   | NATIONAL | NATURAL | NCHAR | NCLOB | NEW | NO | NONE | NORMALIZE | NOT
   | NTH_VALUE | NTILE | NULL | NULLIF | NUMERIC
 
-  | OCTET_LENGTH | OCCURRENCES_REGEX | OF | OFFSET | OLD | ON | ONLY | OPEN
-  | OR | ORDER | OUT | OUTER | OVER | OVERLAPS | OVERLAY
+  | OCTET_LENGTH | OCCURRENCES_REGEX | OF | OFFSET | OLD | OMIT | ON | ONE
+  | ONLY | OPEN | OR | ORDER | OUT | OUTER | OVER | OVERLAPS | OVERLAY
 
-  | PARAMETER | PARTITION | PERCENT | PERCENT_RANK | PERCENTILE_CONT
-  | PERCENTILE_DISC | PERIOD | PORTION | POSITION | POSITION_REGEX | POWER | PRECEDES
-  | PRECISION | PREPARE | PRIMARY | PROCEDURE
+  | PARAMETER | PARTITION | PATTERN | PER | PERCENT | PERCENT_RANK
+  | PERCENTILE_CONT | PERCENTILE_DISC | PERIOD | PORTION | POSITION | POSITION_REGEX
+  | POWER | PRECEDES | PRECISION | PREPARE | PRIMARY | PROCEDURE | PTF
 
   | RANGE | RANK | READS | REAL | RECURSIVE | REF | REFERENCES | REFERENCING
   | REGR_AVGX | REGR_AVGY | REGR_COUNT | REGR_INTERCEPT | REGR_R2 | REGR_SLOPE
   | REGR_SXX | REGR_SXY | REGR_SYY | RELEASE | RESULT | RETURN | RETURNS
-  | REVOKE | RIGHT | ROLLBACK | ROLLUP | ROW | ROW_NUMBER | ROWS
+  | REVOKE | RIGHT | ROLLBACK | ROLLUP | ROW | ROW_NUMBER | ROWS | RUNNING
 
-  | SAVEPOINT | SCOPE | SCROLL | SEARCH | SECOND | SELECT
-  | SENSITIVE | SESSION_USER | SET | SIMILAR | SMALLINT | SOME | SPECIFIC
+  | SAVEPOINT | SCOPE | SCROLL | SEARCH | SECOND | SEEK | SELECT | SENSITIVE
+  | SESSION_USER | SET | SHOW | SIMILAR | SIN | SINH | SKIP | SMALLINT | SOME | SPECIFIC
   | SPECIFICTYPE | SQL | SQLEXCEPTION | SQLSTATE | SQLWARNING | SQRT | START
-  | STATIC | STDDEV_POP | STDDEV_SAMP | SUBMULTISET | SUBSTRING | SUBSTRING_REGEX
-  | SUCCEEDS | SUM | SYMMETRIC | SYSTEM | SYSTEM_TIME | SYSTEM_USER
+  | STATIC | STDDEV_POP | STDDEV_SAMP | SUBMULTISET | SUBSET | SUBSTRING
+  | SUBSTRING_REGEX | SUCCEEDS | SUM | SYMMETRIC | SYSTEM | SYSTEM_TIME
+  | SYSTEM_USER
 
-  | TABLE | TABLESAMPLE | THEN | TIME | TIMESTAMP | TIMEZONE_HOUR | TIMEZONE_MINUTE
-  | TO | TRAILING | TRANSLATE | TRANSLATE_REGEX | TRANSLATION | TREAT
-  | TRIGGER | TRUNCATE | TRIM | TRIM_ARRAY | TRUE
+  | TABLE | TABLESAMPLE | TAN | TANH | THEN | TIME | TIMESTAMP | TIMEZONE_HOUR
+  | TIMEZONE_MINUTE | TO | TRAILING | TRANSLATE | TRANSLATE_REGEX | TRANSLATION | TREAT
+  | TRIGGER | TRIM | TRIM_ARRAY | TRUE | TRUNCATE
 
-  | UESCAPE | UNION | UNIQUE | UNKNOWN | UNNEST | UPDATE | UPPER | USER | USING
+  | UESCAPE | UNION | UNIQUE | UNKNOWN | UNNEST | UPDATE    | UPPER | USER | USING
 
   | VALUE | VALUES | VALUE_OF | VAR_POP | VAR_SAMP | VARBINARY
   | VARCHAR | VARYING | VERSIONING
@@ -2183,6 +2265,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="dynamic-cursor-name" class="listingblock">
 <div class="content">
 <pre>&lt;dynamic cursor name&gt; ::=
+    <a href="#conventional-dynamic-cursor-name">&lt;conventional dynamic cursor name&gt; </a>
+  | <a href="#PTF-cursor-name">&lt;PTF cursor name&gt; </a></pre>
+</div>
+</div>
+<div id="conventional-dynamic-cursor-name" class="listingblock">
+<div class="content">
+<pre>&lt;conventional dynamic cursor name&gt; ::=
     <a href="#cursor-name">&lt;cursor name&gt; </a>
   | <a href="#extended-cursor-name">&lt;extended cursor name&gt; </a></pre>
 </div>
@@ -2193,9 +2282,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   [ <a href="#scope-option">&lt;scope option&gt; </a> ] <a href="#simple-value-specification">&lt;simple value specification&gt; </a></pre>
 </div>
 </div>
+<div id="PTF-cursor-name" class="listingblock">
+<div class="content">
+<pre>&lt;PTF cursor name&gt; ::=
+  PTF <a href="#simple-value-specification">&lt;simple value specification&gt; </a></pre>
+</div>
+</div>
 <div id="descriptor-name" class="listingblock">
 <div class="content">
 <pre>&lt;descriptor name&gt; ::=
+    <a href="#conventional-descriptor-name">&lt;conventional descriptor name&gt; </a>
+  | <a href="#PTF-descriptor-name">&lt;PTF descriptor name&gt; </a></pre>
+</div>
+</div>
+<div id="conventional-descriptor-name" class="listingblock">
+<div class="content">
+<pre>&lt;conventional descriptor name&gt; ::=
     <a href="#non-extended-descriptor-name">&lt;non-extended descriptor name&gt; </a>
   | <a href="#extended-descriptor-name">&lt;extended descriptor name&gt; </a></pre>
 </div>
@@ -2219,9 +2321,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   | LOCAL</pre>
 </div>
 </div>
+<div id="PTF-descriptor-name" class="listingblock">
+<div class="content">
+<pre>&lt;PTF descriptor name&gt; ::=
+  PTF <a href="#simple-value-specification">&lt;simple value specification&gt; </a></pre>
+</div>
+</div>
 <div id="window-name" class="listingblock">
 <div class="content">
 <pre>&lt;window name&gt; ::=
+  <a href="#identifier">&lt;identifier&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-variable-name" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern variable name&gt; ::=
+  <a href="#correlation-name">&lt;correlation name&gt; </a></pre>
+</div>
+</div>
+<div id="measure-name" class="listingblock">
+<div class="content">
+<pre>&lt;measure name&gt; ::=
   <a href="#identifier">&lt;identifier&gt; </a></pre>
 </div>
 </div>
@@ -2321,7 +2441,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre>&lt;numeric type&gt; ::=
     <a href="#exact-numeric-type">&lt;exact numeric type&gt; </a>
-  | <a href="#approximate-numeric-type">&lt;approximate numeric type&gt; </a></pre>
+  | <a href="#approximate-numeric-type">&lt;approximate numeric type&gt; </a>
+  | <a href="#decimal-floating-point-type">&lt;decimal floating-point type&gt; </a></pre>
 </div>
 </div>
 <div id="exact-numeric-type" class="listingblock">
@@ -2344,6 +2465,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   | DOUBLE PRECISION</pre>
 </div>
 </div>
+<div id="decimal-floating-point-type" class="listingblock">
+<div class="content">
+<pre>&lt;decimal floating-point type&gt; ::=
+  DECFLOAT [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#precision">&lt;precision&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ]</pre>
+</div>
+</div>
 <div id="length" class="listingblock">
 <div class="content">
 <pre>&lt;length&gt; ::=
@@ -2359,7 +2486,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="large-object-length" class="listingblock">
 <div class="content">
 <pre>&lt;large object length&gt; ::=
-    <a href="#length">&lt;length&gt; </a> [ <a href="#multiplier">&lt;multiplier&gt; </a> ]
+    <a href="#unsigned-integer">&lt;unsigned integer&gt; </a> [ <a href="#multiplier">&lt;multiplier&gt; </a> ]
   | <a href="#large-object-length-token">&lt;large object length token&gt; </a></pre>
 </div>
 </div>
@@ -2553,7 +2680,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
      | <a href="#array-element-reference">&lt;array element reference&gt; </a>
      | <a href="#multiset-element-reference">&lt;multiset element reference&gt; </a>
      | <a href="#next-value-expression">&lt;next value expression&gt; </a>
-     | <a href="#routine-invocation">&lt;routine invocation&gt; </a></pre>
+     | <a href="#routine-invocation">&lt;routine invocation&gt; </a>
+     | <a href="#row-pattern-navigation-operation">&lt;row pattern navigation operation&gt; </a>
+     | <a href="#JSON-value-function">&lt;JSON value function&gt; </a></pre>
 </div>
 </div>
 <div id="collection-value-constructor" class="listingblock">
@@ -2786,8 +2915,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Format</div>
 <div class="content">
 <pre>&lt;set function specification&gt; ::=
-    <a href="#aggregate-function">&lt;aggregate function&gt; </a>
+    [ <a href="#running-or-final">&lt;running or final&gt; </a> ] <a href="#aggregate-function">&lt;aggregate function&gt; </a>
   | <a href="#grouping-operation">&lt;grouping operation&gt; </a></pre>
+</div>
+</div>
+<div id="running-or-final" class="listingblock">
+<div class="content">
+<pre>&lt;running or final&gt; ::=
+  RUNNING | FINAL</pre>
 </div>
 </div>
 <div id="grouping-operation" class="listingblock">
@@ -2820,7 +2955,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   | <a href="#ntile-function">&lt;ntile function&gt; </a>
   | <a href="#lead-or-lag-function">&lt;lead or lag function&gt; </a>
   | <a href="#first-or-last-value-function">&lt;first or last value function&gt; </a>
-  | <a href="#nth-value-function">&lt;nth value function&gt; </a></pre>
+  | <a href="#nth-value-function">&lt;nth value function&gt; </a>
+  | <a href="#window-row-pattern-measure">&lt;window row pattern measure&gt; </a></pre>
 </div>
 </div>
 <div id="rank-function-type" class="listingblock">
@@ -2928,6 +3064,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre>&lt;in-line window specification&gt; ::=
   <a href="#window-specification">&lt;window specification&gt; </a></pre>
+</div>
+</div>
+<div id="window-row-pattern-measure" class="listingblock">
+<div class="content">
+<pre>&lt;window row pattern measure&gt; ::=
+  <a href="#measure-name">&lt;measure name&gt; </a></pre>
 </div>
 </div>
 </div>
@@ -3116,7 +3258,10 @@ function&gt;.</p>
 <div class="title">Format</div>
 <div class="content">
 <pre>&lt;cast specification&gt; ::=
-     CAST <a href="#left-paren">&lt;left paren&gt; </a> <a href="#cast-operand">&lt;cast operand&gt; </a> AS <a href="#cast-target">&lt;cast target&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+     CAST <a href="#left-paren">&lt;left paren&gt; </a>
+         <a href="#cast-operand">&lt;cast operand&gt; </a> AS <a href="#cast-target">&lt;cast target&gt; </a>
+         [ FORMAT <a href="#cast-template">&lt;cast template&gt; </a> ]
+         <a href="#right-paren">&lt;right paren&gt; </a></pre>
 </div>
 </div>
 <div id="cast-operand" class="listingblock">
@@ -3131,6 +3276,12 @@ function&gt;.</p>
 <pre>&lt;cast target&gt; ::=
     <a href="#domain-name">&lt;domain name&gt; </a>
   | <a href="#data-type">&lt;data type&gt; </a></pre>
+</div>
+</div>
+<div id="cast-template" class="listingblock">
+<div class="content">
+<pre>&lt;cast template&gt; ::=
+  <a href="#character-string-literal">&lt;character string literal&gt; </a></pre>
 </div>
 </div>
 </div>
@@ -3254,7 +3405,7 @@ function&gt;.</p>
 <h3 id="_6_19_new_specification">6.19 &lt;new specification&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
-<p>Invoke a method on a newly-constructed value of a structured type.</p>
+<p>Invoke a method on a structured type.</p>
 </div>
 <div id="new-specification" class="listingblock">
 <div class="title">Format</div>
@@ -3325,7 +3476,7 @@ invoking an SQL-invoked method.</p>
 <h3 id="_6_23_reference_resolution">6.23 &lt;reference resolution&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
-<p>Obtain the value referenced by a reference value.</p>
+<p>Obtain the value referenced by a REF value.</p>
 </div>
 <div id="reference-resolution" class="listingblock">
 <div class="title">Format</div>
@@ -3365,7 +3516,113 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_26_value_expression">6.26 &lt;value expression&gt;</h3>
+<h3 id="_6_26_row_pattern_navigation_operation">6.26 &lt;row pattern navigation operation&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Return the value of a value expression evaluated in a row determined by navigation within the row pattern
+partition using logical and physical offsets from a row mapped to a row pattern variable.</p>
+</div>
+<div id="row-pattern-navigation-operation" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;row pattern navigation operation&gt; ::=
+    <a href="#row-pattern-navigation:-logical">&lt;row pattern navigation: logical&gt; </a>
+  | <a href="#row-pattern-navigation:-physical">&lt;row pattern navigation: physical&gt; </a>
+  | <a href="#row-pattern-navigation:-compound">&lt;row pattern navigation: compound&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-navigation:-logical" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern navigation: logical&gt; ::=
+  [ <a href="#running-or-final">&lt;running or final&gt; </a> ] <a href="#first-or-last">&lt;first or last&gt; </a>
+      <a href="#left-paren">&lt;left paren&gt; </a> <a href="#value-expression">&lt;value expression&gt; </a> [ <a href="#comma">&lt;comma&gt; </a> <a href="#logical-offset">&lt;logical offset&gt; </a> ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-navigation:-physical" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern navigation: physical&gt; ::=
+  <a href="#prev-or-next">&lt;prev or next&gt; </a>
+      <a href="#left-paren">&lt;left paren&gt; </a> <a href="#value-expression">&lt;value expression&gt; </a> [ <a href="#comma">&lt;comma&gt; </a> <a href="#physical-offset">&lt;physical offset&gt; </a> ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-navigation:-compound" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern navigation: compound&gt; ::=
+  <a href="#prev-or-next">&lt;prev or next&gt; </a> <a href="#left-paren">&lt;left paren&gt; </a> [ <a href="#running-or-final">&lt;running or final&gt; </a> ] <a href="#first-or-last">&lt;first or last&gt; </a>
+      <a href="#left-paren">&lt;left paren&gt; </a> <a href="#value-expression">&lt;value expression&gt; </a> [ <a href="#comma">&lt;comma&gt; </a> <a href="#logical-offset">&lt;logical offset&gt; </a> ] <a href="#right-paren">&lt;right paren&gt; </a>
+      [ <a href="#comma">&lt;comma&gt; </a> <a href="#physical-offset">&lt;physical offset&gt; </a> ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="first-or-last" class="listingblock">
+<div class="content">
+<pre>&lt;first or last&gt; ::=
+  FIRST | LAST</pre>
+</div>
+</div>
+<div id="prev-or-next" class="listingblock">
+<div class="content">
+<pre>&lt;prev or next&gt; ::=
+  PREV | NEXT</pre>
+</div>
+</div>
+<div id="logical-offset" class="listingblock">
+<div class="content">
+<pre>&lt;logical offset&gt; ::=
+    <a href="#simple-value-specification">&lt;simple value specification&gt; </a>
+  | <a href="#dynamic-parameter-specification">&lt;dynamic parameter specification&gt; </a></pre>
+</div>
+</div>
+<div id="physical-offset" class="listingblock">
+<div class="content">
+<pre>&lt;physical offset&gt; ::=
+    <a href="#simple-value-specification">&lt;simple value specification&gt; </a>
+  | <a href="#dynamic-parameter-specification">&lt;dynamic parameter specification&gt; </a></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_27_json_value_function">6.27 &lt;JSON value function&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Extract an SQL value of a predefined type from a JSON value.</p>
+</div>
+<div id="JSON-value-function" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON value function&gt; ::=
+  JSON_VALUE <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#JSON-API-common-syntax">&lt;JSON API common syntax&gt; </a>
+      [ <a href="#JSON-returning-clause">&lt;JSON returning clause&gt; </a> ]
+      [ <a href="#JSON-value-empty-behavior">&lt;JSON value empty behavior&gt; </a> ON EMPTY ]
+      [ <a href="#JSON-value-error-behavior">&lt;JSON value error behavior&gt; </a> ON ERROR ]
+  <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-returning-clause" class="listingblock">
+<div class="content">
+<pre>&lt;JSON returning clause&gt; ::=
+  RETURNING <a href="#data-type">&lt;data type&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-value-empty-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON value empty behavior&gt; ::=
+    ERROR
+  | NULL
+  | DEFAULT <a href="#value-expression">&lt;value expression&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-value-error-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON value error behavior&gt; ::=
+    ERROR
+  | NULL
+  | DEFAULT <a href="#value-expression">&lt;value expression&gt; </a></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_28_value_expression">6.28 &lt;value expression&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a value.</p>
@@ -3412,7 +3669,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_27_numeric_value_expression">6.27 &lt;numeric value expression&gt;</h3>
+<h3 id="_6_29_numeric_value_expression">6.29 &lt;numeric value expression&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a numeric value.</p>
@@ -3449,7 +3706,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_28_numeric_value_function">6.28 &lt;numeric value function&gt;</h3>
+<h3 id="_6_30_numeric_value_function">6.30 &lt;numeric value function&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a function yielding a value of type numeric.</p>
@@ -3467,13 +3724,17 @@ invoking an SQL-invoked method.</p>
   | <a href="#max-cardinality-expression">&lt;max cardinality expression&gt; </a>
   | <a href="#absolute-value-expression">&lt;absolute value expression&gt; </a>
   | <a href="#modulus-expression">&lt;modulus expression&gt; </a>
+  | <a href="#trigonometric-function">&lt;trigonometric function&gt; </a>
+  | <a href="#general-logarithm-function">&lt;general logarithm function&gt; </a>
+  | <a href="#common-logarithm">&lt;common logarithm&gt; </a>
   | <a href="#natural-logarithm">&lt;natural logarithm&gt; </a>
   | <a href="#exponential-function">&lt;exponential function&gt; </a>
   | <a href="#power-function">&lt;power function&gt; </a>
   | <a href="#square-root">&lt;square root&gt; </a>
   | <a href="#floor-function">&lt;floor function&gt; </a>
   | <a href="#ceiling-function">&lt;ceiling function&gt; </a>
-  | <a href="#width-bucket-function">&lt;width bucket function&gt; </a></pre>
+  | <a href="#width-bucket-function">&lt;width bucket function&gt; </a>
+  | <a href="#match-number-function">&lt;match number function&gt; </a></pre>
 </div>
 </div>
 <div id="position-expression" class="listingblock">
@@ -3654,6 +3915,43 @@ invoking an SQL-invoked method.</p>
   <a href="#numeric-value-expression">&lt;numeric value expression&gt; </a></pre>
 </div>
 </div>
+<div id="trigonometric-function" class="listingblock">
+<div class="content">
+<pre>&lt;trigonometric function&gt; ::=
+  <a href="#trigonometric-function-name">&lt;trigonometric function name&gt; </a> <a href="#left-paren">&lt;left paren&gt; </a> <a href="#numeric-value-expression">&lt;numeric value expression&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="trigonometric-function-name" class="listingblock">
+<div class="content">
+<pre>&lt;trigonometric function name&gt; ::=
+  SIN | COS | TAN | SINH | COSH | TANH | ASIN | ACOS | ATAN</pre>
+</div>
+</div>
+<div id="general-logarithm-function" class="listingblock">
+<div class="content">
+<pre>&lt;general logarithm function&gt; ::=
+  LOG <a href="#left-paren">&lt;left paren&gt; </a> <a href="#general-logarithm-base">&lt;general logarithm base&gt; </a> <a href="#comma">&lt;comma&gt; </a>
+      <a href="#general-logarithm-argument">&lt;general logarithm argument&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="general-logarithm-base" class="listingblock">
+<div class="content">
+<pre>&lt;general logarithm base&gt; ::=
+  <a href="#numeric-value-expression">&lt;numeric value expression&gt; </a></pre>
+</div>
+</div>
+<div id="general-logarithm-argument" class="listingblock">
+<div class="content">
+<pre>&lt;general logarithm argument&gt; ::=
+  <a href="#numeric-value-expression">&lt;numeric value expression&gt; </a></pre>
+</div>
+</div>
+<div id="common-logarithm" class="listingblock">
+<div class="content">
+<pre>&lt;common logarithm&gt; ::=
+  LOG10 <a href="#left-paren">&lt;left paren&gt; </a> <a href="#numeric-value-expression">&lt;numeric value expression&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
 <div id="natural-logarithm" class="listingblock">
 <div class="content">
 <pre>&lt;natural logarithm&gt; ::=
@@ -3734,9 +4032,15 @@ invoking an SQL-invoked method.</p>
   <a href="#numeric-value-expression">&lt;numeric value expression&gt; </a></pre>
 </div>
 </div>
+<div id="match-number-function" class="listingblock">
+<div class="content">
+<pre>&lt;match number function&gt; ::=
+  MATCH_NUMBER <a href="#left-paren">&lt;left paren&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_6_29_string_value_expression">6.29 &lt;string value expression&gt;</h3>
+<h3 id="_6_31_string_value_expression">6.31 &lt;string value expression&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a character string value or a binary string value.</p>
@@ -3803,7 +4107,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_30_string_value_function">6.30 &lt;string value function&gt;</h3>
+<h3 id="_6_32_string_value_function">6.32 &lt;string value function&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a function yielding a value of type character string or binary string.</p>
@@ -3813,7 +4117,9 @@ invoking an SQL-invoked method.</p>
 <div class="content">
 <pre>&lt;string value function&gt; ::=
     <a href="#character-value-function">&lt;character value function&gt; </a>
-  | <a href="#binary-value-function">&lt;binary value function&gt; </a></pre>
+  | <a href="#binary-value-function">&lt;binary value function&gt; </a>
+  | <a href="#JSON-value-constructor">&lt;JSON value constructor&gt; </a>
+  | <a href="#JSON-query">&lt;JSON query&gt; </a></pre>
 </div>
 </div>
 <div id="character-value-function" class="listingblock">
@@ -3829,7 +4135,8 @@ invoking an SQL-invoked method.</p>
   | <a href="#trim-function">&lt;trim function&gt; </a>
   | <a href="#character-overlay-function">&lt;character overlay function&gt; </a>
   | <a href="#normalize-function">&lt;normalize function&gt; </a>
-  | <a href="#specific-type-method">&lt;specific type method&gt; </a></pre>
+  | <a href="#specific-type-method">&lt;specific type method&gt; </a>
+  | <a href="#classifier-function">&lt;classifier function&gt; </a></pre>
 </div>
 </div>
 <div id="character-substring-function" class="listingblock">
@@ -4033,9 +4340,142 @@ invoking an SQL-invoked method.</p>
   <a href="#numeric-value-expression">&lt;numeric value expression&gt; </a></pre>
 </div>
 </div>
+<div id="classifier-function" class="listingblock">
+<div class="content">
+<pre>&lt;classifier function&gt; ::=
+  CLASSIFIER <a href="#left-paren">&lt;left paren&gt; </a> [ <a href="#row-pattern-variable-name">&lt;row pattern variable name&gt; </a> ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_6_31_datetime_value_expression">6.31 &lt;datetime value expression&gt;</h3>
+<h3 id="_6_33_json_value_constructor">6.33 &lt;JSON value constructor&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Generate a JSON text fragment.</p>
+</div>
+<div id="JSON-value-constructor" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON value constructor&gt; ::=
+    <a href="#JSON-object-constructor">&lt;JSON object constructor&gt; </a>
+  | <a href="#JSON-array-constructor">&lt;JSON array constructor&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-object-constructor" class="listingblock">
+<div class="content">
+<pre>&lt;JSON object constructor&gt; ::=
+  JSON_OBJECT <a href="#left-paren">&lt;left paren&gt; </a>
+      [ <a href="#JSON-name-and-value">&lt;JSON name and value&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#JSON-name-and-value">&lt;JSON name and value&gt; </a> }... ]
+      [ <a href="#JSON-constructor-null-clause">&lt;JSON constructor null clause&gt; </a> ]
+      [ <a href="#JSON-key-uniqueness-constraint">&lt;JSON key uniqueness constraint&gt; </a> ] ]
+      [ <a href="#JSON-output-clause">&lt;JSON output clause&gt; </a> ]
+      <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-name-and-value" class="listingblock">
+<div class="content">
+<pre>&lt;JSON name and value&gt; ::=
+    [ KEY ] <a href="#JSON-name">&lt;JSON name&gt; </a> VALUE <a href="#JSON-value-expression">&lt;JSON value expression&gt; </a>
+  | <a href="#JSON-name">&lt;JSON name&gt; </a> <a href="#colon">&lt;colon&gt; </a> <a href="#JSON-value-expression">&lt;JSON value expression&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-name" class="listingblock">
+<div class="content">
+<pre>&lt;JSON name&gt; ::=
+  <a href="#character-value-expression">&lt;character value expression&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-constructor-null-clause" class="listingblock">
+<div class="content">
+<pre>&lt;JSON constructor null clause&gt; ::=
+    NULL ON NULL
+  | ABSENT ON NULL</pre>
+</div>
+</div>
+<div id="JSON-array-constructor" class="listingblock">
+<div class="content">
+<pre>&lt;JSON array constructor&gt; ::=
+    <a href="#JSON-array-constructor-by-enumeration">&lt;JSON array constructor by enumeration&gt; </a>
+  | <a href="#JSON-array-constructor-by-query">&lt;JSON array constructor by query&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-array-constructor-by-enumeration" class="listingblock">
+<div class="content">
+<pre>&lt;JSON array constructor by enumeration&gt; ::=
+  JSON_ARRAY <a href="#left-paren">&lt;left paren&gt; </a>
+      [ <a href="#JSON-value-expression">&lt;JSON value expression&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#JSON-value-expression">&lt;JSON value expression&gt; </a> }... ]
+      [ <a href="#JSON-constructor-null-clause">&lt;JSON constructor null clause&gt; </a> ] ]
+      [ <a href="#JSON-output-clause">&lt;JSON output clause&gt; </a> ]
+      <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-array-constructor-by-query" class="listingblock">
+<div class="content">
+<pre>&lt;JSON array constructor by query&gt; ::=
+  JSON_ARRAY <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#query-expression">&lt;query expression&gt; </a>
+      [ <a href="#JSON-input-clause">&lt;JSON input clause&gt; </a> ]
+      [ <a href="#JSON-constructor-null-clause">&lt;JSON constructor null clause&gt; </a> ]
+      [ <a href="#JSON-output-clause">&lt;JSON output clause&gt; </a> ]
+      <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_34_json_query">6.34 &lt;JSON query&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Extract a JSON text from a JSON text using an SQL/JSON path expression.</p>
+</div>
+<div id="JSON-query" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON query&gt; ::=
+  JSON_QUERY <a href="#left-paren">&lt;left paren&gt; </a>
+  <a href="#JSON-API-common-syntax">&lt;JSON API common syntax&gt; </a>
+      [ <a href="#JSON-output-clause">&lt;JSON output clause&gt; </a> ]
+      [ <a href="#JSON-query-wrapper-behavior">&lt;JSON query wrapper behavior&gt; </a> WRAPPER ]
+      [ <a href="#JSON-query-quotes-behavior">&lt;JSON query quotes behavior&gt; </a> QUOTES [ ON SCALAR STRING ] ]
+      [ <a href="#JSON-query-empty-behavior">&lt;JSON query empty behavior&gt; </a> ON EMPTY ]
+      [ <a href="#JSON-query-error-behavior">&lt;JSON query error behavior&gt; </a> ON ERROR ]
+  <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-query-wrapper-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON query wrapper behavior&gt; ::=
+    WITHOUT [ ARRAY ]
+  | WITH [ CONDITIONAL | UNCONDITIONAL ] [ ARRAY ]</pre>
+</div>
+</div>
+<div id="JSON-query-quotes-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON query quotes behavior&gt; ::=
+    KEEP
+  | OMIT</pre>
+</div>
+</div>
+<div id="JSON-query-empty-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON query empty behavior&gt; ::=
+    ERROR
+  | NULL
+  | EMPTY ARRAY
+  | EMPTY OBJECT</pre>
+</div>
+</div>
+<div id="JSON-query-error-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON query error behavior&gt; ::=
+    ERROR
+  | NULL
+  | EMPTY ARRAY
+  | EMPTY OBJECT</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_35_datetime_value_expression">6.35 &lt;datetime value expression&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a datetime value.</p>
@@ -4084,7 +4524,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_32_datetime_value_function">6.32 &lt;datetime value function&gt;</h3>
+<h3 id="_6_36_datetime_value_function">6.36 &lt;datetime value function&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a function yielding a value of type datetime.</p>
@@ -4132,7 +4572,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_33_interval_value_expression">6.33 &lt;interval value expression&gt;</h3>
+<h3 id="_6_37_interval_value_expression">6.37 &lt;interval value expression&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify an interval value.</p>
@@ -4190,7 +4630,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_34_interval_value_function">6.34 &lt;interval value function&gt;</h3>
+<h3 id="_6_38_interval_value_function">6.38 &lt;interval value function&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a function yielding a value of type interval.</p>
@@ -4210,7 +4650,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_35_boolean_value_expression">6.35 &lt;boolean value expression&gt;</h3>
+<h3 id="_6_39_boolean_value_expression">6.39 &lt;boolean value expression&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a boolean value.</p>
@@ -4272,7 +4712,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_36_array_value_expression">6.36 &lt;array value expression&gt;</h3>
+<h3 id="_6_40_array_value_expression">6.40 &lt;array value expression&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify an array value.</p>
@@ -4306,7 +4746,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_37_array_value_function">6.37 &lt;array value function&gt;</h3>
+<h3 id="_6_41_array_value_function">6.41 &lt;array value function&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a function yielding a value of an array type.</p>
@@ -4327,7 +4767,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_38_array_value_constructor">6.38 &lt;array value constructor&gt;</h3>
+<h3 id="_6_42_array_value_constructor">6.42 &lt;array value constructor&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify construction of an array.</p>
@@ -4366,7 +4806,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_39_multiset_value_expression">6.39 &lt;multiset value expression&gt;</h3>
+<h3 id="_6_43_multiset_value_expression">6.43 &lt;multiset value expression&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a multiset value.</p>
@@ -4396,7 +4836,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_40_multiset_value_function">6.40 &lt;multiset value function&gt;</h3>
+<h3 id="_6_44_multiset_value_function">6.44 &lt;multiset value function&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a function yielding a value of a multiset type.</p>
@@ -4416,7 +4856,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_41_multiset_value_constructor">6.41 &lt;multiset value constructor&gt;</h3>
+<h3 id="_6_45_multiset_value_constructor">6.45 &lt;multiset value constructor&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify construction of a multiset.</p>
@@ -4705,27 +5145,28 @@ invoking an SQL-invoked method.</p>
 <div id="table-primary" class="listingblock">
 <div class="content">
 <pre>&lt;table primary&gt; ::=
-      <a href="#table-or-query-name">&lt;table or query name&gt; </a> [ <a href="#query-system-time-period-specification">&lt;query system time period specification&gt; </a> ]
-          [ [ AS ] <a href="#correlation-name">&lt;correlation name&gt; </a>
-            [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#derived-column-list">&lt;derived column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ] ]
-  | <a href="#derived-table">&lt;derived table&gt; </a> [ AS ] <a href="#correlation-name">&lt;correlation name&gt; </a>
-      [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#derived-column-list">&lt;derived column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ]
-  | <a href="#lateral-derived-table">&lt;lateral derived table&gt; </a> [ AS ] <a href="#correlation-name">&lt;correlation name&gt; </a>
-      [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#derived-column-list">&lt;derived column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ]
-  | <a href="#collection-derived-table">&lt;collection derived table&gt; </a> [ AS ] <a href="#correlation-name">&lt;correlation name&gt; </a>
-        [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#derived-column-list">&lt;derived column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ]
-  | <a href="#table-function-derived-table">&lt;table function derived table&gt; </a> [ AS ] <a href="#correlation-name">&lt;correlation name&gt; </a>
-      [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#derived-column-list">&lt;derived column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ]
-  | <a href="#only-spec">&lt;only spec&gt; </a> [ [ AS ] <a href="#correlation-name">&lt;correlation name&gt; </a>
-      [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#derived-column-list">&lt;derived column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ] ]
-  | <a href="#data-change-delta-table">&lt;data change delta table&gt; </a> [ [ AS ] <a href="#correlation-name">&lt;correlation name&gt; </a>
-      [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#derived-column-list">&lt;derived column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ] ]
+    <a href="#table-or-query-name">&lt;table or query name&gt; </a>
+        [ <a href="#query-system-time-period-specification">&lt;query system time period specification&gt; </a> ]
+        [ <a href="#correlation-or-recognition">&lt;correlation or recognition&gt; </a> ]
+  | <a href="#derived-table">&lt;derived table&gt; </a> <a href="#correlation-or-recognition">&lt;correlation or recognition&gt; </a>
+  | <a href="#lateral-derived-table">&lt;lateral derived table&gt; </a> <a href="#correlation-or-recognition">&lt;correlation or recognition&gt; </a>
+  | <a href="#collection-derived-table">&lt;collection derived table&gt; </a> <a href="#correlation-or-recognition">&lt;correlation or recognition&gt; </a>
+  | <a href="#table-function-derived-table">&lt;table function derived table&gt; </a> <a href="#correlation-or-recognition">&lt;correlation or recognition&gt; </a>
+  | <a href="#PTF-derived-table">&lt;PTF derived table&gt; </a> [ <a href="#correlation-or-recognition">&lt;correlation or recognition&gt; </a> ]
+  | <a href="#only-spec">&lt;only spec&gt; </a> [ <a href="#correlation-or-recognition">&lt;correlation or recognition&gt; </a> ]
+  | <a href="#data-change-delta-table">&lt;data change delta table&gt; </a> [ <a href="#correlation-or-recognition">&lt;correlation or recognition&gt; </a> ]
+  | <a href="#JSON-table">&lt;JSON table&gt; </a> <a href="#correlation-or-recognition">&lt;correlation or recognition&gt; </a>
+  | <a href="#JSON-table-primitive">&lt;JSON table primitive&gt; </a> <a href="#correlation-name">&lt;correlation name&gt; </a>
   | <a href="#parenthesized-joined-table">&lt;parenthesized joined table&gt; </a></pre>
 </div>
 </div>
-<div id="query-system-time-period-specification" class="listingblock">
+<div id="correlation-or-recognition" class="listingblock">
 <div class="content">
-<pre>&lt;query system time period specification&gt; ::=
+<pre>&lt;correlation or recognition&gt; ::=
+    [ AS ] <a href="#correlation-name">&lt;correlation name&gt; </a>
+        [ <a href="#parenthesized-derived-column-list">&lt;parenthesized derived column list&gt; </a> ]
+  | <a href="#row-pattern-recognition-clause-and-name">&lt;row pattern recognition clause and name&gt; </a>
+&lt;query system time period specification&gt; ::=
     FOR SYSTEM_TIME AS OF <a href="#point-in-time-1">&lt;point in time 1&gt; </a>
   | FOR SYSTEM_TIME BETWEEN [ ASYMMETRIC | SYMMETRIC ]
       <a href="#point-in-time-1">&lt;point in time 1&gt; </a> AND <a href="#point-in-time-2">&lt;point in time 2&gt; </a>
@@ -4782,6 +5223,12 @@ invoking an SQL-invoked method.</p>
   <a href="#table-subquery">&lt;table subquery&gt; </a></pre>
 </div>
 </div>
+<div id="PTF-derived-table" class="listingblock">
+<div class="content">
+<pre>&lt;PTF derived table&gt; ::=
+  TABLE <a href="#left-paren">&lt;left paren&gt; </a> <a href="#routine-invocation">&lt;routine invocation&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
 <div id="table-or-query-name" class="listingblock">
 <div class="content">
 <pre>&lt;table or query name&gt; ::=
@@ -4832,9 +5279,302 @@ invoking an SQL-invoked method.</p>
   | <a href="#left-paren">&lt;left paren&gt; </a> <a href="#joined-table">&lt;joined table&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
 </div>
 </div>
+<div id="row-pattern-recognition-clause-and-name" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern recognition clause and name&gt; ::=
+  [ [ AS ] <a href="#row-pattern-input-name">&lt;row pattern input name&gt; </a>
+      [ <a href="#row-pattern-input-derived-column-list">&lt;row pattern input derived column list&gt; </a> ] ]
+      <a href="#row-pattern-recognition-clause">&lt;row pattern recognition clause&gt; </a> [ [ AS ] <a href="#row-pattern-output-name">&lt;row pattern output name&gt; </a>
+      [ <a href="#row-pattern-output-derived-column-list">&lt;row pattern output derived column list&gt; </a> ] ]</pre>
+</div>
+</div>
+<div id="row-pattern-input-name" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern input name&gt; ::=
+  <a href="#correlation-name">&lt;correlation name&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-output-name" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern output name&gt; ::=
+  <a href="#correlation-name">&lt;correlation name&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-input-derived-column-list" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern input derived column list&gt; ::=
+  <a href="#parenthesized-derived-column-list">&lt;parenthesized derived column list&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-output-derived-column-list" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern output derived column list&gt; ::=
+  <a href="#parenthesized-derived-column-list">&lt;parenthesized derived column list&gt; </a></pre>
+</div>
+</div>
+<div id="parenthesized-derived-column-list" class="listingblock">
+<div class="content">
+<pre>&lt;parenthesized derived column list&gt; ::=
+  <a href="#left-paren">&lt;left paren&gt; </a> <a href="#derived-column-list">&lt;derived column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_7_7_joined_table">7.7     &lt;joined table&gt;</h3>
+<h3 id="_7_7_row_pattern_recognition_clause">7.7        &lt;row pattern recognition clause&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Match row patterns.</p>
+</div>
+<div id="row-pattern-recognition-clause" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;row pattern recognition clause&gt; ::=
+  MATCH_RECOGNIZE <a href="#left-paren">&lt;left paren&gt; </a>
+      [ <a href="#row-pattern-partition-by">&lt;row pattern partition by&gt; </a> ]
+      [ <a href="#row-pattern-order-by">&lt;row pattern order by&gt; </a> ]
+      [ <a href="#row-pattern-measures">&lt;row pattern measures&gt; </a> ]
+      [ <a href="#row-pattern-rows-per-match">&lt;row pattern rows per match&gt; </a> ]
+      <a href="#row-pattern-common-syntax">&lt;row pattern common syntax&gt; </a>
+      <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-partition-by" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern partition by&gt; ::=
+  PARTITION BY <a href="#row-pattern-partition-list">&lt;row pattern partition list&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-partition-list" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern partition list&gt; ::=
+  <a href="#row-pattern-partition-column">&lt;row pattern partition column&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#row-pattern-partition-column">&lt;row pattern partition column&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="row-pattern-partition-column" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern partition column&gt; ::=
+  <a href="#column-reference">&lt;column reference&gt; </a> [ <a href="#collate-clause">&lt;collate clause&gt; </a> ]</pre>
+</div>
+</div>
+<div id="row-pattern-order-by" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern order by&gt; ::=
+  ORDER BY <a href="#sort-specification-list">&lt;sort specification list&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-rows-per-match" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern rows per match&gt; ::=
+    ONE ROW PER MATCH
+  | ALL ROWS PER MATCH [ <a href="#row-pattern-empty-match-handling">&lt;row pattern empty match handling&gt; </a> ]</pre>
+</div>
+</div>
+<div id="row-pattern-empty-match-handling" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern empty match handling&gt; ::=
+    SHOW EMPTY MATCHES
+  | OMIT EMPTY MATCHES
+  | WITH UNMATCHED ROWS</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_7_8_row_pattern_measures">7.8        &lt;row pattern measures&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Specify the measure columns of a row pattern.</p>
+</div>
+<div id="row-pattern-measures" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;row pattern measures&gt; ::=
+  MEASURES <a href="#row-pattern-measure-list">&lt;row pattern measure list&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-measure-list" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern measure list&gt; ::=
+  <a href="#row-pattern-measure-definition">&lt;row pattern measure definition&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#row-pattern-measure-definition">&lt;row pattern measure definition&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="row-pattern-measure-definition" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern measure definition&gt; ::=
+  <a href="#row-pattern-measure-expression">&lt;row pattern measure expression&gt; </a> AS <a href="#measure-name">&lt;measure name&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-measure-expression" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern measure expression&gt; ::=
+  <a href="#value-expression">&lt;value expression&gt; </a></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_7_9_row_pattern_common_syntax">7.9    &lt;row pattern common syntax&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Specify syntax that is common to row patterns in &lt;table reference&gt; and in &lt;window clause&gt;.</p>
+</div>
+<div id="row-pattern-common-syntax" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;row pattern common syntax&gt; ::=
+  [ AFTER MATCH <a href="#row-pattern-skip-to">&lt;row pattern skip to&gt; </a> ]
+      [ <a href="#row-pattern-initial-or-seek">&lt;row pattern initial or seek&gt; </a> ]
+      PATTERN <a href="#left-paren">&lt;left paren&gt; </a> <a href="#row-pattern">&lt;row pattern&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+      [ <a href="#row-pattern-subset-clause">&lt;row pattern subset clause&gt; </a> ]
+      DEFINE <a href="#row-pattern-definition-list">&lt;row pattern definition list&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-skip-to" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern skip to&gt; ::=
+    SKIP TO NEXT ROW
+  | SKIP PAST LAST ROW
+  | SKIP TO FIRST <a href="#row-pattern-skip-to-variable-name">&lt;row pattern skip to variable name&gt; </a>
+  | SKIP TO LAST <a href="#row-pattern-skip-to-variable-name">&lt;row pattern skip to variable name&gt; </a>
+  | SKIP TO <a href="#row-pattern-skip-to-variable-name">&lt;row pattern skip to variable name&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-skip-to-variable-name" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern skip to variable name&gt; ::=
+  <a href="#row-pattern-variable-name">&lt;row pattern variable name&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-initial-or-seek" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern initial or seek&gt; ::=
+    INITIAL
+  | SEEK</pre>
+</div>
+</div>
+<div id="row-pattern" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern&gt; ::=
+    <a href="#row-pattern-term">&lt;row pattern term&gt; </a>
+  | <a href="#row-pattern-alternation">&lt;row pattern alternation&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-alternation" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern alternation&gt; ::=
+  <a href="#row-pattern">&lt;row pattern&gt; </a> <a href="#vertical-bar">&lt;vertical bar&gt; </a> <a href="#row-pattern-term">&lt;row pattern term&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-term" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern term&gt; ::=
+    <a href="#row-pattern-factor">&lt;row pattern factor&gt; </a>
+  | <a href="#row-pattern-term">&lt;row pattern term&gt; </a> <a href="#row-pattern-factor">&lt;row pattern factor&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-factor" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern factor&gt; ::=
+  <a href="#row-pattern-primary">&lt;row pattern primary&gt; </a> [ <a href="#row-pattern-quantifier">&lt;row pattern quantifier&gt; </a> ]</pre>
+</div>
+</div>
+<div id="row-pattern-quantifier" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern quantifier&gt; ::=
+    <a href="#asterisk">&lt;asterisk&gt; </a> [ <a href="#question-mark">&lt;question mark&gt; </a> ]
+  | <a href="#plus-sign">&lt;plus sign&gt; </a> [ <a href="#question-mark">&lt;question mark&gt; </a> ]
+  | <a href="#question-mark">&lt;question mark&gt; </a> [ <a href="#question-mark">&lt;question mark&gt; </a> ]
+  | <a href="#left-brace">&lt;left brace&gt; </a> [ <a href="#unsigned-integer">&lt;unsigned integer&gt; </a> ] <a href="#comma">&lt;comma&gt; </a> [ <a href="#unsigned-integer">&lt;unsigned integer&gt; </a> ] <a href="#right-brace">&lt;right brace&gt; </a>
+      [ <a href="#question-mark">&lt;question mark&gt; </a> ]
+  | <a href="#left-brace">&lt;left brace&gt; </a> <a href="#unsigned-integer">&lt;unsigned integer&gt; </a> <a href="#right-brace">&lt;right brace&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-primary" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern primary&gt; ::=
+    <a href="#row-pattern-primary-variable-name">&lt;row pattern primary variable name&gt; </a>
+  | <a href="#dollar-sign">&lt;dollar sign&gt; </a>
+  | <a href="#circumflex">&lt;circumflex&gt; </a>
+  | <a href="#left-paren">&lt;left paren&gt; </a> [ <a href="#row-pattern">&lt;row pattern&gt; </a> ] <a href="#right-paren">&lt;right paren&gt; </a>
+  | <a href="#left-brace-minus">&lt;left brace minus&gt; </a> <a href="#row-pattern">&lt;row pattern&gt; </a> <a href="#right-minus-brace">&lt;right minus brace&gt; </a>
+  | <a href="#row-pattern-permute">&lt;row pattern permute&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-primary-variable-name" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern primary variable name&gt; ::=
+  <a href="#row-pattern-variable-name">&lt;row pattern variable name&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-permute" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern permute&gt; ::=
+  PERMUTE <a href="#left-paren">&lt;left paren&gt; </a> <a href="#row-pattern">&lt;row pattern&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#row-pattern">&lt;row pattern&gt; </a> }... ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-subset-clause" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern subset clause&gt; ::=
+  SUBSET <a href="#row-pattern-subset-list">&lt;row pattern subset list&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-subset-list" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern subset list&gt; ::=
+  <a href="#row-pattern-subset-item">&lt;row pattern subset item&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#row-pattern-subset-item">&lt;row pattern subset item&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="row-pattern-subset-item" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern subset item&gt; ::=
+  <a href="#row-pattern-subset-item-variable-name">&lt;row pattern subset item variable name&gt; </a> <a href="#equals-operator">&lt;equals operator&gt; </a>
+      <a href="#left-paren">&lt;left paren&gt; </a> <a href="#row-pattern-subset-rhs">&lt;row pattern subset rhs&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-subset-item-variable-name" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern subset item variable name&gt; ::=
+  <a href="#row-pattern-variable-name">&lt;row pattern variable name&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-subset-rhs" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern subset rhs&gt; ::=
+  <a href="#row-pattern-subset-rhs-variable-name">&lt;row pattern subset rhs variable name&gt; </a>
+      [ { <a href="#comma">&lt;comma&gt; </a> <a href="#row-pattern-subset-rhs-variable-name">&lt;row pattern subset rhs variable name&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="row-pattern-subset-rhs-variable-name" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern subset rhs variable name&gt; ::=
+  <a href="#row-pattern-variable-name">&lt;row pattern variable name&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-definition-list" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern definition list&gt; ::=
+  <a href="#row-pattern-definition">&lt;row pattern definition&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#row-pattern-definition">&lt;row pattern definition&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="row-pattern-definition" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern definition&gt; ::=
+  <a href="#row-pattern-definition-variable-name">&lt;row pattern definition variable name&gt; </a> AS <a href="#row-pattern-definition-search-condition">&lt;row pattern definition search condition&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-definition-variable-name" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern definition variable name&gt; ::=
+  <a href="#row-pattern-variable-name">&lt;row pattern variable name&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-definition-search-condition" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern definition search condition&gt; ::=
+  <a href="#search-condition">&lt;search condition&gt; </a></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_7_10_joined_table">7.10 &lt;joined table&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a table derived from a Cartesian product, inner join, or outer join.</p>
@@ -4908,7 +5648,13 @@ invoking an SQL-invoked method.</p>
 <div id="named-columns-join" class="listingblock">
 <div class="content">
 <pre>&lt;named columns join&gt; ::=
-  USING <a href="#left-paren">&lt;left paren&gt; </a> <a href="#join-column-list">&lt;join column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+  USING <a href="#left-paren">&lt;left paren&gt; </a> <a href="#join-column-list">&lt;join column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> [ AS <a href="#join-correlation-name">&lt;join correlation name&gt; </a> ]</pre>
+</div>
+</div>
+<div id="join-correlation-name" class="listingblock">
+<div class="content">
+<pre>&lt;join correlation name&gt; ::=
+  <a href="#correlation-name">&lt;correlation name&gt; </a></pre>
 </div>
 </div>
 <div id="join-type" class="listingblock">
@@ -4934,7 +5680,296 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_7_8_where_clause">7.8      &lt;where clause&gt;</h3>
+<h3 id="_7_11_json_table">7.11 &lt;JSON table&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Query a JSON text and present it as a relational table.</p>
+</div>
+<div id="JSON-table" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON table&gt; ::=
+  JSON_TABLE <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#JSON-API-common-syntax">&lt;JSON API common syntax&gt; </a>
+      <a href="#JSON-table-columns-clause">&lt;JSON table columns clause&gt; </a>
+      [ <a href="#JSON-table-plan-clause">&lt;JSON table plan clause&gt; </a> ]
+      [ <a href="#JSON-table-error-behavior">&lt;JSON table error behavior&gt; </a> ON ERROR ]
+  <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-columns-clause" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table columns clause&gt; ::=
+  COLUMNS <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#JSON-table-column-definition">&lt;JSON table column definition&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#JSON-table-column-definition">&lt;JSON table column definition&gt; </a> }... ]
+  <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-column-definition" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table column definition&gt; ::=
+    <a href="#JSON-table-ordinality-column-definition">&lt;JSON table ordinality column definition&gt; </a>
+  | <a href="#JSON-table-regular-column-definition">&lt;JSON table regular column definition&gt; </a>
+  | <a href="#JSON-table-formatted-column-definition">&lt;JSON table formatted column definition&gt; </a>
+  | <a href="#JSON-table-nested-columns">&lt;JSON table nested columns&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-ordinality-column-definition" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table ordinality column definition&gt; ::=
+  <a href="#column-name">&lt;column name&gt; </a> FOR ORDINALITY</pre>
+</div>
+</div>
+<div id="JSON-table-regular-column-definition" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table regular column definition&gt; ::=
+  <a href="#column-name">&lt;column name&gt; </a> <a href="#data-type">&lt;data type&gt; </a>
+      [ PATH <a href="#JSON-table-column-path-specification">&lt;JSON table column path specification&gt; </a> ]
+      [ <a href="#JSON-table-column-empty-behavior">&lt;JSON table column empty behavior&gt; </a> ON EMPTY ]
+      [ <a href="#JSON-table-column-error-behavior">&lt;JSON table column error behavior&gt; </a> ON ERROR ]</pre>
+</div>
+</div>
+<div id="JSON-table-column-empty-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table column empty behavior&gt; ::=
+    ERROR
+  | NULL
+  | DEFAULT <a href="#value-expression">&lt;value expression&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-column-error-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table column error behavior&gt; ::=
+    ERROR
+  | NULL
+  | DEFAULT <a href="#value-expression">&lt;value expression&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-column-path-specification" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table column path specification&gt; ::=
+  <a href="#JSON-path-specification">&lt;JSON path specification&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-formatted-column-definition" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table formatted column definition&gt; ::=
+  <a href="#column-name">&lt;column name&gt; </a> <a href="#data-type">&lt;data type&gt; </a>
+      FORMAT <a href="#JSON-representation">&lt;JSON representation&gt; </a>
+      [ PATH <a href="#JSON-table-column-path-specification">&lt;JSON table column path specification&gt; </a> ]
+      [ <a href="#JSON-table-formatted-column-wrapper-behavior">&lt;JSON table formatted column wrapper behavior&gt; </a> WRAPPER ]
+      [ <a href="#JSON-table-formatted-column-quotes-behavior">&lt;JSON table formatted column quotes behavior&gt; </a> QUOTES [ ON SCALAR STRING ] ]
+      [ <a href="#JSON-table-formatted-column-empty-behavior">&lt;JSON table formatted column empty behavior&gt; </a> ON EMPTY ]
+      [ <a href="#JSON-table-formatted-column-error-behavior">&lt;JSON table formatted column error behavior&gt; </a> ON ERROR ]</pre>
+</div>
+</div>
+<div id="JSON-table-formatted-column-wrapper-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table formatted column wrapper behavior&gt; ::=
+    WITHOUT [ ARRAY ]
+  | WITH [ CONDITIONAL | UNCONDITIONAL ] [ ARRAY ]</pre>
+</div>
+</div>
+<div id="JSON-table-formatted-column-quotes-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table formatted column quotes behavior&gt; ::=
+    KEEP
+  | OMIT</pre>
+</div>
+</div>
+<div id="JSON-table-formatted-column-empty-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table formatted column empty behavior&gt; ::=
+    ERROR
+  | NULL
+  | EMPTY ARRAY
+  | EMPTY OBJECT</pre>
+</div>
+</div>
+<div id="JSON-table-formatted-column-error-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table formatted column error behavior&gt; ::=
+    ERROR
+  | NULL
+  | EMPTY ARRAY
+  | EMPTY OBJECT</pre>
+</div>
+</div>
+<div id="JSON-table-nested-columns" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table nested columns&gt; ::=
+  NESTED [ PATH ] <a href="#JSON-table-nested-path-specification">&lt;JSON table nested path specification&gt; </a>
+      [ AS <a href="#JSON-table-nested-path-name">&lt;JSON table nested path name&gt; </a> ]
+  <a href="#JSON-table-columns-clause">&lt;JSON table columns clause&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-nested-path-specification" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table nested path specification&gt; ::=
+  <a href="#JSON-path-specification">&lt;JSON path specification&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-nested-path-name" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table nested path name&gt; ::=
+  <a href="#JSON-table-path-name">&lt;JSON table path name&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-path-name" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table path name&gt; ::=
+  <a href="#identifier">&lt;identifier&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-plan-clause" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table plan clause&gt; ::=
+    <a href="#JSON-table-specific-plan">&lt;JSON table specific plan&gt; </a>
+  | <a href="#JSON-table-default-plan">&lt;JSON table default plan&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-specific-plan" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table specific plan&gt; ::=
+  PLAN <a href="#left-paren">&lt;left paren&gt; </a> <a href="#JSON-table-plan">&lt;JSON table plan&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-plan" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table plan&gt; ::=
+    <a href="#JSON-table-path-name">&lt;JSON table path name&gt; </a>
+  | <a href="#JSON-table-plan-parent/child">&lt;JSON table plan parent/child&gt; </a>
+  | <a href="#JSON-table-plan-sibling">&lt;JSON table plan sibling&gt; </a></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>[[JSON-table-plan-parent/child]]</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;JSON table plan parent/child&gt; ::=
+    <a href="#JSON-table-plan-outer">&lt;JSON table plan outer&gt; </a>
+  | <a href="#JSON-table-plan-inner">&lt;JSON table plan inner&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-plan-outer" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table plan outer&gt; ::=
+  <a href="#JSON-table-path-name">&lt;JSON table path name&gt; </a> OUTER <a href="#JSON-table-plan-primary">&lt;JSON table plan primary&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-plan-inner" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table plan inner&gt; ::=
+  <a href="#JSON-table-path-name">&lt;JSON table path name&gt; </a> INNER <a href="#JSON-table-plan-primary">&lt;JSON table plan primary&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-plan-sibling" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table plan sibling&gt; ::=
+    <a href="#JSON-table-plan-union">&lt;JSON table plan union&gt; </a>
+  | <a href="#JSON-table-plan-cross">&lt;JSON table plan cross&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-plan-union" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table plan union&gt; ::=
+  <a href="#JSON-table-plan-primary">&lt;JSON table plan primary&gt; </a> UNION <a href="#JSON-table-plan-primary">&lt;JSON table plan primary&gt; </a>
+      [ { UNION <a href="#JSON-table-plan-primary">&lt;JSON table plan primary&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="JSON-table-plan-cross" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table plan cross&gt; ::=
+  <a href="#JSON-table-plan-primary">&lt;JSON table plan primary&gt; </a> CROSS <a href="#JSON-table-plan-primary">&lt;JSON table plan primary&gt; </a>
+      [ { CROSS <a href="#JSON-table-plan-primary">&lt;JSON table plan primary&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="JSON-table-plan-primary" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table plan primary&gt; ::=
+    <a href="#JSON-table-path-name">&lt;JSON table path name&gt; </a>
+  | <a href="#left-paren">&lt;left paren&gt; </a> <a href="#JSON-table-plan">&lt;JSON table plan&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-default-plan" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table default plan&gt; ::=
+  PLAN DEFAULT <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#JSON-table-default-plan-choices">&lt;JSON table default plan choices&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-default-plan-choices" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table default plan choices&gt; ::=
+    <a href="#JSON-table-default-plan-inner/outer">&lt;JSON table default plan inner/outer&gt; </a>
+        [ <a href="#comma">&lt;comma&gt; </a> <a href="#JSON-table-default-plan-union/cross">&lt;JSON table default plan union/cross&gt; </a> ]
+  | <a href="#JSON-table-default-plan-union/cross">&lt;JSON table default plan union/cross&gt; </a>
+      [ <a href="#comma">&lt;comma&gt; </a> <a href="#JSON-table-default-plan-inner/outer">&lt;JSON table default plan inner/outer&gt; </a> ]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>[[JSON-table-default-plan-inner/outer]]</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;JSON table default plan inner/outer&gt; ::=
+  INNER | OUTER</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>[[JSON-table-default-plan-union/cross]]</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;JSON table default plan union/cross&gt; ::=
+  UNION | CROSS</pre>
+</div>
+</div>
+<div id="JSON-table-error-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table error behavior&gt; ::=
+    ERROR
+  | EMPTY</pre>
+</div>
+</div>
+<div id="JSON-table-primitive" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table primitive&gt; ::=
+  JSON_TABLE_PRIMITIVE <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#JSON-API-common-syntax">&lt;JSON API common syntax&gt; </a>
+      <a href="#JSON-table-primitive-columns-clause">&lt;JSON table primitive columns clause&gt; </a>
+      <a href="#JSON-table-error-behavior">&lt;JSON table error behavior&gt; </a> ON ERROR
+  <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-primitive-columns-clause" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table primitive columns clause&gt; ::=
+  COLUMNS <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#JSON-table-primitive-column-definition">&lt;JSON table primitive column definition&gt; </a>
+      [ { <a href="#comma">&lt;comma&gt; </a> <a href="#JSON-table-primitive-column-definition">&lt;JSON table primitive column definition&gt; </a> }... ]
+  <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-primitive-column-definition" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table primitive column definition&gt; ::=
+    <a href="#JSON-table-ordinality-column-definition">&lt;JSON table ordinality column definition&gt; </a>
+  | <a href="#JSON-table-regular-column-definition">&lt;JSON table regular column definition&gt; </a>
+  | <a href="#JSON-table-formatted-column-definition">&lt;JSON table formatted column definition&gt; </a>
+  | <a href="#JSON-table-primitive-chaining-column">&lt;JSON table primitive chaining column&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-table-primitive-chaining-column" class="listingblock">
+<div class="content">
+<pre>&lt;JSON table primitive chaining column&gt; ::=
+  <a href="#column-name">&lt;column name&gt; </a> FOR CHAINING</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_7_12_where_clause">7.12 &lt;where clause&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a table derived by the application of a &lt;search condition&gt; to the result of the preceding &lt;from clause&gt;.</p>
@@ -4948,7 +5983,7 @@ invoking an SQL-invoked method.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_7_9_group_by_clause">7.9     &lt;group by clause&gt;</h3>
+<h3 id="_7_13_group_by_clause">7.13 &lt;group by clause&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a grouped table derived by the application of the &lt;group by clause&gt; to the result of the previously
@@ -5044,7 +6079,7 @@ specified clause.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_7_10_having_clause">7.10 &lt;having clause&gt;</h3>
+<h3 id="_7_14_having_clause">7.14 &lt;having clause&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a grouped table derived by the elimination of groups that do not satisfy a &lt;search condition&gt;.</p>
@@ -5058,7 +6093,7 @@ specified clause.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_7_11_window_clause">7.11 &lt;window clause&gt;</h3>
+<h3 id="_7_15_window_clause">7.15 &lt;window clause&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify one or more window definitions.</p>
@@ -5137,8 +6172,10 @@ specified clause.</p>
 <div id="window-frame-clause" class="listingblock">
 <div class="content">
 <pre>&lt;window frame clause&gt; ::=
-  <a href="#window-frame-units">&lt;window frame units&gt; </a> <a href="#window-frame-extent">&lt;window frame extent&gt; </a>
-      [ <a href="#window-frame-exclusion">&lt;window frame exclusion&gt; </a> ]</pre>
+  [ <a href="#row-pattern-measures">&lt;row pattern measures&gt; </a> ]
+      <a href="#window-frame-units">&lt;window frame units&gt; </a> <a href="#window-frame-extent">&lt;window frame extent&gt; </a>
+      [ <a href="#window-frame-exclusion">&lt;window frame exclusion&gt; </a> ]
+      [ <a href="#row-pattern-common-syntax">&lt;row pattern common syntax&gt; </a> ]</pre>
 </div>
 </div>
 <div id="window-frame-units" class="listingblock">
@@ -5213,7 +6250,7 @@ specified clause.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_7_12_query_specification">7.12 &lt;query specification&gt;</h3>
+<h3 id="_7_16_query_specification">7.16 &lt;query specification&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a table derived from the result of a &lt;table expression&gt;.</p>
@@ -5285,7 +6322,7 @@ specified clause.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_7_13_query_expression">7.13 &lt;query expression&gt;</h3>
+<h3 id="_7_17_query_expression">7.17 &lt;query expression&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a table.</p>
@@ -5298,10 +6335,15 @@ specified clause.</p>
       [ <a href="#order-by-clause">&lt;order by clause&gt; </a> ] [ <a href="#result-offset-clause">&lt;result offset clause&gt; </a> ] [ <a href="#fetch-first-clause">&lt;fetch first clause&gt; </a> ]</pre>
 </div>
 </div>
-<div id="with-clause" class="listingblock">
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_14_with_clause">14 &lt;with clause&gt; ::=</h2>
+<div class="sectionbody">
+<div class="literalblock">
 <div class="content">
-<pre>&lt;with clause&gt; ::=
-  WITH [ RECURSIVE ] <a href="#with-list">&lt;with list&gt; </a></pre>
+<pre>WITH [ RECURSIVE ] &lt;with list&gt;</pre>
 </div>
 </div>
 <div id="with-list" class="listingblock">
@@ -5419,9 +6461,8 @@ specified clause.</p>
   <a href="#simple-value-specification">&lt;simple value specification&gt; </a> PERCENT</pre>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_7_14_search_or_cycle_clause">7.14 &lt;search or cycle clause&gt;</h3>
+<h3 id="_7_18_search_or_cycle_clause">7.18 &lt;search or cycle clause&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify the generation of ordering and cycle detection information in the result of recursive query expressions.</p>
@@ -5499,7 +6540,7 @@ specified clause.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_7_15_subquery">7.15 &lt;subquery&gt;</h3>
+<h3 id="_7_19_subquery">7.19 &lt;subquery&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a scalar value, a row, or a table derived from a &lt;query expression&gt;.</p>
@@ -5563,7 +6604,9 @@ specified clause.</p>
   | <a href="#submultiset-predicate">&lt;submultiset predicate&gt; </a>
   | <a href="#set-predicate">&lt;set predicate&gt; </a>
   | <a href="#type-predicate">&lt;type predicate&gt; </a>
-  | <a href="#period-predicate">&lt;period predicate&gt; </a></pre>
+  | <a href="#period-predicate">&lt;period predicate&gt; </a>
+  | <a href="#JSON-predicate">&lt;JSON predicate&gt; </a>
+  | <a href="#JSON-exists-predicate">&lt;JSON exists predicate&gt; </a></pre>
 </div>
 </div>
 </div>
@@ -6339,6 +7382,652 @@ specified clause.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_8_22_json_predicate">8.22 &lt;JSON predicate&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Test whether a string value is a JSON text.</p>
+</div>
+<div id="JSON-predicate" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON predicate&gt; ::=
+  <a href="#string-value-expression">&lt;string value expression&gt; </a> [ <a href="#JSON-input-clause">&lt;JSON input clause&gt; </a> ]
+      IS [ NOT ] JSON
+      [ <a href="#JSON-predicate-type-constraint">&lt;JSON predicate type constraint&gt; </a> ]
+      [ <a href="#JSON-key-uniqueness-constraint">&lt;JSON key uniqueness constraint&gt; </a> ]</pre>
+</div>
+</div>
+<div id="JSON-predicate-type-constraint" class="listingblock">
+<div class="content">
+<pre>&lt;JSON predicate type constraint&gt; ::=
+    VALUE
+  | ARRAY
+  | OBJECT
+  | SCALAR</pre>
+</div>
+</div>
+<div id="JSON-key-uniqueness-constraint" class="listingblock">
+<div class="content">
+<pre>&lt;JSON key uniqueness constraint&gt; ::=
+    WITH UNIQUE [ KEYS ]
+  | WITHOUT UNIQUE [ KEYS ]</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_8_23_json_exists_predicate">8.23 &lt;JSON exists predicate&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Test whether a JSON path expression returns any SQL/JSON items.</p>
+</div>
+<div id="JSON-exists-predicate" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON exists predicate&gt; ::=
+  JSON_EXISTS <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#JSON-API-common-syntax">&lt;JSON API common syntax&gt; </a>
+      [ <a href="#JSON-exists-error-behavior">&lt;JSON exists error behavior&gt; </a> ON ERROR ]
+  <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-exists-error-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;JSON exists error behavior&gt; ::=
+  TRUE | FALSE | UNKNOWN | ERROR</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_9_additional_common_rules">9 Additional common rules</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_9_38_sqljson_path_language_lexical_elements">9.38 SQL/JSON path language: lexical elements</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Specify the lexical analysis of the SQL/JSON path language.</p>
+</div>
+<div class="paragraph">
+<div class="title">Format</div>
+<p>[[SQL/JSON-special-symbol]]</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;SQL/JSON special symbol&gt; ::=
+    <a href="#asterisk">&lt;asterisk&gt; </a>
+  | <a href="#at-sign">&lt;at sign&gt; </a>
+  | <a href="#comma">&lt;comma&gt; </a>
+  | <a href="#dollar-sign">&lt;dollar sign&gt; </a>
+  | <a href="#double-ampersand">&lt;double ampersand&gt; </a>
+  | <a href="#double-equals">&lt;double equals&gt; </a>
+  | <a href="#double-vertical-bar">&lt;double vertical bar&gt; </a>
+  | <a href="#exclamation-mark">&lt;exclamation mark&gt; </a>
+  | <a href="#greater-than-operator">&lt;greater than operator&gt; </a>
+  | <a href="#greater-than-or-equals-operator">&lt;greater than or equals operator&gt; </a>
+  | <a href="#left-bracket">&lt;left bracket&gt; </a>
+  | <a href="#left-paren">&lt;left paren&gt; </a>
+  | <a href="#less-than-operator">&lt;less than operator&gt; </a>
+  | <a href="#less-than-or-equals-operator">&lt;less than or equals operator&gt; </a>
+  | <a href="#minus-sign">&lt;minus sign&gt; </a>
+  | <a href="#not-equals-operator">&lt;not equals operator&gt; </a>
+  | <a href="#percent">&lt;percent&gt; </a>
+  | <a href="#period">&lt;period&gt; </a>
+  | <a href="#plus-sign">&lt;plus sign&gt; </a>
+  | <a href="#question-mark">&lt;question mark&gt; </a>
+  | <a href="#right-bracket">&lt;right bracket&gt; </a>
+  | <a href="#right-paren">&lt;right paren&gt; </a>
+  | <a href="#solidus">&lt;solidus&gt; </a></pre>
+</div>
+</div>
+<div id="at-sign" class="listingblock">
+<div class="content">
+<pre>&lt;at sign&gt; ::=
+  @</pre>
+</div>
+</div>
+<div id="double-ampersand" class="listingblock">
+<div class="content">
+<pre>&lt;double ampersand&gt; ::=
+  &amp;&amp;</pre>
+</div>
+</div>
+<div id="double-equals" class="listingblock">
+<div class="content">
+<pre>&lt;double equals&gt; ::=
+  ==</pre>
+</div>
+</div>
+<div id="double-vertical-bar" class="listingblock">
+<div class="content">
+<pre>&lt;double vertical bar&gt; ::=
+  ||</pre>
+</div>
+</div>
+<div id="exclamation-mark" class="listingblock">
+<div class="content">
+<pre>&lt;exclamation mark&gt; ::=
+  !</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>[[SQL/JSON-key-word]]</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;SQL/JSON key word&gt; ::=
+    abs
+  | ceiling
+  | datetime
+  | double
+  | exists
+  | false
+  |   flag
+  |   floor
+  |   is
+  |   keyvalue
+  |   last
+  |   lax
+  |   like_regex
+  |   null
+  |   size
+  |   starts
+  |   strict
+  |   to
+  |   true
+  |   type
+  |   unknown
+  |   with</pre>
+</div>
+</div>
+<div id="JSON-path-literal" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path literal&gt; ::=
+  !! See the Syntax Rules.</pre>
+</div>
+</div>
+<div id="JSON-path-string-literal" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path string literal&gt; ::=
+  !! See the Syntax Rules.</pre>
+</div>
+</div>
+<div id="JSON-path-numeric-literal" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path numeric literal&gt; ::=
+  !! See the Syntax Rules.</pre>
+</div>
+</div>
+<div id="JSON-path-identifier" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path identifier&gt; ::=
+  !! See the Syntax Rules.</pre>
+</div>
+</div>
+<div id="JSON-path-context-variable" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path context variable&gt; ::=
+  !! See the Syntax Rules.</pre>
+</div>
+</div>
+<div id="JSON-path-named-variable" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path named variable&gt; ::=
+  !! See the Syntax Rules.</pre>
+</div>
+</div>
+<div id="JSON-path-key-name" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path key name&gt; ::=
+  !! See the Syntax Rules.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_9_39_sqljson_path_language_syntax_and_semantics">9.39 SQL/JSON path language: syntax and semantics</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Specify the syntax and semantics of SQL/JSON path language.</p>
+</div>
+<div id="JSON-path-expression" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON path expression&gt; ::=
+  <a href="#JSON-path-mode">&lt;JSON path mode&gt; </a> <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-mode" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path mode&gt; ::=
+  strict | lax</pre>
+</div>
+</div>
+<div id="JSON-path-primary" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path primary&gt; ::=
+    <a href="#JSON-path-literal">&lt;JSON path literal&gt; </a>
+  | <a href="#JSON-path-variable">&lt;JSON path variable&gt; </a>
+  | <a href="#left-paren">&lt;left paren&gt; </a> <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-variable" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path variable&gt; ::=
+    <a href="#JSON-path-context-variable">&lt;JSON path context variable&gt; </a>
+  | <a href="#JSON-path-named-variable">&lt;JSON path named variable&gt; </a>
+  | <a href="#at-sign">&lt;at sign&gt; </a>
+  | <a href="#JSON-last-subscript">&lt;JSON last subscript&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-context-variable" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path context variable&gt; ::=
+  <a href="#dollar-sign">&lt;dollar sign&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-named-variable" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path named variable&gt; ::=
+  <a href="#dollar-sign">&lt;dollar sign&gt; </a> <a href="#JSON-path-identifier">&lt;JSON path identifier&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-last-subscript" class="listingblock">
+<div class="content">
+<pre>&lt;JSON last subscript&gt; ::=
+  last</pre>
+</div>
+</div>
+<div id="JSON-accessor-expression" class="listingblock">
+<div class="content">
+<pre>&lt;JSON accessor expression&gt; ::=
+    <a href="#JSON-path-primary">&lt;JSON path primary&gt; </a>
+  | <a href="#JSON-accessor-expression">&lt;JSON accessor expression&gt; </a> <a href="#JSON-accessor-op">&lt;JSON accessor op&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-accessor-op" class="listingblock">
+<div class="content">
+<pre>&lt;JSON accessor op&gt; ::=
+      <a href="#JSON----member-accessor">&lt;JSON    member accessor&gt; </a>
+  |   <a href="#JSON----wildcard-member-accessor">&lt;JSON    wildcard member accessor&gt; </a>
+  |   <a href="#JSON----array-accessor">&lt;JSON    array accessor&gt; </a>
+  |   <a href="#JSON----wildcard-array-accessor">&lt;JSON    wildcard array accessor&gt; </a>
+  |   <a href="#JSON----filter-expression">&lt;JSON    filter expression&gt; </a>
+  |   <a href="#JSON----item-method">&lt;JSON    item method&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-member-accessor" class="listingblock">
+<div class="content">
+<pre>&lt;JSON member accessor&gt; ::=
+    <a href="#period">&lt;period&gt; </a> <a href="#JSON-path-key-name">&lt;JSON path key name&gt; </a>
+  | <a href="#period">&lt;period&gt; </a> <a href="#JSON-path-string-literal">&lt;JSON path string literal&gt; </a>
+      NOTE 447 - Unlike [ECMAScript], SQL/JSON path language does not provide a member accessor using brackets that enclose
+      a character string.</pre>
+</div>
+</div>
+<div id="JSON-wildcard-member-accessor" class="listingblock">
+<div class="content">
+<pre>&lt;JSON wildcard member accessor&gt; ::=
+  <a href="#period">&lt;period&gt; </a> <a href="#asterisk">&lt;asterisk&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-array-accessor" class="listingblock">
+<div class="content">
+<pre>&lt;JSON array accessor&gt; ::=
+  <a href="#left-bracket">&lt;left bracket&gt; </a> <a href="#JSON-subscript-list">&lt;JSON subscript list&gt; </a> <a href="#right-bracket">&lt;right bracket&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-subscript-list" class="listingblock">
+<div class="content">
+<pre>&lt;JSON subscript list&gt; ::=
+  <a href="#JSON-subscript">&lt;JSON subscript&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#JSON-subscript">&lt;JSON subscript&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="JSON-subscript" class="listingblock">
+<div class="content">
+<pre>&lt;JSON subscript&gt; ::=
+    <a href="#JSON-path-wff-1">&lt;JSON path wff 1&gt; </a>
+  | <a href="#JSON-path-wff-2">&lt;JSON path wff 2&gt; </a> to <a href="#JSON-path-wff-3">&lt;JSON path wff 3&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-wff-1" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path wff 1&gt; ::=
+  <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-wff-2" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path wff 2&gt; ::=
+  <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-wff-3" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path wff 3&gt; ::=
+  <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-wildcard-array-accessor" class="listingblock">
+<div class="content">
+<pre>&lt;JSON wildcard array accessor&gt; ::=
+  <a href="#left-bracket">&lt;left bracket&gt; </a> <a href="#asterisk">&lt;asterisk&gt; </a> <a href="#right-bracket">&lt;right bracket&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-filter-expression" class="listingblock">
+<div class="content">
+<pre>&lt;JSON filter expression&gt; ::=
+  <a href="#question-mark">&lt;question mark&gt; </a> <a href="#left-paren">&lt;left paren&gt; </a> <a href="#JSON-path-predicate">&lt;JSON path predicate&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+      NOTE 448 - Unlike [ECMAScript], predicates are not expressions; instead they form a separate language that can only be invoked
+      within a <a href="#JSON-filter-expression">&lt;JSON filter expression&gt; </a>.</pre>
+</div>
+</div>
+<div id="JSON-item-method" class="listingblock">
+<div class="content">
+<pre>&lt;JSON item method&gt; ::=
+  <a href="#period">&lt;period&gt; </a> <a href="#JSON-method">&lt;JSON method&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-method" class="listingblock">
+<div class="content">
+<pre>&lt;JSON method&gt; ::=
+    type <a href="#left-paren">&lt;left paren&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+  | size <a href="#left-paren">&lt;left paren&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+  | double <a href="#left-paren">&lt;left paren&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+  | ceiling <a href="#left-paren">&lt;left paren&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+  | floor <a href="#left-paren">&lt;left paren&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+  | abs <a href="#left-paren">&lt;left paren&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+  | datetime <a href="#left-paren">&lt;left paren&gt; </a> [ <a href="#JSON-datetime-template">&lt;JSON datetime template&gt; </a> ] <a href="#right-paren">&lt;right paren&gt; </a>
+  | keyvalue <a href="#left-paren">&lt;left paren&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-datetime-template" class="listingblock">
+<div class="content">
+<pre>&lt;JSON datetime template&gt; ::=
+  <a href="#JSON-path-string-literal">&lt;JSON path string literal&gt; </a>
+&lt;JSON unary expression&gt; ::=
+    <a href="#JSON-accessor-expression">&lt;JSON accessor expression&gt; </a>
+  | <a href="#plus-sign">&lt;plus sign&gt; </a> <a href="#JSON-unary-expression">&lt;JSON unary expression&gt; </a>
+  | <a href="#minus-sign">&lt;minus sign&gt; </a> <a href="#JSON-unary-expression">&lt;JSON unary expression&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-multiplicative-expression" class="listingblock">
+<div class="content">
+<pre>&lt;JSON multiplicative expression&gt; ::=
+    <a href="#JSON-unary-expression">&lt;JSON unary expression&gt; </a>
+  | <a href="#JSON-multiplicative-expression">&lt;JSON multiplicative expression&gt; </a> <a href="#asterisk">&lt;asterisk&gt; </a> <a href="#JSON-unary-expression">&lt;JSON unary expression&gt; </a>
+  | <a href="#JSON-multiplicative-expression">&lt;JSON multiplicative expression&gt; </a> <a href="#solidus">&lt;solidus&gt; </a> <a href="#JSON-unary-expression">&lt;JSON unary expression&gt; </a>
+  | <a href="#JSON-multiplicative-expression">&lt;JSON multiplicative expression&gt; </a> <a href="#percent">&lt;percent&gt; </a> <a href="#JSON-unary-expression">&lt;JSON unary expression&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-additive-expression" class="listingblock">
+<div class="content">
+<pre>&lt;JSON additive expression&gt; ::=
+    <a href="#JSON-multiplicative-expression">&lt;JSON multiplicative expression&gt; </a>
+  | <a href="#JSON-additive-expression">&lt;JSON additive expression&gt; </a> <a href="#plus-sign">&lt;plus sign&gt; </a> <a href="#JSON-multiplicative-expression">&lt;JSON multiplicative expression&gt; </a>
+  | <a href="#JSON-additive-expression">&lt;JSON additive expression&gt; </a> <a href="#minus-sign">&lt;minus sign&gt; </a> <a href="#JSON-multiplicative-expression">&lt;JSON multiplicative expression&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-wff" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path wff&gt; ::=
+  <a href="#JSON-additive-expression">&lt;JSON additive expression&gt; </a>
+   NOTE 449 - This concludes the main language for JSON path expressions. Next comes the language for predicates, used only
+   in <a href="#JSON-filter-expression">&lt;JSON filter expression&gt; </a>.</pre>
+</div>
+</div>
+<div id="JSON-predicate-primary" class="listingblock">
+<div class="content">
+<pre>&lt;JSON predicate primary&gt; ::=
+    <a href="#JSON-delimited-predicate">&lt;JSON delimited predicate&gt; </a>
+  | <a href="#JSON-non-delimited-predicate">&lt;JSON non-delimited predicate&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-delimited-predicate" class="listingblock">
+<div class="content">
+<pre>&lt;JSON delimited predicate&gt; ::=
+    <a href="#JSON-exists-path-predicate">&lt;JSON exists path predicate&gt; </a>
+  | <a href="#left-paren">&lt;left paren&gt; </a> <a href="#JSON-path-predicate">&lt;JSON path predicate&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-non-delimited-predicate" class="listingblock">
+<div class="content">
+<pre>&lt;JSON non-delimited predicate&gt; ::=
+    <a href="#JSON-comparison-predicate">&lt;JSON comparison predicate&gt; </a>
+  | <a href="#JSON-like_regex-predicate">&lt;JSON like_regex predicate&gt; </a>
+  | <a href="#JSON-starts-with-predicate">&lt;JSON starts with predicate&gt; </a>
+  | <a href="#JSON-unknown-predicate">&lt;JSON unknown predicate&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-exists-path-predicate" class="listingblock">
+<div class="content">
+<pre>&lt;JSON exists path predicate&gt; ::=
+  exists <a href="#left-paren">&lt;left paren&gt; </a> <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-comparison-predicate" class="listingblock">
+<div class="content">
+<pre>&lt;JSON comparison predicate&gt; ::=
+  <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a> <a href="#JSON-comp-op">&lt;JSON comp op&gt; </a> <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a>
+   NOTE 450 - Comparison operators are not left associative, unlike [ECMAScript].</pre>
+</div>
+</div>
+<div id="JSON-comp-op" class="listingblock">
+<div class="content">
+<pre>&lt;JSON comp op&gt; ::=
+    <a href="#double-equals">&lt;double equals&gt; </a>
+  | <a href="#not-equals-operator">&lt;not equals operator&gt; </a>
+  | <a href="#less-than-operator">&lt;less than operator&gt; </a>
+  | <a href="#greater-than-operator">&lt;greater than operator&gt; </a>
+  | <a href="#less-than-or-equals-operator">&lt;less than or equals operator&gt; </a>
+  | <a href="#greater-than-or-equals-operator">&lt;greater than or equals operator&gt; </a>
+   NOTE 451 - Equality operators have the same precedence as inequality comparison operators, unlike [ECMAScript].</pre>
+</div>
+</div>
+<div id="JSON-like_regex-predicate" class="listingblock">
+<div class="content">
+<pre>&lt;JSON like_regex predicate&gt; ::=
+  <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a> like_regex <a href="#JSON-like_regex-pattern">&lt;JSON like_regex pattern&gt; </a>
+      [ flag <a href="#JSON-like_regex-flags">&lt;JSON like_regex flags&gt; </a> ]</pre>
+</div>
+</div>
+<div id="JSON-like_regex-pattern" class="listingblock">
+<div class="content">
+<pre>&lt;JSON like_regex pattern&gt; ::=
+  <a href="#JSON-path-string-literal">&lt;JSON path string literal&gt; </a>
+&lt;JSON like_regex flags&gt; ::=
+  <a href="#JSON-path-string-literal">&lt;JSON path string literal&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-starts-with-predicate" class="listingblock">
+<div class="content">
+<pre>&lt;JSON starts with predicate&gt; ::=
+  <a href="#JSON-starts-with-whole">&lt;JSON starts with whole&gt; </a> starts with <a href="#JSON-starts-with-initial">&lt;JSON starts with initial&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-starts-with-whole" class="listingblock">
+<div class="content">
+<pre>&lt;JSON starts with whole&gt; ::=
+  <a href="#JSON-path-wff">&lt;JSON path wff&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-starts-with-initial" class="listingblock">
+<div class="content">
+<pre>&lt;JSON starts with initial&gt; ::=
+    <a href="#JSON-path-string-literal">&lt;JSON path string literal&gt; </a>
+  | <a href="#JSON-path-named-variable">&lt;JSON path named variable&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-unknown-predicate" class="listingblock">
+<div class="content">
+<pre>&lt;JSON unknown predicate&gt; ::=
+  <a href="#left-paren">&lt;left paren&gt; </a> <a href="#JSON-path-predicate">&lt;JSON path predicate&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> is unknown</pre>
+</div>
+</div>
+<div id="JSON-boolean-negation" class="listingblock">
+<div class="content">
+<pre>&lt;JSON boolean negation&gt; ::=
+    <a href="#JSON-predicate-primary">&lt;JSON predicate primary&gt; </a>
+  | <a href="#exclamation-mark">&lt;exclamation mark&gt; </a> <a href="#JSON-delimited-predicate">&lt;JSON delimited predicate&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-boolean-conjunction" class="listingblock">
+<div class="content">
+<pre>&lt;JSON boolean conjunction&gt; ::=
+    <a href="#JSON-boolean-negation">&lt;JSON boolean negation&gt; </a>
+  | <a href="#JSON-boolean-conjunction">&lt;JSON boolean conjunction&gt; </a> <a href="#double-ampersand">&lt;double ampersand&gt; </a> <a href="#JSON-boolean-negation">&lt;JSON boolean negation&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-boolean-disjunction" class="listingblock">
+<div class="content">
+<pre>&lt;JSON boolean disjunction&gt; ::=
+    <a href="#JSON-boolean-conjunction">&lt;JSON boolean conjunction&gt; </a>
+  | <a href="#JSON-boolean-disjunction">&lt;JSON boolean disjunction&gt; </a> <a href="#double-vertical-bar">&lt;double vertical bar&gt; </a> <a href="#JSON-boolean-conjunction">&lt;JSON boolean conjunction&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-predicate" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path predicate&gt; ::=
+  <a href="#JSON-boolean-disjunction">&lt;JSON boolean disjunction&gt; </a></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_9_44_datetime_templates">9.44 Datetime templates</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Specify the templates to use to convert between datetime types and character string types.</p>
+</div>
+<div id="datetime-template" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;datetime template&gt; ::=
+  { <a href="#datetime-template-part">&lt;datetime template part&gt; </a> }...</pre>
+</div>
+</div>
+<div id="datetime-template-part" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template part&gt; ::=
+    <a href="#datetime-template-field">&lt;datetime template field&gt; </a>
+  | <a href="#datetime-template-delimiter">&lt;datetime template delimiter&gt; </a></pre>
+</div>
+</div>
+<div id="datetime-template-field" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template field&gt; ::=
+    <a href="#datetime-template-year">&lt;datetime template year&gt; </a>
+  | <a href="#datetime-template-rounded-year">&lt;datetime template rounded year&gt; </a>
+  | <a href="#datetime-template-month">&lt;datetime template month&gt; </a>
+  | <a href="#datetime-template-day-of-month">&lt;datetime template day of month&gt; </a>
+  | <a href="#datetime-template-day-of-year">&lt;datetime template day of year&gt; </a>
+  | <a href="#datetime-template-12-hour">&lt;datetime template 12-hour&gt; </a>
+  | <a href="#datetime-template-24-hour">&lt;datetime template 24-hour&gt; </a>
+  | <a href="#datetime-template-minute">&lt;datetime template minute&gt; </a>
+  | <a href="#datetime-template-second-of-minute">&lt;datetime template second of minute&gt; </a>
+  | <a href="#datetime-template-second-of-day">&lt;datetime template second of day&gt; </a>
+  | <a href="#datetime-template-fraction">&lt;datetime template fraction&gt; </a>
+  | <a href="#datetime-template-am/pm">&lt;datetime template am/pm&gt; </a>
+  | <a href="#datetime-template-time-zone-hour">&lt;datetime template time zone hour&gt; </a>
+  | <a href="#datetime-template-time-zone-minute">&lt;datetime template time zone minute&gt; </a></pre>
+</div>
+</div>
+<div id="datetime-template-delimiter" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template delimiter&gt; ::=
+    <a href="#minus-sign">&lt;minus sign&gt; </a>
+  | <a href="#period">&lt;period&gt; </a>
+  | <a href="#solidus">&lt;solidus&gt; </a>
+  | <a href="#comma">&lt;comma&gt; </a>
+  | <a href="#apostrophe">&lt;apostrophe&gt; </a>
+  | <a href="#semicolon">&lt;semicolon&gt; </a>
+  | <a href="#colon">&lt;colon&gt; </a>
+  | <a href="#space">&lt;space&gt; </a></pre>
+</div>
+</div>
+<div id="datetime-template-year" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template year&gt; ::=
+  YYYY | YYY | YY | Y</pre>
+</div>
+</div>
+<div id="datetime-template-rounded-year" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template rounded year&gt; ::=
+  RRRR | RR
+&lt;datetime template month&gt; ::=
+  MM</pre>
+</div>
+</div>
+<div id="datetime-template-day-of-month" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template day of month&gt; ::=
+  DD</pre>
+</div>
+</div>
+<div id="datetime-template-day-of-year" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template day of year&gt; ::=
+  DDD</pre>
+</div>
+</div>
+<div id="datetime-template-12-hour" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template 12-hour&gt; ::=
+  HH | HH12</pre>
+</div>
+</div>
+<div id="datetime-template-24-hour" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template 24-hour&gt; ::=
+  HH24</pre>
+</div>
+</div>
+<div id="datetime-template-minute" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template minute&gt; ::=
+  MI</pre>
+</div>
+</div>
+<div id="datetime-template-second-of-minute" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template second of minute&gt; ::=
+  SS</pre>
+</div>
+</div>
+<div id="datetime-template-second-of-day" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template second of day&gt; ::=
+  SSSSS</pre>
+</div>
+</div>
+<div id="datetime-template-fraction" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template fraction&gt; ::=
+  FF1 | FF2 | FF3 | FF4 | FF5 | FF6 | FF7 | FF8 | FF9</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>[[datetime-template-am/pm]]</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;datetime template am/pm&gt; ::=
+  A.M. | P.M.</pre>
+</div>
+</div>
+<div id="datetime-template-time-zone-hour" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template time zone hour&gt; ::=
+  TZH</pre>
+</div>
+</div>
+<div id="datetime-template-time-zone-minute" class="listingblock">
+<div class="content">
+<pre>&lt;datetime template time zone minute&gt; ::=
+  TZM</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -6480,7 +8169,9 @@ specified clause.</p>
 <div id="SQL-argument-list" class="listingblock">
 <div class="content">
 <pre>&lt;SQL argument list&gt; ::=
-  <a href="#left-paren">&lt;left paren&gt; </a> [ <a href="#SQL-argument">&lt;SQL argument&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#SQL-argument">&lt;SQL argument&gt; </a> }... ] ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
+  <a href="#left-paren">&lt;left paren&gt; </a>
+      [ <a href="#SQL-argument">&lt;SQL argument&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#SQL-argument">&lt;SQL argument&gt; </a> }... ] [ <a href="#copartition-clause">&lt;copartition clause&gt; </a> ] ]
+      <a href="#right-paren">&lt;right paren&gt; </a></pre>
 </div>
 </div>
 <div id="SQL-argument" class="listingblock">
@@ -6490,7 +8181,9 @@ specified clause.</p>
   | <a href="#generalized-expression">&lt;generalized expression&gt; </a>
   | <a href="#target-specification">&lt;target specification&gt; </a>
   | <a href="#contextually-typed-value-specification">&lt;contextually typed value specification&gt; </a>
-  | <a href="#named-argument-specification">&lt;named argument specification&gt; </a></pre>
+  | <a href="#named-argument-specification">&lt;named argument specification&gt; </a>
+  | <a href="#table-argument">&lt;table argument&gt; </a>
+  | <a href="#descriptor-argument">&lt;descriptor argument&gt; </a></pre>
 </div>
 </div>
 <div id="generalized-expression" class="listingblock">
@@ -6511,7 +8204,122 @@ specified clause.</p>
 <pre>&lt;named argument SQL argument&gt; ::=
     <a href="#value-expression">&lt;value expression&gt; </a>
   | <a href="#target-specification">&lt;target specification&gt; </a>
-  | <a href="#contextually-typed-value-specification">&lt;contextually typed value specification&gt; </a></pre>
+  | <a href="#contextually-typed-value-specification">&lt;contextually typed value specification&gt; </a>
+  | <a href="#table-argument">&lt;table argument&gt; </a>
+  | <a href="#descriptor-argument">&lt;descriptor argument&gt; </a></pre>
+</div>
+</div>
+<div id="table-argument" class="listingblock">
+<div class="content">
+<pre>&lt;table argument&gt; ::=
+  <a href="#table-argument-proper">&lt;table argument proper&gt; </a>
+      [ [ AS ] <a href="#table-argument-correlation-name">&lt;table argument correlation name&gt; </a>
+      [ <a href="#table-argument-parenthesized-derived-column-list">&lt;table argument parenthesized derived column list&gt; </a> ] ]
+      [ <a href="#table-argument-partitioning">&lt;table argument partitioning&gt; </a> ]
+      [ <a href="#table-argument-pruning">&lt;table argument pruning&gt; </a> ]
+      [ <a href="#table-argument-ordering">&lt;table argument ordering&gt; </a> ]</pre>
+</div>
+</div>
+<div id="table-argument-correlation-name" class="listingblock">
+<div class="content">
+<pre>&lt;table argument correlation name&gt; ::=
+  <a href="#correlation-name">&lt;correlation name&gt; </a></pre>
+</div>
+</div>
+<div id="table-argument-parenthesized-derived-column-list" class="listingblock">
+<div class="content">
+<pre>&lt;table argument parenthesized derived column list&gt; ::=
+  <a href="#parenthesized-derived-column-list">&lt;parenthesized derived column list&gt; </a></pre>
+</div>
+</div>
+<div id="table-argument-proper" class="listingblock">
+<div class="content">
+<pre>&lt;table argument proper&gt; ::=
+    TABLE <a href="#left-paren">&lt;left paren&gt; </a> <a href="#table-or-query-name">&lt;table or query name&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+  | TABLE <a href="#table-subquery">&lt;table subquery&gt; </a>
+  | <a href="#table-function-invocation">&lt;table function invocation&gt; </a></pre>
+</div>
+</div>
+<div id="table-function-invocation" class="listingblock">
+<div class="content">
+<pre>&lt;table function invocation&gt; ::=
+  <a href="#routine-invocation">&lt;routine invocation&gt; </a></pre>
+</div>
+</div>
+<div id="table-argument-partitioning" class="listingblock">
+<div class="content">
+<pre>&lt;table argument partitioning&gt; ::=
+  PARTITION BY <a href="#table-argument-partitioning-list">&lt;table argument partitioning list&gt; </a></pre>
+</div>
+</div>
+<div id="table-argument-partitioning-list" class="listingblock">
+<div class="content">
+<pre>&lt;table argument partitioning list&gt; ::=
+    <a href="#column-reference">&lt;column reference&gt; </a>
+  | <a href="#left-paren">&lt;left paren&gt; </a> [ <a href="#column-reference">&lt;column reference&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#column-reference">&lt;column reference&gt; </a> }... ] ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="table-argument-pruning" class="listingblock">
+<div class="content">
+<pre>&lt;table argument pruning&gt; ::=
+    PRUNE WHEN EMPTY
+  | KEEP WHEN EMPTY</pre>
+</div>
+</div>
+<div id="table-argument-ordering" class="listingblock">
+<div class="content">
+<pre>&lt;table argument ordering&gt; ::=
+  ORDER BY <a href="#table-argument-ordering-list">&lt;table argument ordering list&gt; </a></pre>
+</div>
+</div>
+<div id="table-argument-ordering-list" class="listingblock">
+<div class="content">
+<pre>&lt;table argument ordering list&gt; ::=
+    <a href="#table-argument-ordering-column">&lt;table argument ordering column&gt; </a>
+  | <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#table-argument-ordering-column">&lt;table argument ordering column&gt; </a>
+      [ { <a href="#comma">&lt;comma&gt; </a> <a href="#table-argument-ordering-column">&lt;table argument ordering column&gt; </a> }... ]
+      <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="table-argument-ordering-column" class="listingblock">
+<div class="content">
+<pre>&lt;table argument ordering column&gt; ::=
+  <a href="#column-reference">&lt;column reference&gt; </a> [ <a href="#ordering-specification">&lt;ordering specification&gt; </a> ] [ <a href="#null-ordering">&lt;null ordering&gt; </a> ]</pre>
+</div>
+</div>
+<div id="copartition-clause" class="listingblock">
+<div class="content">
+<pre>&lt;copartition clause&gt; ::=
+  COPARTITION <a href="#copartition-list">&lt;copartition list&gt; </a></pre>
+</div>
+</div>
+<div id="copartition-list" class="listingblock">
+<div class="content">
+<pre>&lt;copartition list&gt; ::=
+  <a href="#copartition-specification">&lt;copartition specification&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#copartition-specification">&lt;copartition specification&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="copartition-specification" class="listingblock">
+<div class="content">
+<pre>&lt;copartition specification&gt; ::=
+  <a href="#left-paren">&lt;left paren&gt; </a> <a href="#range-variable">&lt;range variable&gt; </a> <a href="#comma">&lt;comma&gt; </a> <a href="#range-variable">&lt;range variable&gt; </a>
+      [ { <a href="#comma">&lt;comma&gt; </a> <a href="#range-variable">&lt;range variable&gt; </a> }... ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="range-variable" class="listingblock">
+<div class="content">
+<pre>&lt;range variable&gt; ::=
+    <a href="#table-name">&lt;table name&gt; </a>
+  | <a href="#query-name">&lt;query name&gt; </a>
+  | <a href="#correlation-name">&lt;correlation name&gt; </a></pre>
+</div>
+</div>
+<div id="descriptor-argument" class="listingblock">
+<div class="content">
+<pre>&lt;descriptor argument&gt; ::=
+    <a href="#descriptor-value-constructor">&lt;descriptor value constructor&gt; </a>
+  | CAST <a href="#left-paren">&lt;left paren&gt; </a> NULL AS DESCRIPTOR <a href="#right-paren">&lt;right paren&gt; </a></pre>
 </div>
 </div>
 </div>
@@ -6655,7 +8463,9 @@ specified clause.</p>
   | <a href="#general-set-function">&lt;general set function&gt; </a> [ <a href="#filter-clause">&lt;filter clause&gt; </a> ]
   | <a href="#binary-set-function">&lt;binary set function&gt; </a> [ <a href="#filter-clause">&lt;filter clause&gt; </a> ]
   | <a href="#ordered-set-function">&lt;ordered set function&gt; </a> [ <a href="#filter-clause">&lt;filter clause&gt; </a> ]
-  | <a href="#array-aggregate-function">&lt;array aggregate function&gt; </a> [ <a href="#filter-clause">&lt;filter clause&gt; </a> ]</pre>
+  | <a href="#array-aggregate-function">&lt;array aggregate function&gt; </a> [ <a href="#filter-clause">&lt;filter clause&gt; </a> ]
+  | <a href="#row-pattern-count-function">&lt;row pattern count function&gt; </a> [ <a href="#filter-clause">&lt;filter clause&gt; </a> ]
+  | <a href="#JSON-aggregate-function">&lt;JSON aggregate function&gt; </a> [ <a href="#filter-clause">&lt;filter clause&gt; </a> ]</pre>
 </div>
 </div>
 <div id="general-set-function" class="listingblock">
@@ -6744,7 +8554,8 @@ specified clause.</p>
 <div class="content">
 <pre>&lt;ordered set function&gt; ::=
     <a href="#hypothetical-set-function">&lt;hypothetical set function&gt; </a>
-  | <a href="#inverse-distribution-function">&lt;inverse distribution function&gt; </a></pre>
+  | <a href="#inverse-distribution-function">&lt;inverse distribution function&gt; </a>
+  | <a href="#listagg-set-function">&lt;listagg set function&gt; </a></pre>
 </div>
 </div>
 <div id="hypothetical-set-function" class="listingblock">
@@ -6788,11 +8599,57 @@ specified clause.</p>
   | PERCENTILE_DISC</pre>
 </div>
 </div>
+<div id="listagg-set-function" class="listingblock">
+<div class="content">
+<pre>&lt;listagg set function&gt; ::=
+  LISTAGG <a href="#left-paren">&lt;left paren&gt; </a> [ <a href="#set-quantifier">&lt;set quantifier&gt; </a> ] <a href="#character-value-expression">&lt;character value expression&gt; </a>
+      <a href="#comma">&lt;comma&gt; </a> <a href="#listagg-separator">&lt;listagg separator&gt; </a> [ <a href="#listagg-overflow-clause">&lt;listagg overflow clause&gt; </a> ] <a href="#right-paren">&lt;right paren&gt; </a>
+      <a href="#within-group-specification">&lt;within group specification&gt; </a></pre>
+</div>
+</div>
+<div id="listagg-separator" class="listingblock">
+<div class="content">
+<pre>&lt;listagg separator&gt; ::=
+  <a href="#character-string-literal">&lt;character string literal&gt; </a></pre>
+</div>
+</div>
+<div id="listagg-overflow-clause" class="listingblock">
+<div class="content">
+<pre>&lt;listagg overflow clause&gt; ::=
+  ON OVERFLOW <a href="#overflow-behavior">&lt;overflow behavior&gt; </a></pre>
+</div>
+</div>
+<div id="overflow-behavior" class="listingblock">
+<div class="content">
+<pre>&lt;overflow behavior&gt; ::=
+    ERROR
+  | TRUNCATE [ <a href="#listagg-truncation-filler">&lt;listagg truncation filler&gt; </a> ] <a href="#listagg-count-indication">&lt;listagg count indication&gt; </a></pre>
+</div>
+</div>
+<div id="listagg-truncation-filler" class="listingblock">
+<div class="content">
+<pre>&lt;listagg truncation filler&gt; ::=
+  <a href="#character-string-literal">&lt;character string literal&gt; </a></pre>
+</div>
+</div>
+<div id="listagg-count-indication" class="listingblock">
+<div class="content">
+<pre>&lt;listagg count indication&gt; ::=
+    WITH COUNT&gt;
+  | WITHOUT COUNT&gt;</pre>
+</div>
+</div>
 <div id="array-aggregate-function" class="listingblock">
 <div class="content">
 <pre>&lt;array aggregate function&gt; ::=
   ARRAY_AGG
       <a href="#left-paren">&lt;left paren&gt; </a> <a href="#value-expression">&lt;value expression&gt; </a> [ ORDER BY <a href="#sort-specification-list">&lt;sort specification list&gt; </a> ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="row-pattern-count-function" class="listingblock">
+<div class="content">
+<pre>&lt;row pattern count function&gt; ::=
+  COUNT <a href="#left-paren">&lt;left paren&gt; </a> <a href="#row-pattern-variable-name">&lt;row pattern variable name&gt; </a> <a href="#period">&lt;period&gt; </a> <a href="#asterisk">&lt;asterisk&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
 </div>
 </div>
 </div>
@@ -6833,6 +8690,141 @@ specified clause.</p>
 <pre>&lt;null ordering&gt; ::=
     NULLS FIRST
   | NULLS LAST</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_10_11_json_aggregate_function">10.11 &lt;JSON aggregate function&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Construct a JSON object or a JSON array from an aggregation of SQL data.</p>
+</div>
+<div id="JSON-aggregate-function" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON aggregate function&gt; ::=
+    <a href="#JSON-object-aggregate-constructor">&lt;JSON object aggregate constructor&gt; </a>
+  | <a href="#JSON-array-aggregate-constructor">&lt;JSON array aggregate constructor&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-object-aggregate-constructor" class="listingblock">
+<div class="content">
+<pre>&lt;JSON object aggregate constructor&gt; ::=
+  JSON_OBJECTAGG <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#JSON-name-and-value">&lt;JSON name and value&gt; </a>
+      [ <a href="#JSON-constructor-null-clause">&lt;JSON constructor null clause&gt; </a> ]
+      [ <a href="#JSON-key-uniqueness-constraint">&lt;JSON key uniqueness constraint&gt; </a> ]
+      [ <a href="#JSON-output-clause">&lt;JSON output clause&gt; </a> ]
+      <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-array-aggregate-constructor" class="listingblock">
+<div class="content">
+<pre>&lt;JSON array aggregate constructor&gt; ::=
+  JSON_ARRAYAGG <a href="#left-paren">&lt;left paren&gt; </a>
+      <a href="#JSON-value-expression">&lt;JSON value expression&gt; </a>
+      [ <a href="#JSON-array-aggregate-order-by-clause">&lt;JSON array aggregate order by clause&gt; </a> ]
+      [ <a href="#JSON-constructor-null-clause">&lt;JSON constructor null clause&gt; </a> ]
+      [ <a href="#JSON-output-clause">&lt;JSON output clause&gt; </a> ]
+      <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-array-aggregate-order-by-clause" class="listingblock">
+<div class="content">
+<pre>&lt;JSON array aggregate order by clause&gt; ::=
+  ORDER BY <a href="#sort-specification-list">&lt;sort specification list&gt; </a></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_10_12_json_value_expression">10.12 &lt;JSON value expression&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Specify a value to be used as input by an SQL/JSON function.</p>
+</div>
+<div id="JSON-value-expression" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON value expression&gt; ::=
+  <a href="#value-expression">&lt;value expression&gt; </a> [ <a href="#JSON-input-clause">&lt;JSON input clause&gt; </a> ]</pre>
+</div>
+</div>
+<div id="JSON-input-clause" class="listingblock">
+<div class="content">
+<pre>&lt;JSON input clause&gt; ::=
+  FORMAT <a href="#JSON-representation">&lt;JSON representation&gt; </a></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_10_13_json_output_clause">10.13 &lt;JSON output clause&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Specify the data type, format, and encoding of the JSON text created by a JSON-returning function.</p>
+</div>
+<div id="JSON-output-clause" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON output clause&gt; ::=
+  RETURNING <a href="#data-type">&lt;data type&gt; </a> [ FORMAT <a href="#JSON-representation">&lt;JSON representation&gt; </a> ]</pre>
+</div>
+</div>
+<div id="JSON-representation" class="listingblock">
+<div class="content">
+<pre>&lt;JSON representation&gt; ::=
+    JSON [ ENCODING { UTF8 | UTF16 | UTF32 } ]
+  | <a href="#implementation-defined-JSON-representation-option">&lt;implementation-defined JSON representation option&gt; </a></pre>
+</div>
+</div>
+<div id="implementation-defined-JSON-representation-option" class="listingblock">
+<div class="content">
+<pre>&lt;implementation-defined JSON representation option&gt; ::=
+  !! See the Syntax Rules.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_10_14_json_api_common_syntax">10.14 &lt;JSON API common syntax&gt;</h3>
+<div class="paragraph">
+<p>Subclause Signature
+"&lt;JSON API common syntax&gt;" [General Rules] (
+  Parameter: "JSON API COMMON SYNTAX"
+) Returns: "STATUS" and "SQL/JSON SEQUENCE"</p>
+</div>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Define the inputs to JSON_VALUE, JSON_QUERY, JSON_TABLE, and JSON_EXISTS.</p>
+</div>
+<div id="JSON-API-common-syntax" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;JSON API common syntax&gt; ::=
+  <a href="#JSON-context-item">&lt;JSON context item&gt; </a> <a href="#comma">&lt;comma&gt; </a> <a href="#JSON-path-specification">&lt;JSON path specification&gt; </a> [ AS <a href="#JSON-table-path-name">&lt;JSON table path name&gt; </a> ]
+      [ <a href="#JSON-passing-clause">&lt;JSON passing clause&gt; </a> ]</pre>
+</div>
+</div>
+<div id="JSON-context-item" class="listingblock">
+<div class="content">
+<pre>&lt;JSON context item&gt; ::=
+  <a href="#JSON-value-expression">&lt;JSON value expression&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-path-specification" class="listingblock">
+<div class="content">
+<pre>&lt;JSON path specification&gt; ::=
+  <a href="#character-string-literal">&lt;character string literal&gt; </a></pre>
+</div>
+</div>
+<div id="JSON-passing-clause" class="listingblock">
+<div class="content">
+<pre>&lt;JSON passing clause&gt; ::=
+  PASSING <a href="#JSON-argument">&lt;JSON argument&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#JSON-argument">&lt;JSON argument&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="JSON-argument" class="listingblock">
+<div class="content">
+<pre>&lt;JSON argument&gt; ::=
+  <a href="#JSON-value-expression">&lt;JSON value expression&gt; </a> AS <a href="#identifier">&lt;identifier&gt; </a></pre>
 </div>
 </div>
 </div>
@@ -8727,20 +10719,26 @@ specified clause.</p>
       [ { <a href="#comma">&lt;comma&gt; </a> <a href="#SQL-parameter-declaration">&lt;SQL parameter declaration&gt; </a> }... ] ] <a href="#right-paren">&lt;right paren&gt; </a></pre>
 </div>
 </div>
-<div id="SQL-parameter-declaration" class="listingblock">
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_14_sql_parameter_declaration">14 &lt;SQL parameter declaration&gt; ::=</h2>
+<div class="sectionbody">
+<div class="literalblock">
 <div class="content">
-<pre>&lt;SQL parameter declaration&gt; ::=
-  [ <a href="#parameter-mode">&lt;parameter mode&gt; </a> ]
-      [ <a href="#SQL-parameter-name">&lt;SQL parameter name&gt; </a> ]
-      <a href="#parameter-type">&lt;parameter type&gt; </a> [ RESULT ]
-      [ DEFAULT <a href="#parameter-default">&lt;parameter default&gt; </a> ]</pre>
+<pre>[ &lt;parameter mode&gt; ]
+    [ &lt;SQL parameter name&gt; ]
+    &lt;parameter type&gt; [ RESULT ]
+    [ DEFAULT &lt;parameter default&gt; ]</pre>
 </div>
 </div>
 <div id="parameter-default" class="listingblock">
 <div class="content">
 <pre>&lt;parameter default&gt; ::=
     <a href="#value-expression">&lt;value expression&gt; </a>
-  | <a href="#contextually-typed-value-specification">&lt;contextually typed value specification&gt; </a></pre>
+  | <a href="#contextually-typed-value-specification">&lt;contextually typed value specification&gt; </a>
+  | <a href="#descriptor-value-constructor">&lt;descriptor value constructor&gt; </a></pre>
 </div>
 </div>
 <div id="parameter-mode" class="listingblock">
@@ -8754,7 +10752,42 @@ specified clause.</p>
 <div id="parameter-type" class="listingblock">
 <div class="content">
 <pre>&lt;parameter type&gt; ::=
-  <a href="#data-type">&lt;data type&gt; </a> [ <a href="#locator-indication">&lt;locator indication&gt; </a> ]</pre>
+   <a href="#data-type">&lt;data type&gt; </a> [ <a href="#locator-indication">&lt;locator indication&gt; </a> ]
+ | <a href="#generic-table-parameter-type">&lt;generic table parameter type&gt; </a>
+ | <a href="#descriptor-parameter-type">&lt;descriptor parameter type&gt; </a></pre>
+</div>
+</div>
+<div id="generic-table-parameter-type" class="listingblock">
+<div class="content">
+<pre>&lt;generic table parameter type&gt; ::=
+  TABLE [ <a href="#pass-through-option">&lt;pass through option&gt; </a> ] [ <a href="#generic-table-semantics">&lt;generic table semantics&gt; </a> ]</pre>
+</div>
+</div>
+<div id="pass-through-option" class="listingblock">
+<div class="content">
+<pre>&lt;pass through option&gt; ::=
+    PASS THROUGH
+  | NO PASS THROUGH</pre>
+</div>
+</div>
+<div id="generic-table-semantics" class="listingblock">
+<div class="content">
+<pre>&lt;generic table semantics&gt; ::=
+    WITH ROW SEMANTICS
+  | WITH SET SEMANTICS [ <a href="#generic-table-pruning">&lt;generic table pruning&gt; </a> ]</pre>
+</div>
+</div>
+<div id="generic-table-pruning" class="listingblock">
+<div class="content">
+<pre>&lt;generic table pruning&gt; ::=
+    PRUNE ON EMPTY
+  | KEEP ON EMPTY</pre>
+</div>
+</div>
+<div id="descriptor-parameter-type" class="listingblock">
+<div class="content">
+<pre>&lt;descriptor parameter type&gt; ::=
+  DESCRIPTOR</pre>
 </div>
 </div>
 <div id="locator-indication" class="listingblock">
@@ -8842,7 +10875,8 @@ specified clause.</p>
 <div id="returns-table-type" class="listingblock">
 <div class="content">
 <pre>&lt;returns table type&gt; ::=
-  TABLE <a href="#table-function-column-list">&lt;table function column list&gt; </a></pre>
+    TABLE [ <a href="#table-function-column-list">&lt;table function column list&gt; </a> ]
+  | ONLY PASS THROUGH</pre>
 </div>
 </div>
 <div id="table-function-column-list" class="listingblock">
@@ -8880,7 +10914,8 @@ specified clause.</p>
 <div class="content">
 <pre>&lt;routine body&gt; ::=
     <a href="#SQL-routine-spec">&lt;SQL routine spec&gt; </a>
-  | <a href="#external-body-reference">&lt;external body reference&gt; </a></pre>
+  | <a href="#external-body-reference">&lt;external body reference&gt; </a>
+  | <a href="#polymorphic-table-function-body">&lt;polymorphic table function body&gt; </a></pre>
 </div>
 </div>
 <div id="SQL-routine-spec" class="listingblock">
@@ -8909,6 +10944,50 @@ specified clause.</p>
       [ <a href="#parameter-style-clause">&lt;parameter style clause&gt; </a> ]
       [ <a href="#transform-group-specification">&lt;transform group specification&gt; </a> ]
       [ <a href="#external-security-clause">&lt;external security clause&gt; </a> ]</pre>
+</div>
+</div>
+<div id="polymorphic-table-function-body" class="listingblock">
+<div class="content">
+<pre>&lt;polymorphic table function body&gt; ::=
+  [ <a href="#PTF-private-parameters">&lt;PTF private parameters&gt; </a> ]
+      [ DESCRIBE WITH <a href="#PTF-describe-component-procedure">&lt;PTF describe component procedure&gt; </a> ]
+      [ START WITH <a href="#PTF-start-component-procedure">&lt;PTF start component procedure&gt; </a> ]
+      FULFILL WITH <a href="#PTF-fulfill-component-procedure">&lt;PTF fulfill component procedure&gt; </a>
+      [ FINISH WITH <a href="#PTF-finish-component-procedure">&lt;PTF finish component procedure&gt; </a> ]
+&lt;PTF private parameters&gt; ::=
+  PRIVATE [ DATA ] <a href="#private-parameter-declaration-list">&lt;private parameter declaration list&gt; </a></pre>
+</div>
+</div>
+<div id="private-parameter-declaration-list" class="listingblock">
+<div class="content">
+<pre>&lt;private parameter declaration list&gt; ::=
+  <a href="#left-paren">&lt;left paren&gt; </a> [ <a href="#SQL-parameter-declaration">&lt;SQL parameter declaration&gt; </a>
+      [ { <a href="#comma">&lt;comma&gt; </a> <a href="#SQL-parameter-declaration">&lt;SQL parameter declaration&gt; </a> }... ] ]
+      <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="PTF-describe-component-procedure" class="listingblock">
+<div class="content">
+<pre>&lt;PTF describe component procedure&gt; ::=
+  <a href="#specific-routine-designator">&lt;specific routine designator&gt; </a></pre>
+</div>
+</div>
+<div id="PTF-start-component-procedure" class="listingblock">
+<div class="content">
+<pre>&lt;PTF start component procedure&gt; ::=
+  <a href="#specific-routine-designator">&lt;specific routine designator&gt; </a></pre>
+</div>
+</div>
+<div id="PTF-fulfill-component-procedure" class="listingblock">
+<div class="content">
+<pre>&lt;PTF fulfill component procedure&gt; ::=
+  <a href="#specific-routine-designator">&lt;specific routine designator&gt; </a></pre>
+</div>
+</div>
+<div id="PTF-finish-component-procedure" class="listingblock">
+<div class="content">
+<pre>&lt;PTF finish component procedure&gt; ::=
+  <a href="#specific-routine-designator">&lt;specific routine designator&gt; </a></pre>
 </div>
 </div>
 <div id="external-security-clause" class="listingblock">
@@ -8977,7 +11056,6 @@ specified clause.</p>
 <div class="content">
 <pre>&lt;group specification&gt; ::=
   <a href="#group-name">&lt;group name&gt; </a> FOR TYPE <a href="#path-resolved-user-defined-type-name">&lt;path-resolved user-defined type name&gt; </a></pre>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -10006,7 +12084,9 @@ specified clause.</p>
   | <a href="#describe-statement">&lt;describe statement&gt; </a>
   | <a href="#execute-statement">&lt;execute statement&gt; </a>
   | <a href="#execute-immediate-statement">&lt;execute immediate statement&gt; </a>
-  | <a href="#SQL-dynamic-data-statement">&lt;SQL dynamic data statement&gt; </a></pre>
+  | <a href="#SQL-dynamic-data-statement">&lt;SQL dynamic data statement&gt; </a>
+  | <a href="#copy-descriptor-statement">&lt;copy descriptor statement&gt; </a>
+  | <a href="#pipe-row-statement">&lt;pipe row statement&gt; </a></pre>
 </div>
 </div>
 <div id="SQL-dynamic-data-statement" class="listingblock">
@@ -10642,7 +12722,7 @@ row.</p>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Set the characteristics of the next SQL-transaction for the SQL-agent.
-    NOTE 522 - This statement has no effect on any SQL-transactions subsequent to the next SQL-transaction.</p>
+    NOTE 711 - This statement has no effect on any SQL-transactions subsequent to the next SQL-transaction.</p>
 </div>
 <div id="set-transaction-statement" class="listingblock">
 <div class="title">Format</div>
@@ -10715,7 +12795,7 @@ row.</p>
 <p>If an SQL-transaction is currently active, then set the constraint mode for that SQL-transaction in the current
 SQL-session. If no SQL-transaction is currently active, then set the constraint mode for the next SQL-transaction
 in the current SQL-session for the SQL-agent.
-    NOTE 524 - This statement has no effect on any SQL-transactions subsequent to this SQL-transaction.</p>
+    NOTE 713 - This statement has no effect on any SQL-transactions subsequent to this SQL-transaction.</p>
 </div>
 <div id="set-constraints-mode-statement" class="listingblock">
 <div class="title">Format</div>
@@ -11095,7 +13175,8 @@ remains effective until another SQL-session collation for the same character set
 </div>
 <div id="collation-specification" class="listingblock">
 <div class="content">
-<pre>&lt;collation specification&gt; ::= &lt;value specification&gt;</pre>
+<pre>&lt;collation specification&gt; ::=
+  <a href="#value-specification">&lt;value specification&gt; </a></pre>
 </div>
 </div>
 </div>
@@ -11114,7 +13195,7 @@ remains effective until another SQL-session collation for the same character set
 <div class="title">Format</div>
 <div class="content">
 <pre>&lt;allocate descriptor statement&gt; ::=
-  ALLOCATE [ SQL ] DESCRIPTOR <a href="#descriptor-name">&lt;descriptor name&gt; </a> [ WITH MAX <a href="#occurrences">&lt;occurrences&gt; </a> ]</pre>
+  ALLOCATE [ SQL ] DESCRIPTOR <a href="#conventional-descriptor-name">&lt;conventional descriptor name&gt; </a> [ WITH MAX <a href="#occurrences">&lt;occurrences&gt; </a> ]</pre>
 </div>
 </div>
 <div id="occurrences" class="listingblock">
@@ -11134,7 +13215,7 @@ remains effective until another SQL-session collation for the same character set
 <div class="title">Format</div>
 <div class="content">
 <pre>&lt;deallocate descriptor statement&gt; ::=
-  DEALLOCATE [ SQL ] DESCRIPTOR <a href="#descriptor-name">&lt;descriptor name&gt; </a></pre>
+  DEALLOCATE [ SQL ] DESCRIPTOR <a href="#conventional-descriptor-name">&lt;conventional descriptor name&gt; </a></pre>
 </div>
 </div>
 </div>
@@ -11219,6 +13300,7 @@ remains effective until another SQL-session collation for the same character set
   | LEVEL
   | NAME
   | NULLABLE
+  | NULL_ORDERING
   | OCTET_LENGTH
   | PARAMETER_MODE
   | PARAMETER_ORDINAL_POSITION
@@ -11233,6 +13315,7 @@ remains effective until another SQL-session collation for the same character set
   | SCOPE_CATALOG
   | SCOPE_NAME
   | SCOPE_SCHEMA
+  | SORT_DIRECTION
   | TYPE
   | UNNAMED
   | USER_DEFINED_TYPE_CATALOG
@@ -11289,7 +13372,69 @@ remains effective until another SQL-session collation for the same character set
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_6_prepare_statement">20.6 &lt;prepare statement&gt;</h3>
+<h3 id="_20_6_copy_descriptor_statement">20.6 &lt;copy descriptor statement&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Copy one SQL descriptor area, in whole or in part, to another SQL descriptor area.</p>
+</div>
+<div id="copy-descriptor-statement" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;copy descriptor statement&gt; ::=
+    <a href="#copy-whole-descriptor-statement">&lt;copy whole descriptor statement&gt; </a>
+  | <a href="#copy-item-descriptor-statement">&lt;copy item descriptor statement&gt; </a></pre>
+</div>
+</div>
+<div id="copy-whole-descriptor-statement" class="listingblock">
+<div class="content">
+<pre>&lt;copy whole descriptor statement&gt; ::=
+  COPY <a href="#source-descriptor-name">&lt;source descriptor name&gt; </a> TO <a href="#target-descriptor-name">&lt;target descriptor name&gt; </a></pre>
+</div>
+</div>
+<div id="copy-item-descriptor-statement" class="listingblock">
+<div class="content">
+<pre>&lt;copy item descriptor statement&gt; ::=
+  COPY <a href="#source-descriptor-name">&lt;source descriptor name&gt; </a> VALUE <a href="#item-number-1">&lt;item number 1&gt; </a>
+      <a href="#left-paren">&lt;left paren&gt; </a> <a href="#copy-descriptor-options">&lt;copy descriptor options&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
+      TO <a href="#target-descriptor-name">&lt;target descriptor name&gt; </a> VALUE <a href="#item-number-2">&lt;item number 2&gt; </a></pre>
+</div>
+</div>
+<div id="source-descriptor-name" class="listingblock">
+<div class="content">
+<pre>&lt;source descriptor name&gt; ::=
+  <a href="#descriptor-name">&lt;descriptor name&gt; </a></pre>
+</div>
+</div>
+<div id="target-descriptor-name" class="listingblock">
+<div class="content">
+<pre>&lt;target descriptor name&gt; ::=
+  <a href="#PTF-descriptor-name">&lt;PTF descriptor name&gt; </a></pre>
+</div>
+</div>
+<div id="item-number-1" class="listingblock">
+<div class="content">
+<pre>&lt;item number 1&gt; ::=
+  <a href="#simple-value-specification">&lt;simple value specification&gt; </a></pre>
+</div>
+</div>
+<div id="item-number-2" class="listingblock">
+<div class="content">
+<pre>&lt;item number 2&gt; ::=
+  <a href="#simple-value-specification">&lt;simple value specification&gt; </a></pre>
+</div>
+</div>
+<div id="copy-descriptor-options" class="listingblock">
+<div class="content">
+<pre>&lt;copy descriptor options&gt; ::=
+    NAME
+  | TYPE
+  | NAME <a href="#comma">&lt;comma&gt; </a> TYPE
+  | DATA</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_20_7_prepare_statement">20.7 &lt;prepare statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Prepare a statement for execution.</p>
@@ -11385,7 +13530,7 @@ remains effective until another SQL-session collation for the same character set
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_7_cursor_attributes">20.7 &lt;cursor attributes&gt;</h3>
+<h3 id="_20_8_cursor_attributes">20.8 &lt;cursor attributes&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify a list of cursor attributes.</p>
@@ -11408,7 +13553,7 @@ remains effective until another SQL-session collation for the same character set
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_8_deallocate_prepared_statement">20.8 &lt;deallocate prepared statement&gt;</h3>
+<h3 id="_20_9_deallocate_prepared_statement">20.9 &lt;deallocate prepared statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Deallocate SQL-statements that have been prepared with a &lt;prepare statement&gt;.</p>
@@ -11422,7 +13567,7 @@ remains effective until another SQL-session collation for the same character set
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_9_describe_statement">20.9 &lt;describe statement&gt;</h3>
+<h3 id="_20_10_describe_statement">20.10 &lt;describe statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Obtain information about the &lt;select list&gt; columns or &lt;dynamic parameter specification&gt;s contained in a prepared
@@ -11470,7 +13615,7 @@ statement or about the columns of the result set associated with a cursor.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_10_input_using_clause">20.10 &lt;input using clause&gt;</h3>
+<h3 id="_20_11_input_using_clause">20.11 &lt;input using clause&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Supply input values for an &lt;SQL dynamic statement&gt;.</p>
@@ -11503,7 +13648,7 @@ statement or about the columns of the result set associated with a cursor.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_11_output_using_clause">20.11 &lt;output using clause&gt;</h3>
+<h3 id="_20_12_output_using_clause">20.12 &lt;output using clause&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Supply output variables for an &lt;SQL dynamic statement&gt;.</p>
@@ -11536,7 +13681,7 @@ statement or about the columns of the result set associated with a cursor.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_12_execute_statement">20.12 &lt;execute statement&gt;</h3>
+<h3 id="_20_13_execute_statement">20.13 &lt;execute statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Associate input SQL parameters and output targets with a prepared statement and execute the statement.</p>
@@ -11562,7 +13707,7 @@ statement or about the columns of the result set associated with a cursor.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_13_execute_immediate_statement">20.13 &lt;execute immediate statement&gt;</h3>
+<h3 id="_20_14_execute_immediate_statement">20.14 &lt;execute immediate statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Dynamically prepare and execute a preparable statement.</p>
@@ -11576,7 +13721,7 @@ statement or about the columns of the result set associated with a cursor.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_14_dynamic_declare_cursor">20.14 &lt;dynamic declare cursor&gt;</h3>
+<h3 id="_20_15_dynamic_declare_cursor">20.15 &lt;dynamic declare cursor&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Declare a declared dynamic cursor to be associated with a &lt;statement name&gt;, which may in turn be associated
@@ -11593,7 +13738,33 @@ with a &lt;cursor specification&gt;.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_15_allocate_extended_dynamic_cursor_statement">20.15 &lt;allocate extended dynamic cursor statement&gt;</h3>
+<h3 id="_20_16_descriptor_value_constructor">20.16 &lt;descriptor value constructor&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Construct a PTF descriptor.</p>
+</div>
+<div id="descriptor-value-constructor" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;descriptor value constructor&gt; ::=
+  DESCRIPTOR <a href="#left-paren">&lt;left paren&gt; </a> <a href="#descriptor-column-list">&lt;descriptor column list&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a></pre>
+</div>
+</div>
+<div id="descriptor-column-list" class="listingblock">
+<div class="content">
+<pre>&lt;descriptor column list&gt; ::=
+  <a href="#descriptor-column-specification">&lt;descriptor column specification&gt; </a> [ { <a href="#comma">&lt;comma&gt; </a> <a href="#descriptor-column-specification">&lt;descriptor column specification&gt; </a> }... ]</pre>
+</div>
+</div>
+<div id="descriptor-column-specification" class="listingblock">
+<div class="content">
+<pre>&lt;descriptor column specification&gt; ::=
+  <a href="#column-name">&lt;column name&gt; </a> [ <a href="#data-type">&lt;data type&gt; </a> ]</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_20_17_allocate_extended_dynamic_cursor_statement">20.17 &lt;allocate extended dynamic cursor statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Define a cursor based on a prepared statement for a &lt;cursor specification&gt;.</p>
@@ -11609,7 +13780,7 @@ with a &lt;cursor specification&gt;.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_16_allocate_received_cursor_statement">20.16 &lt;allocate received cursor statement&gt;</h3>
+<h3 id="_20_18_allocate_received_cursor_statement">20.18 &lt;allocate received cursor statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Assign a cursor to the result set sequence returned from an SQL-invoked procedure.</p>
@@ -11624,7 +13795,7 @@ with a &lt;cursor specification&gt;.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_17_dynamic_open_statement">20.17 &lt;dynamic open statement&gt;</h3>
+<h3 id="_20_19_dynamic_open_statement">20.19 &lt;dynamic open statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Associate input dynamic parameters with a &lt;cursor specification&gt; and open the dynamic cursor.</p>
@@ -11633,12 +13804,12 @@ with a &lt;cursor specification&gt;.</p>
 <div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic open statement&gt; ::=
-  OPEN <a href="#dynamic-cursor-name">&lt;dynamic cursor name&gt; </a> [ <a href="#input-using-clause">&lt;input using clause&gt; </a> ]</pre>
+  OPEN <a href="#conventional-dynamic-cursor-name">&lt;conventional dynamic cursor name&gt; </a> [ <a href="#input-using-clause">&lt;input using clause&gt; </a> ]</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_18_dynamic_fetch_statement">20.18 &lt;dynamic fetch statement&gt;</h3>
+<h3 id="_20_20_dynamic_fetch_statement">20.20 &lt;dynamic fetch statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Fetch a row for a dynamic cursor.</p>
@@ -11652,7 +13823,7 @@ with a &lt;cursor specification&gt;.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_19_dynamic_single_row_select_statement">20.19 &lt;dynamic single row select statement&gt;</h3>
+<h3 id="_20_21_dynamic_single_row_select_statement">20.21 &lt;dynamic single row select statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Retrieve values from a dynamically-specified row of a table.</p>
@@ -11666,7 +13837,7 @@ with a &lt;cursor specification&gt;.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_20_dynamic_close_statement">20.20 &lt;dynamic close statement&gt;</h3>
+<h3 id="_20_22_dynamic_close_statement">20.22 &lt;dynamic close statement&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Close a dynamic cursor.</p>
@@ -11675,12 +13846,12 @@ with a &lt;cursor specification&gt;.</p>
 <div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic close statement&gt; ::=
-  CLOSE <a href="#dynamic-cursor-name">&lt;dynamic cursor name&gt; </a></pre>
+  CLOSE <a href="#conventional-dynamic-cursor-name">&lt;conventional dynamic cursor name&gt; </a></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_21_dynamic_delete_statement_positioned">20.21 &lt;dynamic delete statement: positioned&gt;</h3>
+<h3 id="_20_23_dynamic_delete_statement_positioned">20.23 &lt;dynamic delete statement: positioned&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Delete a row of a table.</p>
@@ -11689,12 +13860,12 @@ with a &lt;cursor specification&gt;.</p>
 <div class="title">Format</div>
 <div class="content">
 <pre>&lt;dynamic delete statement: positioned&gt; ::=
-  DELETE FROM <a href="#target-table">&lt;target table&gt; </a> WHERE CURRENT OF <a href="#dynamic-cursor-name">&lt;dynamic cursor name&gt; </a></pre>
+  DELETE FROM <a href="#target-table">&lt;target table&gt; </a> WHERE CURRENT OF <a href="#conventional-dynamic-cursor-name">&lt;conventional dynamic cursor name&gt; </a></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_22_dynamic_update_statement_positioned">20.22 &lt;dynamic update statement: positioned&gt;</h3>
+<h3 id="_20_24_dynamic_update_statement_positioned">20.24 &lt;dynamic update statement: positioned&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Update a row of a table.</p>
@@ -11704,12 +13875,12 @@ with a &lt;cursor specification&gt;.</p>
 <div class="content">
 <pre>&lt;dynamic update statement: positioned&gt; ::=
   UPDATE <a href="#target-table">&lt;target table&gt; </a> SET <a href="#set-clause-list">&lt;set clause list&gt; </a>
-      WHERE CURRENT OF <a href="#dynamic-cursor-name">&lt;dynamic cursor name&gt; </a></pre>
+      WHERE CURRENT OF <a href="#conventional-dynamic-cursor-name">&lt;conventional dynamic cursor name&gt; </a></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_23_preparable_dynamic_delete_statement_positioned">20.23 &lt;preparable dynamic delete statement: positioned&gt;</h3>
+<h3 id="_20_25_preparable_dynamic_delete_statement_positioned">20.25 &lt;preparable dynamic delete statement: positioned&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Delete a row of a table through a dynamic cursor.</p>
@@ -11724,7 +13895,7 @@ with a &lt;cursor specification&gt;.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_24_preparable_dynamic_cursor_name">20.24 &lt;preparable dynamic cursor name&gt;</h3>
+<h3 id="_20_26_preparable_dynamic_cursor_name">20.26 &lt;preparable dynamic cursor name&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Specify the cursor of a &lt;preparable dynamic delete statement: positioned&gt; or a &lt;preparable dynamic update
@@ -11739,7 +13910,7 @@ statement: positioned&gt;.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_20_25_preparable_dynamic_update_statement_positioned">20.25 &lt;preparable dynamic update statement: positioned&gt;</h3>
+<h3 id="_20_27_preparable_dynamic_update_statement_positioned">20.27 &lt;preparable dynamic update statement: positioned&gt;</h3>
 <div class="paragraph">
 <div class="title">Function</div>
 <p>Update a row of a table through a dynamic cursor.</p>
@@ -11750,6 +13921,20 @@ statement: positioned&gt;.</p>
 <pre>&lt;preparable dynamic update statement: positioned&gt; ::=
   UPDATE [ <a href="#target-table">&lt;target table&gt; </a> ] SET <a href="#set-clause-list">&lt;set clause list&gt; </a>
       WHERE CURRENT OF <a href="#preparable-dynamic-cursor-name">&lt;preparable dynamic cursor name&gt; </a></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_20_28_pipe_row_statement">20.28 &lt;pipe row statement&gt;</h3>
+<div class="paragraph">
+<div class="title">Function</div>
+<p>Output a row from a polymorphic table function.</p>
+</div>
+<div id="pipe-row-statement" class="listingblock">
+<div class="title">Format</div>
+<div class="content">
+<pre>&lt;pipe row statement&gt; ::=
+  PIPE ROW <a href="#PTF-descriptor-name">&lt;PTF descriptor name&gt; </a></pre>
 </div>
 </div>
 </div>
@@ -11945,7 +14130,7 @@ statement: positioned&gt;.</p>
 <div class="content">
 <pre>&lt;SQL condition&gt; ::=
     <a href="#major-category">&lt;major category&gt; </a>
-  | SQLSTATE ( <a href="#SQLSTATE-class-value">&lt;SQLSTATE class value&gt; </a> [ , <a href="#SQLSTATE-subclass-value">&lt;SQLSTATE subclass value&gt; </a> ] )
+  | SQLSTATE ( <a href="#SQLSTATE-class-code">&lt;SQLSTATE class code&gt; </a> [ , <a href="#SQLSTATE-subclass-code">&lt;SQLSTATE subclass code&gt; </a> ] )
   | CONSTRAINT <a href="#constraint-name">&lt;constraint name&gt; </a></pre>
 </div>
 </div>
@@ -11957,15 +14142,15 @@ statement: positioned&gt;.</p>
   | NOT FOUND</pre>
 </div>
 </div>
-<div id="SQLSTATE-class-value" class="listingblock">
+<div id="SQLSTATE-class-code" class="listingblock">
 <div class="content">
-<pre>&lt;SQLSTATE class value&gt; ::=
+<pre>&lt;SQLSTATE class code&gt; ::=
   <a href="#SQLSTATE-char">&lt;SQLSTATE char&gt; </a> <a href="#SQLSTATE-char">&lt;SQLSTATE char&gt; </a>!! See the Syntax Rules.</pre>
 </div>
 </div>
-<div id="SQLSTATE-subclass-value" class="listingblock">
+<div id="SQLSTATE-subclass-code" class="listingblock">
 <div class="content">
-<pre>&lt;SQLSTATE subclass value&gt; ::=
+<pre>&lt;SQLSTATE subclass code&gt; ::=
   <a href="#SQLSTATE-char">&lt;SQLSTATE char&gt; </a> <a href="#SQLSTATE-char">&lt;SQLSTATE char&gt; </a> <a href="#SQLSTATE-char">&lt;SQLSTATE char&gt; </a>!! See the Syntax Rules.</pre>
 </div>
 </div>
@@ -12285,8 +14470,7 @@ statement: positioned&gt;.</p>
 <div id="C-NCHAR-variable" class="listingblock">
 <div class="content">
 <pre>&lt;C NCHAR variable&gt; ::=
-  NCHAR [ CHARACTER SET [ IS ] <a href="#character-set-specification">&lt;character set specification&gt; </a> ]
-      <a href="#C-host-identifier">&lt;C host identifier&gt; </a> <a href="#C-array-specification">&lt;C array specification&gt; </a> [ <a href="#C-initial-value">&lt;C initial value&gt; </a> ]
+  NCHAR <a href="#C-host-identifier">&lt;C host identifier&gt; </a> <a href="#C-array-specification">&lt;C array specification&gt; </a> [ <a href="#C-initial-value">&lt;C initial value&gt; </a> ]
       [ { <a href="#comma">&lt;comma&gt; </a> <a href="#C-host-identifier">&lt;C host identifier&gt; </a> <a href="#C-array-specification">&lt;C array specification&gt; </a>
       [ <a href="#C-initial-value">&lt;C initial value&gt; </a> ] } ... ]</pre>
 </div>
@@ -12294,8 +14478,7 @@ statement: positioned&gt;.</p>
 <div id="C-NCHAR-VARYING-variable" class="listingblock">
 <div class="content">
 <pre>&lt;C NCHAR VARYING variable&gt; ::=
-  NCHAR VARYING [ CHARACTER SET [ IS ] <a href="#character-set-specification">&lt;character set specification&gt; </a> ]
-      <a href="#C-host-identifier">&lt;C host identifier&gt; </a> <a href="#C-array-specification">&lt;C array specification&gt; </a> [ <a href="#C-initial-value">&lt;C initial value&gt; </a> ]
+  NCHAR VARYING <a href="#C-host-identifier">&lt;C host identifier&gt; </a> <a href="#C-array-specification">&lt;C array specification&gt; </a> [ <a href="#C-initial-value">&lt;C initial value&gt; </a> ]
       [ { <a href="#comma">&lt;comma&gt; </a> <a href="#C-host-identifier">&lt;C host identifier&gt; </a> <a href="#C-array-specification">&lt;C array specification&gt; </a> [
       <a href="#C-initial-value">&lt;C initial value&gt; </a> ] } ... ]</pre>
 </div>
@@ -12313,7 +14496,6 @@ statement: positioned&gt;.</p>
 <div class="content">
 <pre>&lt;C NCLOB variable&gt; ::=
   SQL TYPE IS NCLOB <a href="#left-paren">&lt;left paren&gt; </a> <a href="#character-large-object-length">&lt;character large object length&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a>
-      [ CHARACTER SET [ IS ] <a href="#character-set-specification">&lt;character set specification&gt; </a> ]
       <a href="#C-host-identifier">&lt;C host identifier&gt; </a> [ <a href="#C-initial-value">&lt;C initial value&gt; </a> ] [ { <a href="#comma">&lt;comma&gt; </a> <a href="#C-host-identifier">&lt;C host identifier&gt; </a>
       [ <a href="#C-initial-value">&lt;C initial value&gt; </a> ] }... ]</pre>
 </div>
@@ -12473,8 +14655,7 @@ statement: positioned&gt;.</p>
 <div id="COBOL-national-character-type" class="listingblock">
 <div class="content">
 <pre>&lt;COBOL national character type&gt; ::=
-  [ CHARACTER SET [ IS ] <a href="#character-set-specification">&lt;character set specification&gt; </a> ]
-      { PIC | PICTURE } [ IS ] { N [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#character-length">&lt;character length&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ] }...</pre>
+  { PIC | PICTURE } [ IS ] { N [ <a href="#left-paren">&lt;left paren&gt; </a> <a href="#character-length">&lt;character length&gt; </a> <a href="#right-paren">&lt;right paren&gt; </a> ] }...</pre>
 </div>
 </div>
 <div id="COBOL-CLOB-variable" class="listingblock">
@@ -12489,8 +14670,7 @@ statement: positioned&gt;.</p>
 <div class="content">
 <pre>&lt;COBOL NCLOB variable&gt; ::=
   [ USAGE [ IS ] ] SQL TYPE IS NCLOB <a href="#left-paren">&lt;left paren&gt; </a> <a href="#character-large-object-length">&lt;character large object length&gt; </a> &lt;right
-  paren&gt;
-      [ CHARACTER SET [ IS ] <a href="#character-set-specification">&lt;character set specification&gt; </a> ]</pre>
+  paren&gt;</pre>
 </div>
 </div>
 <div id="COBOL-BINARY-variable" class="listingblock">
@@ -13324,7 +15504,7 @@ statement: positioned&gt;.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-05 19:43:20 +0100
+Last updated 2019-07-05 19:43:22 +0100
 </div>
 </div>
 </body>
