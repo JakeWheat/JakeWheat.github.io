@@ -17,7 +17,8 @@ local_docs () {
     # todo: fix svg tag in html
     cabal sandbox init
     cabal install split
-    runhaskell -package-db=.cabal-sandbox/x86_64-linux-ghc-7.10.3-packages.conf.d/ FixStuff.lhs
+    GHC_VER=$(ghc --numeric-version)
+    runhaskell -package-db=.cabal-sandbox/x86_64-linux-ghc-$GHC_VER-packages.conf.d/ FixStuff.lhs
     echo hssqlppp/index
     asciidoctor hssqlppp/index.asciidoc -o - | runhaskell AddLinks.lhs ".." > hssqlppp/index.html
     echo simple-sql-parser/index
