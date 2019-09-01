@@ -4137,12 +4137,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-ss">&quot;period&quot;</span></code></pre>
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-ss">&quot;from&quot;</span></code></pre>
 </div>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Iden</span> <span class="tok-p">[</span> <span class="tok-kt">Name</span> <span class="tok-p">(</span><span class="tok-kt">Just</span> <span class="tok-p">(</span> <span class="tok-s">&quot;</span><span class="tok-se">\&quot;</span><span class="tok-s">&quot;</span> <span class="tok-p">,</span> <span class="tok-s">&quot;</span><span class="tok-se">\&quot;</span><span class="tok-s">&quot;</span> <span class="tok-p">))</span> <span class="tok-s">&quot;period&quot;</span> <span class="tok-p">]</span></code></pre>
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Iden</span> <span class="tok-p">[</span> <span class="tok-kt">Name</span> <span class="tok-p">(</span><span class="tok-kt">Just</span> <span class="tok-p">(</span> <span class="tok-s">&quot;</span><span class="tok-se">\&quot;</span><span class="tok-s">&quot;</span> <span class="tok-p">,</span> <span class="tok-s">&quot;</span><span class="tok-se">\&quot;</span><span class="tok-s">&quot;</span> <span class="tok-p">))</span> <span class="tok-s">&quot;from&quot;</span> <span class="tok-p">]</span></code></pre>
 </div>
 </div></div></td>
 </tr>
@@ -24709,6 +24709,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-n">a</span> <span class="tok-n">b</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Right</span>
+  <span class="tok-kt">Select</span>
+    <span class="tok-p">{</span> <span class="tok-n">qeSetQuantifier</span> <span class="tok-ow">=</span> <span class="tok-kt">SQDefault</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeSelectList</span> <span class="tok-ow">=</span>
+        <span class="tok-p">[</span> <span class="tok-p">(</span> <span class="tok-kt">Iden</span> <span class="tok-p">[</span> <span class="tok-kt">Name</span> <span class="tok-kt">Nothing</span> <span class="tok-s">&quot;a&quot;</span> <span class="tok-p">]</span> <span class="tok-p">,</span> <span class="tok-kt">Just</span> <span class="tok-p">(</span><span class="tok-kt">Name</span> <span class="tok-kt">Nothing</span> <span class="tok-s">&quot;b&quot;</span><span class="tok-p">)</span> <span class="tok-p">)</span> <span class="tok-p">]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeFrom</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeWhere</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeGroupBy</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeHaving</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeOrderBy</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeOffset</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeFetchFirst</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
 <pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-nb">DATE</span><span class="tok-p">(</span><span class="tok-s1">&#39;2000-01-01&#39;</span><span class="tok-p">)</span></code></pre>
 </div>
 </div></div></td>
@@ -24722,6 +24746,79 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
           <span class="tok-p">,</span> <span class="tok-kt">Nothing</span>
           <span class="tok-p">)</span>
         <span class="tok-p">]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeFrom</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeWhere</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeGroupBy</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeHaving</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeOrderBy</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeOffset</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeFetchFirst</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-nb">DATE</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Right</span>
+  <span class="tok-kt">Select</span>
+    <span class="tok-p">{</span> <span class="tok-n">qeSetQuantifier</span> <span class="tok-ow">=</span> <span class="tok-kt">SQDefault</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeSelectList</span> <span class="tok-ow">=</span> <span class="tok-p">[</span> <span class="tok-p">(</span> <span class="tok-kt">Iden</span> <span class="tok-p">[</span> <span class="tok-kt">Name</span> <span class="tok-kt">Nothing</span> <span class="tok-s">&quot;DATE&quot;</span> <span class="tok-p">]</span> <span class="tok-p">,</span> <span class="tok-kt">Nothing</span> <span class="tok-p">)</span> <span class="tok-p">]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeFrom</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeWhere</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeGroupBy</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeHaving</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeOrderBy</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeOffset</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeFetchFirst</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-nb">DATE</span><span class="tok-p">(</span><span class="tok-s1">&#39;2000-01-01&#39;</span><span class="tok-p">)</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Right</span>
+  <span class="tok-kt">Select</span>
+    <span class="tok-p">{</span> <span class="tok-n">qeSetQuantifier</span> <span class="tok-ow">=</span> <span class="tok-kt">SQDefault</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeSelectList</span> <span class="tok-ow">=</span>
+        <span class="tok-p">[</span> <span class="tok-p">(</span> <span class="tok-kt">App</span> <span class="tok-p">[</span> <span class="tok-kt">Name</span> <span class="tok-kt">Nothing</span> <span class="tok-s">&quot;DATE&quot;</span> <span class="tok-p">]</span> <span class="tok-p">[</span> <span class="tok-kt">StringLit</span> <span class="tok-s">&quot;&#39;&quot;</span> <span class="tok-s">&quot;&#39;&quot;</span> <span class="tok-s">&quot;2000-01-01&quot;</span> <span class="tok-p">]</span>
+          <span class="tok-p">,</span> <span class="tok-kt">Nothing</span>
+          <span class="tok-p">)</span>
+        <span class="tok-p">]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeFrom</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeWhere</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeGroupBy</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeHaving</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeOrderBy</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeOffset</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeFetchFirst</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-nb">DATE</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Right</span>
+  <span class="tok-kt">Select</span>
+    <span class="tok-p">{</span> <span class="tok-n">qeSetQuantifier</span> <span class="tok-ow">=</span> <span class="tok-kt">SQDefault</span>
+    <span class="tok-p">,</span> <span class="tok-n">qeSelectList</span> <span class="tok-ow">=</span> <span class="tok-p">[</span> <span class="tok-p">(</span> <span class="tok-kt">Iden</span> <span class="tok-p">[</span> <span class="tok-kt">Name</span> <span class="tok-kt">Nothing</span> <span class="tok-s">&quot;DATE&quot;</span> <span class="tok-p">]</span> <span class="tok-p">,</span> <span class="tok-kt">Nothing</span> <span class="tok-p">)</span> <span class="tok-p">]</span>
     <span class="tok-p">,</span> <span class="tok-n">qeFrom</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
     <span class="tok-p">,</span> <span class="tok-n">qeWhere</span> <span class="tok-ow">=</span> <span class="tok-kt">Nothing</span>
     <span class="tok-p">,</span> <span class="tok-n">qeGroupBy</span> <span class="tok-ow">=</span> <span class="tok-kt">[]</span>
@@ -24753,6 +24850,126 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-nb">DATE</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Left</span>
+  <span class="tok-kt">ParseError</span>
+    <span class="tok-p">{</span> <span class="tok-n">peErrorString</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFilename</span> <span class="tok-ow">=</span> <span class="tok-s">&quot;&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">pePosition</span> <span class="tok-ow">=</span> <span class="tok-p">(</span> <span class="tok-mi">1</span> <span class="tok-p">,</span> <span class="tok-mi">8</span> <span class="tok-p">)</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFormattedError</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;:1:8:</span><span class="tok-se">\n</span><span class="tok-s">SELECT DATE</span><span class="tok-se">\n</span><span class="tok-s">       ^</span><span class="tok-se">\n</span><span class="tok-s">(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-nb">DATE</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Left</span>
+  <span class="tok-kt">ParseError</span>
+    <span class="tok-p">{</span> <span class="tok-n">peErrorString</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFilename</span> <span class="tok-ow">=</span> <span class="tok-s">&quot;&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">pePosition</span> <span class="tok-ow">=</span> <span class="tok-p">(</span> <span class="tok-mi">1</span> <span class="tok-p">,</span> <span class="tok-mi">8</span> <span class="tok-p">)</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFormattedError</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;:1:8:</span><span class="tok-se">\n</span><span class="tok-s">SELECT DATE</span><span class="tok-se">\n</span><span class="tok-s">       ^</span><span class="tok-se">\n</span><span class="tok-s">(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-nb">DATE</span><span class="tok-p">(</span><span class="tok-s1">&#39;2000-01-01&#39;</span><span class="tok-p">)</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Left</span>
+  <span class="tok-kt">ParseError</span>
+    <span class="tok-p">{</span> <span class="tok-n">peErrorString</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFilename</span> <span class="tok-ow">=</span> <span class="tok-s">&quot;&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">pePosition</span> <span class="tok-ow">=</span> <span class="tok-p">(</span> <span class="tok-mi">1</span> <span class="tok-p">,</span> <span class="tok-mi">8</span> <span class="tok-p">)</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFormattedError</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;:1:8:</span><span class="tok-se">\n</span><span class="tok-s">SELECT DATE(&#39;2000-01-01&#39;)</span><span class="tok-se">\n</span><span class="tok-s">       ^</span><span class="tok-se">\n</span><span class="tok-s">(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-n">a</span> <span class="tok-nb">date</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Left</span>
+  <span class="tok-kt">ParseError</span>
+    <span class="tok-p">{</span> <span class="tok-n">peErrorString</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFilename</span> <span class="tok-ow">=</span> <span class="tok-s">&quot;&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">pePosition</span> <span class="tok-ow">=</span> <span class="tok-p">(</span> <span class="tok-mi">1</span> <span class="tok-p">,</span> <span class="tok-mi">8</span> <span class="tok-p">)</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFormattedError</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;:1:8:</span><span class="tok-se">\n</span><span class="tok-s">SELECT a date</span><span class="tok-se">\n</span><span class="tok-s">       ^</span><span class="tok-se">\n</span><span class="tok-s">(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-n">a</span> <span class="tok-nb">date</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Left</span>
+  <span class="tok-kt">ParseError</span>
+    <span class="tok-p">{</span> <span class="tok-n">peErrorString</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFilename</span> <span class="tok-ow">=</span> <span class="tok-s">&quot;&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">pePosition</span> <span class="tok-ow">=</span> <span class="tok-p">(</span> <span class="tok-mi">1</span> <span class="tok-p">,</span> <span class="tok-mi">8</span> <span class="tok-p">)</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFormattedError</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;:1:8:</span><span class="tok-se">\n</span><span class="tok-s">SELECT a date</span><span class="tok-se">\n</span><span class="tok-s">       ^</span><span class="tok-se">\n</span><span class="tok-s">(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">SELECT</span> <span class="tok-n">a</span> <span class="tok-nb">date</span></code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="haskell"><span></span><span class="tok-kt">Left</span>
+  <span class="tok-kt">ParseError</span>
+    <span class="tok-p">{</span> <span class="tok-n">peErrorString</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFilename</span> <span class="tok-ow">=</span> <span class="tok-s">&quot;&quot;</span>
+    <span class="tok-p">,</span> <span class="tok-n">pePosition</span> <span class="tok-ow">=</span> <span class="tok-p">(</span> <span class="tok-mi">1</span> <span class="tok-p">,</span> <span class="tok-mi">8</span> <span class="tok-p">)</span>
+    <span class="tok-p">,</span> <span class="tok-n">peFormattedError</span> <span class="tok-ow">=</span>
+        <span class="tok-s">&quot;:1:8:</span><span class="tok-se">\n</span><span class="tok-s">SELECT a date</span><span class="tok-se">\n</span><span class="tok-s">       ^</span><span class="tok-se">\n</span><span class="tok-s">(line 1, column 8):</span><span class="tok-se">\n</span><span class="tok-s">expecting scalar expression&quot;</span>
+    <span class="tok-p">}</span></code></pre>
+</div>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -24760,7 +24977,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-08-31 18:08:25 +0100
+Last updated 2019-09-01 10:02:26 +0100
 </div>
 </div>
 </body>
