@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span>
+</span><span id="line-2"></span><span class="hs-operator">&gt;</span><span> </span><span class="hs-comment">-- | helpers to work with parsec errors more nicely</span><span>
+</span><span id="line-3"></span><span class="hs-operator">&gt;</span><span> </span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Language.SQL.SimpleSQL.Errors</span><span>
+</span><span id="line-4"></span><span class="hs-operator">&gt;</span><span>     </span><span class="hs-special">(</span><span class="annot"><a href="Language.SQL.SimpleSQL.Errors.html#ParseError"><span class="hs-identifier">ParseError</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-5"></span><span class="hs-operator">&gt;</span><span>     </span><span class="hs-comment">--,formatError</span><span>
+</span><span id="line-6"></span><span class="hs-operator">&gt;</span><span>     </span><span class="hs-special">,</span><span class="annot"><a href="Language.SQL.SimpleSQL.Errors.html#convParseError"><span class="hs-identifier">convParseError</span></a></span><span>
+</span><span id="line-7"></span><span class="hs-operator">&gt;</span><span>     </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-operator">&gt;</span><span> </span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Text.Parsec</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">sourceColumn</span></span><span class="hs-special">,</span><span class="annot"><span class="hs-identifier">sourceLine</span></span><span class="hs-special">,</span><span class="annot"><span class="hs-identifier">sourceName</span></span><span class="hs-special">,</span><span class="annot"><span class="hs-identifier">errorPos</span></span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span class="hs-operator">&gt;</span><span> </span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Text.Parsec</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">P</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">ParseError</span></span><span class="hs-special">)</span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="hs-operator">&gt;</span><span> </span><span class="hs-comment">-- | Type to represent parse errors.</span><span>
+</span><span id="line-13"></span><span class="hs-operator">&gt;</span><span> </span><span class="hs-keyword">data</span><span> </span><span id="ParseError"><span class="annot"><a href="Language.SQL.SimpleSQL.Errors.html#ParseError"><span class="hs-identifier hs-var">ParseError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="ParseError"><span class="annot"><a href="Language.SQL.SimpleSQL.Errors.html#ParseError"><span class="hs-identifier hs-var">ParseError</span></a></span></span><span>
+</span><span id="line-14"></span><span class="hs-operator">&gt;</span><span>                   </span><span class="hs-special">{</span><span id="peErrorString"><span class="annot"><span class="annottext">ParseError -&gt; String
+</span><a href="Language.SQL.SimpleSQL.Errors.html#peErrorString"><span class="hs-identifier hs-var hs-var">peErrorString</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-15"></span><span class="hs-operator">&gt;</span><span>                    </span><span class="hs-comment">-- ^ contains the error message</span><span>
+</span><span id="line-16"></span><span class="hs-operator">&gt;</span><span>                   </span><span class="hs-special">,</span><span id="peFilename"><span class="annot"><span class="annottext">ParseError -&gt; String
+</span><a href="Language.SQL.SimpleSQL.Errors.html#peFilename"><span class="hs-identifier hs-var hs-var">peFilename</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FilePath</span></span><span>
+</span><span id="line-17"></span><span class="hs-operator">&gt;</span><span>                    </span><span class="hs-comment">-- ^ filename location for the error</span><span>
+</span><span id="line-18"></span><span class="hs-operator">&gt;</span><span>                   </span><span class="hs-special">,</span><span id="pePosition"><span class="annot"><span class="annottext">ParseError -&gt; (Int, Int)
+</span><a href="Language.SQL.SimpleSQL.Errors.html#pePosition"><span class="hs-identifier hs-var hs-var">pePosition</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">,</span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">)</span><span>
+</span><span id="line-19"></span><span class="hs-operator">&gt;</span><span>                    </span><span class="hs-comment">-- ^ line number and column number location for the error</span><span>
+</span><span id="line-20"></span><span class="hs-operator">&gt;</span><span>                   </span><span class="hs-special">,</span><span id="peFormattedError"><span class="annot"><span class="annottext">ParseError -&gt; String
+</span><a href="Language.SQL.SimpleSQL.Errors.html#peFormattedError"><span class="hs-identifier hs-var hs-var">peFormattedError</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-21"></span><span class="hs-operator">&gt;</span><span>                    </span><span class="hs-comment">-- ^ formatted error with the position, error</span><span>
+</span><span id="line-22"></span><span class="hs-operator">&gt;</span><span>                    </span><span class="hs-comment">-- message and source context</span><span>
+</span><span id="line-23"></span><span class="hs-operator">&gt;</span><span>                   </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679114955"><span id="local-6989586621679114957"><span class="annot"><span class="annottext">ParseError -&gt; ParseError -&gt; Bool
+(ParseError -&gt; ParseError -&gt; Bool)
+-&gt; (ParseError -&gt; ParseError -&gt; Bool) -&gt; Eq ParseError
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+/= :: ParseError -&gt; ParseError -&gt; Bool
+$c/= :: ParseError -&gt; ParseError -&gt; Bool
+== :: ParseError -&gt; ParseError -&gt; Bool
+$c== :: ParseError -&gt; ParseError -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span id="local-6989586621679114948"><span id="local-6989586621679114950"><span id="local-6989586621679114952"><span class="annot"><span class="annottext">Int -&gt; ParseError -&gt; ShowS
+[ParseError] -&gt; ShowS
+ParseError -&gt; String
+(Int -&gt; ParseError -&gt; ShowS)
+-&gt; (ParseError -&gt; String)
+-&gt; ([ParseError] -&gt; ShowS)
+-&gt; Show ParseError
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+showList :: [ParseError] -&gt; ShowS
+$cshowList :: [ParseError] -&gt; ShowS
+show :: ParseError -&gt; String
+$cshow :: ParseError -&gt; String
+showsPrec :: Int -&gt; ParseError -&gt; ShowS
+$cshowsPrec :: Int -&gt; ParseError -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span class="hs-operator">&gt;</span><span> </span><span class="annot"><a href="Language.SQL.SimpleSQL.Errors.html#convParseError"><span class="hs-identifier hs-type">convParseError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">P.ParseError</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Language.SQL.SimpleSQL.Errors.html#ParseError"><span class="hs-identifier hs-type">ParseError</span></a></span><span>
+</span><span id="line-26"></span><span class="hs-operator">&gt;</span><span> </span><span id="convParseError"><span class="annot"><span class="annottext">convParseError :: String -&gt; ParseError -&gt; ParseError
+</span><a href="Language.SQL.SimpleSQL.Errors.html#convParseError"><span class="hs-identifier hs-var hs-var">convParseError</span></a></span></span><span> </span><span id="local-6989586621679114946"><span class="annot"><span class="annottext">src :: String
+</span><a href="#local-6989586621679114946"><span class="hs-identifier hs-var">src</span></a></span></span><span> </span><span id="local-6989586621679114945"><span class="annot"><span class="annottext">e :: ParseError
+</span><a href="#local-6989586621679114945"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-27"></span><span class="hs-operator">&gt;</span><span>     </span><span class="annot"><span class="annottext">ParseError :: String -&gt; String -&gt; (Int, Int) -&gt; String -&gt; ParseError
+</span><a href="Language.SQL.SimpleSQL.Errors.html#ParseError"><span class="hs-identifier hs-type hs-type">ParseError</span></a></span><span>
+</span><span id="line-28"></span><span class="hs-operator">&gt;</span><span>     </span><span class="hs-special">{</span><span class="annot"><span class="annottext">peErrorString :: String
+</span><a href="Language.SQL.SimpleSQL.Errors.html#peErrorString"><span class="hs-identifier hs-var">peErrorString</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ParseError -&gt; String
+forall a. Show a =&gt; a -&gt; String
+</span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">ParseError
+</span><a href="#local-6989586621679114945"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-29"></span><span class="hs-operator">&gt;</span><span>     </span><span class="hs-special">,</span><span class="annot"><span class="annottext">peFilename :: String
+</span><a href="Language.SQL.SimpleSQL.Errors.html#peFilename"><span class="hs-identifier hs-var">peFilename</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SourcePos -&gt; String
+</span><span class="hs-identifier hs-var">sourceName</span></span><span> </span><span class="annot"><span class="annottext">SourcePos
+</span><a href="#local-6989586621679114942"><span class="hs-identifier hs-var">p</span></a></span><span>
+</span><span id="line-30"></span><span class="hs-operator">&gt;</span><span>     </span><span class="hs-special">,</span><span class="annot"><span class="annottext">pePosition :: (Int, Int)
+</span><a href="Language.SQL.SimpleSQL.Errors.html#pePosition"><span class="hs-identifier hs-var">pePosition</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourcePos -&gt; Int
+</span><span class="hs-identifier hs-var">sourceLine</span></span><span> </span><span class="annot"><span class="annottext">SourcePos
+</span><a href="#local-6989586621679114942"><span class="hs-identifier hs-var">p</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">SourcePos -&gt; Int
+</span><span class="hs-identifier hs-var">sourceColumn</span></span><span> </span><span class="annot"><span class="annottext">SourcePos
+</span><a href="#local-6989586621679114942"><span class="hs-identifier hs-var">p</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-31"></span><span class="hs-operator">&gt;</span><span>     </span><span class="hs-special">,</span><span class="annot"><span class="annottext">peFormattedError :: String
+</span><a href="Language.SQL.SimpleSQL.Errors.html#peFormattedError"><span class="hs-identifier hs-var">peFormattedError</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; ParseError -&gt; String
+</span><a href="Language.SQL.SimpleSQL.Errors.html#formatError"><span class="hs-identifier hs-var">formatError</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679114946"><span class="hs-identifier hs-var">src</span></a></span><span> </span><span class="annot"><span class="annottext">ParseError
+</span><a href="#local-6989586621679114945"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">}</span><span>
+</span><span id="line-32"></span><span class="hs-operator">&gt;</span><span>   </span><span class="hs-keyword">where</span><span>
+</span><span id="line-33"></span><span class="hs-operator">&gt;</span><span>     </span><span id="local-6989586621679114942"><span class="annot"><span class="annottext">p :: SourcePos
+</span><a href="#local-6989586621679114942"><span class="hs-identifier hs-var hs-var">p</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ParseError -&gt; SourcePos
+</span><span class="hs-identifier hs-var">errorPos</span></span><span> </span><span class="annot"><span class="annottext">ParseError
+</span><a href="#local-6989586621679114945"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-34"></span><span>
+</span><span id="line-35"></span><span class="hs-identifier">format</span><span> </span><span class="hs-identifier">the</span><span> </span><span class="hs-identifier">error</span><span> </span><span class="hs-identifier">more</span><span> </span><span class="hs-identifier">nicely</span><span class="hs-glyph">:</span><span> </span><span class="hs-identifier">emacs</span><span> </span><span class="hs-identifier">format</span><span> </span><span class="hs-identifier">for</span><span> </span><span class="hs-identifier">positioning</span><span class="hs-special">,</span><span> </span><span class="hs-identifier">plus</span><span>
+</span><span id="line-36"></span><span class="hs-identifier">context</span><span>
+</span><span id="line-37"></span><span>
+</span><span id="line-38"></span><span class="hs-operator">&gt;</span><span> </span><span class="annot"><a href="Language.SQL.SimpleSQL.Errors.html#formatError"><span class="hs-identifier hs-type">formatError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">P.ParseError</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-39"></span><span class="hs-operator">&gt;</span><span> </span><span id="formatError"><span class="annot"><span class="annottext">formatError :: String -&gt; ParseError -&gt; String
+</span><a href="Language.SQL.SimpleSQL.Errors.html#formatError"><span class="hs-identifier hs-var hs-var">formatError</span></a></span></span><span> </span><span id="local-6989586621679114940"><span class="annot"><span class="annottext">src :: String
+</span><a href="#local-6989586621679114940"><span class="hs-identifier hs-var">src</span></a></span></span><span> </span><span id="local-6989586621679114939"><span class="annot"><span class="annottext">e :: ParseError
+</span><a href="#local-6989586621679114939"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-40"></span><span class="hs-operator">&gt;</span><span>     </span><span class="annot"><span class="annottext">SourcePos -&gt; String
+</span><span class="hs-identifier hs-var">sourceName</span></span><span> </span><span class="annot"><span class="annottext">SourcePos
+</span><a href="#local-6989586621679114938"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="hs-string">&quot;:&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
+forall a. Show a =&gt; a -&gt; String
+</span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourcePos -&gt; Int
+</span><span class="hs-identifier hs-var">sourceLine</span></span><span> </span><span class="annot"><span class="annottext">SourcePos
+</span><a href="#local-6989586621679114938"><span class="hs-identifier hs-var">p</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-41"></span><span class="hs-operator">&gt;</span><span>     </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="hs-string">&quot;:&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
+forall a. Show a =&gt; a -&gt; String
+</span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourcePos -&gt; Int
+</span><span class="hs-identifier hs-var">sourceColumn</span></span><span> </span><span class="annot"><span class="annottext">SourcePos
+</span><a href="#local-6989586621679114938"><span class="hs-identifier hs-var">p</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="hs-string">&quot;:&quot;</span></span><span>
+</span><span id="line-42"></span><span class="hs-operator">&gt;</span><span>     </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679114937"><span class="hs-identifier hs-var">context</span></a></span><span>
+</span><span id="line-43"></span><span class="hs-operator">&gt;</span><span>     </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">ParseError -&gt; String
+forall a. Show a =&gt; a -&gt; String
+</span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">ParseError
+</span><a href="#local-6989586621679114939"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-44"></span><span class="hs-operator">&gt;</span><span>   </span><span class="hs-keyword">where</span><span>
+</span><span id="line-45"></span><span class="hs-operator">&gt;</span><span>     </span><span id="local-6989586621679114937"><span class="annot"><span class="annottext">context :: String
+</span><a href="#local-6989586621679114937"><span class="hs-identifier hs-var hs-var">context</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-46"></span><span class="hs-operator">&gt;</span><span>         </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679114936"><span class="annot"><span class="annottext">lns :: [String]
+</span><a href="#local-6989586621679114936"><span class="hs-identifier hs-var hs-var">lns</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; [String] -&gt; [String]
+forall a. Int -&gt; [a] -&gt; [a]
+</span><span class="hs-identifier hs-var">take</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">([String] -&gt; [String]) -&gt; [String] -&gt; [String]
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; [String] -&gt; [String]
+forall a. Int -&gt; [a] -&gt; [a]
+</span><span class="hs-identifier hs-var">drop</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourcePos -&gt; Int
+</span><span class="hs-identifier hs-var">sourceLine</span></span><span> </span><span class="annot"><span class="annottext">SourcePos
+</span><a href="#local-6989586621679114938"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+forall a. Num a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">([String] -&gt; [String]) -&gt; [String] -&gt; [String]
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; [String]
+</span><span class="hs-identifier hs-var">lines</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679114940"><span class="hs-identifier hs-var">src</span></a></span><span>
+</span><span id="line-47"></span><span class="hs-operator">&gt;</span><span>         </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">[String]
+</span><a href="#local-6989586621679114936"><span class="hs-identifier hs-var">lns</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-48"></span><span class="hs-operator">&gt;</span><span>              </span><span class="hs-special">[</span><span id="local-6989586621679114932"><span class="annot"><span class="annottext">x :: String
+</span><a href="#local-6989586621679114932"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-string">&quot;\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679114932"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="hs-string">&quot;\n&quot;</span></span><span>
+</span><span id="line-49"></span><span class="hs-operator">&gt;</span><span>                     </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Char -&gt; String
+forall a. Int -&gt; a -&gt; [a]
+</span><span class="hs-identifier hs-var">replicate</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourcePos -&gt; Int
+</span><span class="hs-identifier hs-var">sourceColumn</span></span><span> </span><span class="annot"><span class="annottext">SourcePos
+</span><a href="#local-6989586621679114938"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+forall a. Num a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="hs-char">' '</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="hs-string">&quot;^\n&quot;</span></span><span>
+</span><span id="line-50"></span><span class="hs-operator">&gt;</span><span>              </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-string">&quot;&quot;</span></span><span>
+</span><span id="line-51"></span><span class="hs-operator">&gt;</span><span>     </span><span id="local-6989586621679114938"><span class="annot"><span class="annottext">p :: SourcePos
+</span><a href="#local-6989586621679114938"><span class="hs-identifier hs-var hs-var">p</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ParseError -&gt; SourcePos
+</span><span class="hs-identifier hs-var">errorPos</span></span><span> </span><span class="annot"><span class="annottext">ParseError
+</span><a href="#local-6989586621679114939"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-52"></span></pre></body></html>
