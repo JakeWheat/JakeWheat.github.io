@@ -1,0 +1,213 @@
+0.7.0
+	support autoincrement for sqlite
+	support table constraints without separating comma for sqlite
+	switch source from literate to regular haskell
+	use prettyprinter lib instead of pretty
+	parsing nested block comments regressed - post a bug if you need this
+	fixed fixity parsing of union, except and intersect (matches postgres docs now)
+	removed the Errors module - the pretty printer function for errors is in the Parse module
+	parses from and pretty prints to strict Text
+	use strict Text instead of String everywhere
+	tested with latest three main ghc releases (9.8.1, 9.6.4, and 9.4.8) and stack lts 22.5
+	the makeSelect helper is now a distinct type, code using it will need some trivial
+	  tweaks, this is change so that code using makeSelect doesn't emit warnings
+	overhaul website
+0.6.1   added odbc handling to sqlsqerver dialect
+		added sqlserver dialect case for convert function
+0.6.0
+        tested with ghc 8.8.1 also
+        change the dialect handling - now a dialect is a bunch of flags
+          plus a keyword list, and custom dialects are now feasible
+          (still incomplete)
+        fix parsing for a lot of things which are keywords in the standard
+        fix bug with cte pretty printing an extra 'as', which the parser
+          also incorrectly accepted
+        bug fix: allow keywords that are quoted to be parsed as identifiers
+
+0.5.0
+        update to work with ghc 8.6.5, also tested with 8.4.4 and 8.2.1
+	rename some of the modules Lexer -> Lex, Parser -> Parse
+	add a separate lexer to simplify code and speed up parsing
+	replace SqlIndent with new tool, SimpleSqlParserTool (amazing
+	  name) which can indent, and parse and lex.
+	experiments in new approach to dealing with fixities with separate
+	  pass after parsing
+	dml :add support for insert, update, delete and truncate
+	ddl: add limited support for create schema, plus drop schema
+	  create, alter and drop table with defaults and constraints
+	  create, alter and drop for domain, view, sequence
+	  create and drop for assertion
+	access control: simple create and drop for role
+	simple grant and revoke
+	limited support for transaction management: start transation,
+	rollback, commit, savepoint
+	fix the precendence of operators which was following the weird
+	  postgresql 9.4 and earlier precendences instead of the standard
+	refactor the syntax for names, identifiers and strings slightly
+	refactor the dialect support, add some support for postgresql
+	  syntax
+	change parsing of identifiers and strings to not unescape the
+	  identifier or string text during parsing
+	add some explicit parse failures for probably ambiguous text
+	  */ without /* (outside quoted identifier, string) will fail
+	  .,e,E following a number without whitespace always fails
+	  three symbols together fails explicitly, instead of trying to
+	    lex and giving a less good error at parse time (applies to |
+	    and : in postgres dialect)
+	fix parsing of functions whose name is a keyword (e.g. abs)
+	add basic support for parsing odbc syntax ({d 'literals'} {fn
+	  app(something)} and {oj t1 left outer join ... }
+	rename ValueExpr -> ScalarExpr (I think scalar expression is
+	  slightly less incorrect)
+        rename CombineQueryExpr to QueryExprSetOp and CombineOp to SetOperatorName
+        use explicit data type for sign in interval literals
+        add comments to statement syntax (aimed at codegen)
+        add support for oracle type size units 'char' and 'byte', example: varchar2(55 byte)
+        updated the makefile to use cabal v2 commands
+        fix for parsing window functions with keyword names
+0.4.4
+	tested with ghc 8.2.1 and 8.4.3
+0.4.3
+	tested with ghc 8.0.2 and 8.2.1
+0.4.1 (commit c156c5c34e91e1f7ef449d2c1ea14e282104fd90)
+	tested with ghc 7.4.2, 7.6.3, 7.8.4,7.10.0.20150123
+	simple demonstration of how dialects could be handled internally
+	add ability to add comments to syntax tree to help with generating
+	SQL code
+0.4.0 (commit 7914898cc8f07bbaf8358d208469392346341964)
+	now targets SQL:2011
+	update to ghc 7.8.2
+	remove dependency on haskell-src-exts
+	derive Data and Typeable in all the syntax types
+	improve the error messages a great deal
+	sql features:
+	parse schema qualified table names in from clause (thanks to Sönke
+	  Hahn)
+	support multiline string literals
+	support colon prefix host parameters and introducer
+	support unique predicate
+	support match predicate
+	support array constructors and subscripting
+	support character set literals
+	support collate
+	support escape for string literals as a postfix operator
+	parse schema/whatever qualified ids in various places: identifiers
+	  (replaces equivalent functionality using '.' operator), function,
+	  aggregate, window function names, explicit tables and functions in
+	  from clauses, typenames
+	support almost all typename syntax for SQL:2011 (just missing refs)
+	support most multiset operations (missing some predicates only,
+	  likely to be added before next release)
+	support two double quotes in a quoted identifier to represent a
+	  quote character in the identifier
+	support filter and within group for aggregates
+	support next value for
+	parse special nullary functions
+	annoying changes:
+	replace Int with Integer in the syntax
+	remove support for parsing clauses after the from clause if there
+	  is no from clause
+	change the syntax representation of quantified comparison
+	  predicates
+	change the hardcoded collate keyword in substring and trim to use
+	  the new collate postfix operator, this also changes the collation
+	  name to be an identifier instead of a string
+	represent missing setquantifier as a literal default instead of as
+	  the actual default value (all in select, distinct in set
+	  operators)
+	same for sort directions in order by
+	implement complete interval literals (fixed the handling of the
+	  interval qualifier)
+	make most of the standard reserved words actually reserved (still
+	  some gaps)
+	change the natural in join abstract syntax to match the concrete
+	  syntax instead of combining natural, on and using into one field
+	remove support for postgresql limit syntax
+	bug fixes:
+	fix some trailing whitespace issues in the keyword style functions,
+	  e.g. extract(day from x), dealing with trailing whitespace on
+	  the parens was fixed
+	improve some cases of parsing chained prefix or postfix operators
+	  (still some issues here)
+	fix bug where the 'as' was incorrectly optional in a 'with
+	  expression list item'
+	fix bug in set operations where 'all' was assumed as the default
+	  instead of 'distinct', e.g. 'select * from t union select * from
+	  u' was parsed to 'select * from t union all select * from u'
+	  instead of 'select * from t union distinct select * from u'.
+	fix corresponding bug where 'distinct' was being pretty printed in
+	  this case and 'all' was not since the assumed default was the
+	  wrong way round
+	fix some trailing junk lexing issues with symbols and number
+	  literals
+	fix number literals to accept upper case E
+0.3.1 (commit 5cba9a1cac19d66166aed2876d809aef892ff59f)
+	update to work with ghc 7.8.1
+0.3.0 (commit 9e75fa93650b4f1a08d94f4225a243bcc50445ae)
+	fix the basic operator fixity parsing
+	swap the order in select item abstract syntax so it is now
+	  (expression, alias) which matches the order in the concrete
+	  syntax
+	rename ScalarExpr -> ValueExpr
+	rename Duplicates to SetQuantifier
+	rename qeDuplicates to qeSetQuantifier
+	rename OrderField to SortSpec
+	rename InThing to InPredValue
+	add support for ? for parameterized queries
+	add new abstract syntax for special operators whose concrete
+	  syntax is a kind of limited named parameters syntax
+	add more parsing for these operators: position, convert,
+	  translate, overlay, trim, and improve the substring parsing
+	add support for multi keyword type names
+	   previously:
+	     double precision
+	     character varying
+	   now:
+	     double precision,
+	     character varying,
+	     char varying,
+	     character large object,
+	     char large object,
+	     national character,
+	     national char,
+	     national character varying,
+	     national char varying,
+	     national character large object,
+	     nchar large object,
+	     nchar varying,
+	     bit varying
+	rename tools/PrettyIt to tools/SQLIdent and add to cabal file as
+	  optional executable (disabled by default)
+	rename the qeFetch field in Select to qeFetchFirst
+	change the pretty printer to use 'fetch first' instead of
+	  'fetch next'
+
+0.2.0 (commit 9ea29c1a0ceb2c3f3157fb161d1ea819ea5d64d4)
+	'' quotes in string literal
+	parse simple interval literal e.g. "interval '1 week'"
+	support . in identifiers as a dot operator
+	support quoted identifiers
+	partial support for explicit window frames
+	support multiple test expressions in when branches in case expressions
+	rename CastOp to TypedLit
+	support typenames with precision and scale in casts
+	support nulls first and nulls last in order by
+	support grouping expressions: group by (), grouping sets, cube,
+	  rollup and parens
+	support with recursive
+	support values table literal
+	support 'table t' syntax
+	rename fields qe1 and qe1 in combinequeryexpr to qe0 and qe1
+	add support for functions in from clause
+	add support for lateral in from clause
+	support column aliases in common table expressions
+	refactor the tests and add lots more
+	parse * in any scalar context instead of trying to restrict it
+	support row ctor without 'row' e.g. (a,b) = (c,d)
+	add % ^ | & ~ operators
+	support ansi standard syntax for offset n rows and fetch first n
+	  rows only
+	fix keyword parsing to be case insensitive
+
+0.1.0.0 (commit 9bf4012fc40a74ad9a039fcb936e3b9dfc3f90f0)
+	initial release

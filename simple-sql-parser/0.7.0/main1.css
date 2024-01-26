@@ -1,0 +1,130 @@
+
+body {
+  margin: 0 auto;
+
+  hyphens: auto;
+  overflow-wrap: break-word;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  color:#000000;
+
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-bottom: 5em;
+  margin-top: 2em;
+
+  /*left:auto;
+  right:0;
+  margin-right:30em;*/
+
+  /*max-width: 120ex;*/
+
+}
+
+
+
+pre {
+    padding: 1em;
+    background:#fafafa;
+}
+
+code {
+    padding: 0;
+    margin: 0;
+      font-size:15px;
+}
+
+#TOC {
+    /*position:fixed;
+    width:25em;
+    left:0;
+    top:0;
+    z-index:1000;
+    height:100%;
+    overflow:auto;
+
+    left:auto;
+    right:0;
+
+    border-top: 1px solid #858585;
+    border-right-width: 0;
+    border-left: 1px solid #858585;
+
+    margin-top: 0 !important;
+    background: #fafafa;
+
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
+
+    padding-top: 0em;
+    padding-right: 1em;
+    padding-bottom: 1.25em;
+    padding-left: 1em;
+    margin: 0;*/
+
+  font-size: .9em;
+  font-family:"Noto Serif","Open Sans","DejaVu Sans",sans-serif;
+  font-style: normal;
+  color: #000000;
+  font-weight: 400;
+
+}
+
+
+#TOC li {
+  list-style: none;
+  line-height:1.3334;
+  margin-top:.3334em
+}
+
+#TOC ul {
+  padding-left: 1.3em;
+
+}
+#TOC a:not(:hover) {
+  text-decoration: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family:"Open Sans","DejaVu Sans",sans-serif;
+    font-weight:300;
+    font-style:normal;
+    color:#000000;
+    text-rendering:optimizeLegibility;
+    margin-top:1em;
+    margin-bottom:.5em;
+    line-height:1.0125em
+}
+
+/*h1 {
+border-top: 1px solid #858585;
+padding-top:1em;
+}*/
+
+.title {
+    color:#000000;
+    font-size: 3em;
+    border-top: none;
+    padding-top:0em;
+}
+
+a {
+    font-weight:400;
+    font-style:normal;
+    color:  #05117f;
+}
+
+hr{border:solid #858585;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+td {
+    width: 50%;
+    vertical-align: top;
+    border:solid #c5c5c5;
+    border-width:1px;
+}

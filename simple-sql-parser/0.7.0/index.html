@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Simple SQL Parser</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Simple SQL Parser</h1>
+</header>
+<h1 id="overview">Overview</h1>
+<p>A parser for SQL in Haskell. Also includes a pretty printer which
+formats SQL.</p>
+<p>This is the documentation for version 0.7.0. Documentation for other
+versions is available here: <a
+href="http://jakewheat.github.io/simple-sql-parser/"
+class="uri">http://jakewheat.github.io/simple-sql-parser/</a>.</p>
+<p>Status: usable for parsing a substantial amount of SQL. Adding
+support for new SQL is easy. Expect a little bit of churn on the AST
+types when support for new SQL features is added.</p>
+<p>This version is tested with GHC 9.8.1, 9.6.4, and 9.4.8.</p>
+<h1 id="examples">Examples</h1>
+<p>Parse a SQL statement:</p>
+<div class="sourceCode" id="cb1"
+data-sb-session="cabal repl --repl-options=-XOverloadedStrings"
+data-sb-prompt="ghci&gt; " data-sb-no-initial-text=""><pre
+class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ghci<span class="op">&gt;</span> <span class="kw">import</span> <span class="dt">Language.SQL.SimpleSQL.Parse</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ghci<span class="op">&gt;</span> <span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">Data.Text</span> <span class="kw">as</span> <span class="dt">T</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ghci<span class="op">&gt;</span> <span class="fu">either</span> (T.unpack <span class="op">.</span> prettyError) <span class="fu">show</span> <span class="op">$</span> parseStatement ansi2011 <span class="st">&quot;&quot;</span> <span class="dt">Nothing</span> <span class="st">&quot;select a + b * c&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;SelectStatement (Select {qeSetQuantifier = SQDefault, qeSelectList = [(BinOp (Iden [Name Nothing \&quot;a\&quot;]) [Name Nothing \&quot;+\&quot;] (BinOp (Iden [Name Nothing \&quot;b\&quot;]) [Name Nothing \&quot;*\&quot;] (Iden [Name Nothing \&quot;c\&quot;])),Nothing)], qeFrom = [], qeWhere = Nothing, qeGroupBy = [], qeHaving = Nothing, qeOrderBy = [], qeOffset = Nothing, qeFetchFirst = Nothing})&quot;</span></span></code></pre></div>
+<p>The result printed readably:</p>
+<div class="sourceCode" id="cb2"
+data-sb-run="cabal run -fparserexe SimpleSQLParserTool -- parse -c &quot;select a + b * c&quot;"
+data-sb-cwd=".."><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>[ <span class="dt">SelectStatement</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Select</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      { qeSetQuantifier <span class="ot">=</span> <span class="dt">SQDefault</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      , qeSelectList <span class="ot">=</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>          [ ( <span class="dt">BinOp</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                (<span class="dt">Iden</span> [ <span class="dt">Name</span> <span class="dt">Nothing</span> <span class="st">&quot;a&quot;</span> ])</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                [ <span class="dt">Name</span> <span class="dt">Nothing</span> <span class="st">&quot;+&quot;</span> ]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                (<span class="dt">BinOp</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                   (<span class="dt">Iden</span> [ <span class="dt">Name</span> <span class="dt">Nothing</span> <span class="st">&quot;b&quot;</span> ])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                   [ <span class="dt">Name</span> <span class="dt">Nothing</span> <span class="st">&quot;*&quot;</span> ]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                   (<span class="dt">Iden</span> [ <span class="dt">Name</span> <span class="dt">Nothing</span> <span class="st">&quot;c&quot;</span> ]))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            , <span class="dt">Nothing</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>          ]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      , qeFrom <span class="ot">=</span> []</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      , qeWhere <span class="ot">=</span> <span class="dt">Nothing</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      , qeGroupBy <span class="ot">=</span> []</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      , qeHaving <span class="ot">=</span> <span class="dt">Nothing</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      , qeOrderBy <span class="ot">=</span> []</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      , qeOffset <span class="ot">=</span> <span class="dt">Nothing</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      , qeFetchFirst <span class="ot">=</span> <span class="dt">Nothing</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+<p>Formatting SQL, TPC-H query 21:</p>
+<div class="sourceCode" id="cb3" data-sb-file="tpch21.sql"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        s_name,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">as</span> numwait</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        supplier,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        lineitem l1,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        orders,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        nation</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        s_suppkey <span class="op">=</span> l1.l_suppkey</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> o_orderkey <span class="op">=</span> l1.l_orderkey</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> o_orderstatus <span class="op">=</span> <span class="st">&#39;F&#39;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> l1.l_receiptdate <span class="op">&gt;</span> l1.l_commitdate</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> <span class="kw">exists</span> (</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                <span class="kw">select</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                        <span class="op">*</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                <span class="kw">from</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                        lineitem l2</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                <span class="kw">where</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                        l2.l_orderkey <span class="op">=</span> l1.l_orderkey</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                        <span class="kw">and</span> l2.l_suppkey <span class="op">&lt;&gt;</span> l1.l_suppkey</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> <span class="kw">not</span> <span class="kw">exists</span> (</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                <span class="kw">select</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>                        <span class="op">*</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>                <span class="kw">from</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                        lineitem l3</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>                <span class="kw">where</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                        l3.l_orderkey <span class="op">=</span> l1.l_orderkey</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>                        <span class="kw">and</span> l3.l_suppkey <span class="op">&lt;&gt;</span> l1.l_suppkey</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                        <span class="kw">and</span> l3.l_receiptdate <span class="op">&gt;</span> l3.l_commitdate</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> s_nationkey <span class="op">=</span> n_nationkey</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        <span class="kw">and</span> n_name <span class="op">=</span> <span class="st">&#39;INDIA&#39;</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="kw">group</span> <span class="kw">by</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        s_name</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="kw">order</span> <span class="kw">by</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        numwait <span class="kw">desc</span>,</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        s_name</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>fetch <span class="fu">first</span> <span class="dv">100</span> <span class="kw">rows</span> <span class="kw">only</span>;</span></code></pre></div>
+<p>Output from the simple-sql-parser pretty printer:</p>
+<div class="sourceCode" id="cb4"
+data-sb-run="cabal run -fparserexe SimpleSQLParserTool -- format website/tpch21.sql"
+data-sb-cwd=".."><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>select s_name, count(<span class="op">*</span>) as numwait</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>from supplier,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     lineitem as l1,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     orders,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     nation</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> s_suppkey <span class="ot">=</span> l1<span class="op">.</span>l_suppkey</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">and</span> o_orderkey <span class="ot">=</span> l1<span class="op">.</span>l_orderkey</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">and</span> o_orderstatus <span class="ot">=</span> <span class="ch">&#39;F&#39;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">and</span> l1<span class="op">.</span>l_receiptdate <span class="op">&gt;</span> l1<span class="op">.</span>l_commitdate</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">and</span> exists (select <span class="op">*</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                  from lineitem as l2</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                  <span class="kw">where</span> l2<span class="op">.</span>l_orderkey <span class="ot">=</span> l1<span class="op">.</span>l_orderkey</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">and</span> l2<span class="op">.</span>l_suppkey <span class="op">&lt;&gt;</span> l1<span class="op">.</span>l_suppkey)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">and</span> <span class="fu">not</span> exists (select <span class="op">*</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                      from lineitem as l3</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                      <span class="kw">where</span> l3<span class="op">.</span>l_orderkey <span class="ot">=</span> l1<span class="op">.</span>l_orderkey</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">and</span> l3<span class="op">.</span>l_suppkey <span class="op">&lt;&gt;</span> l1<span class="op">.</span>l_suppkey</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">and</span> l3<span class="op">.</span>l_receiptdate <span class="op">&gt;</span> l3<span class="op">.</span>l_commitdate)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">and</span> s_nationkey <span class="ot">=</span> n_nationkey</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">and</span> n_name <span class="ot">=</span> <span class="dt">&#39;INDIA&#39;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">group</span> by s_name</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>order by numwait desc, s_name</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>fetch first <span class="dv">100</span> rows only;</span></code></pre></div>
+<h1 id="supported-sql-overview">Supported SQL overview</h1>
+<ul>
+<li>query expressions
+<ul>
+<li>select lists</li>
+<li>from clause</li>
+<li>where clause</li>
+<li>group by clause</li>
+</ul></li>
+<li>having clause
+<ul>
+<li>order by clause</li>
+<li>offset and fetch</li>
+<li>set operators</li>
+<li>common table expressions</li>
+<li>wide range of scalar expressions</li>
+</ul></li>
+<li>DDL (ansi dialect)
+<ul>
+<li>create, drop schema</li>
+<li>create, alter, drop table</li>
+<li>create, drop view</li>
+<li>create, alter, drop domain</li>
+<li>create, drop assertion</li>
+<li>create, alter, drop sequence</li>
+</ul></li>
+<li>non-query DML
+<ul>
+<li>delete</li>
+<li>truncate</li>
+<li>insert</li>
+<li>update</li>
+</ul></li>
+<li>Access control
+<ul>
+<li>grant, revoke - permissions and roles</li>
+<li>create, drop role</li>
+</ul></li>
+<li>Transaction management
+<ul>
+<li>begin, commit, rollback, savepoints</li>
+</ul></li>
+</ul>
+<p>See the <a href="supported_sql.html">supported_sql.html</a> page for
+details on the supported SQL.</p>
+<p>Here is all the <a href="test_cases.html">test_cases.html</a>
+rendered in a webpage so you can get an idea of what it supports, and
+what various instances of SQL parse to.</p>
+<h1 id="installation">Installation</h1>
+<p>This package is on hackage, use it in the usual way. You can install
+the SimpleSQLParserTool demo exe using:</p>
+<pre><code>cabal install -fparserexe simple-sql-parser</code></pre>
+<h1 id="reporting-bugs">Reporting bugs</h1>
+<p>Please report bugs here: <a
+href="https://github.com/JakeWheat/simple-sql-parser/issues"
+class="uri">https://github.com/JakeWheat/simple-sql-parser/issues</a></p>
+<p>A good bug report (or feature request) should have an example of the
+SQL which is failing. You can expect bugs to get fixed.</p>
+<p>Feature requests are welcome, but be aware that there is no-one
+generally available to work on these, so you should either make a pull
+request, or find someone willing to implement the features and make a
+pull request.</p>
+<p>There is a related tutorial on implementing a SQL parser here: <a
+href="http://jakewheat.github.io/intro_to_parsing/"
+class="uri">http://jakewheat.github.io/intro_to_parsing/</a> (TODO: this
+is out of date, in the process of being updated)</p>
+<h1 id="modifying-the-library">Modifying the library</h1>
+<p>Get the latest development version:</p>
+<pre><code>git clone https://github.com/JakeWheat/simple-sql-parser.git
+cd simple-sql-parser
+cabal build</code></pre>
+<p>You can run the tests using cabal:</p>
+<pre><code>cabal test</code></pre>
+<p>Or use the makefile target</p>
+<pre><code>make test</code></pre>
+<p>When you add support for new syntax: add some tests. If you modify or
+fix something, and it doesn’t have tests, add some. If the syntax isn’t
+in ANSI SQL, guard it behind a dialect flag. If you write support for a
+dialect that isn’t mention, add a new dialect.</p>
+<p>Make sure all the tests still pass, then send a pull request on
+Github.</p>
+<h1 id="links">Links</h1>
+<ul>
+<li>Haddock: <a href="haddock/index.html">haddock/index.html</a></li>
+<li>Supported SQL: <a
+href="supported_sql.html">supported_sql.html</a></li>
+<li>Test cases: <a href="test_cases.html">test_cases.html</a></li>
+<li>Homepage: <a
+href="http://jakewheat.github.io/simple-sql-parser/latest"
+class="uri">http://jakewheat.github.io/simple-sql-parser/latest</a></li>
+<li>Hackage: <a
+href="http://hackage.haskell.org/package/simple-sql-parser"
+class="uri">http://hackage.haskell.org/package/simple-sql-parser</a></li>
+<li>Source repository: <a
+href="https://github.com/JakeWheat/simple-sql-parser"
+class="uri">https://github.com/JakeWheat/simple-sql-parser</a></li>
+<li>Bug tracker: <a
+href="https://github.com/JakeWheat/simple-sql-parser/issues"
+class="uri">https://github.com/JakeWheat/simple-sql-parser/issues</a></li>
+<li>Changes: <a
+href="https://github.com/JakeWheat/simple-sql-parser/blob/master/changelog"
+class="uri">https://github.com/JakeWheat/simple-sql-parser/blob/master/changelog</a></li>
+<li>Other versions: <a
+href="http://jakewheat.github.io/simple-sql-parser/"
+class="uri">http://jakewheat.github.io/simple-sql-parser/</a></li>
+<li>Contact: jakewheat@tutanota.com</li>
+</ul>
+<p>The simple-sql-parser is a lot less simple than it used to be. If you
+just need to parse much simpler SQL than this, or want to start with a
+simpler parser and modify it slightly, you could also look at the basic
+query parser in the intro_to_parsing project, the code is here: <a
+href="https://github.com/JakeWheat/intro_to_parsing/blob/master/SimpleSQLQueryParser0.lhs"
+class="uri">https://github.com/JakeWheat/intro_to_parsing/blob/master/SimpleSQLQueryParser0.lhs</a>
+(TODO: this is out of date, in the process of being updated).</p>
+
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#overview" id="toc-overview">Overview</a></li>
+<li><a href="#examples" id="toc-examples">Examples</a></li>
+<li><a href="#supported-sql-overview"
+id="toc-supported-sql-overview">Supported SQL overview</a></li>
+<li><a href="#installation" id="toc-installation">Installation</a></li>
+<li><a href="#reporting-bugs" id="toc-reporting-bugs">Reporting
+bugs</a></li>
+<li><a href="#modifying-the-library"
+id="toc-modifying-the-library">Modifying the library</a></li>
+<li><a href="#links" id="toc-links">Links</a></li>
+</ul>
+<hr />
+<h2 id="toc-title">Links</h2>
+<ul>
+  <li><a href="index.html">Index</a></li>
+  <li><a href='haddock/index.html'>Haddock</li>
+  <li><a href="supported_sql.html">Supported SQL</a></li>
+  <li><a href="test_cases.html">Test cases</a></li>
+  </ul>
+  <ul>
+  <li><a href="http://jakewheat.github.io/simple-sql-parser/latest">Homepage</a></li>
+  <li><a href="http://hackage.haskell.org/package/simple-sql-parser">Hackage</a></li>
+  <li><a href="https://github.com/JakeWheat/simple-sql-parser">Source repository</a></li>
+  <li><a href="https://github.com/JakeWheat/simple-sql-parser/issues">Bug tracker</a></li>
+  <li><a href="https://github.com/JakeWheat/simple-sql-parser/blob/master/changelog">Changes</a></li>
+  <li><a href="http://jakewheat.github.io/simple-sql-parser/">Other versions</a></li>
+  <li>jakewheat@tutanota.com</li>
+</ul>
+
+</nav>
+
+</body>
+</html>
