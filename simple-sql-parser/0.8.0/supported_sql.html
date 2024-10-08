@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Simple SQL Parser supported SQL</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Simple SQL Parser supported SQL</h1>
+</header>
+<h1 id="overview">Overview</h1>
+<p>This page has more details on the supported SQL in
+simple-sql-parser.</p>
+<p>See the <a href="test_cases.html">simple-sql-parser test cases</a>
+page for examples.</p>
+<p>The target dialect of SQL at this time is ISO/ANSI SQL:2011. The
+parser supports queries, DDL, non-query DML, access control and
+transaction management syntax. The parser and syntax does not follow the
+standard grammar closely - they permit a lot of things which the grammar
+in the standard forbids. The intended usage is that an additional pass
+over the ast can be made if you want to carefully prohibit everything
+that the standard doesn’t allow.</p>
+<p>Apart from this permissiveness, some work has been put into trying to
+get good parser error messages.</p>
+<h1 id="queries">Queries</h1>
+<h2 id="select-lists">Select lists</h2>
+<p>Supports scalar expressions, aliases with optional ‘as’.</p>
+<h2 id="set-quantifiers-on-select">Set quantifiers on select</h2>
+<p>Supports ‘select distinct’ and explicit ‘select all’.</p>
+<h2 id="from-clause">From clause</h2>
+<ul>
+<li>aliases</li>
+<li>subqueries</li>
+<li>functions</li>
+<li>joins
+<ul>
+<li>natural</li>
+<li>inner</li>
+<li>left/right/full outer</li>
+<li>cross</li>
+<li>on expressions</li>
+<li>using lists</li>
+<li>lateral</li>
+</ul></li>
+</ul>
+<h2 id="group-by-clause">Group by clause</h2>
+<p>Supports scalar expressions, group by (), cube, rollup, grouping
+parentheses and grouping sets with nested grouping expressions.</p>
+<h2 id="order-by-clause">Order by clause</h2>
+<p>Supports scalar expressions, asc/desc and nulls first/last.</p>
+<h2 id="offset-and-fetch">Offset and fetch</h2>
+<p>Supports ‘offset n rows’ and ‘fetch first n rows only’.</p>
+<h2 id="set-operators">Set operators</h2>
+<p>Union, except, intersect + all/distinct and corresponding.</p>
+<h2 id="table-value-constructor">Table value constructor</h2>
+<p>Example: ‘values (1,2),(3,4)’.</p>
+<h2 id="explicit-table">Explicit table</h2>
+<p>Example: ‘table t’, which is shorthand for ‘select * from t’.</p>
+<h2 id="scalar-expressions">Scalar expressions</h2>
+<p>The scalar expressions type and parser is used in many contexts,
+including:</p>
+<ul>
+<li>select lists;</li>
+<li>where clause expressions;</li>
+<li>group by clause expressions;</li>
+<li>having clause expressions;</li>
+<li>order by clause expressions;</li>
+<li>offset and fetch clause expressions;</li>
+<li>table value constructors.</li>
+</ul>
+<p>This doesn’t exactly follow the ANSI Standards, which have separate
+grammars for most of these.</p>
+<p>The supported scalar expressions include:</p>
+<ul>
+<li>basic string literals in single quotes</li>
+<li>number literals: digits.digitse+-exp</li>
+<li>explicitly typed literal, e.g. int ‘3’</li>
+<li>binary operators
+<ul>
+<li>comparisons: = != &lt;&gt; &lt;= &gt;= &lt; &gt;</li>
+<li>arithmetic: + - / * % ^</li>
+<li>logic: and, or</li>
+<li>bitwise: &amp; | (and ^ as above)</li>
+<li>string: ||, like, not like</li>
+<li>other: overlaps, is similar to, is not similar too, is distinct
+from, is not distinct from</li>
+</ul></li>
+<li>prefix unary operators
+<ul>
+<li>+, -</li>
+<li>not</li>
+<li>~</li>
+</ul></li>
+<li>postfix unary
+<ul>
+<li>is null, is not null</li>
+<li>is true, is not true, is false, is not false, is unknown, is not
+unknown</li>
+</ul></li>
+<li>other operators
+<ul>
+<li>extract (extract(day from dt))</li>
+<li>position (position string1 in string2)</li>
+<li>substring (substring(x from 2 for 4))</li>
+<li>convert (convert(string using conversion))</li>
+<li>translate (translate(string using translation))</li>
+<li>overlay (overlay (string placing embedded_string from start for
+length))</li>
+<li>trim (trim(leading ’_’ from s))</li>
+<li>between (a between 1 and 5)</li>
+<li>in list (a in (1,2,3,4))</li>
+<li>cast (cast(a as int))</li>
+</ul></li>
+<li>subqueries
+<ul>
+<li>in subquery</li>
+<li>any/some/all</li>
+<li>exists</li>
+</ul></li>
+<li>case expressions</li>
+<li>parentheses</li>
+<li>quoted and unquoted identifiers</li>
+<li>a.b qualified identifiers</li>
+<li>*, a.*</li>
+<li>functions: f(a,b)</li>
+<li>aggregates: agg(distinct a order by b)</li>
+<li>window functions: sum(x) over (partition by y order by z) plus some
+explicit frame support (same as in postgres 9.3)</li>
+<li>row constructors, e.g. where (a,b) = any (select a,b from t)</li>
+<li>? used in parameterized queries</li>
+</ul>
+<h1 id="ddl">DDL</h1>
+<ul>
+<li>schemas
+<ul>
+<li>create, drop + drop restrict</li>
+</ul></li>
+<li>tables
+<ul>
+<li>create table
+<ul>
+<li>constraints: named, null, unique, primary key, foreign key (matches,
+on update/delete)</li>
+<li>identity (the weird ansi version), defaults</li>
+<li>defaults</li>
+</ul></li>
+<li>alter table
+<ul>
+<li>defaults, null, set data type, drop column, constraints</li>
+</ul></li>
+<li>drop table + restrict</li>
+</ul></li>
+<li>create, drop view</li>
+<li>create, alter, drop domain
+<ul>
+<li>defaults, constraints</li>
+</ul></li>
+<li>create, drop assertion</li>
+<li>create, alter, drop sequence</li>
+</ul>
+<h1 id="non-query-dml">Non-query DML</h1>
+<ul>
+<li>delete
+<ul>
+<li>delete from</li>
+<li>as alias</li>
+<li>where</li>
+</ul></li>
+<li>truncate
+<ul>
+<li>with identity options</li>
+</ul></li>
+<li>insert
+<ul>
+<li>values, general queries, defaults</li>
+</ul></li>
+<li>update
+<ul>
+<li>including row updates</li>
+</ul></li>
+</ul>
+<h1 id="access-control">Access Control</h1>
+<ul>
+<li>grant privileges
+<ul>
+<li>all, grant option, table, domain, type, sequence, role, etc.</li>
+</ul></li>
+<li>revoke</li>
+<li>create role, drop role</li>
+</ul>
+<h1 id="transaction-management">Transaction management</h1>
+<ul>
+<li>begin, commit, rollback</li>
+<li>savepoints</li>
+</ul>
+
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#overview" id="toc-overview">Overview</a></li>
+<li><a href="#queries" id="toc-queries">Queries</a>
+<ul>
+<li><a href="#select-lists" id="toc-select-lists">Select lists</a></li>
+<li><a href="#set-quantifiers-on-select"
+id="toc-set-quantifiers-on-select">Set quantifiers on select</a></li>
+<li><a href="#from-clause" id="toc-from-clause">From clause</a></li>
+<li><a href="#group-by-clause" id="toc-group-by-clause">Group by
+clause</a></li>
+<li><a href="#order-by-clause" id="toc-order-by-clause">Order by
+clause</a></li>
+<li><a href="#offset-and-fetch" id="toc-offset-and-fetch">Offset and
+fetch</a></li>
+<li><a href="#set-operators" id="toc-set-operators">Set
+operators</a></li>
+<li><a href="#table-value-constructor"
+id="toc-table-value-constructor">Table value constructor</a></li>
+<li><a href="#explicit-table" id="toc-explicit-table">Explicit
+table</a></li>
+<li><a href="#scalar-expressions" id="toc-scalar-expressions">Scalar
+expressions</a></li>
+</ul></li>
+<li><a href="#ddl" id="toc-ddl">DDL</a></li>
+<li><a href="#non-query-dml" id="toc-non-query-dml">Non-query
+DML</a></li>
+<li><a href="#access-control" id="toc-access-control">Access
+Control</a></li>
+<li><a href="#transaction-management"
+id="toc-transaction-management">Transaction management</a></li>
+</ul>
+<hr />
+<h2 id="toc-title">Links</h2>
+<ul>
+  <li><a href="index.html">Index</a></li>
+  <li><a href='haddock/index.html'>Haddock</li>
+  <li><a href="supported_sql.html">Supported SQL</a></li>
+  <li><a href="test_cases.html">Test cases</a></li>
+  </ul>
+  <ul>
+  <li><a href="http://jakewheat.github.io/simple-sql-parser/latest">Homepage</a></li>
+  <li><a href="http://hackage.haskell.org/package/simple-sql-parser">Hackage</a></li>
+  <li><a href="https://github.com/JakeWheat/simple-sql-parser">Source repository</a></li>
+  <li><a href="https://github.com/JakeWheat/simple-sql-parser/issues">Bug tracker</a></li>
+  <li><a href="https://github.com/JakeWheat/simple-sql-parser/blob/master/changelog">Changes</a></li>
+  <li><a href="http://jakewheat.github.io/simple-sql-parser/">Other versions</a></li>
+  <li>jakewheat@tutanota.com</li>
+</ul>
+
+</nav>
+
+</body>
+</html>
